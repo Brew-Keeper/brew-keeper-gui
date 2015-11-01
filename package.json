@@ -1,0 +1,34 @@
+{
+  "name": "brew-keeper-gui",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "mocha",
+    "start": "browser-sync start --server --directory --files='src/*.html, src/css/main.css, src/js/*.js'",
+    "start:dist": "browser-sync start --server --startPath dist/index.html",
+    "sass": "node-sass src/scss/main.scss src/css/main.css",
+    "sass:watch": "node-sass src/scss/main.scss src/css/main.css --watch src/scss/*.scss",
+    "install:bower": "bower install --save",
+    "postinstall:bower": "wiredep --src 'src/*.html'",
+    "postinstall": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brew-Keeper/brew-keeper-gui.git"
+  },
+  "author": "David White, Shay Hall, Adam Hartz, Kathleen Rauh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Brew-Keeper/brew-keeper-gui/issues"
+  },
+  "homepage": "https://github.com/Brew-Keeper/brew-keeper-gui#readme",
+  "dependencies": {
+    "bower": "^1.6.5",
+    "browser-sync": "^2.9.11",
+    "gulp": "^3.9.0",
+    "modernizr": "^3.2.0",
+    "node-sass": "^3.4.1",
+    "wiredep": "^2.2.2"
+  }
+}
