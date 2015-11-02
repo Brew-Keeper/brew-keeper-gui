@@ -26,7 +26,7 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}}
 <br>
-<a href="" class="show-steps"><h2 class="show-steps">Steps:</h2></a>
+<a href="" class="show-steps" ng-click="showSteps()"><h2>Steps:</h2></a>
 <div class="steps hidden" ng-repeat="step in steps">
   <strong>{{step.step_title}}:</strong> {{step.step_body}}
   <br>
@@ -36,8 +36,8 @@
   <br>
   <br>
 </div>
-<h2>Brew Notes:</h2>
-<div ng-repeat="note in notes">
+<a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
+<div class="notes hidden" ng-repeat="note in notes">
   <strong>{{note.body}}</strong>
   <br>
   on {{note.timestamp}}
