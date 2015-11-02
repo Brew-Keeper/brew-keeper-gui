@@ -1,5 +1,48 @@
-<h3>recipe-detail partial page</h3>
-
-Public recipe details
+<h2>Name: {{detail.title}}</h2>
+<strong>GRC:</strong> {{detail.general_recipe_comment}}
 <br>
-User receip details
+<br>
+<a ng-href="#/recipe/brew/{{detail.id}}"><button>BREW IT!</button></a>
+<button>Delete</button>
+<button>Make Public</button>
+<button>Clone</button>
+<br>
+<br>
+<strong>Orientation:</strong> {{detail.orientation}}
+<br>
+<strong>Rating:</strong> {{detail.rating}}
+<br>
+<strong>Bean Type:</strong> {{detail.bean_name}}
+<br>
+<strong>Bean Roast:</strong> {{detail.roast}}
+<br>
+<strong>Grind:</strong> {{detail.grind}}
+<br>
+<strong>Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
+<br>
+<strong>Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
+<br>
+<strong>Brew Count:</strong> {{detail.brew_count}} brews
+<br>
+<strong>Total Duration:</strong> {{detail.total_duration}} seconds
+<br>
+<h2>Steps:</h2>
+<div ng-repeat="step in steps">
+  <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}:</strong> </a> {{step.duration}} seconds
+  <br>
+  <p class="step {{step.id}} hidden">{{step.step_body}}
+    <br>
+    Water: {{step.water_amount}} {{detail.water_units}}
+    <br>
+  </p>
+  <br>
+</div>
+<a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
+<div class="notes hidden" ng-repeat="note in notes">
+  <strong>{{note.body}}</strong>
+  <br>
+  on {{note.timestamp}}
+  <br>
+  <br>
+</div>
+<button>Edit Recipe</button>
