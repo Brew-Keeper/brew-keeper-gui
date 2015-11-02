@@ -59,7 +59,7 @@
       "step_body": "Press evenly until coffee is out, do not compress puck",
       "duration": 30,
       "water_amount": 0
-    },
+    }
   ],
   "brewnotes": [
     {
@@ -79,6 +79,6 @@
       "recipe_id": 1,
       "body": "Steep for 55 instead of 50 seconds",
       "timestamp": "2014-10-08 06:18"
-    },
+    }
   ]
 }
