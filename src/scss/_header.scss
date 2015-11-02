@@ -1,0 +1,22 @@
+.heading {
+  box-sizing: border-box;
+  nav.menu {
+    &.hamburger::before {
+      content: '\2261';
+      color: #000;
+      font-size: 4em;
+      position: absolute;
+      right: 10%;
+      top: 0;
+    }
+    ul.menu {
+      display: none;
+    }
+    ul.menu.active {
+      outline:1px solid black;
+      display: block;
+      text-decoration: none;
+      padding-left: 0;
+    }
+  }//nav.menu
+}//.heading

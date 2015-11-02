@@ -18,6 +18,9 @@
         .when('/info', {
           templateUrl: 'partials/more-info.html'
         })
+        .when('/login', {
+          templateUrl: 'partials/login.html'
+        })
         .otherwise({
           redirectTo: '/404.html',
           templateUrl: 'partials/404.html'
