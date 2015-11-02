@@ -1,0 +1,31 @@
+{
+  "name": "brew-keeper-gui",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "David White",
+    "Shay Hall",
+    "Adam Hartz",
+    "Kathleen Rauh"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Brew-Keeper/brew-keeper-gui",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "~3.0.3",
+    "modernizr": "components-modernizr#~2.8.3",
+    "jquery": "~2.1.4",
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7"
+  },
+  "resolutions": {
+    "modernizr": "~3.2.0"
+  }
+}
