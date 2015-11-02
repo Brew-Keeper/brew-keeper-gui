@@ -6,8 +6,9 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'recipeList'
         })
-        .when('/recipe', {
-          templateUrl: 'partials/recipe-detail.html'
+        .when('/recipe/:id', {
+          templateUrl: 'partials/recipe-detail.html',
+          controller: 'recipeDetail'
         })
         .when('/recipe/new', {
           templateUrl: 'partials/recipe-create.html'
@@ -32,12 +33,6 @@
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
     })
-
-
-
-
-
-
 
 
 })(); //end IIFE
