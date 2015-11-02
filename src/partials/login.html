@@ -1,0 +1,24 @@
+<form class="login">
+  <label class="login" for="login">Login</label>
+  <div class="login-user">
+    <input class="login-user" type="text" name="username" placeholder=" username">
+  </div>
+  <div class="login-password">
+    <input class="login-password" type="text" name="password" placeholder=" password">
+  </div>
+  <a href="#/user"><button class="login" type="button" name="login">Login</button></a>
+</form><!--end form login-->
+
+<form class="register" ng-controller="SignupController" ng-submit="submit()">
+  <label class="register" for="register">SignUp</label>
+  <div class="register">
+    <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username">
+  </div>
+  <div >
+    <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password">
+  </div>
+  <!-- <div >
+    <input class="register-password" type="text" name="password" placeholder=" retype password">
+  </div> -->
+  <button class="register" type="submit" name="register">SignUp</button>
+</form><!--end form register-->
