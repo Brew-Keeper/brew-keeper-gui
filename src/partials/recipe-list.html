@@ -1,5 +1,6 @@
 <h3>recipe-list partial page</h3>
 
-Public recipe list
 <br>
-User recipe list
+<div ng-repeat="recipe in recipes">
+  <a href="#recipe/{{recipe.id}}">{{recipe.title}}</a>
+</div>
