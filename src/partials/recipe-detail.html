@@ -10,21 +10,21 @@
 <br>
 <strong>Orientation:</strong> {{detail.orientation}}
 <br>
-<strong>Rating:</strong> {{detail.user_rating}}
+<strong>Rating:</strong> {{detail.rating}}
 <br>
-<strong>Bean Type:</strong> {{detail.bean_type}}
+<strong>Bean Type:</strong> {{detail.bean_name}}
 <br>
-<strong>Bean Roast:</strong> {{detail.bean_roast}}
+<strong>Bean Roast:</strong> {{detail.roast}}
 <br>
 <strong>Grind:</strong> {{detail.grind}}
 <br>
-<strong>Bean Amount:</strong> {{detail.bean_amount}} {{detail.bean_units}}
+<strong>Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
 <br>
-<strong>Water:</strong> {{detail.water_type}} {{detail.water_amount}} {{detail.water_amount_units}}
+<strong>Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
 <br>
-<strong>Brew Count:</strong> {{detail.brew_count}}
+<strong>Brew Count:</strong> {{detail.brew_count}} brews
 <br>
-<strong>Total Duration:</strong> {{detail.total_duration}}
+<strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
 <a href="" class="show-steps" ng-click="showSteps()"><h2>Steps:</h2></a>
 <div class="steps hidden" ng-repeat="step in steps">
