@@ -3,7 +3,8 @@
   angular.module('brewKeeper', ['ngRoute'], function($routeProvider){
       $routeProvider
         .when('/',{
-          templateUrl: 'partials/recipe-list.html'
+          templateUrl: 'partials/recipe-list.html',
+          controller: 'recipeList'
         })
         .when('/recipe', {
           templateUrl: 'partials/recipe-detail.html'
