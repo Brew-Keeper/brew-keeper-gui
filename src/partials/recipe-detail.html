@@ -26,14 +26,15 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<a href="" class="show-steps" ng-click="showSteps()"><h2>Steps:</h2></a>
-<div class="steps hidden" ng-repeat="step in steps">
-  <strong>{{step.step_title}}:</strong> {{step.step_body}}
+<h2>Steps:</h2>
+<div ng-repeat="step in steps">
+  <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}:</strong> </a> {{step.duration}} seconds
   <br>
-  <strong>Duration:</strong> {{step.duration}} seconds
-  <br>
-  <strong>Water:</strong> {{step.water_amount}} {{detail.water_amount_units}}
-  <br>
+  <p class="step {{step.id}} hidden">{{step.step_body}}
+    <br>
+    Water: {{step.water_amount}} {{detail.water_units}}
+    <br>
+  </p>
   <br>
 </div>
 <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
