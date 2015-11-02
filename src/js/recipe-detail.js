@@ -9,15 +9,13 @@ angular.module('brewKeeper')
               $scope.steps = response.data.steps;
               $scope.notes = response.data.brewnotes;
             })
+          $scope.showSteps = function(){
+            $("div.steps").toggleClass("hidden")
+          };
+          $scope.showNotes = function(){
+            $("div.notes").toggleClass("hidden")
+          };
       })
 
+
 })();//END Angular IFEE
-
-;(function(){// JQuery IFEE
-  // console.log($(".show-steps"));
-  $(".test").click(function(){
-    console.log("tracer");
-    // $("div.steps").toggleClass("hide");
-  });
-
-})();//END JQuery IFEE
