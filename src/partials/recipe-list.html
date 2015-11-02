@@ -1,7 +1,7 @@
 <h3>recipe-list partial page</h3>
 <br>
 <a href="#/recipe/new"><button>Create new recipe</button></a>
-<div ng-repeat="recipe in recipes">
+<div ng-repeat="recipe in recipes | orderBy: 'id'">
   <br>
   <a href="#recipe/{{recipe.id}}">{{recipe.title}}</a>
   <br>
@@ -10,5 +10,7 @@
   Roast: {{recipe.roast}}
   <br>
   Rating: {{recipe.rating}}
+  <br>
+  id: {{recipe.id}}
   <br>
 </div>
