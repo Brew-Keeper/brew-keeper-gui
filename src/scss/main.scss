@@ -94,6 +94,16 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+main.container {
+  box-sizing: border-box;
+  margin: 0 5%;
+  width: 90%;
+} //main.container
+
+
+@import 'header';
+@import 'forms';
+@import 'desktop-view';
 
 
 
@@ -106,11 +116,10 @@ textarea {
 
 
 
-
-
-
-
-
+.current-step {
+  color: #330f0a;
+  background-color: #f4cda4;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
