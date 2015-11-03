@@ -1,6 +1,6 @@
 ;(function(){ //IIFE for angular
 
-  angular.module('brewKeeper', ['ngRoute'], function($routeProvider){
+  angular.module('brewKeeper', ['ngRoute', 'timer'], function($routeProvider){
       $routeProvider
         .when('/',{
           templateUrl: 'partials/recipe-list.html',
@@ -9,8 +9,13 @@
         .when('/recipe/new', {
           templateUrl: 'partials/recipe-create.html'
         })
-        .when('/recipe/brew', {
-          templateUrl: 'partials/brew-it.html'
+        .when('/recipe/brew/:id', {
+          templateUrl: 'partials/brew-it.html',
+          controller: 'brewIt'
+        })
+        .when('/recipe/:id', {
+          templateUrl: 'partials/recipe-detail.html',
+          controller: 'recipeDetail'
         })
         .when('/info', {
           templateUrl: 'partials/more-info.html'

@@ -1,3 +1,27 @@
 <h3>Brew It! partial page</h3>
 
-this is where the magic happens (eventually)
+<h2>Recipe: {{detail.title}}</h2>
+<button ng-click="startBrew()">Start Brewing</button>
+<button ng-click="resetBrew()">Reset</button>
+<br>
+<br>
+<strong>Total Duration:</strong> {{detail.total_duration}} seconds
+<br>
+<timer class="timer" autostart="false" interval="1000" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
+<div ng-repeat="step in steps" class="{{step.id}}">
+  <strong>{{step.step_title}}:</strong>
+  <br>
+  {{step.duration}} seconds
+  <br>
+  <timer class="{{step.id}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="finishBrew(step.id)">seconds remaining:<strong> {{countdown}}</strong></timer>
+  <br>
+  Step id: {{step.id}}
+  <br>
+  {{step.step_body}}
+  <br>
+  Water: {{step.water_amount}} {{detail.water_units}}
+  <br>
+  <br>
+</div>
+<button>Add Brew Note</button>
+<br>
