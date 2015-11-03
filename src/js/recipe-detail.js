@@ -18,7 +18,10 @@ angular.module('brewKeeper')
           $scope.showNotes = function(){
             $("div.notes").toggleClass("hidden")
           };
-      })
+          $scope.Eliminate = function() {
+            $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+          }
+      })//recipeDetail controller
 
 
 })();//END Angular IFEE
