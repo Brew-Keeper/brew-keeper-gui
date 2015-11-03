@@ -2,6 +2,7 @@
 
 angular.module('brewKeeper')
       .controller('brewIt', function($scope, $http, $routeParams){
+        // console.log("firing brewIt controller")
           var id = $routeParams.id;
           $http.get('api/users/1/recipes/'+ id + '/recipe.json')
             .then(function(response){
