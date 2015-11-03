@@ -37,6 +37,12 @@ cp bower_components/modernizr/modernizr.js dist/bower_components/modernizr/moder
 mkdir -p dist/bower_components/angular-timer/dist/
 cp bower_components/angular-timer/dist/angular-timer.js dist/bower_components/angular-timer/dist/angular-timer.js
 
+mkdir -p dist/bower_components/momentjs/
+cp bower_components/momentjs/moment.js dist/bower_components/momentjs/moment.js
+
+mkdir -p dist/bower_components/humanize-duration/
+cp bower_components/humanize-duration/humanize-duration.js dist/bower_components/humanize-duration/humanize-duration.js
+
 # mkdir -p dist/bower_components/d3/
 # cp bower_components/d3/d3.js dist/bower_components/d3/d3.js
 
