@@ -13,8 +13,9 @@
         .when('/recipe/new', {
           templateUrl: 'partials/recipe-create.html'
         })
-        .when('/recipe/brew', {
-          templateUrl: 'partials/brew-it.html'
+        .when('/recipe/brew/:id', {
+          templateUrl: 'partials/brew-it.html',
+          controller: 'brewIt'
         })
         .when('/info', {
           templateUrl: 'partials/more-info.html'
