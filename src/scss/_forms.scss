@@ -1,0 +1,44 @@
+form {
+.columns {
+  display: block;
+  width: 50%;
+  float: left;
+  label, input, select, textarea, legend {
+    display: block;
+    width: 90%;
+    margin: 1ex 5%;
+  }
+  input, textarea, button {
+    margin-bottom: 2ex;
+  }
+  &.general {
+  width: 100%;
+  margin: 0;
+    label, input, select, textarea, legend {
+      display: block;
+      width: 95%;
+      margin: 1ex 2.5%;
+    }
+    input, textarea, button {
+      margin-bottom: 2ex;
+    }
+  }//&.general
+  &.steps {
+    width: 100%;
+    label {
+      display: inline-block;
+      width: 100% * (3/10);
+    }
+    input {
+      display: inline-block;
+      width: 5ex;
+      margin-right: 100% * (4/10);
+    }
+  }
+}//.columns
+  button {
+    width: 40%;
+    margin: 1ex 30%;
+  }//WATCH OUT!  ALL BUTTONS ARE TARGETED!
+
+}
