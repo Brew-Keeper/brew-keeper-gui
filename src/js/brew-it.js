@@ -47,12 +47,14 @@ angular.module('brewKeeper')
             console.log("id = " + id)
             nextStep(id);
             $("."+id).removeClass("red");
+             $("."+id).addClass("hidden")
           };
           nextStep = function(id){
             var nextId = id + 1;
             console.log($scope.steps.length)
             if(nextId > $scope.steps.length){
               timerRunning = false;
+              $(".hidden").removeClass("hidden")
               return
             }
             $("."+ nextId).addClass("red");
