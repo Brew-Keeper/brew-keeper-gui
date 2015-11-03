@@ -7,6 +7,9 @@
           // controller: 'recipeList'
             redirectTo: '/users/don.pablo'
         })
+        .when('/users/:username/recipes/new', {
+          templateUrl: 'partials/recipe-create.html'
+        })
         .when('/users/:username/recipes/:id', {
           templateUrl: 'partials/recipe-detail.html',
           controller: 'recipeDetail'
@@ -15,16 +18,9 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'recipeList'
         })
-        .when('/recipe/new', {
-          templateUrl: 'partials/recipe-create.html'
-        })
         .when('/users/:username/recipes/:id/brewit', {
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
-        })
-        .when('/recipe/:id', {
-          templateUrl: 'partials/recipe-detail.html',
-          controller: 'recipeDetail'
         })
         .when('/info', {
           templateUrl: 'partials/more-info.html'

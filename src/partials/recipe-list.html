@@ -1,6 +1,6 @@
 <h3>recipe-list partial page</h3>
 <br>
-<a href="#/recipe/new"><button>Create new recipe</button></a>
+<a href="#/users/{{username}}/recipes/new"><button>Create new recipe</button></a>
 <div ng-repeat="recipe in recipes | orderBy: 'id'">
   <br>
   <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
