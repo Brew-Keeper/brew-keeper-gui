@@ -34,6 +34,9 @@ cp bower_components/angular-route/angular-route.js dist/bower_components/angular
 mkdir -p dist/bower_components/modernizr/
 cp bower_components/modernizr/modernizr.js dist/bower_components/modernizr/modernizr.js
 
+mkdir -p dist/bower_components/angular-timer/dist/
+cp bower_components/angular-timer/dist/angular-timer.js dist/bower_components/angular-timer/dist/angular-timer.js
+
 # mkdir -p dist/bower_components/d3/
 # cp bower_components/d3/d3.js dist/bower_components/d3/d3.js
 
