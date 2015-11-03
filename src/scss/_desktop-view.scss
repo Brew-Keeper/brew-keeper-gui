@@ -1,3 +1,22 @@
-@media (min-width: 30em){
-
+@media (min-width: 50em){
+  .heading {
+    position: relative;
+    h1 {
+      width:35%;
+    }
+    > nav.menu {
+      position: absolute;
+      top: 0.6ex;
+      right: 0;
+      &.hamburger::before {
+        display: none;
+      }
+      ul.menu {
+        display: block;
+        > li {
+          display: inline-block;
+        }
+      }
+    }//nav.menu
+  }//.heading
 }
