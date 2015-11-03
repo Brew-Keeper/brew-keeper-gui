@@ -13,10 +13,10 @@ angular.module('brewKeeper')
           //start brew function
           $scope.startBrew = function(){
             console.log("starting brew");
-            totalDuration =
-            $scope.detail.total_duration;
-            console.log("duration = " + totalDuration)
-          };
+            steps = $scope.steps.length;
+            console.log("steps = " + steps);
+            $scope.$broadcast('timer-add-cd-seconds', $scope.detail.total_duration)
+            }
       }) // end brewIt controller
 
 })();//END Angular IIFE

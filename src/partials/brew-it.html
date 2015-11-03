@@ -5,7 +5,8 @@
 <br>
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
-<h2>Steps:</h2>
+<br>
+<timer interval="1000" countdown="1">seconds remaining: {{countdown}}</timer>
 <div ng-repeat="step in steps">
   <strong>{{step.step_title}}:</strong>
   <br>
