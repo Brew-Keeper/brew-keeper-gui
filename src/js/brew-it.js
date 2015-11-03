@@ -10,14 +10,13 @@ angular.module('brewKeeper')
               $scope.steps = response.data.steps;
               $scope.notes = response.data.brewnotes;
             })
-          // $scope.showSteps = function(stepId){
-          //   stepId= "p." + stepId.toString()
-          //   $(stepId).toggleClass("hidden")
-          // };
-          // $scope.showNotes = function(){
-          //   $("div.notes").toggleClass("hidden")
-          // };
-      })
-
+          //start brew function
+          $scope.startBrew = function(){
+            console.log("starting brew");
+            totalDuration =
+            $scope.detail.total_duration;
+            console.log("duration = " + totalDuration)
+          };
+      }) // end brewIt controller
 
 })();//END Angular IIFE

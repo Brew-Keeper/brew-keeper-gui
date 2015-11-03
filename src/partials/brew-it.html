@@ -1,13 +1,15 @@
 <h3>Brew It! partial page</h3>
 
 <h2>Recipe: {{detail.title}}</h2>
-<button>Start Brewing</button>
+<button ng-click="startBrew()">Start Brewing</button>
 <br>
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <h2>Steps:</h2>
 <div ng-repeat="step in steps">
-  <a href=""><strong>{{step.step_title}}:</strong> </a> {{step.duration}} seconds
+  <strong>{{step.step_title}}:</strong>
+  <br>
+  {{step.duration}} seconds
   <br>
   {{step.step_body}}
   <br>
