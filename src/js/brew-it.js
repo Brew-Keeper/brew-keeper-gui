@@ -17,7 +17,7 @@ angular.module('brewKeeper')
             console.log("starting brew");
             // $scope.$broadcast('timer-start');
             // $(".timer").addClass("red");
-            // $(".1").addClass("red")
+            $(".1").addClass("red")
             $('timer')[0].start();
             $('timer')[1].start();
           };
@@ -29,7 +29,7 @@ angular.module('brewKeeper')
           $scope.resetBrew = function(timerTime){
             console.log("reset button pressed");
             $scope.$broadcast('timer-reset');
-            $(".timer").removeClass("red");
+            // $(".timer").removeClass("red");
             // $scope.$broadcast('timer-start');
           };
           $scope.finishBrew = function(id){
@@ -37,10 +37,15 @@ angular.module('brewKeeper')
             // $(".timer").removeClass("red");
             console.log("id = " + id)
             nextStep(id);
-            // $("."+id).removeClass("red");
+            $("."+id).removeClass("red");
           };
           nextStep = function(id){
             var nextId = id + 1;
+            console.log($scope.steps.length)
+            if(nextId > $scope.steps.length){
+              return
+            }
+            $("."+ nextId).addClass("red");
             $('timer')[nextId].start();
           }
       }) // end brewIt controller

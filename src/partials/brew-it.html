@@ -8,8 +8,8 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer class="timer" autostart="false" interval="1000" countdown="countdownVal" finish-callback="finishBrew()">seconds remaining:<strong> {{countdown}}</strong></timer>
-<div ng-repeat="step in steps">
+<timer class="timer" autostart="false" interval="1000" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
+<div ng-repeat="step in steps" class="{{step.id}}">
   <strong>{{step.step_title}}:</strong>
   <br>
   {{step.duration}} seconds
