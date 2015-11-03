@@ -14,6 +14,10 @@
   <br>
   {{step.duration}} seconds
   <br>
+  <timer class="{{step.id}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="finishBrew(step.id)">seconds remaining:<strong> {{countdown}}</strong></timer>
+  <br>
+  Step id: {{step.id}}
+  <br>
   {{step.step_body}}
   <br>
   Water: {{step.water_amount}} {{detail.water_units}}
