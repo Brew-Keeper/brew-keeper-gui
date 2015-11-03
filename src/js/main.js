@@ -3,6 +3,11 @@
   angular.module('brewKeeper', ['ngRoute', 'timer'], function($routeProvider){
       $routeProvider
         .when('/',{
+          // templateUrl: 'partials/recipe-list.html',
+          // controller: 'recipeList'
+            redirectTo: '/users/don.pablo'
+        })
+        .when('/users/:username', {
           templateUrl: 'partials/recipe-list.html',
           controller: 'recipeList'
         })
@@ -27,10 +32,10 @@
           templateUrl: 'partials/recipe-detail.html',
           controller: 'recipeDetail'
         })
-        .otherwise({
-          redirectTo: '/404.html',
-          templateUrl: 'partials/404.html'
-        })
+        // .otherwise({
+        //   redirectTo: '/404.html',
+        //   templateUrl: 'partials/404.html'
+        // })
     })
 
     .controller('MainController', function($scope, $route, $routeParams, $location){
