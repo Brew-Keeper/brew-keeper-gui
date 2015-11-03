@@ -4,7 +4,9 @@ angular.module('brewKeeper')
   .controller('createNewRecipe', function($scope, $http){
     $scope.recipe = { }//Might need to prepopulate this with empty strings for each key... Maybe...
     $scope.submit=function(){
-      $http.post('urlendpoint', $scope.recipe);//ADD ACTUAL ENDPOINT HERE!
+      $http.post('https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/', $scope.recipe)
+        .then(function() {
+        })
     $scope.recipe= { };
   }
   $('.addSteps').on('click', function() {
