@@ -38,6 +38,9 @@ angular.module('brewKeeper')
           $scope.resetBrew = function(timerTime){
             console.log("reset button pressed");
             $scope.$broadcast('timer-reset');
+            $(".hidden").removeClass("hidden");
+            $(".red").removeClass("red");
+            timerRunning = false;
             // $(".timer").removeClass("red");
             // $scope.$broadcast('timer-start');
           };
