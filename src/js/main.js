@@ -6,10 +6,6 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'recipeList'
         })
-        .when('/recipe/:id', {
-          templateUrl: 'partials/recipe-detail.html',
-          controller: 'recipeDetail'
-        })
         .when('/recipe/new', {
           templateUrl: 'partials/recipe-create.html'
         })
@@ -21,6 +17,10 @@
         })
         .when('/login', {
           templateUrl: 'partials/login.html'
+        })
+        .when('/recipe/:id', {
+          templateUrl: 'partials/recipe-detail.html',
+          controller: 'recipeDetail'
         })
         .otherwise({
           redirectTo: '/404.html',
