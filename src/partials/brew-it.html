@@ -2,19 +2,18 @@
 
 <h2>Recipe: {{detail.title}}</h2>
 <button ng-click="startBrew()">Start Brewing</button>
-<button ng-click="stopBrew()">Pause</button>
 <button ng-click="resetBrew(detail.total_duration)">Reset</button>
 <br>
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer class="timer" autostart="false" interval="1000" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
+<timer class="timer" autostart="false" interval="100" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
 <div ng-repeat="step in steps" class="{{step.id}}">
   <strong>{{step.step_title}}:</strong>
   <br>
   {{step.duration}} seconds
   <br>
-  <timer class="{{step.id}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="finishBrew(step.id)">seconds remaining:<strong> {{countdown}}</strong></timer>
+  <timer class="{{step.id}}" autostart="false" interval="100" countdown="step.duration" finish-callback="finishBrew(step.id)">seconds remaining:<strong> {{countdown}}</strong></timer>
   <br>
   Step id: {{step.id}}
   <br>
