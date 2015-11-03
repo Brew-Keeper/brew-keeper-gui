@@ -1,3 +1,16 @@
 <h3>Brew It! partial page</h3>
 
-this is where the magic happens (eventually)
+<h2>Recipe: {{detail.title}}</h2>
+<button>Start Brewing</button>
+<br>
+<strong>Total Duration:</strong> {{detail.total_duration}} seconds
+<h2>Steps:</h2>
+<div ng-repeat="step in steps">
+  <a href=""><strong>{{step.step_title}}:</strong> </a> {{step.duration}} seconds
+  <br>
+  {{step.step_body}}
+  <br>
+  Water: {{step.water_amount}} {{detail.water_units}}
+  <br>
+  <br>
+</div>
