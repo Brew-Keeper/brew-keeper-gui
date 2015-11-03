@@ -13,8 +13,8 @@
       display: none;
     }
     ul.menu.active {
-      outline:1px solid black;
       display: block;
+      float: right;
       list-style-type: none;
       padding-left: 0;
     }
