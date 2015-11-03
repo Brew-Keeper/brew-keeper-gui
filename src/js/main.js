@@ -6,16 +6,16 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'recipeList'
         })
-        .when('/recipe/:id', {
-          templateUrl: 'partials/recipe-detail.html',
-          controller: 'recipeDetail'
-        })
         .when('/recipe/new', {
           templateUrl: 'partials/recipe-create.html'
         })
         .when('/recipe/brew/:id', {
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
+        })
+        .when('/recipe/:id', {
+          templateUrl: 'partials/recipe-detail.html',
+          controller: 'recipeDetail'
         })
         .when('/info', {
           templateUrl: 'partials/more-info.html'
