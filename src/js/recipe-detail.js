@@ -4,7 +4,8 @@ angular.module('brewKeeper')
       .controller('recipeDetail', function($scope, $http, $routeParams){
           // console.log("firing the recipeDetail controller")
           var id = $routeParams.id;
-          $http.get('api/users/1/recipes/'+ id + '/recipe.json')
+          var username = $routeParams.username;
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
             .then(function(response){
               $scope.detail = response.data;
               $scope.steps = response.data.steps;
