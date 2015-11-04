@@ -2,7 +2,7 @@
 <strong>GRC:</strong> {{detail.general_recipe_comment}}
 <br>
 <br>
-<a ng-href="#/users/don.pablo/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
+<a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
 <button ng-click="Eliminate()">Delete</button>
 <button>Make Public</button>
 <button>Clone</button>
@@ -56,9 +56,9 @@
       <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
     </section>
     <div class="columns general">
-      <button><a href="#/recipe">VIEW IT!</a></button>
+      <button><a href="#/users/{{username}}/recipes/{{detail.id}}">VIEW IT!</a></button>
       <button type="submit">Add Step</button>
-      <button><a href="#/recipe/brew">BREW IT!</a></button>
+      <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
     </div>
   </form><!--Add Step Form-->
   <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
