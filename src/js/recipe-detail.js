@@ -76,10 +76,23 @@ angular.module('brewKeeper')
         }; //hides the add step form
 
 
+            $('.recipe-view').on('click', function(){
+              $('.edit-recipe').removeClass("hidden");
+              $('.recipe-view').addClass("hidden");
+            });
+            $('.cancel-recipe-edit').on('click', function(){
+              console.log("Cancel!")
+              $('.recipe-view').removeClass("hidden");
+              $('.edit-recipe').addClass("hidden");
+            });
           $scope.editRecipe = function(recipe){
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
-              .then(console.log("edit reciple patch complete"))
+            .then( function () {
+              $('.edit-recipe').addClass("hidden");
+              $('.recipe-view').removeClass("hidden");
+            })
           } //end editRecipe function
+
 
       }) //end recipDetail controller
 
