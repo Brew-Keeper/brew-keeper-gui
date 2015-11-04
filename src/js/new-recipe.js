@@ -18,5 +18,3 @@ angular.module('brewKeeper')
   })//controller for creating new step
 
 })();//END IFEE
-
-/* Eventually, it would be good to have the submitted form's information show up in place of the blank form so that the add new steps will be filled out instead of a new recipe form.  Then, as each step is added, it's info will show alongside the recipe info. */
