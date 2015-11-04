@@ -105,6 +105,7 @@ angular.module('brewKeeper')
               steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
               $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step]).success(function(){
+                $location.path("/users/"+ username +"/recipes/"+ newRecipeId)
               });//end step post
             };//end loop to clone steps
           });//end post new recipe
