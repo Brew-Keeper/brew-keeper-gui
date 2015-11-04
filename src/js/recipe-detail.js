@@ -29,11 +29,18 @@ angular.module('brewKeeper')
             }
           } //end deleteStep function
 
+          $scope.showEditStep = function(stepId){
+            console.log("show edit step for " + stepId)
+            stepId = "form." + stepId.toString();
+            $(stepId).toggleClass("hidden")
+          }
+
           $scope.editStep = function(step){
             console.log(step)
             console.log(step.id)
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
-          }
+              .then($scope.showEditStep(step.id))
+          } //end editStep function
 
           })//recipeDetail controller
 

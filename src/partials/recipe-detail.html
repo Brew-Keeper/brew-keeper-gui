@@ -40,7 +40,7 @@
 
 
   <!-- edit step form -->
-  <form class="edit-step"  ng-submit="editStep(step)">
+  <form class="hidden edit-step {{step.id}}"  ng-submit="editStep(step)">
     <section class="columns general">
       <legend><h4>Add Steps</h4></legend>
       <label>Step Title</label>
