@@ -75,6 +75,7 @@ angular.module('brewKeeper')
           $("button.done-adding").addClass("hidden");
         }; //hides the add step form
 
+        //Function for cloning recipes
         $scope.cloneRecipe = function(){
           var cloneData = {}
           console.log("raw data")
@@ -93,8 +94,21 @@ angular.module('brewKeeper')
           cloneData.temp = $scope.detail.temp
           console.log("clone data")
           console.log(cloneData)
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/", cloneData).success(function(){
-            console.log("yay success?")
+          // $http.post("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/", cloneData).success(function(){
+          //   console.log("yay success?")
+          // });
+          var steps = []
+          for(step in $scope.detail.steps){
+            steps[step] = {}
+            steps[step].step_number = $scope.detail.steps[step].step_number
+            steps[step].step_title = $scope.detail.steps[step].step_title
+            steps[step].step_body = $scope.detail.steps[step].step_body
+            steps[step].duration = $scope.detail.steps[step].duration
+            steps[step].water_amount = $scope.detail.steps[step].water_amount
+          }
+          console.log(steps)
+          $http.patch("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/52/", steps).success(function(){
+            console.log("steps added!")
           });
         }
 
