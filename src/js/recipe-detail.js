@@ -30,7 +30,7 @@ angular.module('brewKeeper')
         $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
         console.log($scope.step);
         $scope.submit=function(){
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/12/steps/", $scope.step).then(function(){
+          $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+username+"/recipes/"+id+"/steps/", $scope.step).then(function(){
             console.log("step posted")
             // $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
             //   .then(function(response){
