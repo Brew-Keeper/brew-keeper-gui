@@ -1,34 +1,35 @@
+
 <section class="recipe-view">
-  <h2>Recipe: {{detail.title}}</h2>
-  <strong>GRC:</strong> {{detail.general_recipe_comment}}
-  <br>
-  <br>
-  <a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
-  <button ng-click="Eliminate()">Delete</button>
-  <button>Make Public</button>
-  <button>Clone</button>
-  <br>
-  <br>
-  <strong>Orientation:</strong> {{detail.orientation}}
-  <br>
-  <strong>Rating:</strong> {{detail.rating}}
-  <br>
-  <strong>Bean Type:</strong> {{detail.bean_name}}
-  <br>
-  <strong>Bean Roast:</strong> {{detail.roast}}
-  <br>
-  <strong>Grind:</strong> {{detail.grind}}
-  <br>
-  <strong>Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
-  <br>
-  <strong>Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
-  <br>
-  <strong>Brew Count:</strong> {{detail.brew_count}} brews
-  <br>
-  <strong>Total Duration:</strong> {{detail.total_duration}} seconds
-  <br>
-  <h2>Steps:</h2>
-  <div ng-repeat="step in steps">
+<h2>Recipe: {{detail.title}}</h2>
+<strong>GRC:</strong> {{detail.general_recipe_comment}}
+<br>
+<br>
+<a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
+<button ng-click="Eliminate()">Delete</button>
+<button>Make Public</button>
+<button ng-Click="cloneRecipe(detail)">Clone</button>
+<br>
+<br>
+<strong>Orientation:</strong> {{detail.orientation}}
+<br>
+<strong>Rating:</strong> {{detail.rating}}
+<br>
+<strong>Bean Type:</strong> {{detail.bean_name}}
+<br>
+<strong>Bean Roast:</strong> {{detail.roast}}
+<br>
+<strong>Grind:</strong> {{detail.grind}}
+<br>
+<strong>Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
+<br>
+<strong>Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
+<br>
+<strong>Brew Count:</strong> {{detail.brew_count}} brews
+<br>
+<strong>Total Duration:</strong> {{detail.total_duration}} seconds
+<br>
+<h2>Steps:</h2>
+<div ng-repeat="step in steps">
     <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>Step {{step.step_number}}: {{step.step_title}}:</strong> </a> {{step.duration}} seconds
     <button ng-click="showEditStep(step.id)">Edit Step</button>
     <button ng-click="deleteStep(step.step_number, step.id)">Delete Step</button>
@@ -38,7 +39,6 @@
       Water: {{step.water_amount}} {{detail.water_units}}
       <br>
     </p>
-
 
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
