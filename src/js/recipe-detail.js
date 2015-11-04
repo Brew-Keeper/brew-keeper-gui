@@ -75,6 +75,10 @@ angular.module('brewKeeper')
           $("button.done-adding").addClass("hidden");
         }; //hides the add step form
 
+        $scope.cloneRecipe = function(){
+          console.log("make a clone!")
+        }
+
       }) //end recipDetail controller
 
 
