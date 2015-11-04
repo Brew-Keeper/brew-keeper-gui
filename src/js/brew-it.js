@@ -4,6 +4,7 @@ angular.module('brewKeeper')
       .controller('brewIt', function($scope, $http, $routeParams){
           var id = $routeParams.id;
           var username =$routeParams.username;
+          $scope.username = $routeParams.username;
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
             .then(function(response){
               $scope.detail = response.data;
@@ -26,10 +27,10 @@ angular.module('brewKeeper')
           // $scope.stopBrew = function(){
           //   console.log("pause button pressed");
           //   $scope.$broadcast('timer-stop');
-          // };
+          // }; //This can be used to pause process if needed.
           $scope.resetBrew = function(){
             $scope.$broadcast('timer-reset');
-            $(".hidden").removeClass("hidden");
+            $("div.hidden").removeClass("hidden");
             $(".current-step").removeClass("current-step");
             timerRunning = false;
           };
@@ -42,13 +43,27 @@ angular.module('brewKeeper')
             var nextId = id + 1;
             if(nextId > $scope.steps.length){
               $scope.resetBrew();
-              // timerRunning = false;
-              // $(".hidden").removeClass("hidden")
               return
             }
             $("."+ nextId).addClass("current-step");
             $('timer')[nextId].start();
           };
-      }) // end brewIt controller
-
+        $scope.brewnote = { }
+        $scope.addBrewNote=function(){
+          $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
+          .success(function (data) {
+            var id = data.id
+          })
+        $scope.brewnote = { };
+        }//Add Brew Note Form
+        $(".add-brew-note").on('click', function() {
+          $(".brew-form").removeClass("hidden");
+        })
+        $(".save-note").on('click', function() {
+          $(".brew-form").addClass("hidden");
+        });//Add hidden class to brewNote form on submit
+        $(".cancel-note").on('click', function() {
+          $(".brew-form").addClass("hidden");
+        });//Cancel BrewNote form
+      })
 })();//END Angular IIFE

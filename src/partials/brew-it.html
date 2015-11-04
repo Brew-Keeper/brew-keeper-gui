@@ -1,8 +1,17 @@
 <h3>Brew It! partial page</h3>
 
-<h2>Recipe: {{detail.title}}</h2>
+<a href="#users/{{username}}/recipes/{{detail.id}}"><h2>Recipe: {{detail.title}}</h2></a>
 <button ng-click="startBrew()">Start Brewing</button>
 <button ng-click="resetBrew()">Reset</button>
+<button class="add-brew-note">Add Brew Note</button>
+<section  class="brew-form hidden" >
+<form ng-submit="addBrewNote()">
+      <label>Add Brew Note</label>
+      <textarea type="text" ng-model="brewnote.body"></textarea>
+      <button class="save-note" type="submit">Save Note</button>
+</form>
+      <button class="cancel-note">Cancel Note</button>
+</section>
 <br>
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
@@ -23,5 +32,3 @@
   <br>
   <br>
 </div>
-<button>Add Brew Note</button>
-<br>
