@@ -7,10 +7,12 @@ angular.module('brewKeeper')
       $http.post('https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/', $scope.recipe)
         // .then(function() {
         // })
+        // $resource.get()
         .success(function (data) {
-          $location.path('/users/don.pablo/recipes/1');
+          var id = data.id
+          $location.path('/users/don.pablo/recipes/' + id);
         })
-    // $scope.recipe= { };
+    $scope.recipe= { };
   }
   $('.addSteps').on('click', function() {
     $('.addSteps').removeClass('hidden');
