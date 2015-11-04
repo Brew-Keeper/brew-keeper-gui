@@ -5,7 +5,7 @@
     <label>Recipe Title*</label>
     <input placeholder="The Original" maxlength="50"  ng-model="recipe.title"></input>
     <label>General Recipe Comment</label>
-    <textarea placeholder="No stirring, just hard pour."  ng-model="recipe.general_reipe_comment"></textarea>
+    <textarea placeholder="No stirring, just hard pour."  ng-model="recipe.general_recipe_comment"></textarea>
   </fieldset><!--General Details-->
   </section>
   <section class="columns">
@@ -35,10 +35,10 @@
       <label>Temp</label>
       <input placeholder="Temp in F."  ng-model="recipe.temp"></input>
       <label>Orientation</label>
-      <select>
+      <select ng-model="recipe.orientation">
         <option>Standard</option>
         <option>Inverted</option>
-      </select  ng-model="recipe.orientation">
+      </select>
     </fieldset><!--Water Details-->
   </section>
   <button class="addSteps" type="submit">Submit</button>
