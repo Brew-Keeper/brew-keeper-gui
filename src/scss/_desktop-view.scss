@@ -1,10 +1,10 @@
 @media (min-width: 50em){
   .heading {
-    position: relative;
     h1 {
-      width:35%;
+      width:30%;
     }
     > nav.menu {
+      width: 70%;
       position: absolute;
       top: 0.6ex;
       right: 0;
@@ -13,8 +13,13 @@
       }
       ul.menu {
         display: block;
-        > li {
+        margin: 4ex 5% 0 0;
+        li {
           display: inline-block;
+          margin-left: 0.7em;
+          a {
+            text-decoration: none;
+          }
         }
       }
     }//nav.menu

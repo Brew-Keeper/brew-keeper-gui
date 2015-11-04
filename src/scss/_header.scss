@@ -14,9 +14,11 @@
     }
     ul.menu.active {
       display: block;
-      float: right;
       list-style-type: none;
       padding-left: 0;
+      a {
+        text-decoration: none;
+      }
     }
   }//nav.menu
 }//.heading
