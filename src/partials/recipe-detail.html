@@ -2,7 +2,7 @@
 <strong>GRC:</strong> {{detail.general_recipe_comment}}
 <br>
 <br>
-<a ng-href="#/users/don.pablo/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
+<a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
 <button ng-click="Eliminate()">Delete</button>
 <button>Make Public</button>
 <button>Clone</button>
@@ -28,15 +28,73 @@
 <br>
 <h2>Steps:</h2>
 <div ng-repeat="step in steps">
-  <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}:</strong> </a> {{step.duration}} seconds
+  <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>Step {{step.step_number}}: {{step.step_title}}:</strong> </a> {{step.duration}} seconds
+  <button ng-click="showEditStep(step.id)">Edit Step</button>
+  <button ng-click="deleteStep(step.step_number, step.id)">Delete Step</button>
   <br>
   <p class="step {{step.id}} hidden">{{step.step_body}}
     <br>
     Water: {{step.water_amount}} {{detail.water_units}}
     <br>
   </p>
+
+
+  <!-- edit step form -->
+  <div class="hidden edit-step {{step.id}}">
+    <form ng-submit="editStep(step)">
+      <section class="columns general">
+        <legend><h4>Add Steps</h4></legend>
+        <label>Step Title</label>
+        <input maxlength="50" type="text" ng-model="step.step_title"></input>
+        <label>Step Details</label>
+        <textarea maxlength="255" type="text"  ng-model="step.step_body"></textarea>
+      </section>
+      <section class="columns steps">
+        <label>Step Number:</label>
+        <input type="number" placeholder="#" ng-model="step.step_number"></input>
+        <label>Duration</label>
+        <input type="number"  placeholder="#" ng-model="step.duration"></input>
+        <label>Water Amount</label>
+        <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
+      </section>
+      <div class="columns general">
+        <button type="submit">Save</button>
+        <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
+      </div>
+    </form><!--edit Step Form-->
+    <button ng-click="hideEditStep(step.id)">Cancel</button>
+  </div> <!-- edit step form div -->
+
+
   <br>
-</div>
+</div> <!--end ng-repeat for steps -->
+<!-- <div class="addSteps" ng-controller="createNewStep"> -->
+<div class="addSteps">
+
+  <button ng-click="showAddSteps()">Add Steps</button>
+  <form class="hidden create-new-step"  ng-submit="submit()">
+    <section class="columns general">
+      <legend><h4>Add Steps</h4></legend>
+      <label>Step Title</label>
+      <input maxlength="50" type="text" ng-model="step.step_title"></input>
+      <label>Step Details</label>
+      <textarea maxlength="255" type="text" placeholder="Pour slowly, using side-to-side motion to ensure no dry spots" ng-model="step.step_detail"></textarea>
+    </section>
+    <section class="columns steps">
+      <label>Step Number:</label>
+      <input type="number" placeholder="#" ng-model="step.step_number"></input>
+      <label>Duration</label>
+      <input type="number"  placeholder="#" ng-model="step.duration"></input>
+      <label>Water Amount</label>
+      <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
+    </section>
+    <div class="columns general">
+      <button type="submit">Add Step</button>
+      <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
+    </div>
+  </form><!--Add Step Form-->
+  <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
+</div> <!-- add step section -->
 <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
 <div class="notes hidden" ng-repeat="note in notes">
   <strong>{{note.body}}</strong>
