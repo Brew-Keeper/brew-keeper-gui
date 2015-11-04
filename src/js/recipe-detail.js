@@ -1,7 +1,7 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeDetail', function($scope, $http, $routeParams){
+      .controller('recipeDetail', function($scope, $http, $location, $routeParams){
           // console.log("firing the recipeDetail controller")
           var id = $routeParams.id;
           var username = $routeParams.username;
@@ -19,7 +19,12 @@ angular.module('brewKeeper')
             $("div.notes").toggleClass("hidden")
           };
           $scope.Eliminate = function() {
-            $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+            if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
+              $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/').then(function(){
+                $location.path('/users/'+ username);
+              })
+            };
+
           }
       })//recipeDetail controller
 
