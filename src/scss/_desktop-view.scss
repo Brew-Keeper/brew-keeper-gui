@@ -1,20 +1,26 @@
 @media (min-width: 50em){
   .heading {
-    position: relative;
     h1 {
-      width:35%;
+      width:60%;
     }
     > nav.menu {
+      width: 50%;
       position: absolute;
       top: 0.6ex;
-      right: 0;
+      right: 5%;
       &.hamburger::before {
         display: none;
       }
       ul.menu {
         display: block;
-        > li {
+        float: right;
+        margin-top: 4ex;
+        li {
           display: inline-block;
+          margin-left: 0.7em;
+          a {
+            text-decoration: none;
+          }
         }
       }
     }//nav.menu
