@@ -2,7 +2,7 @@
 <button ng-click="startBrew()">Start Brewing</button>
 <button ng-click="resetBrew()">Reset</button>
 <button class="add-brew-note">Add Brew Note</button>
-<section  class="brew-form hidden" >
+<section class="brew-form hidden" >
 <form ng-submit="addBrewNote()">
       <label>Add Brew Note</label>
       <textarea type="text" ng-model="brewnote.body"></textarea>
@@ -14,7 +14,7 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer class="timer" autostart="false" interval="1000" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
+<timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer>
 <br>
 <br>
 <div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
@@ -22,7 +22,7 @@
   <br>
   {{step.duration}} seconds
   <br>
-  <timer class="{{step.step_number}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="finishBrew(step.step_number)">seconds remaining:<strong> {{countdown}}</strong></timer>
+  <timer class="{{step.step_number}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number)">seconds remaining: <strong>{{countdown}}</strong></timer>
   <br>
   Step Number: {{step.step_number}}
   <br>
