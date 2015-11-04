@@ -1,10 +1,12 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeList', function($scope, $http){
-          $http.get('api/users/1/user1.json')
+      .controller('recipeList', function($scope, $http, $routeParams){
+          var username = $routeParams.username;
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/')
             .then(function(response){
-              $scope.recipes = response.data.recipe_list;
+              $scope.recipes = response.data;
+              $scope.username = username;
             })
       })
 
