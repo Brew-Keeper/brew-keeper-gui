@@ -21,6 +21,13 @@ angular.module('brewKeeper')
           $scope.showNotes = function(){
             $("div.notes").toggleClass("hidden")
           };
+          $scope.deleteStep = function(stepNumber, stepId){
+            console.log("deleteStep function called " + stepNumber)
+            if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
+              console.log("delete confirmed")
+              $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/")
+            }
+          } //end deleteStep function
           })//recipeDetail controller
 
       .controller('createNewStep', function($scope, $http, $routeParams){
@@ -28,10 +35,10 @@ angular.module('brewKeeper')
         var username = $routeParams.username;
         $scope.username = $routeParams.username;
         $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-        console.log($scope.step);
+        // console.log($scope.step);
         $scope.submit=function(){
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+username+"/recipes/"+id+"/steps/", $scope.step).then(function(){
-            console.log("step posted")
+          $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
+            // console.log("step posted")
             // $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
             //   .then(function(response){
             //     // $scope.detail = response.data;
@@ -40,9 +47,16 @@ angular.module('brewKeeper')
             //     // $scope.notes = response.data.brewnotes;
             //   })
           })
-          console.log($scope.step)
-          // $scope.step= { };
+          // console.log($scope.step)
+          $scope.step= { };
         } //end new step submit function
+
+        // $scope.deleteStep = function(){
+        //   console.log("deleteStep function called" + stepId)
+        //   if (window.confirm("Are you sure you want to delete step " + stepId + "?")){
+        //     console.log("delete confirmed")
+        //   }
+        // } //end deleteStep function
 
         $scope.Eliminate = function() {
           if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
