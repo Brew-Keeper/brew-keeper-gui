@@ -92,12 +92,13 @@ angular.module('brewKeeper')
           cloneData.total_water_amount = $scope.detail.total_water_amount
           cloneData.water_units = $scope.detail.water_units
           cloneData.temp = $scope.detail.temp
+          cloneData.steps = []
           console.log("clone data")
           console.log(cloneData)
           // $http.post("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/", cloneData).success(function(){
           //   console.log("yay success?")
           // });
-          var steps = []
+          steps = []
           for(step in $scope.detail.steps){
             steps[step] = {}
             steps[step].step_number = $scope.detail.steps[step].step_number
@@ -105,11 +106,11 @@ angular.module('brewKeeper')
             steps[step].step_body = $scope.detail.steps[step].step_body
             steps[step].duration = $scope.detail.steps[step].duration
             steps[step].water_amount = $scope.detail.steps[step].water_amount
+            $http.post("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/53/steps/", steps[step]).success(function(){
+              console.log("step# "+ steps[step].step_number +" added!")
+            });
           }
-          console.log(steps)
-          $http.patch("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/52/", steps).success(function(){
-            console.log("steps added!")
-          });
+          // console.log(cloneData.steps)
         }
 
 
