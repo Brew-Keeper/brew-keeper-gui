@@ -33,7 +33,10 @@ angular.module('brewKeeper')
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){
-                controller: 'recipeDetail'
+                $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+                  .then(function(response){
+                    $scope.steps = response.data.steps;
+                  })
               })
             }
           } //end deleteStep function
@@ -48,20 +51,17 @@ angular.module('brewKeeper')
               .then($scope.showEditStep(step.id))
           } //end editStep function
 
-          })//recipeDetail controller
+          $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
 
-      .controller('createNewStep', function($scope, $http, $routeParams){
-        var id = $routeParams.id;
-        var username = $routeParams.username;
-        $scope.username = $routeParams.username;
-        $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-
-        $scope.submit=function(){
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step)
-          $scope.step= { };
-        } //end new step submit function
-
-
+          $scope.submit=function(){
+            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+                .then(function(response){
+                  $scope.steps = response.data.steps;
+                })
+            })
+            $scope.step= { };
+          } //end new step submit function
 
         $scope.showAddSteps = function(){
           $("form.create-new-step").removeClass("hidden");
@@ -71,7 +71,8 @@ angular.module('brewKeeper')
           $("form.create-new-step").addClass("hidden");
           $("button.done-adding").addClass("hidden");
         }; //hides the add step form
-      }) //end createNewStep controller
+
+      }) //end recipDetail controller
 
 
 
