@@ -86,10 +86,10 @@
     <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
   </div> <!-- add step section -->
   <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
-  <div class="notes hidden" ng-repeat="note in notes">
+  <div class="notes hidden" ng-repeat="note in notes | orderBy: 'note.timestamp'">
     <strong>{{note.body}}</strong>
     <br>
-    on {{note.timestamp}}
+    posted {{note.timestamp | date}}
     <br>
     <br>
   </div>
