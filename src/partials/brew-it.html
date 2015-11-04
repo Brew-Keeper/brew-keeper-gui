@@ -1,6 +1,4 @@
-<h3>Brew It! partial page</h3>
-
-<a href="#users/{{username}}/recipes/{{detail.id}}"><h2>Recipe: {{detail.title}}</h2></a>
+<a href="#users/{{username}}/recipes/{{detail.id}}"><h2>{{detail.title}}</h2></a>
 <button ng-click="startBrew()">Start Brewing</button>
 <button ng-click="resetBrew()">Reset</button>
 <button class="add-brew-note">Add Brew Note</button>
@@ -17,6 +15,8 @@
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
 <timer class="timer" autostart="false" interval="1000" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
+<br>
+<br>
 <div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
   <strong>{{step.step_title}}:</strong>
   <br>
