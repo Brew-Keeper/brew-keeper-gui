@@ -75,6 +75,12 @@ angular.module('brewKeeper')
           $("button.done-adding").addClass("hidden");
         }; //hides the add step form
 
+
+          $scope.editRecipe = function(recipe){
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
+              .then(console.log("edit reciple patch complete"))
+          } //end editRecipe function
+
       }) //end recipDetail controller
 
 
