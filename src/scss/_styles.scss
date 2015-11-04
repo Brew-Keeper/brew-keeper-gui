@@ -1,0 +1,37 @@
+body {
+  font-family: 'Open Sans', 'sans-serif';
+  background-color: #f7f1e0;
+  color: #332421;
+  a {
+    // color: #57321f;
+    color: #840200;
+  }
+}
+
+.heading {
+  display: block;
+  background-color: #e4dbc3;
+  padding: 1ex 5%;
+  border-bottom: 1px solid #3a7f01;
+  h1 > a[href]{
+    text-decoration: none;
+  }
+}
+
+div.current-step {
+  border-radius: 5px;
+  // color: #dddddd;
+  border: 2px solid #840200;
+  background-color: lighten(tomato, 15%);
+}
+
+button {
+  background-color: #e4dbc3;
+  border-radius: 5px;
+  margin: 15px 2px;
+}
+
+.brew-step {
+  padding-left: 15px;
+  padding-top: 10px;
+}

@@ -100,7 +100,7 @@ main.container {
   width: 90%;
 } //main.container
 
-
+@import 'styles';
 @import 'header';
 @import 'forms';
 @import 'desktop-view';
@@ -116,10 +116,7 @@ main.container {
 
 
 
-.current-step {
-  color: #330f0a;
-  background-color: #f4cda4;
-}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
