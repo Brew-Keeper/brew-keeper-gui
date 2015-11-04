@@ -40,28 +40,30 @@
 
 
   <!-- edit step form -->
-  <form class="hidden edit-step {{step.id}}"  ng-submit="editStep(step)">
-    <section class="columns general">
-      <legend><h4>Add Steps</h4></legend>
-      <label>Step Title</label>
-      <input maxlength="50" type="text" ng-model="step.step_title"></input>
-      <label>Step Details</label>
-      <textarea maxlength="255" type="text"  ng-model="step.step_body"></textarea>
-    </section>
-    <section class="columns steps">
-      <label>Step Number:</label>
-      <input type="number" placeholder="#" ng-model="step.step_number"></input>
-      <label>Duration</label>
-      <input type="number"  placeholder="#" ng-model="step.duration"></input>
-      <label>Water Amount</label>
-      <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
-    </section>
-    <div class="columns general">
-      <button type="submit">Save</button>
-      <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
-    </div>
-  </form><!--edit Step Form-->
-
+  <div class="hidden edit-step {{step.id}}">
+    <form ng-submit="editStep(step)">
+      <section class="columns general">
+        <legend><h4>Add Steps</h4></legend>
+        <label>Step Title</label>
+        <input maxlength="50" type="text" ng-model="step.step_title"></input>
+        <label>Step Details</label>
+        <textarea maxlength="255" type="text"  ng-model="step.step_body"></textarea>
+      </section>
+      <section class="columns steps">
+        <label>Step Number:</label>
+        <input type="number" placeholder="#" ng-model="step.step_number"></input>
+        <label>Duration</label>
+        <input type="number"  placeholder="#" ng-model="step.duration"></input>
+        <label>Water Amount</label>
+        <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
+      </section>
+      <div class="columns general">
+        <button type="submit">Save</button>
+        <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
+      </div>
+    </form><!--edit Step Form-->
+    <button ng-click="hideEditStep(step.id)">Cancel</button>
+  </div> <!-- edit step form div -->
 
 
   <br>

@@ -42,17 +42,20 @@ angular.module('brewKeeper')
           } //end deleteStep function
 
           $scope.showEditStep = function(stepId){
-            stepId = "form." + stepId.toString();
-            $(stepId).toggleClass("hidden")
+            stepId = "div." + stepId.toString();
+            $(stepId).removeClass("hidden")
           }
 
           $scope.editStep = function(step){
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
               .then($scope.showEditStep(step.id))
           } //end editStep function
+          $scope.hideEditStep = function(stepId){
+            stepId = "div." + stepId.toString();
+            $(stepId).addClass("hidden")
+          }
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-
           $scope.submit=function(){
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
