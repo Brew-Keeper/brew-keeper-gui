@@ -75,6 +75,23 @@ angular.module('brewKeeper')
           $("button.done-adding").addClass("hidden");
         }; //hides the add step form
 
+
+        $('.edit-button').on('click', function(){
+          $('.edit-recipe').removeClass("hidden");
+          $('.recipe-view').addClass("hidden");
+        });
+      $scope.editRecipe = function(recipe){
+        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
+        .then( function () {
+          $('.edit-recipe').addClass("hidden");
+          $('.recipe-view').removeClass("hidden");
+        })
+      } //end editRecipe function
+        $('.cancel-recipe-edit').on('click', function(){
+          $('.recipe-view').removeClass("hidden");
+          $('.edit-recipe').addClass("hidden");
+        });
+
       }) //end recipDetail controller
 
 
