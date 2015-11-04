@@ -28,6 +28,13 @@ angular.module('brewKeeper')
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/")
             }
           } //end deleteStep function
+
+          $scope.editStep = function(step){
+            console.log(step)
+            console.log(step.id)
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
+          }
+
           })//recipeDetail controller
 
       .controller('createNewStep', function($scope, $http, $routeParams){
