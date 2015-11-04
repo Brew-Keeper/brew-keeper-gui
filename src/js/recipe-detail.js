@@ -76,8 +76,28 @@ angular.module('brewKeeper')
         }; //hides the add step form
 
         $scope.cloneRecipe = function(){
-          console.log("make a clone!")
+          var cloneData = {}
+          console.log("raw data")
+          console.log($scope.detail)
+          cloneData.title = $scope.detail.title;
+          cloneData.bean_name = $scope.detail.bean_name;
+          cloneData.roast = $scope.detail.roast
+          cloneData.orientation = $scope.detail.orientation
+          cloneData.general_recipe_comment = $scope.detail.general_recipe_comment
+          cloneData.grind = $scope.detail.grind
+          cloneData.total_bean_amount = $scope.detail.total_bean_amount
+          cloneData.bean_units = $scope.detail.bean_units
+          cloneData.water_type = $scope.detail.water_type
+          cloneData.total_water_amount = $scope.detail.total_water_amount
+          cloneData.water_units = $scope.detail.water_units
+          cloneData.temp = $scope.detail.temp
+          console.log("clone data")
+          console.log(cloneData)
+          $http.post("https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/", cloneData).success(function(){
+            console.log("yay success?")
+          });
         }
+
 
       }) //end recipDetail controller
 
