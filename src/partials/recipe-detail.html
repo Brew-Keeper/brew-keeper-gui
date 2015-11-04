@@ -29,6 +29,7 @@
 <h2>Steps:</h2>
 <div ng-repeat="step in steps">
   <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}:</strong> </a> {{step.duration}} seconds
+  <button ng-click="deleteStep(step.id)">Delete Step</button>
   <br>
   <p class="step {{step.id}} hidden">{{step.step_body}}
     <br>
