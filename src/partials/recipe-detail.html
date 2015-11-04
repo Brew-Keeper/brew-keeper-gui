@@ -1,32 +1,25 @@
 
+<button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
 <section class="recipe-view">
-<h2>Recipe: {{detail.title}}</h2>
-<strong>GRC:</strong> {{detail.general_recipe_comment}}
-<br>
+<h2>{{detail.title}}</h2>
+<p>{{detail.general_recipe_comment}}<p>
 <br>
 <a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
-<button ng-click="Eliminate()">Delete</button>
-<button>Make Public</button>
+<!-- <button>Make Public</button> -->
 <button ng-Click="cloneRecipe(detail)">Clone</button>
+<button class="recipe-view edit-button {{detail.id}}">Edit Recipe</button>
+<button ng-click="Eliminate()">Delete</button>
 <br>
 <br>
-<strong>Orientation:</strong> {{detail.orientation}}
-<br>
-<strong>Rating:</strong> {{detail.rating}}
-<br>
-<strong>Bean Type:</strong> {{detail.bean_name}}
-<br>
-<strong>Bean Roast:</strong> {{detail.roast}}
-<br>
-<strong>Grind:</strong> {{detail.grind}}
-<br>
-<strong>Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
-<br>
-<strong>Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
-<br>
-<strong>Brew Count:</strong> {{detail.brew_count}} brews
-<br>
-<strong>Total Duration:</strong> {{detail.total_duration}} seconds
+<p><strong ng-show="detail.orientation">Orientation:</strong> {{detail.orientation}}
+<p><strong ng-show="detail.rating">Rating:</strong> {{detail.rating}}
+<p><strong ng-show="detail.bean_name">Bean Type:</strong> {{detail.bean_name}}
+<p><strong ng-show="detail.roast">Bean Roast:</strong> {{detail.roast}}
+<p><strong ng-show="detail.grind">Grind:</strong> {{detail.grind}}
+<p><strong ng-show="detail.total_bean_amount">Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
+<p><strong ng-show="detail.total_water_amount">Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
+<!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
+<p><strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
 <h2>Steps:</h2>
 <div ng-repeat="step in steps">
@@ -95,16 +88,16 @@
     <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
   </div> <!-- add step section -->
   <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
-  <div class="notes hidden" ng-repeat="note in notes">
+  <div class="notes hidden" ng-repeat="note in notes | orderBy: 'note.timestamp'">
     <strong>{{note.body}}</strong>
     <br>
-    on {{note.timestamp}}
+    posted {{note.timestamp | date}}
     <br>
     <br>
   </div>
 </section><!--.recipe-view-->
 
-<button class="recipe-view edit-button {{detail.id}}">Edit Recipe</button>
+
 <section class="edit-recipe hidden">
 <form class="edit-recipe" ng-submit="editRecipe(recipe)">
   <section class="columns general">
@@ -151,4 +144,3 @@
   <button class="submit-recipe-edit" type="submit">Submit</button>
 </form><!--Edit Recipe Form-->
 </section>
-<button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
