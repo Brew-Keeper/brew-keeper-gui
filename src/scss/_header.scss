@@ -16,8 +16,11 @@
       display: block;
       list-style-type: none;
       padding-left: 0;
-      a {
-        text-decoration: none;
+      li {
+        text-align:right;
+        a {
+          text-decoration: none;
+        }
       }
     }
   }//nav.menu
