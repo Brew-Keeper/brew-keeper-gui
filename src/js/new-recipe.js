@@ -1,13 +1,16 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-  .controller('createNewRecipe', function($scope, $http){
+  .controller('createNewRecipe', function($scope, $http, $location){
     $scope.recipe = { }//Might need to prepopulate this with empty strings for each key... Maybe...
     $scope.submit=function(){
       $http.post('https://brew-keeper-api.herokuapp.com/api/users/don.pablo/recipes/', $scope.recipe)
-        .then(function() {
+        // .then(function() {
+        // })
+        .success(function (data) {
+          $location.path('/users/don.pablo/recipes/1');
         })
-    $scope.recipe= { };
+    // $scope.recipe= { };
   }
   $('.addSteps').on('click', function() {
     $('.addSteps').removeClass('hidden');
