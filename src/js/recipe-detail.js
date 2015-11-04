@@ -77,6 +77,9 @@ angular.module('brewKeeper')
 
         //Function for cloning recipes
         $scope.cloneRecipe = function(){
+          if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
+            return;
+          };
           var cloneData = {}
           cloneData.title = $scope.detail.title;
           cloneData.bean_name = $scope.detail.bean_name;
