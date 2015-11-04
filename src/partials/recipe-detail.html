@@ -5,7 +5,7 @@
 <a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
 <button ng-click="Eliminate()">Delete</button>
 <button>Make Public</button>
-<button>Clone</button>
+<button ng-Click="cloneRecipe(detail)">Clone</button>
 <br>
 <br>
 <strong>Orientation:</strong> {{detail.orientation}}
