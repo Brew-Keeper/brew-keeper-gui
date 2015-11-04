@@ -9,16 +9,16 @@ angular.module('brewKeeper')
         })
     $scope.recipe= { };
   }
-  $('.addSteps').on('click', function() {
-    $('.addSteps').removeClass('hidden');
-  });//Reveal "Add Step" when new recipe form is submitted.
-  })//controller for creating new recipe
-  .controller('createNewStep', function($scope, $http){
-    $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-    $scope.submit=function(){
-      $http.post('urlendpoint', $scope.step);//ADD ACTUAL ENDPOINT HERE!
-      $scope.step= { };
-    }
+  // $('.addSteps').on('click', function() {
+  //   $('.addSteps').removeClass('hidden');
+  // });//Reveal "Add Step" when new recipe form is submitted.
+  // })//controller for creating new recipe
+  // .controller('createNewStep', function($scope, $http){
+  //   $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
+  //   $scope.submit=function(){
+  //     $http.post('urlendpoint', $scope.step);//ADD ACTUAL ENDPOINT HERE!
+  //     $scope.step= { };
+  //   }
   })//controller for creating new step
 
 })();//END IFEE
