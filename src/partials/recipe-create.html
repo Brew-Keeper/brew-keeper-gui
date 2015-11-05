@@ -1,40 +1,40 @@
-<h3>Create New Recipe</h3>
+<h3>Create A New Recipe</h3>
 <form class="create-new-recipe" ng-controller="createNewRecipe" ng-submit="submit()">
   <section class="columns general">
   <fieldset>
-    <label>Recipe Title*</label>
-    <input placeholder="The Original" maxlength="50"  ng-model="recipe.title"></input>
-    <label>General Recipe Comment</label>
-    <textarea placeholder="No stirring, just hard pour."  ng-model="recipe.general_recipe_comment"></textarea>
+    <!-- <label>Title (Required)</label> -->
+    <input placeholder="Title (Required)" maxlength="50"  ng-model="recipe.title" required></input>
+    <!-- <label>General Recipe Comment</label> -->
+    <textarea placeholder="Comments"  ng-model="recipe.general_recipe_comment"></textarea>
   </fieldset><!--General Details-->
   </section>
   <section class="columns">
     <fieldset>
       <legend><h4>Bean Details</h4></legend>
-      <label>Bean Name</label>
-      <input max="50" placeholder="Arabica"  ng-model="recipe.bean_name"></input>
-      <label>Bean Roast</label>
-      <input max="15" placeholder="Medium"  ng-model="recipe.roast"></input>
-      <label>Grind</label>
-      <input maxlength="12" placeholder="Capresso M2"  ng-model="recipe.grind"></input>
-      <label>Bean Amount</label>
-      <input type="number"  ng-model="recipe.total_bean_amount"></input>
-      <label>Bean Units</label>
-      <input max="12" placeholder="g"  ng-model="recipe.bean_units"></input>
+      <!-- <label>Bean Name</label> -->
+      <input max="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
+      <!-- <label>Bean Roast</label> -->
+      <input max="15" placeholder="Roast"  ng-model="recipe.roast"></input>
+      <!-- <label>Grind</label> -->
+      <input maxlength="12" placeholder="Grind"  ng-model="recipe.grind"></input>
+      <!-- <label>Bean Amount</label> -->
+      <input type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
+      <!-- <label>Bean Units</label> -->
+      <input max="12" placeholder="Units" ng-model="recipe.bean_units"></input>
   </fieldset><!--Bean Details-->
   </section>
   <section class="columns">
     <fieldset>
       <legend><h4>Water Details</h4></legend>
-      <label>Water Type</label>
-      <input maxlength="50" placeholder="tap"  ng-model="recipe.water_type"></input>
-      <label>Water Amount</label>
-      <input  ng-model="recipe.total_water_amount"></input>
-      <label>Water Amount Units</label>
-      <input maxlength="12"  ng-model="recipe.water_units"></input>
-      <label>Temp</label>
-      <input placeholder="Temp in F."  ng-model="recipe.temp"></input>
-      <label>Orientation</label>
+      <!-- <label>Water Type</label> -->
+      <input maxlength="50" placeholder="Type" ng-model="recipe.water_type"></input>
+      <!-- <label>Water Amount</label> -->
+      <input type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
+      <!-- <label>Water Amount Units</label> -->
+      <input maxlength="12" ng-model="recipe.water_units" placeholder="Units"></input>
+      <!-- <label>Temp</label> -->
+      <input type="number" placeholder="Temp in &deg;F" ng-model="recipe.temp"></input>
+      <!-- <label>Orientation</label> -->
       <select ng-model="recipe.orientation">
         <option>Standard</option>
         <option>Inverted</option>
