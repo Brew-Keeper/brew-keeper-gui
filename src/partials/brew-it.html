@@ -14,23 +14,21 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer interval="1000" countdown="3" finish-callback="startBrew()">start delay: {{countdown}}</timer>
+<timer interval="1000" countdown="3" finish-callback="startBrew()">start delay countdown: {{countdown}}</timer>
 
 <!-- <timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer> -->
 <br>
 <br>
 <div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
-  <strong>{{step.step_title}}:</strong>
+  <strong>{{step.step_title}}</strong>
   <br>
-  {{step.duration}} seconds
+  duration - {{step.duration}} sec
   <br>
-  <timer class="{{step.step_number}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number)">seconds remaining: <strong>{{countdown}}</strong></timer>
-  <br>
-  Step Number: {{step.step_number}}
+  <timer class="{{step.step_number}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number)">time remaining - <strong>{{countdown}} sec</strong></timer>
   <br>
   {{step.step_body}}
   <br>
-  Water: {{step.water_amount}} {{detail.water_units}}
+  <p ng-show="step.water_amount">Water - {{step.water_amount}} {{detail.water_units}}</p>
   <br>
   <br>
 </div>
