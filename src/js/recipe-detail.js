@@ -27,9 +27,9 @@ angular.module('brewKeeper')
             $(stepId).toggleClass("hidden")
           };
 
-          $scope.showNotes = function(){
-            $("div.notes").toggleClass("hidden")
-          };
+          // $scope.showNotes = function(){
+          //   $("div.notes").toggleClass("hidden")
+          // };
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){

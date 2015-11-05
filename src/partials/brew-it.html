@@ -4,8 +4,8 @@
 <button class="add-brew-note">Add Brew Note</button>
 <section class="brew-form hidden" >
 <form ng-submit="addBrewNote()">
-      <label>Add Brew Note</label>
-      <textarea type="text" ng-model="brewnote.body"></textarea>
+      <!-- <label>Add Brew Note</label> -->
+      <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
       <button class="save-note" type="submit">Save Note</button>
 </form>
       <button class="cancel-note">Cancel Note</button>
