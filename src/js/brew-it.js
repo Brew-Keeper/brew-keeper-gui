@@ -6,6 +6,7 @@ angular.module('brewKeeper')
         var username =$routeParams.username;
         $scope.username = $routeParams.username;
 
+
         var stepArray = [] //create an array of step #'s'
         for(step in $rootScope.steps){
           stepArray.push($rootScope.steps[step].step_number)
@@ -15,14 +16,24 @@ angular.module('brewKeeper')
         var timerRunning = false //logic for brew timer
         //start brew function
         $scope.startBrew = function(id){
+          console.log("start brew function called")
           if(timerRunning){
             return;
           }
           $("."+$scope.stepArray[0]).addClass("current-step")
-          $('timer')[0].start();
+          // $('timer')[0].start();
           $('timer')[1].start();
           timerRunning = true;
         };
+
+        //autostart brewit
+        // startBrew();
+
+        // $("."+$scope.stepArray[0]).addClass("current-step")
+        // $('timer')[0].start();
+        // $('timer')[1].start();
+        // timerRunning = true;
+
         // $scope.stopBrew = function(){
         //   console.log("pause button pressed");
         //   $scope.$broadcast('timer-stop');
@@ -63,7 +74,6 @@ angular.module('brewKeeper')
           $("."+ nextStep).addClass("current-step");
           $('timer')[nextTimerId].start();
         };
-
       $scope.brewnote = { }
       $scope.addBrewNote=function(){
         $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)

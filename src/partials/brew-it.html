@@ -14,7 +14,9 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer>
+<timer interval="1000" countdown="3" finish-callback="startBrew()">start delay: {{countdown}}</timer>
+
+<!-- <timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer> -->
 <br>
 <br>
 <div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
