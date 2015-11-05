@@ -5,7 +5,7 @@
     <label>Recipe Title*</label>
     <input placeholder="The Original" maxlength="50"  ng-model="recipe.title"></input>
     <label>General Recipe Comment</label>
-    <textarea placeholder="No stirring, just hard pour."  ng-model="recipe.general_reipe_comment"></textarea>
+    <textarea placeholder="No stirring, just hard pour."  ng-model="recipe.general_recipe_comment"></textarea>
   </fieldset><!--General Details-->
   </section>
   <section class="columns">
@@ -35,36 +35,11 @@
       <label>Temp</label>
       <input placeholder="Temp in F."  ng-model="recipe.temp"></input>
       <label>Orientation</label>
-      <select>
+      <select ng-model="recipe.orientation">
         <option>Standard</option>
         <option>Inverted</option>
-      </select  ng-model="recipe.orientation">
+      </select>
     </fieldset><!--Water Details-->
   </section>
   <button class="addSteps" type="submit">Submit</button>
 </form><!--Recipe Form-->
-
-<div class="hidden addSteps" ng-controller="createNewStep">
-  <form class="create-new-step"  ng-submit="submit()">
-    <section class="columns general">
-      <legend><h4>Add Steps</h4></legend>
-      <label>Step Title</label>
-      <input maxlength="50" type="text" ng-model="step.step_title"></input>
-      <label>Step Details</label>
-      <textarea maxlength="255" type="text" placeholder="Pour slowly, using side-to-side motion to ensure no dry spots" ng-model="step.step_detail"></textarea>
-    </section>
-    <section class="columns steps">
-      <label>Step Number:</label>
-      <input type="number" placeholder="#" ng-model="step.step_number"></input>
-      <label>Duration</label>
-      <input type="number"  placeholder="#" ng-model="step.duration"></input>
-      <label>Water Amount</label>
-      <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
-    </section>
-    <div class="columns general">
-      <button><a href="#/recipe">VIEW IT!</a></button>
-      <button type="submit">Add Another Step</button>
-      <button><a href="#/recipe/brew">BREW IT!</a></button>
-    </div>
-  </form><!--Add Step Form-->
-</div>

@@ -1,14 +1,23 @@
 ;(function(){//IIFE
 
 angular.module('brewKeeper')
-      .controller('brewIt', function($scope, $http, $routeParams){
+      .controller('brewIt', function($scope, $http, $routeParams, $location, $route){
           var id = $routeParams.id;
-          $http.get('api/users/1/recipes/'+ id + '/recipe.json')
+          var username =$routeParams.username;
+          $scope.username = $routeParams.username;
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
             .then(function(response){
               $scope.detail = response.data;
               $scope.steps = response.data.steps;
               $scope.notes = response.data.brewnotes;
               $scope.countdownVal = response.data.total_duration;
+
+
+              var stepArray = [] //create an array of step #'s'
+              for(step in response.data.steps){
+                stepArray.push(response.data.steps[step].step_number)
+              };
+              $scope.stepArray = stepArray;
             })
 
             var timerRunning = false //logic for brew timer
@@ -17,7 +26,7 @@ angular.module('brewKeeper')
             if(timerRunning){
               return;
             }
-            $(".1").addClass("current-step")
+            $("."+$scope.stepArray[0]).addClass("current-step")
             $('timer')[0].start();
             $('timer')[1].start();
             timerRunning = true;
@@ -25,29 +34,61 @@ angular.module('brewKeeper')
           // $scope.stopBrew = function(){
           //   console.log("pause button pressed");
           //   $scope.$broadcast('timer-stop');
-          // };
+          // }; //This can be used to pause process if needed.
+
           $scope.resetBrew = function(){
-            $scope.$broadcast('timer-reset');
-            $(".hidden").removeClass("hidden");
+
+            $("div.hidden").removeClass("hidden");
             $(".current-step").removeClass("current-step");
+            $scope.$broadcast('timer-reset');
             timerRunning = false;
+            // $location.path("/users/"+ username + "/recipes/" + id + "/brewit")
+            // $route.reload()
+            $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+              .then(function(response){
+                $scope.detail = response.data;
+                $scope.steps = response.data.steps;
+                $scope.notes = response.data.brewnotes;
+                $scope.countdownVal = response.data.total_duration;
+              })
           };
-          $scope.finishBrew = function(id){
-            $scope.nextStep(id);
-            $("."+id).removeClass("current-step");
-             $("."+id).addClass("hidden")
-          };
-          $scope.nextStep = function(id){
-            var nextId = id + 1;
-            if(nextId > $scope.steps.length){
+
+          // $scope.finishBrew = function(id){
+          //   $scope.nextStep(id);
+          //   $("."+id).removeClass("current-step");
+          //   $("."+id).addClass("hidden")
+          // };
+          $scope.nextStep = function(stepNumber){
+            var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
+            var nextStep = $scope.stepArray[nextStepIndex];
+            var nextTimerId = $scope.stepArray.indexOf(stepNumber) + 2;
+            if(nextStepIndex >= $scope.steps.length){
               $scope.resetBrew();
-              // timerRunning = false;
-              // $(".hidden").removeClass("hidden")
               return
             }
-            $("."+ nextId).addClass("current-step");
-            $('timer')[nextId].start();
+            $("."+ stepNumber).removeClass("current-step");
+            $("."+ stepNumber).addClass("hidden");
+            $("."+ nextStep).addClass("current-step");
+            $('timer')[nextTimerId].start();
           };
-      }) // end brewIt controller
 
+        $scope.brewnote = { }
+        $scope.addBrewNote=function(){
+          $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
+          .success(function (data) {
+            var id = data.id
+          })
+        $scope.brewnote = { };
+        }//Add Brew Note Form
+
+        $(".add-brew-note").on('click', function() {
+          $(".brew-form").removeClass("hidden");
+        })
+        $(".save-note").on('click', function() {
+          $(".brew-form").addClass("hidden");
+        });//Add hidden class to brewNote form on submit
+        $(".cancel-note").on('click', function() {
+          $(".brew-form").addClass("hidden");
+        });//Cancel BrewNote form
+      })
 })();//END Angular IIFE

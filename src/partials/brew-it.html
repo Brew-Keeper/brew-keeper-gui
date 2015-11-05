@@ -1,21 +1,30 @@
-<h3>Brew It! partial page</h3>
-
-<h2>Recipe: {{detail.title}}</h2>
+<a href="#users/{{username}}/recipes/{{detail.id}}"><h2>{{detail.title}}</h2></a>
 <button ng-click="startBrew()">Start Brewing</button>
 <button ng-click="resetBrew()">Reset</button>
+<button class="add-brew-note">Add Brew Note</button>
+<section class="brew-form hidden" >
+<form ng-submit="addBrewNote()">
+      <label>Add Brew Note</label>
+      <textarea type="text" ng-model="brewnote.body"></textarea>
+      <button class="save-note" type="submit">Save Note</button>
+</form>
+      <button class="cancel-note">Cancel Note</button>
+</section>
 <br>
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer class="timer" autostart="false" interval="1000" countdown="countdownVal">seconds remaining:<strong> {{countdown}}</strong></timer>
-<div ng-repeat="step in steps" class="{{step.id}}">
+<timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer>
+<br>
+<br>
+<div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
   <strong>{{step.step_title}}:</strong>
   <br>
   {{step.duration}} seconds
   <br>
-  <timer class="{{step.id}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="finishBrew(step.id)">seconds remaining:<strong> {{countdown}}</strong></timer>
+  <timer class="{{step.step_number}}" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number)">seconds remaining: <strong>{{countdown}}</strong></timer>
   <br>
-  Step id: {{step.id}}
+  Step Number: {{step.step_number}}
   <br>
   {{step.step_body}}
   <br>
@@ -23,5 +32,3 @@
   <br>
   <br>
 </div>
-<button>Add Brew Note</button>
-<br>

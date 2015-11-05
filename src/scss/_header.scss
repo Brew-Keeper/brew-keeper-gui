@@ -3,7 +3,7 @@
   nav.menu {
     &.hamburger::before {
       content: '\2261';
-      color: #000;
+      color: #57321f;
       font-size: 4em;
       position: absolute;
       right: 5%;
@@ -14,9 +14,14 @@
     }
     ul.menu.active {
       display: block;
-      float: right;
       list-style-type: none;
       padding-left: 0;
+      li {
+        text-align:right;
+        a {
+          text-decoration: none;
+        }
+      }
     }
   }//nav.menu
 }//.heading

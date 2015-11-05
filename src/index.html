@@ -6,7 +6,8 @@
         <title>Brew Keeper</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <!-- <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:400,700,600,300,100' rel='stylesheet' type='text/css'> -->
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
         <!-- bower:css -->
@@ -14,20 +15,21 @@
         <!-- endbower -->
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body>
-      <main class="container" ng-app="brewKeeper" ng-controller="MainController">
+    <body  ng-app="brewKeeper" ng-controller="MainController">
         <heading class="heading">
           <h1><a href="#/">Brew Keeper</a></h1>
           <nav class="menu hamburger">
-            <ul class="menu active">
-              <li><a href="#/">User Recipes</a></li>
-              <li><a href="#/login">Login/Signup</a></li>
-              <li><a href="#/recipe/new">Create New</a></li>
-              <li><a href="#/recipe/brew/1">BREW IT!</a></li>
+            <ul class="menu">
+              <!-- <li><a href="#/login">Login/Signup</a></li> -->
+              <li><a href="#/users/don.pablo/recipes/new">Create New</a></li>
+              <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
+              <!-- <li><a href="/users/:username/recipes/:id/brewit">BREW IT!</a></li> WHICH RECIPE WOULD THIS BREW IF IN MENU BAR? -->
               <li><a href="#/info">More info/About</a></li>
             </ul>
           </nav>
         </heading>
+      <main class="container">
+
         <div class="place-holder">
           <ng-view />
         <div> <!-- end div.place-holder -->
