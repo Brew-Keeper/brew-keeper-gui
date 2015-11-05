@@ -1,24 +1,24 @@
 ;(function(){//IIFE
 
 angular.module('brewKeeper')
-      .controller('brewIt', function($scope, $http, $routeParams, $location, $route){
+      .controller('brewIt', function($scope, $http, $routeParams, $location, $route, $rootScope){
           var id = $routeParams.id;
           var username =$routeParams.username;
           $scope.username = $routeParams.username;
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
-            .then(function(response){
-              $scope.detail = response.data;
-              $scope.steps = response.data.steps;
-              $scope.notes = response.data.brewnotes;
-              $scope.countdownVal = response.data.total_duration;
-
+          // $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+          //   .then(function(response){
+          //     $scope.detail = response.data;
+          //     $scope.steps = response.data.steps;
+          //     $scope.notes = response.data.brewnotes;
+          //     $scope.countdownVal = response.data.total_duration;
+          //
 
               var stepArray = [] //create an array of step #'s'
-              for(step in response.data.steps){
-                stepArray.push(response.data.steps[step].step_number)
+              for(step in $rootScope.steps){
+                stepArray.push($rootScope.steps[step].step_number)
               };
               $scope.stepArray = stepArray;
-            })
+            // })
 
             var timerRunning = false //logic for brew timer
           //start brew function
