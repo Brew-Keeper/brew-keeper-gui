@@ -1,18 +1,37 @@
+
+$Acolor1: #565656;
+$Acolor2: #000;
+$Acolor3: #000;
+$Acolor4: #fff;
+$Acolor5: #fff;
+
+$heading-background: $Acolor4;
+$body-background: $Acolor4;
+$brewit-background: $Acolor1;
+$button-background: $Acolor1;
+$heading-color: $Acolor2;
+$border-color: $Acolor2;
+$body-color: $Acolor2;
+$button-color: $Acolor2;
+$brewit-color: $Acolor2;
+
 body {
   font-family: 'Open Sans', 'sans-serif';
-  background-color: #f7f1e0;
-  color: #332421;
+  background-color: $body-background;
+  color: $body-color;
   a {
-    // color: #57321f;
-    color: #840200;
+    color: $heading-color;
   }
 }
 
+textarea, input, select {
+  background-color: $heading-background;
+}
 .heading {
   display: block;
-  background-color: #e4dbc3;
+  background-color: $heading-background;
   padding: 1ex 5%;
-  border-bottom: 1px solid #3a7f01;
+  border-bottom: 1px solid $border-color;
   h1 > a[href]{
     text-decoration: none;
   }
@@ -20,15 +39,17 @@ body {
 
 div.current-step {
   border-radius: 5px;
-  // color: #dddddd;
-  border: 2px solid #840200;
-  background-color: lighten(tomato, 15%);
+  border: 2px solid $border-color;
+  color: $brewit-color;
+  background-color: $brewit-background;
 }
 
 button {
-  background-color: #e4dbc3;
-  border-radius: 5px;
+  background-color: $button-background;
+  color: $button-color;
+  border-radius: 3px;
   margin: 15px 2px;
+  font-weight: 100;
 }
 
 .brew-step {
