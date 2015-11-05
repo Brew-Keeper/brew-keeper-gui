@@ -1,7 +1,10 @@
 <a href="#/users/{{username}}/recipes/new"><button>Create new recipe</button></a>
-<div ng-repeat="recipe in recipes | orderBy: 'id'">
+<input placeholder="Filter Recipes" ng-model="query"></>
+<div ng-repeat="recipe in recipes | orderBy: 'id' | filter:query">
+
   <br>
   <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
+
   <br>
   Bean: {{recipe.bean_name}}
   <br>
