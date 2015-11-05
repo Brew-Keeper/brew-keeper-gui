@@ -8,7 +8,6 @@ angular.module('brewKeeper')
 
         //load the data if the page is manually reset
         window.onload = function(){
-          console.log("page reloaded")
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
               $rootScope.detail = response.data;
@@ -19,7 +18,6 @@ angular.module('brewKeeper')
                 stepArray.push($rootScope.steps[step].step_number)
               };
               $rootScope.stepArray = stepArray;
-              console.log(stepArray)
             });
           $scope.resetBrew();
         }
@@ -30,11 +28,9 @@ angular.module('brewKeeper')
           stepArray.push($rootScope.steps[step].step_number)
         };
         $rootScope.stepArray = stepArray;
-        // console.log(stepArray)
         var timerRunning = false //logic for brew timer
         //start brew function
         $scope.startBrew = function(id){
-          console.log("start brew function called")
           if(timerRunning){
             return;
           }
@@ -44,17 +40,12 @@ angular.module('brewKeeper')
           timerRunning = true;
         };
 
+        //runs when brew again button pushed
         $scope.reStartBrew = function(id){
           if(timerRunning){
-            console.log("timer is already running")
             return;
           }
-          console.log("RE-start brew function called")
-          console.log($scope.stepArray)
-          // $("."+$scope.stepArray[0]).addClass("current-step")
           $('timer')[0].start();
-          // $('timer')[1].start();
-          // timerRunning = true;
         }
 
         // $scope.stopBrew = function(){
@@ -68,8 +59,9 @@ angular.module('brewKeeper')
           $(".current-step").removeClass("current-step");
           $scope.$broadcast('timer-reset');
           timerRunning = false;
-          // $location.path("/users/"+ username + "/recipes/" + id + "/brewit")
-          // $route.reload()
+
+          //getting the data again solves the timers not
+          //resetting correctly
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $scope.detail = response.data;
@@ -117,8 +109,5 @@ angular.module('brewKeeper')
       });//Cancel BrewNote form
     })
 
-    // pageReloadFix = function(){
-    //   console.log("page reloaded")
-    // }
-
+    
 })();//END Angular IIFE
