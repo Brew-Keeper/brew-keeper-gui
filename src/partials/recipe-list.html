@@ -1,6 +1,6 @@
 <a href="#/users/{{username}}/recipes/new"><button>Create new recipe</button></a>
 <input placeholder="Filter Recipes" ng-model="query"></>
-<div ng-repeat="recipe in recipes | orderBy: 'id' | filter:query">
+<div ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query">
 
   <br>
   <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
