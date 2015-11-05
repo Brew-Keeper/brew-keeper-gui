@@ -22,7 +22,8 @@
 <!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
 <p><strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<h2>Steps:</h2>
+<!-- steps section -->
+<h2>Steps</h2>
 <div ng-repeat="step in steps">
     <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}</strong></a>  {{step.duration}} seconds
     <button ng-click="showEditStep(step.id)">Edit Step</button>
@@ -86,8 +87,10 @@
     </form><!--Add Step Form-->
     <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
   </div> <!-- add step section -->
-  <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a>
-  <div class="notes hidden" ng-repeat="note in notes | orderBy: 'note.timestamp'">
+  <!--Brew notes -->
+  <!-- <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a> -->
+  <h2>Brew Notes</h2>
+  <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
     <strong>{{note.body}}</strong>
     <br>
     posted {{note.timestamp | date}}
