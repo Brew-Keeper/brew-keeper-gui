@@ -11,6 +11,13 @@ angular.module('brewKeeper')
               $scope.steps = response.data.steps;
               $scope.notes = response.data.brewnotes;
               $scope.countdownVal = response.data.total_duration;
+
+
+              var stepArray = [] //create an array of step #'s'
+              for(step in response.data.steps){
+                stepArray.push(response.data.steps[step].step_number)
+              };
+              $scope.stepArray = stepArray;
             })
 
             var timerRunning = false //logic for brew timer
@@ -19,7 +26,7 @@ angular.module('brewKeeper')
             if(timerRunning){
               return;
             }
-            $(".1").addClass("current-step")
+            $("."+$scope.stepArray[0]).addClass("current-step")
             $('timer')[0].start();
             $('timer')[1].start();
             timerRunning = true;
@@ -51,17 +58,18 @@ angular.module('brewKeeper')
           //   $("."+id).removeClass("current-step");
           //   $("."+id).addClass("hidden")
           // };
-
-          $scope.nextStep = function(id){
-            var nextId = id + 1;
-            if(nextId > $scope.steps.length){
+          $scope.nextStep = function(stepNumber){
+            var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
+            var nextStep = $scope.stepArray[nextStepIndex];
+            var nextTimerId = $scope.stepArray.indexOf(stepNumber) + 2;
+            if(nextStepIndex >= $scope.steps.length){
               $scope.resetBrew();
               return
             }
-            $("."+id).removeClass("current-step");
-            $("."+id).addClass("hidden");
-            $("."+ nextId).addClass("current-step");
-            $('timer')[nextId].start();
+            $("."+ stepNumber).removeClass("current-step");
+            $("."+ stepNumber).addClass("hidden");
+            $("."+ nextStep).addClass("current-step");
+            $('timer')[nextTimerId].start();
           };
 
         $scope.brewnote = { }

@@ -18,6 +18,7 @@
 <p><strong ng-show="detail.grind">Grind:</strong> {{detail.grind}}
 <p><strong ng-show="detail.total_bean_amount">Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
 <p><strong ng-show="detail.total_water_amount">Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
+<p><strong ng-show="detail.temp">Water Temp:</strong> {{detail.temp}} F`
 <!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
 <p><strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
@@ -29,8 +30,8 @@
     <br>
     <p class="step {{step.id}} hidden">{{step.step_body}}
       <br>
-      Water: {{step.water_amount}} {{detail.water_units}}
-      <br>
+      <span ng-show="step.water_amount">Water: {{step.water_amount}} {{detail.water_units}}</span>
+      <!-- <br> -->
     </p>
 
     <!-- edit step form -->
@@ -68,15 +69,15 @@
       <section class="columns general">
         <legend><h4>Add Steps</h4></legend>
         <label>Step Title</label>
-        <input maxlength="50" type="text" ng-model="step.step_title"></input>
+        <input maxlength="50" type="text" ng-model="step.step_title" required></input>
         <label>Step Details</label>
-        <textarea maxlength="255" type="text" placeholder="Pour slowly, using side-to-side motion to ensure no dry spots" ng-model="step.step_detail"></textarea>
+        <textarea maxlength="255" type="text" placeholder="Pour slowly, using side-to-side motion to ensure no dry spots" ng-model="step.step_body"></textarea>
       </section>
       <section class="columns steps">
         <label>Step Number:</label>
-        <input type="number" placeholder="#" ng-model="step.step_number"></input>
+        <input type="number" placeholder="#" ng-model="step.step_number" min="1" required></input>
         <label>Duration</label>
-        <input type="number"  placeholder="#" ng-model="step.duration"></input>
+        <input type="number"  placeholder="#" ng-model="step.duration" min="1" required></input>
         <label>Water Amount</label>
         <input type="number"  placeholder="#" ng-model="step.water_amount"> </input>
       </section>
