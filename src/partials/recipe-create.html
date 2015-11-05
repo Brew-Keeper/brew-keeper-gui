@@ -12,21 +12,34 @@
     <fieldset>
       <legend><h4>Bean Details</h4></legend>
       <!-- <label>Bean Name</label> -->
-      <input max="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
+      <input maxlength="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
       <!-- <label>Bean Roast</label> -->
       <!-- <input max="15" placeholder="Roast"  ng-model="recipe.roast"></input> -->
       <input list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast">
-      <datalist id="roast">
-        <option value="Ligh">
-        <option value="Medium">
-        <option value="Dark">
+        <datalist id="roast">
+          <option value="Light">
+          <option value="Medium">
+          <option value="Dark">
+        </datalist>
       </datalist>
       <!-- <label>Grind</label> -->
-      <input maxlength="12" placeholder="Grind"  ng-model="recipe.grind"></input>
+      <!-- <input maxlength="12" placeholder="Grind"  ng-model="recipe.grind"></input> -->
+      <input list="grind" maxlength="12" placeholder="Grind" ng-model="recipe.grind">
+        <datalist id="grind">
+          <option value="Fine">
+          <option value="Medium">
+          <option value="Coarse">
+        </datalist>
+      </input>
       <!-- <label>Bean Amount</label> -->
       <input type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
       <!-- <label>Bean Units</label> -->
-      <input max="12" placeholder="Units" ng-model="recipe.bean_units"></input>
+      <!-- <input maxlength="12" placeholder="Units" ng-model="recipe.bean_units"></input> -->
+      <input list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
+      <datalist id="bean-units">
+        <option value="grams">
+        <option value="scoops">
+      </datalist>
   </fieldset><!--Bean Details-->
   </section>
   <section class="columns">
