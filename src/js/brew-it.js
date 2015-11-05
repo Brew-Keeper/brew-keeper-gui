@@ -14,7 +14,14 @@ angular.module('brewKeeper')
               $rootScope.detail = response.data;
               $rootScope.steps = response.data.steps;
               $rootScope.notes = response.data.brewnotes;
-            })
+              var stepArray = [] //create an array of step #'s'
+              for(step in $rootScope.steps){
+                stepArray.push($rootScope.steps[step].step_number)
+              };
+              $rootScope.stepArray = stepArray;
+              console.log(stepArray)
+            });
+          $scope.resetBrew();
         }
 
 
@@ -22,8 +29,8 @@ angular.module('brewKeeper')
         for(step in $rootScope.steps){
           stepArray.push($rootScope.steps[step].step_number)
         };
-        $scope.stepArray = stepArray;
-
+        $rootScope.stepArray = stepArray;
+        // console.log(stepArray)
         var timerRunning = false //logic for brew timer
         //start brew function
         $scope.startBrew = function(id){
@@ -37,6 +44,18 @@ angular.module('brewKeeper')
           timerRunning = true;
         };
 
+        $scope.reStartBrew = function(id){
+          if(timerRunning){
+            console.log("timer is already running")
+            return;
+          }
+          console.log("RE-start brew function called")
+          console.log($scope.stepArray)
+          // $("."+$scope.stepArray[0]).addClass("current-step")
+          $('timer')[0].start();
+          // $('timer')[1].start();
+          // timerRunning = true;
+        }
 
         // $scope.stopBrew = function(){
         //   console.log("pause button pressed");
@@ -51,7 +70,7 @@ angular.module('brewKeeper')
           timerRunning = false;
           // $location.path("/users/"+ username + "/recipes/" + id + "/brewit")
           // $route.reload()
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $scope.detail = response.data;
               $scope.steps = response.data.steps;
