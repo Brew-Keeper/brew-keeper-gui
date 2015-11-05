@@ -14,7 +14,13 @@
       <!-- <label>Bean Name</label> -->
       <input max="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
       <!-- <label>Bean Roast</label> -->
-      <input max="15" placeholder="Roast"  ng-model="recipe.roast"></input>
+      <!-- <input max="15" placeholder="Roast"  ng-model="recipe.roast"></input> -->
+      <input list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast">
+      <datalist id="roast">
+        <option value="Ligh">
+        <option value="Medium">
+        <option value="Dark">
+      </datalist>
       <!-- <label>Grind</label> -->
       <input maxlength="12" placeholder="Grind"  ng-model="recipe.grind"></input>
       <!-- <label>Bean Amount</label> -->
@@ -37,10 +43,6 @@
       <!-- <label>Orientation</label> -->
       <input type="radio" ng-model="recipe.orientation" value="Standard">Standard</input>
       <input type="radio" ng-model="recipe.orientation" value="Inverted">Inverted</input>
-      <!-- <input type="radio" ng-model="recipe.orientation">test</input> -->
-        <!-- <value>Standard</value>
-        <value>Inverted</value>
-      </input> -->
     </fieldset><!--Water Details-->
   </section>
   <button class="addSteps" type="submit">Submit</button>
