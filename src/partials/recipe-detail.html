@@ -104,43 +104,56 @@
 <form class="edit-recipe" ng-submit="editRecipe(detail)">
   <section class="columns general">
   <fieldset>
-    <label>Recipe Title*</label>
-    <input placeholder="#" maxlength="50"  ng-model="detail.title"></input>
-    <label>General Recipe Comment</label>
-    <textarea placeholder="#"  ng-model="detail.general_recipe_comment"></textarea>
+    <input placeholder="Title (Required)" maxlength="50"  ng-model="detail.title" required></input>
+    <textarea placeholder="Comments"  ng-model="detail.general_recipe_comment"></textarea>
   </fieldset><!--General Details-->
   </section>
   <section class="columns">
     <fieldset>
       <legend><h4>Bean Details</h4></legend>
-      <label>Bean Name</label>
-      <input max="50" placeholder="#" ng-model="detail.bean_name"></input>
-      <label>Bean Roast</label>
-      <input max="15" placeholder="#" ng-model="detail.roast"></input>
-      <label>Grind</label>
-      <input maxlength="12" placeholder="#" ng-model="detail.grind"></input>
-      <label>Bean Amount</label>
-      <input type="number"  placeholder="#" ng-model="detail.total_bean_amount"></input>
-      <label>Bean Units</label>
-      <input max="12" placeholder="#" ng-model="detail.bean_units"></input>
+      <input maxlength="50" placeholder="Name"  ng-model="detail.bean_name"></input>
+      <input list="roast" maxlength="15" placeholder="Roast" ng-model="detail.roast">
+        <datalist id="roast">
+          <option value="Light">
+          <option value="Medium">
+          <option value="Dark">
+        </datalist>
+      </datalist>
+      <input list="grind" maxlength="12" placeholder="Grind" ng-model="detail.grind">
+        <datalist id="grind">
+          <option value="Fine">
+          <option value="Medium">
+          <option value="Coarse">
+        </datalist>
+      </input>
+      <input type="number" min="0" max="32767" ng-model="detail.total_bean_amount" placeholder="Amount"></input>
+      <input list="bean-units" maxlength="12" placeholder="Units" ng-model="detail.bean_units">
+      <datalist id="bean-units">
+        <option value="grams">
+        <option value="scoops">
+      </datalist>
   </fieldset><!--Bean Details-->
   </section>
   <section class="columns">
     <fieldset>
       <legend><h4>Water Details</h4></legend>
-      <label>Water Type</label>
-      <input maxlength="50"  placeholder="#" ng-model="detail.water_type"></input>
-      <label>Water Amount</label>
-      <input  placeholder="#" ng-model="detail.total_water_amount"></input>
-      <label>Water Amount Units</label>
-      <input maxlength="12" placeholder="#"  ng-model="detail.water_units"></input>
-      <label>Temp</label>
-      <input placeholder="#" ng-model="detail.temp"></input>
-      <label>Orientation</label>
-      <select ng-model="detail.orientation">
-        <option>Standard</option>
-        <option>Inverted</option>
-      </select>
+      <input list="water-type" maxlength="50" placeholder="Type" ng-model="detail.water_type">
+        <datalist id="water-type">
+          <option value="Tap">
+          <option value="Distilled">
+          <option value="Spring">
+          <option value="Deionized">
+        </datalist>
+      <input type="number" min="0" max="32767" placeholder="Amount" ng-model="detail.total_water_amount"></input>
+      <input list="water-units" maxlength="12" ng-model="detail.water_units" placeholder="Units">
+        <datalist id="water-units">
+          <option value="ounces">
+          <option value="cups">
+          <option value="mL">
+        </datalist>
+      <input type="number" placeholder="Temp in &deg;F" ng-model="detail.temp" max="32767"></input>
+      <input type="radio" ng-model="detail.orientation" value="Standard">Standard</input>
+      <input type="radio" ng-model="detail.orientation" value="Inverted">Inverted</input>
     </fieldset><!--Water Details-->
   </section>
   <button class="submit-recipe-edit" type="submit">Submit</button>
