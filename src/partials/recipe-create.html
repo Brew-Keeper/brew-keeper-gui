@@ -33,12 +33,14 @@
       <!-- <label>Water Amount Units</label> -->
       <input maxlength="12" ng-model="recipe.water_units" placeholder="Units"></input>
       <!-- <label>Temp</label> -->
-      <input type="number" placeholder="Temp in &deg;F" ng-model="recipe.temp"></input>
+      <input type="number" placeholder="Temp in &deg;F" ng-model="recipe.temp" max="32767"></input>
       <!-- <label>Orientation</label> -->
-      <select ng-model="recipe.orientation">
-        <option>Standard</option>
-        <option>Inverted</option>
-      </select>
+      <input type="radio" ng-model="recipe.orientation" value="Standard">Standard</input>
+      <input type="radio" ng-model="recipe.orientation" value="Inverted">Inverted</input>
+      <!-- <input type="radio" ng-model="recipe.orientation">test</input> -->
+        <!-- <value>Standard</value>
+        <value>Inverted</value>
+      </input> -->
     </fieldset><!--Water Details-->
   </section>
   <button class="addSteps" type="submit">Submit</button>
