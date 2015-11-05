@@ -1,17 +1,17 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeDetail', function($scope, $http, $location, $routeParams){
+      .controller('recipeDetail', function($scope, $http, $location, $routeParams, $rootScope){
           // console.log("firing the recipeDetail controller")
           var id = $routeParams.id;
           var username = $routeParams.username;
           $scope.username = $routeParams.username;
 
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
-              $scope.detail = response.data;
-              $scope.steps = response.data.steps;
-              $scope.notes = response.data.brewnotes;
+              $rootScope.detail = response.data;
+              $rootScope.steps = response.data.steps;
+              $rootScope.notes = response.data.brewnotes;
             })
 
           $scope.Eliminate = function() {
