@@ -6,6 +6,17 @@ angular.module('brewKeeper')
         var username =$routeParams.username;
         $scope.username = $routeParams.username;
 
+        //load the data if the page is manually reset
+        window.onload = function(){
+          console.log("page reloaded")
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
+            .then(function(response){
+              $rootScope.detail = response.data;
+              $rootScope.steps = response.data.steps;
+              $rootScope.notes = response.data.brewnotes;
+            })
+        }
+
 
         var stepArray = [] //create an array of step #'s'
         for(step in $rootScope.steps){
@@ -26,13 +37,6 @@ angular.module('brewKeeper')
           timerRunning = true;
         };
 
-        //autostart brewit
-        // startBrew();
-
-        // $("."+$scope.stepArray[0]).addClass("current-step")
-        // $('timer')[0].start();
-        // $('timer')[1].start();
-        // timerRunning = true;
 
         // $scope.stopBrew = function(){
         //   console.log("pause button pressed");
@@ -93,4 +97,9 @@ angular.module('brewKeeper')
         $(".brew-form").addClass("hidden");
       });//Cancel BrewNote form
     })
+
+    // pageReloadFix = function(){
+    //   console.log("page reloaded")
+    // }
+
 })();//END Angular IIFE
