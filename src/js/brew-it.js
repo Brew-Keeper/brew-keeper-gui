@@ -30,7 +30,7 @@ angular.module('brewKeeper')
         $rootScope.stepArray = stepArray;
         var timerRunning = false //logic for brew timer
         //start brew function
-        $scope.startBrew = function(id){
+        $scope.startBrew = function(brewCount){
           if(timerRunning){
             return;
           }
@@ -41,7 +41,7 @@ angular.module('brewKeeper')
         };
 
         //runs when brew again button pushed
-        $scope.reStartBrew = function(id){
+        $scope.reStartBrew = function(){
           if(timerRunning){
             return;
           }
@@ -76,12 +76,18 @@ angular.module('brewKeeper')
         //   $("."+id).removeClass("current-step");
         //   $("."+id).addClass("hidden")
         // };
-        $scope.nextStep = function(stepNumber){
+        $scope.nextStep = function(stepNumber, brewCount){
           var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
           var nextStep = $scope.stepArray[nextStepIndex];
           var nextTimerId = $scope.stepArray.indexOf(stepNumber) + 2;
           if(nextStepIndex >= $scope.steps.length){
+            //end of brew countdown
             $scope.resetBrew();
+            //update brew_count
+            var recipe = {};
+            recipe.brew_count = brewCount + 1;
+            // brewCount++; //increment brew counter
+            $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe);
             return
           }
           $("."+ stepNumber).removeClass("current-step");
@@ -109,5 +115,5 @@ angular.module('brewKeeper')
       });//Cancel BrewNote form
     })
 
-    
+
 })();//END Angular IIFE
