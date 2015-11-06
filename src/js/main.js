@@ -1,7 +1,11 @@
 ;(function(){ //IIFE for angular
 
   angular.module('brewKeeper', ['ngRoute', 'timer'], function($httpProvider, $routeProvider){
-      $httpProvider.defaults.headers.common = {"Authorization": "Token 17af9302daa37f79bfac3beb1266b5622b533984"}
+      var userInfo = JSON.parse(window.sessionStorage["userInfo"])
+      console.log(userInfo)
+      // $httpProvider.defaults.headers.common = {"Authorization": "Token 17af9302daa37f79bfac3beb1266b5622b533984"}
+
+      $httpProvider.defaults.headers.common = userInfo
       $routeProvider
         .when('/',{
           // templateUrl: 'partials/recipe-list.html',

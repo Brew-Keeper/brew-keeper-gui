@@ -1,7 +1,7 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeList', function($scope, $http, $routeParams, $window){
+      .controller('recipeList', function($scope, $http, $routeParams){
           var username = $routeParams.username;
           // var userInfo = JSON.parse($window.sessionStorage["userInfo"])
           // console.log("here is the user info: "+userInfo)
