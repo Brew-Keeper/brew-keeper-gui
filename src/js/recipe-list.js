@@ -8,7 +8,15 @@ angular.module('brewKeeper')
               $scope.recipes = response.data;
               $scope.username = username;
             })
-      })
+          $scope.listBrewIt = function(username, id){
+            console.log("brew-it button pressed");
+
+          }
+      })//end controller
+
+
 
 
 })();//END IFEE
+
+// ng-href="#/users/{{username}}/recipes/{{recipe.id}}/brewit"
