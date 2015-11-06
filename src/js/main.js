@@ -1,6 +1,7 @@
 ;(function(){ //IIFE for angular
 
-  angular.module('brewKeeper', ['ngRoute', 'timer'], function($routeProvider){
+  angular.module('brewKeeper', ['ngRoute', 'timer'], function($httpProvider, $routeProvider){
+      $httpProvider.defaults.headers.common = {"Authorization": "Token 17af9302daa37f79bfac3beb1266b5622b533984"}
       $routeProvider
         .when('/',{
           // templateUrl: 'partials/recipe-list.html',
@@ -34,7 +35,8 @@
         // })
     })
 
-    .controller('MainController', function($scope, $route, $routeParams, $location){
+    .controller('MainController', function($scope, $route, $routeParams, $location, $window){
+    var userInfo = JSON.parse($window.sessionStorage["userInfo"])
     $scope.$route = $route;
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;

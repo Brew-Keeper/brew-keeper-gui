@@ -24,7 +24,7 @@ angular.module('brewKeeper')
         userInfo = {
             Authorization: "Token " + response.data.token
         }
-        $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
+       $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
         console.log(userInfo);
         $scope.login = {};
         return $window.sessionStorage["userInfo"]
