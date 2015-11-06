@@ -1,17 +1,19 @@
-<a href="#/users/{{username}}/recipes/new"><button>Create new recipe</button></a>
-<select name="Order By" value="Order By" ng-model="query">
-  <option value="">Order By</>
-  <option value="roast">Roast</option>
-  <option value="bean_name">Bean</option>
-  <option value="-rating">Rating</option>
-</select>
-<input placeholder="Filter Recipes" ng-model="filter"></>
+<nav class="recipe-list-options">
+  <h2>Recipe List</h2>
+  <select name="Order By" value="Order By" ng-model="query">
+    <option value="">Order By</>
+    <option value="roast">Roast</option>
+    <option value="bean_name">Bean</option>
+    <option value="-rating > 0">Rating</option>
+    <option value="-id">Newest</option>
+  </select>
+  <input placeholder="Filter Recipes" ng-model="filter"></input>
+  <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a><!--Flask by Mister Pixel from the Noun Project-->
+</nav>
 
-<div ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
-  <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
-  <br>
-  <p ng-show="recipe.bean_name">Bean: {{recipe.bean_name}}</p>
-  <p ng-show="recipe.roast">Roast: {{recipe.roast}}</p>
-  <p ng-show="recipe.rating">Rating: {{recipe.rating}}</p>
-  <br>
-</div>
+<section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
+  <p class="recipe-title"><a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a></p>
+  <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
+  <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
+  <p ng-show="recipe.rating"><strong>Rating </strong> {{recipe.rating}}</p>
+</section>

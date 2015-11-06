@@ -1,22 +1,22 @@
-$Acolor1: #9ccdb2;//green
-$Acolor2: #fff;//white
-$Acolor3: #495067;//gray
-$Acolor4: #6c473f;//brown
-$Acolor5: #e3eecc;//cream
+// $Acolor1: #9ccdb2;//green
+// $Acolor2: #fff;//white
+// $Acolor3: #495067;//gray
+// $Acolor4: #6c473f;//brown
+// $Acolor5: #e3eecc;//cream
 
 
-// $Acolor1: #565656;
-// $Acolor2: #000;
-// $Acolor3: #000;
-// $Acolor4: #fff;
-// $Acolor5: #fff;
+$Acolor3: #565656;//darkgray
+$Acolor1: #dfdfdf;//lightgray
+$Acolor5: #000;//black
+$Acolor2: #454545;//grey
+$Acolor4: #ffffff;//white
 
-$heading-background: $Acolor1;
-$body-background: $Acolor1;
+$heading-background: $Acolor4;
+$body-background: $Acolor4;
 $button-background: $Acolor2;
-$heading-color: $Acolor3;
+$heading-color: black;
 $border-color: $Acolor3;
-$body-color: $Acolor4;
+$body-color: $Acolor5;
 $button-color: $Acolor4;
 $brewit-color: $Acolor1;
 $brewit-background: $Acolor5;
@@ -60,4 +60,55 @@ button {
 .brew-step {
   padding-left: 15px;
   padding-top: 10px;
+}
+
+
+nav.recipe-list-options {
+  box-sizing: border-box;
+  margin: 2ex 0;
+  padding: 2ex 0;
+  h2 {
+  text-align: center;
+  font-weight:100;
+  font-size: 3em;
+  color: $heading-color;
+  margin: -1.5ex 0 0;
+  }
+  a {
+    text-align: center;
+    display: block;
+    color: black;
+    font-size: 2em;
+    font-weight:100;
+    padding-top: 0.5ex 0;
+    border-radius: 3px;
+    text-decoration: none;
+    &:hover {
+      color: lighten($heading-color, 45%);
+    }
+    img {
+      width: 30px;
+    }
+  }//a
+  input {
+    font-size: 1em;
+    text-align: center;
+    width: 30%;
+    margin: 1ex 35% 2ex 35%;
+  }
+  select {
+    font-size: 1em;
+    text-align: center;
+    width: 28%;
+    margin: 3ex 35.5% 1ex 36.5%;
+  }
+}//nav.recipe-list-options
+
+
+.recipe-list {
+  box-sizing: border-box;
+  width: 100%;
+  height: 22ex;
+  padding: 0 5% 0;
+  border-top: 1px solid black;
 }
