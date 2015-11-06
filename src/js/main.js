@@ -1,11 +1,10 @@
 ;(function(){ //IIFE for angular
 
-  angular.module('brewKeeper', ['ngRoute', 'timer'], function($httpProvider, $routeProvider){
-      var userInfo = JSON.parse(window.sessionStorage["userInfo"])
-      console.log(userInfo)
+  angular.module('brewKeeper', ['ngRoute', 'timer', 'ngCookies'], function($httpProvider, $routeProvider){
+      // var userInfo = JSON.parse(window.sessionStorage["userInfo"])
+      // console.log(userInfo)
       // $httpProvider.defaults.headers.common = {"Authorization": "Token 17af9302daa37f79bfac3beb1266b5622b533984"}
-
-      $httpProvider.defaults.headers.common = userInfo
+      // $httpProvider.defaults.headers.common = userInfo;
       $routeProvider
         .when('/',{
           // templateUrl: 'partials/recipe-list.html',
@@ -39,8 +38,13 @@
         // })
     })
 
-    .controller('MainController', function($scope, $route, $routeParams, $location, $window){
-    var userInfo = JSON.parse($window.sessionStorage["userInfo"])
+    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies){
+      var cookie = $cookies.get("Authorization")
+
+      // console.log(cookie)
+    // console.log(JSON.stringify($cookies.get("Authorization")));
+      $http.defaults.headers.common = {"Authorization": cookie}
+
     $scope.$route = $route;
     $scope.$location = $location;
     $scope.$routeParams = $routeParams;
