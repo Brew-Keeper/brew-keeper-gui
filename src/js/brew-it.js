@@ -34,7 +34,9 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
-          $("."+$scope.stepArray[0]).addClass("current-step")
+          $("timer.delay").addClass("hidden");
+          $("."+$scope.stepArray[0]).addClass("current-step");
+          $("timer."+$scope.stepArray[0]).removeClass("hidden");
           // $('timer')[0].start();
           $('timer')[1].start();
           timerRunning = true;
@@ -45,6 +47,7 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
+          $("timer.delay").removeClass("hidden");
           $('timer')[0].start();
         }
 
@@ -54,7 +57,7 @@ angular.module('brewKeeper')
         // }; //This can be used to pause process if needed.
 
         $scope.resetBrew = function(){
-
+          $("timer.delay").addClass("hidden");
           $("div.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
           $scope.$broadcast('timer-reset');
@@ -92,6 +95,7 @@ angular.module('brewKeeper')
           }
           $("."+ stepNumber).removeClass("current-step");
           $("."+ stepNumber).addClass("hidden");
+          $("timer."+nextStep).removeClass("hidden");
           $("."+ nextStep).addClass("current-step");
           $('timer')[nextTimerId].start();
         };
