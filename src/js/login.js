@@ -31,10 +31,7 @@ angular.module('brewKeeper')
         $cookies.put("Authorization", userInfo)
         console.log($cookies.get("Authorization"))
         $http.defaults.headers.common = {"Authorization": userInfo}
-      //  $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-      //   console.log(userInfo);
         $scope.users = {};
-        // return $window.sessionStorage["userInfo"]
       })
     }//submit function
   })//CONTROLLER FOR LOGIN
@@ -45,7 +42,10 @@ angular.module('brewKeeper')
       password: ''
     }
     $scope.submit= function(){
-      // $http.delete('https://brew-keeper-api.herokuapp.com/api/register/', $scope.user)
+      console.log($cookies.get("Authorization"))
+      var logoutHeader = {"Authorization":$cookies.get("Authorization")}
+      console.log(logoutHeader)
+      $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
       // console.log($scope.user);
         console.log("LOGOUT!")
         $cookies.remove("Authorization")
