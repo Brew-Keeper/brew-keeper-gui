@@ -1,17 +1,17 @@
 <a href="#/users/{{username}}/recipes/new"><button>Create new recipe</button></a>
-<input placeholder="Reorder Recipes" ng-model="query"></>
+<select name="Order By" value="Order By" ng-model="query">
+  <option value="">Order By</>
+  <option value="roast">Roast</option>
+  <option value="bean_name">Bean</option>
+  <option value="-rating">Rating</option>
+</select>
 <input placeholder="Filter Recipes" ng-model="filter"></>
 
 <div ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
-
-  <br>
   <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
-
   <br>
-  Bean: {{recipe.bean_name}}
-  <br>
-  Roast: {{recipe.roast}}
-  <br>
-  Rating: {{recipe.rating}}
+  <p ng-show="recipe.bean_name">Bean: {{recipe.bean_name}}</p>
+  <p ng-show="recipe.roast">Roast: {{recipe.roast}}</p>
+  <p ng-show="recipe.rating">Rating: {{recipe.rating}}</p>
   <br>
 </div>
