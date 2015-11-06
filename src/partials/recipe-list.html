@@ -1,3 +1,4 @@
+
 <nav class="recipe-list-options">
   <h2>Recipe List</h2>
   <select name="Order By" value="Order By" ng-model="query">
@@ -6,6 +7,7 @@
     <option value="bean_name">Bean</option>
     <option value="-rating > 0">Rating</option>
     <option value="-id">Newest</option>
+    <option value="-brew_count">Brew Count</option>
   </select>
   <input placeholder="Filter Recipes" ng-model="filter"></input>
   <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a><!--Flask by Mister Pixel from the Noun Project-->
@@ -16,4 +18,5 @@
   <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
   <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
   <p ng-show="recipe.rating"><strong>Rating </strong> {{recipe.rating}}</p>
+  <p ng-show="recipe.brew_count">Brew Count: {{recipe.brew_count}}<p>
 </section>

@@ -11,8 +11,9 @@
 <button ng-click="Eliminate()">Delete</button>
 <br>
 <br>
+<p ng-show="detail.rating"><strong>Rating:</strong> {{detail.rating}}
+<p ng-show="detail.brew_count"><strong>Brew Count:</strong> {{detail.brew_count}}
 <p><strong ng-show="detail.orientation">Orientation:</strong> {{detail.orientation}}
-<p><strong ng-show="detail.rating">Rating:</strong> {{detail.rating}}
 <p><strong ng-show="detail.bean_name">Bean Type:</strong> {{detail.bean_name}}
 <p><strong ng-show="detail.roast">Bean Roast:</strong> {{detail.roast}}
 <p><strong ng-show="detail.grind">Grind:</strong> {{detail.grind}}
