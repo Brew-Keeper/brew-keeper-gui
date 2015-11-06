@@ -25,4 +25,22 @@
       }
     }//nav.menu
   }//.heading
+  .container {
+    .recipe-list-options {
+      input, select {
+        width: 20%;
+        margin: 3ex 40%;
+      }
+  input {
+    box-sizing: border-box;
+    width: 20%;
+    margin: 1ex 40% 3ex 40%;
+  }
+  select {
+    box-sizing: border-box;
+    width: 18%;
+    margin: 3ex 41% 1ex 41%;
+  }
+    }//nav.recipe-list-options
+  }
 }
