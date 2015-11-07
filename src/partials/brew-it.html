@@ -21,7 +21,7 @@
 <!-- <timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer> -->
 <br>
 <br>
-<div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
+<div ng-repeat="step in steps | orderBy: 'step_number'" class="step {{step.step_number}}">
   <strong>{{step.step_title}}</strong>
   <p>Step {{stepArray.indexOf(step.step_number)+1}} of {{stepTotal}}</p>
   <br>
