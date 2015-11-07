@@ -2,6 +2,7 @@
 
 angular.module('brewKeeper')
       .controller('brewIt', function($scope, $http, $routeParams, $location, $route, $rootScope){
+        $(document).scrollTop(0);
         var id = $routeParams.id;
         var username =$routeParams.username;
         $scope.username = $routeParams.username;
