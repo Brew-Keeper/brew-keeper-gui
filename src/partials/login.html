@@ -1,9 +1,9 @@
-<form class="login">
+<form class="login" ng-controller="loginCtrl" ng-submit="submit()">
   <div class="columns general">
     <label class="login" for="login">Login</label>
-    <input class="login-user" type="text" name="username" placeholder=" username">
-    <input class="login-password" type="text" name="password" placeholder=" password">
-    <button class="login" type="button" name="login">Login</button>
+    <input class="login-user" type="text" name="username" placeholder="username" ng-model="users.username">
+    <input class="login-password" type="password" name="password" placeholder="password" ng-model="users.password">
+    <button class="login" type="submit" name="login">Login</button>
   </div>
 </form><!--end form login-->
 
@@ -11,8 +11,13 @@
   <div class="columns general">
     <label for="register">SignUp</label>
     <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username">
+    <input class="register-user" type="text" name="email" placeholder=" email" ng-model="users.email">
     <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password">
-    <input class="register-password" type="text" name="password" placeholder=" confirm password">
+    <input class="register-password" type="password" name="password" placeholder=" confirm password">
   </div>
   <button class="register" type="submit" name="register">SignUp</button>
 </form><!--end form register-->
+
+<form class="logout" ng-controller="logoutCtrl" ng-submit="submit()">
+    <button class="logout" type="submit" name="logout">Logout</button>
+</form><!--end logout form
