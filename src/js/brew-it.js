@@ -13,12 +13,14 @@ angular.module('brewKeeper')
               $rootScope.detail = response.data;
               $rootScope.steps = response.data.steps;
               $rootScope.notes = response.data.brewnotes;
-              var stepArray = [] //create an array of step #'s'
+              var stepArray = []; //create an array of step #'s'
               for(step in $rootScope.steps){
                 stepArray.push($rootScope.steps[step].step_number)
               };
               $rootScope.stepArray = stepArray;
-            });
+              $scope.stepTotal = stepArray.length;
+
+              });
           $scope.resetBrew();
         }
 
@@ -28,6 +30,8 @@ angular.module('brewKeeper')
           stepArray.push($rootScope.steps[step].step_number)
         };
         $rootScope.stepArray = stepArray;
+        $scope.stepTotal = stepArray.length;
+
         var timerRunning = false //logic for brew timer
         //start brew function
         $scope.startBrew = function(brewCount){
