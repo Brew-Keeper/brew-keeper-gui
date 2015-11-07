@@ -4,7 +4,7 @@
   <h2>{{detail.title}}</h2>
   <p>{{detail.general_recipe_comment}}<p>
     <button ng-Click="cloneRecipe(detail)">Clone</button>
-    <img class="edit-icon recipe-view edit-button {{detail.id}}" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
+    <img class="edit-icon recipe-view edit-button {{detail.id}}" ng-Click="showEditStep(step.id)" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
     <img class="trash-icon" ng-click="Eliminate()" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
   <br>
   <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
@@ -38,7 +38,6 @@
     <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
     <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
     </article>
-  </section><!--END .step-list-->
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
       <form ng-submit="editStep(step)">
@@ -64,9 +63,11 @@
         </div>
       </form><!--edit Step Form-->
       <button ng-click="hideEditStep(step.id)">Cancel</button>
-    </div> <!-- edit step form div -->
-    <br>
-  </div> <!--end ng-repeat for steps -->
+      </div> <!-- edit step form div -->
+      <br>
+    </div> <!--end ng-repeat for steps -->
+  </section><!--END .step-list-->
+
   <!-- <div class="addSteps" ng-controller="createNewStep"> -->
   <div class="addSteps">
     <button ng-click="showAddSteps()">Add Steps</button>

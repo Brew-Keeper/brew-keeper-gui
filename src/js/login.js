@@ -8,7 +8,6 @@ angular.module('brewKeeper')
     }
     $scope.submit = function() {
       $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
-      console.log($scope.users)
         $scope.users = { }
     };
   })//CONTROLLER FOR SIGNUP
@@ -22,7 +21,6 @@ angular.module('brewKeeper')
       .then(function(response) {
         userInfo = "Token " + response.data.token
         $cookies.put("Authorization", userInfo)
-        console.log($cookies.get("Authorization"))
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = {};
       })
@@ -35,13 +33,9 @@ angular.module('brewKeeper')
       password: ''
     }
     $scope.submit= function(){
-      console.log($cookies.get("Authorization"))
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
-      console.log(logoutHeader)
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
-        console.log("LOGOUT!")
         $cookies.remove("Authorization")
-        console.log($cookies.get("Authorization"))
         $http.defaults.headers.common = {}
     }
   })//CONTROLLER FOR LOGOUT

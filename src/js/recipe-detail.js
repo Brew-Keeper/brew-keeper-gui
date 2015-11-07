@@ -43,6 +43,7 @@ angular.module('brewKeeper')
 
           $scope.showEditStep = function(stepId){
             stepId = "div." + stepId.toString();
+            console.log("Boo!" + stepId)
             $(stepId).removeClass("hidden")
           }
 
