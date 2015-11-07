@@ -23,7 +23,7 @@ angular.module('brewKeeper')
           }; //end Eliminate function
 
           $scope.showSteps = function(stepId){
-            stepId= "p." + stepId.toString()
+            stepId= "article." + stepId.toString()
             $(stepId).toggleClass("hidden")
           };
 
