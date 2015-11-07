@@ -1,7 +1,7 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeList', function($scope, $http, $routeParams){
+      .controller('recipeList', function($rootScope, $scope, $http, $routeParams){
           var username = $routeParams.username;
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/')
             .then(function(response){
@@ -10,8 +10,17 @@ angular.module('brewKeeper')
             })
           $scope.listBrewIt = function(username, id){
             console.log("brew-it button pressed");
+            console.log(username +"  "+ id);
+            $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+              .success(function(){
+                console.log("got the data")
+              })
+              .then(function(response){
+                $rootScope.detail = response.data;
+                $rootScope.steps = response.data.steps;
+              })
+          }//end listBrewit function
 
-          }
       })//end controller
 
 
