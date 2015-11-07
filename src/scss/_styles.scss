@@ -1,10 +1,3 @@
-// $Acolor1: #9ccdb2;//green
-// $Acolor2: #fff;//white
-// $Acolor3: #495067;//gray
-// $Acolor4: #6c473f;//brown
-// $Acolor5: #e3eecc;//cream
-
-
 $Acolor3: #565656;//darkgray
 $Acolor1: #dfdfdf;//lightgray
 $Acolor5: #000;//black
@@ -20,6 +13,44 @@ $body-color: $Acolor5;
 $button-color: $Acolor4;
 $brewit-color: $Acolor1;
 $brewit-background: $Acolor5;
+
+[class*='-icon'] {
+  width: 30px;
+}
+
+.recipe-detail {
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+
+  .recipe-view {
+    .brew-it-button {
+      display: block;
+      box-sizing: border-box;
+      width: 90%;
+      margin: 0 5%;
+      background-color: $Acolor1;
+      font-size: 2em;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .trash-icon {
+      width: 22px;
+    }
+  }
+
+  .step-list {
+    .edit-icon {
+      width: 25px;
+    }
+    .trash-icon {
+      width: 15px;
+    }
+  }
+}//recipe-detail
+
+
+
 
 body {
   font-family: 'Open Sans', 'sans-serif';
@@ -56,12 +87,6 @@ button {
   margin: 15px 2px;
   font-weight: 100;
 }
-
-.brew-step {
-  padding-left: 15px;
-  padding-top: 10px;
-}
-
 
 nav.recipe-list-options {
   box-sizing: border-box;

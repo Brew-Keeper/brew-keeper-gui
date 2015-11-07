@@ -1,38 +1,45 @@
-
+<section class="recipe-detail">
 <button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
 <section class="recipe-view">
-<h2>{{detail.title}}</h2>
-<p>{{detail.general_recipe_comment}}<p>
-<br>
-<a ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit"><button>BREW IT!</button></a>
-<!-- <button>Make Public</button> -->
-<button ng-Click="cloneRecipe(detail)">Clone</button>
-<button class="recipe-view edit-button {{detail.id}}">Edit Recipe</button>
-<button ng-click="Eliminate()">Delete</button>
-<br>
-<br>
-<p ng-show="detail.rating"><strong>Rating:</strong> {{detail.rating}}
-<p ng-show="detail.brew_count"><strong>Brew Count:</strong> {{detail.brew_count}}
-<p><strong ng-show="detail.orientation">Orientation:</strong> {{detail.orientation}}
-<p><strong ng-show="detail.bean_name">Bean Type:</strong> {{detail.bean_name}}
-<p><strong ng-show="detail.roast">Bean Roast:</strong> {{detail.roast}}
-<p><strong ng-show="detail.grind">Grind:</strong> {{detail.grind}}
-<p><strong ng-show="detail.total_bean_amount">Bean Amount:</strong> {{detail.total_bean_amount}} {{detail.bean_units}}
-<p><strong ng-show="detail.total_water_amount">Water:</strong> {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}}
-<p ng-show="detail.temp"><strong>Water Temp:</strong> {{detail.temp}} &deg;F<p>
-<!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
-<p><strong>Total Duration:</strong> {{detail.total_duration}} seconds
-<br>
-<!-- steps section -->
-<h2>Steps</h2>
-<div ng-repeat="step in steps">
-    <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}</strong></a>  {{step.duration}} seconds
-    <button ng-click="showEditStep(step.id)">Edit Step</button>
-    <button ng-click="deleteStep(step.step_number, step.id)">Delete Step</button>
-    <p class="step {{step.id}} hidden">{{step.step_body}}
-      <br>
-      <span ng-show="step.water_amount">Water: {{step.water_amount}} {{detail.water_units}}</span></p>
+  <h2>{{detail.title}}</h2>
+  <p>{{detail.general_recipe_comment}}<p>
+    <button ng-Click="cloneRecipe(detail)">Clone</button>
+    <img class="edit-icon recipe-view edit-button {{detail.id}}" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
+    <img class="trash-icon" ng-click="Eliminate()" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+  <br>
 
+  <a class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
+  <!-- <button>Make Public</button> -->
+  <br>
+  <p ng-show="detail.rating"><strong>Rating:</strong> {{detail.rating}}
+  <p ng-show="detail.brew_count"><strong>Brew Count:</strong> {{detail.brew_count}}
+  <p ng-show="detail.orientation"><img class="arrows-icon" src="img/noun_arrows.svg"/><!--Created by Creative Stall from the Noun Project-->
+  {{detail.orientation}}
+  <p ng-show="detail.bean_name"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
+  {{detail.bean_name}}
+  <p ng-show="detail.roast"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
+  {{detail.roast}} Roast
+  <p ng-show="detail.grind"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->{{detail.grind}} Grind
+  <p ng-show="detail.total_bean_amount"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
+  {{detail.total_bean_amount}} {{detail.bean_units}}
+  <p ng-show="detail.total_water_amount"><img class="water-icon" src="img/noun_water.svg"/><!--Created by Arthur Shlain from the Noun Project-->
+   {{detail.total_water_amount}} {{detail.water_units}} {{detail.water_type}}
+  <p ng-show="detail.temp"><img class="water-temp-icon" src="img/noun_water-temp.svg"/><!--Created by Juan Leon from the Noun Project-->{{detail.temp}} &deg;F<p>
+  <!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
+  <p><img class="stopwatch-icon" src="img/noun_stopwatch.svg"/><!--timer by Alex C. from the Noun Project--> {{detail.total_duration}} seconds total
+  <br>
+  <!-- steps section -->
+  <section class="step-list">
+    <h2>Steps</h2>
+    <div ng-repeat="step in steps">
+      <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}</strong> </a><p>{{step.duration}} seconds</p>
+    <article class="step {{step.id}} hidden">
+      <p>{{step.step_body}}<p>
+      <p ng-show="step.water_amount">Water: {{step.water_amount}} {{detail.water_units}}</p>
+    <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
+    <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+    </article>
+  </section><!--END .step-list-->
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
       <form ng-submit="editStep(step)">
@@ -160,3 +167,4 @@
   <button class="submit-recipe-edit" type="submit">Submit</button>
 </form><!--Edit Recipe Form-->
 </section>
+</section><!--.recipe-detail-->
