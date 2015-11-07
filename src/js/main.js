@@ -1,15 +1,11 @@
 ;(function(){ //IIFE for angular
 
   angular.module('brewKeeper', ['ngRoute', 'timer', 'ngCookies'], function($httpProvider, $routeProvider){
-      // var userInfo = JSON.parse(window.sessionStorage["userInfo"])
-      // console.log(userInfo)
-      // $httpProvider.defaults.headers.common = {"Authorization": "Token 17af9302daa37f79bfac3beb1266b5622b533984"}
-      // $httpProvider.defaults.headers.common = userInfo;
       $routeProvider
         .when('/',{
-          // templateUrl: 'partials/recipe-list.html',
-          // controller: 'recipeList'
-            redirectTo: '/users/don.pablo'
+          templateUrl: 'partials/recipe-list.html',
+          controller: 'WhoAmIController'
+          // redirectTo: '/users/shay'
         })
         .when('/users/:username/recipes/new', {
           templateUrl: 'partials/recipe-create.html'
@@ -41,44 +37,20 @@
     .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies){
       var cookie = $cookies.get("Authorization")
 
-      // console.log(cookie)
-    // console.log(JSON.stringify($cookies.get("Authorization")));
       $http.defaults.headers.common = {"Authorization": cookie}
+      $scope.$route = $route;
+      $scope.$location = $location;
+      $scope.$routeParams = $routeParams;
+    })
 
-    $scope.$route = $route;
-    $scope.$location = $location;
-    $scope.$routeParams = $routeParams;
+    .controller('WhoAmIController', function($location, $http) {
+      $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
+        .then(function(response){
+          var username = response.data.username;
+          $location.path('/users/' + username)
+          console.log("FIRE AWAY!")
+      })
     })
 
 
 })(); //end IIFE
-
-
-
-// ;(function(){ //IIFE for angular
-//
-//   angular.module('brewKeeper', ['ngRoute'], function($routeProvider){
-//       $routeProvider
-//         .when('/',{
-//           templateUrl: 'partials/recipe-list.html'
-//         })
-//         .when('/recipe', {
-//           templateUrl: 'partials/recipe-detail.html'
-//         })
-//         .when('/recipe/new', {
-//           templateUrl: 'partials/recipe-create.html'
-//         })
-//         .when('/recipe/brew', {
-//           templateUrl: 'partials/brew-it.html'
-//         })
-//         .when('/info', {
-//           templateUrl: 'partials/more-info.html'
-//         })
-//         .otherwise({
-//           redirectTo: '/404.html',
-//           templateUrl: 'partials/404.html'
-//         })
-//     });
-//
-//
-// })(); //end IIFE
