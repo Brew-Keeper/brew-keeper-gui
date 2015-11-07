@@ -33,7 +33,7 @@ angular.module('brewKeeper')
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){
-                $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+                $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
                   .then(function(response){
                     $scope.steps = response.data.steps;
                   })
@@ -58,7 +58,7 @@ angular.module('brewKeeper')
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
           $scope.submit=function(){
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
-              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
                   $scope.steps = response.data.steps;
                 })

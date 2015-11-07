@@ -7,7 +7,8 @@
           controller: 'WhoAmIController'
         })
         .when('/users/:username/recipes/new', {
-          templateUrl: 'partials/recipe-create.html'
+          templateUrl: 'partials/recipe-create.html',
+          controller: 'createNewRecipe'
         })
         .when('/users/:username/recipes/:id', {
           templateUrl: 'partials/recipe-detail.html',

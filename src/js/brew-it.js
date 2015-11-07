@@ -39,8 +39,9 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
-          $("timer.delay").addClass("hidden");
-          $("."+$scope.stepArray[0]).addClass("current-step");
+          // $("timer.delay").addClass("hidden");
+          $("."+$scope.stepArray[0]).addClass("current-step").siblings("div").addClass("inactive");
+          // $(".").addClass("inactive");
           $("timer."+$scope.stepArray[0]).removeClass("hidden");
           // $('timer')[0].start();
           $('timer')[1].start();
@@ -53,6 +54,7 @@ angular.module('brewKeeper')
             return;
           }
           $("timer.delay").removeClass("hidden");
+          $(".step").addClass("inactive")
           $("button.restart-brew").addClass("hidden");
           $("button.add-brew-note").addClass("hidden");
           $("button.reset-brew").removeClass("hidden");
@@ -65,13 +67,14 @@ angular.module('brewKeeper')
         // }; //This can be used to pause process if needed.
 
         $scope.resetBrew = function(){
-          $("timer.delay").addClass("hidden");
+          // $("timer.delay").addClass("hidden");
           $("div.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
           $scope.$broadcast('timer-reset');
           $("button.restart-brew").removeClass("hidden");
           $("button.add-brew-note").removeClass("hidden");
           $("button.reset-brew").addClass("hidden");
+          $(".inactive").removeClass("inactive");
 
           timerRunning = false;
 
@@ -94,6 +97,7 @@ angular.module('brewKeeper')
         $scope.nextStep = function(stepNumber, brewCount){
           var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
           var nextStep = $scope.stepArray[nextStepIndex];
+          var prevStep = $scope.stepArray[nextStepIndex - 2]
           var nextTimerId = $scope.stepArray.indexOf(stepNumber) + 2;
           if(nextStepIndex >= $scope.steps.length){
             //end of brew countdown
@@ -105,12 +109,15 @@ angular.module('brewKeeper')
             $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe);
             return
           }
-          $("."+ stepNumber).removeClass("current-step");
-          $("."+ stepNumber).addClass("hidden");
+          $("."+ stepNumber).removeClass("current-step").addClass("inactive");
+          $("div.delay").addClass("hidden");
+          $("."+ prevStep).addClass("hidden");
+          $("."+ stepNumber).addClass("inactive");
           $("timer."+nextStep).removeClass("hidden");
-          $("."+ nextStep).addClass("current-step");
+          $("."+ nextStep).addClass("current-step").removeClass("inactive");
           $('timer')[nextTimerId].start();
         };
+
       $scope.brewnote = { }
       $scope.addBrewNote=function(){
         $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
