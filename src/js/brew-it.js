@@ -2,6 +2,7 @@
 
 angular.module('brewKeeper')
       .controller('brewIt', function($scope, $http, $routeParams, $location, $route, $rootScope){
+        $(document).scrollTop(0);
         var id = $routeParams.id;
         var username =$routeParams.username;
         $scope.username = $routeParams.username;
@@ -13,12 +14,14 @@ angular.module('brewKeeper')
               $rootScope.detail = response.data;
               $rootScope.steps = response.data.steps;
               $rootScope.notes = response.data.brewnotes;
-              var stepArray = [] //create an array of step #'s'
+              var stepArray = []; //create an array of step #'s'
               for(step in $rootScope.steps){
                 stepArray.push($rootScope.steps[step].step_number)
               };
               $rootScope.stepArray = stepArray;
-            });
+              $scope.stepTotal = stepArray.length;
+
+              });
           $scope.resetBrew();
         }
 
@@ -28,6 +31,8 @@ angular.module('brewKeeper')
           stepArray.push($rootScope.steps[step].step_number)
         };
         $rootScope.stepArray = stepArray;
+        $scope.stepTotal = stepArray.length;
+
         var timerRunning = false //logic for brew timer
         //start brew function
         $scope.startBrew = function(brewCount){
@@ -48,6 +53,9 @@ angular.module('brewKeeper')
             return;
           }
           $("timer.delay").removeClass("hidden");
+          $("button.restart-brew").addClass("hidden");
+          $("button.add-brew-note").addClass("hidden");
+          $("button.reset-brew").removeClass("hidden");
           $('timer')[0].start();
         }
 
@@ -61,6 +69,10 @@ angular.module('brewKeeper')
           $("div.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
           $scope.$broadcast('timer-reset');
+          $("button.restart-brew").removeClass("hidden");
+          $("button.add-brew-note").removeClass("hidden");
+          $("button.reset-brew").addClass("hidden");
+
           timerRunning = false;
 
           //getting the data again solves the timers not
