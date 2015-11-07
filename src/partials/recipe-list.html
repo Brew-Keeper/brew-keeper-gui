@@ -14,7 +14,10 @@
 </nav>
 
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
-  <p class="recipe-title"><a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a> <a ng-click="listBrewIt(username, recipe.id)"><button>BREW IT!</button></a></p>
+  <p class="recipe-title">
+    <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
+    <a ng-click="listBrewIt(username, recipe.id)"><button>BREW IT!</button></a>
+  </p>
   <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
   <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
   <p ng-show="recipe.rating"><strong>Rating </strong> {{recipe.rating}}</p>
