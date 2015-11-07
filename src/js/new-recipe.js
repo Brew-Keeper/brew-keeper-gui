@@ -2,7 +2,7 @@
 
 angular.module('brewKeeper')
   .controller('createNewRecipe', function($scope, $http, $location){
-    $scope.recipe = { }//Might need to prepopulate this with empty strings for each key... Maybe...
+    $scope.recipe = { }
     $scope.recipe.orientation = "Standard";
     $scope.submit=function(){
       $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/', $scope.recipe)

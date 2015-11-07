@@ -5,7 +5,6 @@
         .when('/',{
           templateUrl: 'partials/recipe-list.html',
           controller: 'WhoAmIController'
-          // redirectTo: '/users/shay'
         })
         .when('/users/:username/recipes/new', {
           templateUrl: 'partials/recipe-create.html'
@@ -48,7 +47,6 @@
         .then(function(response){
           var username = response.data.username;
           $location.path('/users/' + username)
-          console.log("FIRE AWAY!")
       })
     })
 
