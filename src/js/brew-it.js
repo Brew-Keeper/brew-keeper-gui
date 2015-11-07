@@ -49,6 +49,8 @@ angular.module('brewKeeper')
           }
           $("timer.delay").removeClass("hidden");
           $("button.restart-brew").addClass("hidden");
+          $("button.add-brew-note").addClass("hidden");
+          $("button.reset-brew").removeClass("hidden");
           $('timer')[0].start();
         }
 
@@ -63,6 +65,9 @@ angular.module('brewKeeper')
           $(".current-step").removeClass("current-step");
           $scope.$broadcast('timer-reset');
           $("button.restart-brew").removeClass("hidden");
+          $("button.add-brew-note").removeClass("hidden");
+          $("button.reset-brew").addClass("hidden");
+
           timerRunning = false;
 
           //getting the data again solves the timers not

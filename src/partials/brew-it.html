@@ -2,8 +2,8 @@
 <p ng-show="detail.rating"><strong>Rating: </strong>{{detail.rating}}</p>
 <!-- <p ng-show="detail.brew_count"><strong>Brew Count: </strong>{{detail.brew_count}}</p> -->
 <button class="hidden restart-brew" ng-click="reStartBrew()">Brew Again</button>
-<button ng-click="resetBrew()">Reset</button>
-<button class="add-brew-note">Add Brew Note</button>
+<button class="reset-brew" ng-click="resetBrew()">Reset</button>
+<button class="hidden add-brew-note">Add Brew Note</button>
 <section class="brew-form hidden" >
 <form ng-submit="addBrewNote()">
       <!-- <label>Add Brew Note</label> -->
