@@ -1,26 +1,23 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeList', function($rootScope, $scope, $http, $routeParams){
+      .controller('recipeList', function($rootScope, $scope, $http, $routeParams, $location){
           var username = $routeParams.username;
-          // var userInfo = JSON.parse($window.sessionStorage["userInfo"])
-          // console.log("here is the user info: "+userInfo)
-          // console.log(typeof(userInfo))
+        
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/')
             .then(function(response){
               $scope.recipes = response.data;
               $scope.username = username;
             })
+
           $scope.listBrewIt = function(username, id){
-            console.log("brew-it button pressed");
-            console.log(username +"  "+ id);
             $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
               .success(function(){
-                console.log("got the data")
               })
               .then(function(response){
                 $rootScope.detail = response.data;
                 $rootScope.steps = response.data.steps;
+                $location.path("/users/" + username + "/recipes/" + id + "/brewit")
               })
           }//end listBrewit function
 
