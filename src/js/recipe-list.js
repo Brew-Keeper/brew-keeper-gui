@@ -20,6 +20,7 @@ angular.module('brewKeeper')
             $rootScope.steps = $scope.recipes[recipeId].steps;
             $rootScope.detail = $scope.recipes[recipeId];
             $location.path("/users/" + username + "/recipes/" + id + "/brewit")
+            $(document).scrollTop(0);
           }//end listBrewit function
 
       })//end controller
