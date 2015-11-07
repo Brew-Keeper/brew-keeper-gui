@@ -1,9 +1,9 @@
 <a href="#users/{{username}}/recipes/{{detail.id}}"><h2>{{detail.title}}</h2></a>
 <p ng-show="detail.rating"><strong>Rating: </strong>{{detail.rating}}</p>
 <!-- <p ng-show="detail.brew_count"><strong>Brew Count: </strong>{{detail.brew_count}}</p> -->
-<button ng-click="reStartBrew()">Brew Again</button>
-<button ng-click="resetBrew()">Reset</button>
-<button class="add-brew-note">Add Brew Note</button>
+<button class="hidden restart-brew" ng-click="reStartBrew()">Brew Again</button>
+<button class="reset-brew" ng-click="resetBrew()">Reset</button>
+<button class="hidden add-brew-note">Add Brew Note</button>
 <section class="brew-form hidden" >
 <form ng-submit="addBrewNote()">
       <!-- <label>Add Brew Note</label> -->
@@ -16,13 +16,14 @@
 <br>
 <strong>Total Duration:</strong> {{detail.total_duration}} seconds
 <br>
-<timer class="delay"interval="1000" countdown="3" finish-callback="startBrew(detail.brew_count)">start delay countdown: {{countdown}}</timer>
+<timer class="delay" interval="1000" countdown="3" finish-callback="startBrew(detail.brew_count)">start delay countdown: {{countdown}}</timer>
 
 <!-- <timer class="timer hidden" autostart="false" interval="1000" countdown="detail.total_duration">seconds remaining:<strong> {{countdown}}</strong></timer> -->
 <br>
 <br>
 <div ng-repeat="step in steps | orderBy: 'step_number'" class="{{step.step_number}}">
   <strong>{{step.step_title}}</strong>
+  <p>Step {{stepArray.indexOf(step.step_number)+1}} of {{stepTotal}}</p>
   <br>
   duration - {{step.duration}} sec
   <br>

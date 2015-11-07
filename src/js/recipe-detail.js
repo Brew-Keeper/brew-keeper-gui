@@ -6,7 +6,7 @@ angular.module('brewKeeper')
           var id = $routeParams.id;
           var username = $routeParams.username;
           $scope.username = $routeParams.username;
-
+          $(document).scrollTop(0);
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
               $rootScope.detail = response.data;
