@@ -23,12 +23,14 @@ $scope.ratings = [{
 }];
 
 $scope.rateRecipe = function (rating) {
+    var newRating = {"rating": rating}
     console.log("rateRecipe function");
-    console.log(rating)
-    var username = $scope.username;
-    var id = $scope.id;
+    console.log(newRating)
+    // var username = $scope.username;
+    // var id = $scope.id;
     console.log(username);
     console.log(id);
+     $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
 }
 
 //TODO: end recipe rating test
