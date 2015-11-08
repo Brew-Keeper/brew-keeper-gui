@@ -10,7 +10,8 @@
   <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
   <!-- <button>Make Public</button> -->
   <br>
-  <p><strong>Rating:</strong> {{detail.rating}} Stars
+
+  <!-- <p><strong>Rating:</strong> {{detail.rating}} Stars
     <select ng-model="detail.rating" ng-change="rateRecipe(detail.rating)">
       <option selected>{{detail.rating}}</option>
       <option value="1">1</option>
@@ -19,16 +20,16 @@
       <option value="4">4</option>
       <option value="5">5</option>
     </select>
-  </p>
+  </p> -->
   <!-- rating star test -->
-  rating.js
-  <div ng-controller="StarCtrl"> <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
+  <!-- rating.js -->
+  <!-- <div ng-controller="StarCtrl"> <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="getSelectedRating(rating.current)"></div>
     </span>
-  </div>
+  </div> -->
 
-  recipe-detail.js
-  <div ng-controller="recipeDetail"> <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
+  <!-- recipe-detail.js -->
+  <div ng-controller="recipeDetail"> <span ng-repeat="rating in ratings">Rating
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
     </span>
   </div>
