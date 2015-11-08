@@ -17,11 +17,12 @@
     </head>
     <body  ng-app="brewKeeper" ng-controller="MainController">
         <heading class="heading">
-          <h1><a href="#/">Brew Keeper</a></h1>
+          <h1><a href="#/">Brew Keeper</a><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
+</h1>
           <nav class="menu hamburger">
             <ul class="menu">
-              <!-- <li><a href="#/login">Login/Signup</a></li> -->
-              <li><a href="#/users/don.pablo/recipes/new">Create New</a></li>
+              <li><a href="#/login">Login/Signup</a></li>
+              <li><a href="#/users/don.pablo/recipes/new">Create New Recipe</a></li>
               <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
               <!-- <li><a href="/users/:username/recipes/:id/brewit">BREW IT!</a></li> WHICH RECIPE WOULD THIS BREW IF IN MENU BAR? -->
               <li><a href="#/info">More info/About</a></li>
@@ -45,6 +46,7 @@
       <script src="../bower_components/momentjs/moment.js"></script>
       <script src="../bower_components/humanize-duration/humanize-duration.js"></script>
       <script src="../bower_components/angular-timer/dist/angular-timer.js"></script>
+      <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
       <!-- endbower -->
       <script src="js/plugins.js"></script>
       <script src="js/main.js"></script>
@@ -55,6 +57,7 @@
       <script src="js/new-recipe.js"></script>
       <script src="js/recipe-detail.js"></script>
       <script src="js/brew-it.js"></script>
+      <script src="js/rating.js"
 
       </script>
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
