@@ -33,13 +33,7 @@ angular.module('brewKeeper')
 
           $scope.rateRecipe = function (rating, id) {
             var newRating = {"rating": rating}
-            console.log(newRating)
-            console.log("new rating = " + newRating.rating)
-            console.log(username)
-            console.log(id)
-            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating).then(function(){
-              console.log("yay rating updated")
-            })
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
           }
 
       })//end controller
