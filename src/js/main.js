@@ -41,15 +41,29 @@
       $scope.$route = $route;
       $scope.$location = $location;
       $scope.$routeParams = $routeParams;
-    })
+
+    $scope.logout= function(){
+      console.log("Fire away");
+      var logoutHeader = {"Authorization":$cookies.get("Authorization")}
+      $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
+        .then(function(){
+          $('.login').removeClass('hidden');//when logged out
+          $('.logout').addClass('hidden');
+        })
+        $cookies.remove("Authorization")
+        $http.defaults.headers.common = {}
+      }
+    })//END MainController
 
     .controller('WhoAmIController', function($location, $http) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           var username = response.data.username;
           $location.path('/users/' + username)
-      })
-    })
-
+        })//.success
+        .catch(function(){
+          $location.path('/login')
+        })//.error
+    })//END WhoAmIController
 
 })(); //end IIFE
