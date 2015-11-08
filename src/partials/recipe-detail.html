@@ -10,7 +10,14 @@
   <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
   <!-- <button>Make Public</button> -->
   <br>
-  <p ng-show="detail.rating"><strong>Rating:</strong> {{detail.rating}}
+  <p ng-show="detail.rating"><strong>Rating:</strong> {{detail.rating}} Stars
+    <select ng-model="detail.rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
   <p ng-show="detail.brew_count"><strong>Brew Count:</strong> {{detail.brew_count}}
   <p ng-show="detail.orientation"><img class="arrows-icon" src="img/noun_arrows.svg"/><!--Created by Creative Stall from the Noun Project-->
   {{detail.orientation}}
