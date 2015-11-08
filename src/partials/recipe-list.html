@@ -25,7 +25,7 @@
   <!-- star rating -->
   <div> <span ng-repeat="rating in ratings">
       <!-- {{rating.current}} of {{rating.max}} stars -->
-      <div star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(rating.current)"></div>
+      <div star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></div>
     </span>
   </div>
   <!-- end star rating -->
