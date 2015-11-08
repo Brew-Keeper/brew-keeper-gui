@@ -1,22 +1,23 @@
 ;(function(){//IIFE
   angular.module('brewKeeper')
   .controller('StarCtrl', ['$scope', function ($scope) {
-    var currentRating = 4
-      console.log(currentRating)
-      $scope.rating = 0;
-      $scope.ratings = [{
-          current: currentRating,
-          max: 5
-      }];
-
-      $scope.getSelectedRating = function (rating) {
-          console.log("getSelectedRating function");
-          console.log(rating)
-          var username = $scope.username;
-          var id = $scope.id;
-          console.log(username);
-          console.log(id);
-      }
+    // var currentRating = $rootScope.recipe.rating;
+      // var currentRating = 4;
+      // console.log(currentRating)
+      // $scope.rating = 0;
+      // $scope.ratings = [{
+      //     current: currentRating,
+      //     max: 5
+      // }];
+      //
+      // $scope.getSelectedRating = function (rating) {
+      //     console.log("getSelectedRating function");
+      //     console.log(rating)
+      //     var username = $scope.username;
+      //     var id = $scope.id;
+      //     console.log(username);
+      //     console.log(id);
+      // }
   }])
 
   .directive('starRating', function () {
@@ -50,9 +51,6 @@
                       rating: index + 1
                   });
                   var newRating = {"rating": scope.ratingValue}
-                  // console.log("new rating: " + scope.ratingValue)
-                  // console.log(newRating)
-                  // scope.getSelectedRating(scope.ratingValue);
               };
 
               scope.$watch('ratingValue', function (oldVal, newVal) {

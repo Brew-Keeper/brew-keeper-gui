@@ -21,8 +21,15 @@
     </select>
   </p>
   <!-- rating star test -->
+  rating.js
   <div ng-controller="StarCtrl"> <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="getSelectedRating(rating.current)"></div>
+    </span>
+  </div>
+
+  recipe-detail.js
+  <div ng-controller="recipeDetail"> <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
+      <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
     </span>
   </div>
   <!-- end rating star test -->

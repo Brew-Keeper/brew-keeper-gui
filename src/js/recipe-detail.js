@@ -13,8 +13,27 @@ angular.module('brewKeeper')
               $rootScope.detail = response.data;
               $rootScope.steps = response.data.steps;
               $rootScope.notes = response.data.brewnotes;
-            })
+//TODO: recipe rating test
+var currentRating = $rootScope.detail.rating;
+console.log(currentRating)
+$scope.rating = 0;
+$scope.ratings = [{
+    current: currentRating,
+    max: 5
+}];
 
+$scope.rateRecipe = function (rating) {
+    console.log("rateRecipe function");
+    console.log(rating)
+    var username = $scope.username;
+    var id = $scope.id;
+    console.log(username);
+    console.log(id);
+}
+
+//TODO: end recipe rating test
+            })
+          // console.log("rating again " + $scope.rating)
           $scope.Eliminate = function() {
             if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
               $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/').then(function(){
@@ -131,15 +150,15 @@ angular.module('brewKeeper')
           });//end post new recipe
         }; //end recipe clone function
 
-        $scope.rateRecipe = function(rating){
-          var recipe = {}
-          // console.log("rated!")
-          recipe.rating = rating
-          // console.log(recipe)
-          // console.log(username)
-          // console.log(id)
-          // $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
-        }
+        // $scope.rateRecipe = function(rating){
+        //   var recipe = {}
+        //   // console.log("rated!")
+        //   recipe.rating = rating
+        //   // console.log(recipe)
+        //   // console.log(username)
+        //   // console.log(id)
+        //   // $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
+        // }
 
       }) //end recipDetail controller
 
