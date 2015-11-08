@@ -2,10 +2,10 @@
 angular.module('brewKeeper')
   .controller('signupController', function($scope, $http, $cookies, $location){
     $scope.users = {
-      username: '',
-      password: '',
-      email: '',
-      email: ''
+      // username: '',
+      // password: '',
+      // // email: '',
+      // email: ''
     }
     $scope.submit = function() {
       $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)

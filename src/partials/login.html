@@ -17,8 +17,8 @@
     <label for="register">SignUp</label>
     <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
     <input class="register-email" type="email" name="email" placeholder=" email" ng-model="users.email" required>
-    <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password" required>
-    <!-- <input class="register-password" type="password" name="confirmPassword" placeholder=" confirm password" required ng-model="users.confirmPassword" equals="{{password}}"> -->
+    <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password" required minlength="4">
+    <!-- <input class="register-password" type="password" name="confirmPassword" placeholder=" confirm password" required ng-model="users.confirmPassword" equals="user.password"> -->
 
   </div>
   <button class="register" type="submit" name="register">SignUp</button>
