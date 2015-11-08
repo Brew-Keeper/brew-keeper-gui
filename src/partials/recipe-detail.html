@@ -11,29 +11,12 @@
   <!-- <button>Make Public</button> -->
   <br>
 
-  <!-- <p><strong>Rating:</strong> {{detail.rating}} Stars
-    <select ng-model="detail.rating" ng-change="rateRecipe(detail.rating)">
-      <option selected>{{detail.rating}}</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-  </p> -->
-  <!-- rating star test -->
-  <!-- rating.js -->
-  <!-- <div ng-controller="StarCtrl"> <span ng-repeat="rating in ratings">{{rating.current}} out of {{rating.max}}
-      <div star-rating rating-value="rating.current" max="rating.max" ng-click="getSelectedRating(rating.current)"></div>
-    </span>
-  </div> -->
-
-  <!-- recipe-detail.js -->
-  <div ng-controller="recipeDetail"> <span ng-repeat="rating in ratings">Rating {{rating.current}} out of {{rating.max}}
+  <!-- star rating -->
+  <div ng-controller="recipeDetail"> <span ng-repeat="rating in ratings">
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
     </span>
   </div>
-  <!-- end rating star test -->
+  <!-- end star rating -->
 
   <p ng-show="detail.brew_count"><strong>Brew Count:</strong> {{detail.brew_count}}
   <p ng-show="detail.orientation"><img class="arrows-icon" src="img/noun_arrows.svg"/><!--Created by Creative Stall from the Noun Project-->
