@@ -15,10 +15,11 @@ angular.module('brewKeeper')
               $rootScope.notes = response.data.brewnotes;
 //TODO: recipe rating test
 var currentRating = $rootScope.detail.rating;
-// var currentRating = 1;
+// var currentRating = 0;
 console.log(currentRating)
 $scope.rating = 0;
 $scope.ratings = [{
+    // min: 0,
     current: currentRating,
     max: 5
 }];

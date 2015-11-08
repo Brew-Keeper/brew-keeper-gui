@@ -38,6 +38,7 @@
               var updateStars = function () {
                   scope.stars = [];
                   for (var i = 0; i < scope.max; i++) {
+                      console.log("stars " + i)
                       scope.stars.push({
                           filled: i < scope.ratingValue
                       });
@@ -50,11 +51,15 @@
                   scope.onRatingSelected({
                       rating: index + 1
                   });
-                  var newRating = {"rating": scope.ratingValue}
+                  // var newRating = {"rating": scope.ratingValue}
               };
 
               scope.$watch('ratingValue', function (oldVal, newVal) {
-                  if (newVal) {
+                  console.log("scope.$watch")
+                  console.log("oldVal " + oldVal)
+                  console.log("newVal " + newVal)
+                  if (newVal >=0 ) {
+                      console.log("calling updateStars function")
                       updateStars();
                   }
               });
