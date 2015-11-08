@@ -37,6 +37,18 @@ angular.module('brewKeeper')
   })//CONTROLLER FOR LOGIN
 
 .controller('logoutCtrl', function($scope, $http, $cookies){//CONTROLLER FOR LOGOUT
+    $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
+      .success(function(){
+        console.log("I'm logged in")
+        $('.login').addClass('hidden')
+        $('.register').addClass('hidden')
+        $('.logout').removeClass('hidden')
+      })// if logged in
+      .error(function(){
+        $('.login').removeClass('hidden');//when logged out
+        $('.register').removeClass('hidden');
+        $('.logout').addClass('hidden');
+      })
     $scope.user = {
       email: '',
       password: ''
@@ -44,17 +56,14 @@ angular.module('brewKeeper')
     $scope.submit= function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
+        .then(function(){
+          $('.login').removeClass('hidden');//when logged out
+          $('.register').removeClass('hidden');
+          $('.logout').addClass('hidden');
+        })
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
     }
+
   })//CONTROLLER FOR LOGOUT
-
-        // $('.login').addClass('hidden');//when logged in
-        // $'.register').addClass('hidden');
-        // $('.logout').removeClass('hidden');
-        //
-        // $('.login').removeClass('hidden');//when logged out
-        // $'.register').removeClass('hidden');
-        // $('.logout').addClass('hidden');
-
 })();//END IFFE
