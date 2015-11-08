@@ -12,7 +12,7 @@
   <br>
 
   <!-- star rating -->
-  <div ng-controller="recipeDetail"> <span ng-repeat="rating in ratings">
+  <div> <span ng-repeat="rating in ratings">
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
     </span>
   </div>
