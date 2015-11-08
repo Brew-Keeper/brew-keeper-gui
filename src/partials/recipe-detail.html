@@ -10,8 +10,9 @@
   <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
   <!-- <button>Make Public</button> -->
   <br>
-  <p ng-show="detail.rating"><strong>Rating:</strong> {{detail.rating}} Stars
-    <select ng-model="detail.rating">
+  <p><strong>Rating:</strong> {{detail.rating}} Stars
+    <select ng-model="detail.rating" ng-change="rateRecipe(detail.rating)">
+      <option selected>{{detail.rating}}</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>

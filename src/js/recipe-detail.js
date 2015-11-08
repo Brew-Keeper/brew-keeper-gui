@@ -129,6 +129,17 @@ angular.module('brewKeeper')
             };//end loop to clone steps
           });//end post new recipe
         }; //end recipe clone function
+
+        $scope.rateRecipe = function(rating){
+          var recipe = {}
+          // console.log("rated!")
+          recipe.rating = rating
+          // console.log(recipe)
+          // console.log(username)
+          // console.log(id)
+          $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
+        }
+
       }) //end recipDetail controller
 
 
