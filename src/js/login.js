@@ -9,14 +9,15 @@ angular.module('brewKeeper')
     }
     $scope.submit = function() {
       $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
-      .then(function(response) {
+      .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = { }
+        $('.login').addClass('hidden')
+        $('.logout').removeClass('hidden')
         $location.path('/')
-      })
-      .catch(function(response){
+      }, function errorCallback(response){
         alert("Please fill out all fields carefully.");
       })//Response if bad signup attempt
     };
@@ -28,7 +29,7 @@ angular.module('brewKeeper')
     }
     $scope.submit= function(){
       $http.post('https://brew-keeper-api.herokuapp.com/api/login/', $scope.users)
-      .then(function(response) {
+      .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
@@ -36,8 +37,7 @@ angular.module('brewKeeper')
         $('.login').addClass('hidden')
         $('.logout').removeClass('hidden')
         $location.path('/')
-      })
-      .catch(function(response){
+      }, function errorCallback(response){
         console.log(response.data)
          alert("Please enter a valid username and password.")
       })//responses for bad login attempts
@@ -57,7 +57,7 @@ angular.module('brewKeeper')
       })// if logged in
       .error(function(){
         $('.login').removeClass('hidden');//when logged out
-        // $('.logout').addClass('hidden');
+        $('.logout').addClass('hidden');
       })
     $scope.user = {
       email: '',
