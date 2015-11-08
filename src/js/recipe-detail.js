@@ -2,17 +2,31 @@
 
 angular.module('brewKeeper')
       .controller('recipeDetail', function($scope, $http, $location, $routeParams, $rootScope){
-          // console.log("firing the recipeDetail controller")
           var id = $routeParams.id;
           var username = $routeParams.username;
           $scope.username = $routeParams.username;
+          $scope.id = $routeParams.id;
           $(document).scrollTop(0);
+
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
               $rootScope.detail = response.data;
               $rootScope.steps = response.data.steps;
               $rootScope.notes = response.data.brewnotes;
-            })
+              var currentRating = $rootScope.detail.rating;
+              $scope.rating = 0;
+              $scope.ratings = [{
+                  current: currentRating,
+                  max: 5
+              }];
+          }) //end http.get
+
+
+          $scope.rateRecipe = function (rating) {
+            var newRating = {"rating": rating}
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
+          }
+
 
           $scope.Eliminate = function() {
             if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
@@ -129,6 +143,7 @@ angular.module('brewKeeper')
             };//end loop to clone steps
           });//end post new recipe
         }; //end recipe clone function
+
       }) //end recipDetail controller
 
 
