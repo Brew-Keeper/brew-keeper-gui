@@ -38,7 +38,6 @@ angular.module('brewKeeper')
         $('.logout').removeClass('hidden')
         $location.path('/')
       }, function errorCallback(response){
-        console.log(response.data)
          alert("Please enter a valid username and password.")
       })//responses for bad login attempts
     }//submit function
