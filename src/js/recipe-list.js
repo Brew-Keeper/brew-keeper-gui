@@ -8,6 +8,10 @@ angular.module('brewKeeper')
             .then(function(response){
               $scope.recipes = response.data;
               $scope.username = username;
+
+              $scope.ratings = [{
+                  max: 5
+              }];
             })
 
           $scope.listBrewIt = function(username, id){
@@ -22,6 +26,11 @@ angular.module('brewKeeper')
             $location.path("/users/" + username + "/recipes/" + id + "/brewit")
             $(document).scrollTop(0);
           }//end listBrewit function
+
+          $scope.rateRecipe = function (rating, id) {
+            var newRating = {"rating": rating}
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
+          }
 
       })//end controller
 
