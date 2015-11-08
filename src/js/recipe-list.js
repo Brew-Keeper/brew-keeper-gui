@@ -8,12 +8,8 @@ angular.module('brewKeeper')
             .then(function(response){
               $scope.recipes = response.data;
               $scope.username = username;
-              // var currentRating = $scope.recipes.rating;
-              // var currentRating = 1;
-              // console.log(currentRating)
-              $scope.rating = 0;
+
               $scope.ratings = [{
-                  // current: currentRating,
                   max: 5
               }];
             })
