@@ -39,7 +39,6 @@ angular.module('brewKeeper')
 .controller('logoutCtrl', function($scope, $http, $cookies){//CONTROLLER FOR LOGOUT
     $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
       .success(function(){
-        console.log("I'm logged in")
         $('.login').addClass('hidden')
         $('.register').addClass('hidden')
         $('.logout').removeClass('hidden')
