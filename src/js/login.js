@@ -15,10 +15,12 @@ angular.module('brewKeeper')
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = { }
         $location.path('/')
-
       })
+      .catch(function(response){
+        alert("Please fill out all fields carefully.");
+      })//Response if bad signup attempt
     };
-  })//CONTROLLER FOR SIGNUP
+  })//END CONTROLLER FOR SIGNUP
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
     $scope.users = {
       username: '',
@@ -37,18 +39,14 @@ angular.module('brewKeeper')
       })
       .catch(function(response){
         console.log(response.data)
-        if (response.data.username) {
-         alert("Please enter a valid username.")
-        } else {
-         alert("Your password is invalid.  Please try again.")
-        }
-      })//response if bad login
+         alert("Please enter a valid username and password.")
+      })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
       $('.register').removeClass('hidden');
       $('.login').addClass('hidden')
     })//show signup form
-  })//CONTROLLER FOR LOGIN
+  })//END CONTROLLER FOR LOGIN
 
 .controller('logoutCtrl', function($scope, $http, $cookies){//CONTROLLER FOR LOGOUT
     $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
@@ -75,6 +73,6 @@ angular.module('brewKeeper')
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
     }
-  })//CONTROLLER FOR LOGOUT
+  })//END CONTROLLER FOR LOGOUT
 
 })();//END IFFE
