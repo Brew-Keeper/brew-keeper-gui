@@ -35,6 +35,14 @@ angular.module('brewKeeper')
         $('.logout').removeClass('hidden')
         $location.path('/')
       })
+      .catch(function(response){
+        console.log(response.data)
+        if (response.data.username) {
+         alert("Please enter a valid username.")
+        } else {
+         alert("Your password is invalid.  Please try again.")
+        }
+      })//response if bad login
     }//submit function
     $('.show-signup').on('click', function(){
       $('.register').removeClass('hidden');
