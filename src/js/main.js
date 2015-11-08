@@ -36,14 +36,17 @@
 
     .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies){
       var cookie = $cookies.get("Authorization")
-
       $http.defaults.headers.common = {"Authorization": cookie}
       $scope.$route = $route;
       $scope.$location = $location;
       $scope.$routeParams = $routeParams;
 
+      $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
+        .then(function(response){
+          $scope.username = response.data.username;
+        })//This is for populating url with username
+
     $scope.logout= function(){
-      console.log("Fire away");
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
         .then(function(){
@@ -55,10 +58,11 @@
       }
     })//END MainController
 
-    .controller('WhoAmIController', function($location, $http) {
+    .controller('WhoAmIController', function($location, $http, $scope) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           var username = response.data.username;
+          $scope.username = username
           $location.path('/users/' + username)
         })//.success
         .catch(function(){
