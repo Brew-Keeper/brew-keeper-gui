@@ -6,6 +6,7 @@ angular.module('brewKeeper')
           var id = $routeParams.id;
           var username = $routeParams.username;
           $scope.username = $routeParams.username;
+          $scope.id = $routeParams.id;
           $(document).scrollTop(0);
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
@@ -137,7 +138,7 @@ angular.module('brewKeeper')
           // console.log(recipe)
           // console.log(username)
           // console.log(id)
-          $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
+          // $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
         }
 
       }) //end recipDetail controller
