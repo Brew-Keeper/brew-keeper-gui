@@ -45,11 +45,14 @@
 
     .controller('WhoAmIController', function($location, $http) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
-        .then(function(response){
+        .success(function(response){
           var username = response.data.username;
           $location.path('/users/' + username)
-      })
-    })
+        })//.success
+        .error(function(){
+          $location.path('/login')
+        })//.error
+    })//END WhoAmIController
 
 
 })(); //end IIFE
