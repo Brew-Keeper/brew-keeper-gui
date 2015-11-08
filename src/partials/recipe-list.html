@@ -21,13 +21,13 @@
   </p>
   <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
   <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
-  <!-- <p ng-show="recipe.rating"><strong>Rating </strong> {{recipe.rating}}</p> -->
+
   <!-- star rating -->
   <div> <span ng-repeat="rating in ratings">
-      <!-- {{rating.current}} of {{rating.max}} stars -->
       <div star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></div>
     </span>
   </div>
   <!-- end star rating -->
+  
   <p ng-show="recipe.brew_count">Brew Count: {{recipe.brew_count}}<p>
 </section>
