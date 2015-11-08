@@ -16,19 +16,20 @@
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
   <p class="recipe-title">
     <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
+    <!-- star rating -->
+    <!-- rating : {{recipe.rating}} -->
+    <span ng-repeat="rating in ratings">
+        <span star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></span>
+    </span>
+    <!-- end star rating -->
     <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)"><button>BREW IT!</button></a>
+
+
     <!-- ng-show=recipe.steps.length -->
   </p>
   <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
   <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
 
-  <!-- star rating -->
-  <!-- rating : {{recipe.rating}} -->
-  <div> <span ng-repeat="rating in ratings">
-      <div star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></div>
-    </span>
-  </div>
-  <!-- end star rating -->
 
   <p ng-show="recipe.brew_count">Brew Count: {{recipe.brew_count}}<p>
 </section>
