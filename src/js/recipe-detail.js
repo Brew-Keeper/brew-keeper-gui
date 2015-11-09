@@ -19,6 +19,11 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
+              console.log("steps " + response.data.steps.length)
+              if(response.data.steps.length == 0){
+                console.log("hiding brewit button");
+                $(".brew-it-button").addClass("no-steps");
+              }
           }) //end http.get
 
 
@@ -70,11 +75,14 @@ angular.module('brewKeeper')
           }
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-          $scope.submit=function(){
+          $scope.submit=function(){ //add step function
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
+                  console.log("step added")
+                  $(".brew-it-button").removeClass("no-steps");
                   $scope.steps = response.data.steps;
+
                 })
             })
             $scope.step= { };
