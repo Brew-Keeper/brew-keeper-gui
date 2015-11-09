@@ -23,6 +23,7 @@
     </span>
     <!-- end star rating -->
     <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)"><button>BREW IT!</button></a>
+    <a href="#users/{{username}}/recipes/{{recipe.id}}" ng-hide="recipe.steps.length"><button>Add steps</button></a>
 
 
     <!-- ng-show=recipe.steps.length -->

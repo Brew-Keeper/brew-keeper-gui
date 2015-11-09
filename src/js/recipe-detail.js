@@ -19,6 +19,13 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
+              if(response.data.steps.length == 0){
+                $(".brew-it-button").addClass("hidden");
+                $(".no-steps").removeClass("hidden");
+              }
+              else {
+                $(".brew-it-button").removeClass("hidden");
+              }
           }) //end http.get
 
 
@@ -50,6 +57,10 @@ angular.module('brewKeeper')
                 $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
                   .then(function(response){
                     $scope.steps = response.data.steps;
+                    if(response.data.steps.length == 0){
+                      $(".brew-it-button").addClass("hidden");
+                      $(".no-steps").removeClass("hidden");
+                    }
                   })
               })
             }
@@ -70,11 +81,13 @@ angular.module('brewKeeper')
           }
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-          $scope.submit=function(){
+          $scope.submit=function(){ //add step function
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
-                  $scope.steps = response.data.steps;
+                  $(".brew-it-button").removeClass("hidden");
+                  $(".no-steps").addClass("hidden");
+                  $rootScope.steps = response.data.steps;
                 })
             })
             $scope.step= { };
@@ -93,6 +106,11 @@ angular.module('brewKeeper')
           $('.edit-recipe').removeClass("hidden");
           $('.recipe-view').addClass("hidden");
         });
+
+        $(".no-steps").click(function(){
+          $scope.showAddSteps()
+        })
+
       $scope.editRecipe = function(recipe){
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
         .then( function () {
