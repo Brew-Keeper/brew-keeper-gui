@@ -2,7 +2,6 @@
 
 angular.module('brewKeeper')
       .controller('brewIt', function($scope, $http, $routeParams, $location, $route, $rootScope){
-        console.log("brewit controller fired");
         $(document).scrollTop(0);
         var id = $routeParams.id;
         var username =$routeParams.username;
@@ -10,7 +9,6 @@ angular.module('brewKeeper')
 
         $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
           .then(function(response){
-            console.log("general http.get")
             $scope.detail = response.data;
             $scope.steps = response.data.steps;
             $scope.notes = response.data.brewnotes;
@@ -19,7 +17,6 @@ angular.module('brewKeeper')
 
         //load the data if the page is manually reset
         window.onload = function(){
-          console.log("window reloaded")
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
               $rootScope.detail = response.data;
@@ -31,7 +28,6 @@ angular.module('brewKeeper')
               };
               $rootScope.stepArray = stepArray;
               $scope.stepTotal = stepArray.length;
-              console.log("window reload http.get")
               });
           $scope.resetBrew();
         }
@@ -47,7 +43,6 @@ angular.module('brewKeeper')
         var timerRunning = false //logic for brew timer
         //start brew function
         $scope.startBrew = function(brewCount){
-          console.log("startBrew function called")
           if(timerRunning){
             return;
           }
@@ -62,7 +57,6 @@ angular.module('brewKeeper')
 
         //runs when brew again button pushed
         $scope.reStartBrew = function(){
-          console.log("reStartBrew function called")
           if(timerRunning){
             return;
           }
@@ -80,7 +74,6 @@ angular.module('brewKeeper')
         // }; //This can be used to pause process if needed.
 
         $scope.resetBrew = function(){
-          console.log("resetBrew function called")
           // $("timer.delay").addClass("hidden");
           $("div.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
@@ -96,7 +89,6 @@ angular.module('brewKeeper')
           //resetting correctly
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
-              console.log("resetBrew function http.get")
               $scope.detail = response.data;
               $scope.steps = response.data.steps;
               $scope.notes = response.data.brewnotes;
@@ -110,7 +102,6 @@ angular.module('brewKeeper')
         //   $("."+id).addClass("hidden")
         // };
         $scope.nextStep = function(stepNumber, brewCount){
-          console.log("nextStep function called")
           var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
           var nextStep = $scope.stepArray[nextStepIndex];
           var prevStep = $scope.stepArray[nextStepIndex - 2]
@@ -122,8 +113,7 @@ angular.module('brewKeeper')
             var recipe = {};
             recipe.brew_count = brewCount + 1;
             // brewCount++; //increment brew counter
-            $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe)
-            .then(function(){console.log("update count http.patch")})
+            $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe);
             return
           }
           $("."+ stepNumber).removeClass("current-step").addClass("inactive");
