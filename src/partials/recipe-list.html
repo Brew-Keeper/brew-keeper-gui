@@ -1,12 +1,35 @@
-<a href="#/users/{{username}}/recipes/new"><button>Create new recipe</button></a>
-<div ng-repeat="recipe in recipes | orderBy: 'id'">
-  <br>
-  <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
-  <br>
-  Bean: {{recipe.bean_name}}
-  <br>
-  Roast: {{recipe.roast}}
-  <br>
-  Rating: {{recipe.rating}}
-  <br>
-</div>
+
+<nav class="recipe-list-options">
+  <h2>Recipe List</h2>
+  <select name="OrderBy" value="OrderBy" ng-model="query">
+    <option value="">Order By</>
+    <option value="roast">Roast</option>
+    <option value="bean_name">Bean</option>
+    <option value="-rating">Rating</option>
+    <option value="-id">Newest</option>
+    <option value="-brew_count">Brew Count</option>
+  </select>
+  <input placeholder="Filter Recipes" ng-model="filter"></input>
+  <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a><!--Flask by Mister Pixel from the Noun Project-->
+</nav>
+
+<section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
+  <p class="recipe-title">
+    <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
+    <!-- star rating -->
+    <!-- rating : {{recipe.rating}} -->
+    <span ng-repeat="rating in ratings">
+        <span star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></span>
+    </span>
+    <!-- end star rating -->
+    <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)"><button>BREW IT!</button></a>
+
+
+    <!-- ng-show=recipe.steps.length -->
+  </p>
+  <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
+  <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
+
+
+  <p ng-show="recipe.brew_count">Brew Count: {{recipe.brew_count}}<p>
+</section>

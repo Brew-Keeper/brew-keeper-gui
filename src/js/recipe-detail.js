@@ -1,18 +1,32 @@
 ;(function(){//IFEE
 
 angular.module('brewKeeper')
-      .controller('recipeDetail', function($scope, $http, $location, $routeParams){
-          // console.log("firing the recipeDetail controller")
+      .controller('recipeDetail', function($scope, $http, $location, $routeParams, $rootScope){
           var id = $routeParams.id;
           var username = $routeParams.username;
           $scope.username = $routeParams.username;
+          $scope.id = $routeParams.id;
+          $(document).scrollTop(0);
 
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
             .then(function(response){
-              $scope.detail = response.data;
-              $scope.steps = response.data.steps;
-              $scope.notes = response.data.brewnotes;
-            })
+              $rootScope.detail = response.data;
+              $rootScope.steps = response.data.steps;
+              $rootScope.notes = response.data.brewnotes;
+              var currentRating = $rootScope.detail.rating;
+              $scope.rating = 0;
+              $scope.ratings = [{
+                  current: currentRating,
+                  max: 5
+              }];
+          }) //end http.get
+
+
+          $scope.rateRecipe = function (rating) {
+            var newRating = {"rating": rating}
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
+          }
+
 
           $scope.Eliminate = function() {
             if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
@@ -23,17 +37,17 @@ angular.module('brewKeeper')
           }; //end Eliminate function
 
           $scope.showSteps = function(stepId){
-            stepId= "p." + stepId.toString()
+            stepId= "article." + stepId.toString()
             $(stepId).toggleClass("hidden")
           };
 
-          $scope.showNotes = function(){
-            $("div.notes").toggleClass("hidden")
-          };
+          // $scope.showNotes = function(){
+          //   $("div.notes").toggleClass("hidden")
+          // };
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){
-                $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+                $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
                   .then(function(response){
                     $scope.steps = response.data.steps;
                   })
@@ -58,7 +72,7 @@ angular.module('brewKeeper')
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
           $scope.submit=function(){
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
-              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id)
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
                   $scope.steps = response.data.steps;
                 })
@@ -96,7 +110,7 @@ angular.module('brewKeeper')
             return;
           };
           var cloneData = {}
-          cloneData.title = $scope.detail.title;
+          cloneData.title = "Clone of: " + $scope.detail.title;
           cloneData.bean_name = $scope.detail.bean_name;
           cloneData.roast = $scope.detail.roast;
           cloneData.orientation = $scope.detail.orientation;
@@ -128,6 +142,7 @@ angular.module('brewKeeper')
             };//end loop to clone steps
           });//end post new recipe
         }; //end recipe clone function
+
       }) //end recipDetail controller
 
 

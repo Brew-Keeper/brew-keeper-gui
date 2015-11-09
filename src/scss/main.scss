@@ -96,14 +96,17 @@ textarea {
    ========================================================================== */
 main.container {
   box-sizing: border-box;
-  margin: 0 5%;
-  width: 90%;
+  margin: 0;
+  width: 100%;
 } //main.container
 
 @import 'styles';
 @import 'header';
 @import 'forms';
 @import 'desktop-view';
+@import 'brew-it';
+@import 'rating';
+
 
 
 
