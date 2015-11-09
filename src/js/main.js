@@ -1,6 +1,6 @@
 ;(function(){ //IIFE for angular
 
-  angular.module('brewKeeper', ['ngRoute', 'timer', 'ngCookies'], function($httpProvider, $routeProvider){
+  angular.module('brewKeeper', ['ngRoute', 'timer', 'ngCookies', 'validation.match'], function($httpProvider, $routeProvider){
       $routeProvider
         .when('/',{
           templateUrl: 'partials/recipe-list.html',
