@@ -19,9 +19,7 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
-              console.log("steps " + response.data.steps.length)
               if(response.data.steps.length == 0){
-                console.log("hiding brewit button");
                 $(".brew-it-button").addClass("hidden");
                 $(".no-steps").removeClass("hidden");
               }
@@ -60,7 +58,6 @@ angular.module('brewKeeper')
                   .then(function(response){
                     $scope.steps = response.data.steps;
                     if(response.data.steps.length == 0){
-                      console.log("hiding brewit button");
                       $(".brew-it-button").addClass("hidden");
                       $(".no-steps").removeClass("hidden");
                     }
@@ -88,7 +85,6 @@ angular.module('brewKeeper')
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
-                  console.log("step added")
                   $(".brew-it-button").removeClass("hidden");
                   $(".no-steps").addClass("hidden");
                   $scope.steps = response.data.steps;
