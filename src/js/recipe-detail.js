@@ -22,7 +22,8 @@ angular.module('brewKeeper')
               console.log("steps " + response.data.steps.length)
               if(response.data.steps.length == 0){
                 console.log("hiding brewit button");
-                $(".brew-it-button").addClass("no-steps");
+                $(".brew-it-button").addClass("hidden");
+                $(".no-steps").removeClass("hidden");
               }
           }) //end http.get
 
@@ -55,6 +56,10 @@ angular.module('brewKeeper')
                 $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
                   .then(function(response){
                     $scope.steps = response.data.steps;
+                    if(response.data.steps.length == 0){
+                      console.log("hiding brewit button");
+                      $(".brew-it-button").addClass("hidden");
+                    }
                   })
               })
             }
@@ -80,7 +85,8 @@ angular.module('brewKeeper')
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
                   console.log("step added")
-                  $(".brew-it-button").removeClass("no-steps");
+                  $(".brew-it-button").removeClass("hidden");
+                  $(".no-steps").addClass("hidden");
                   $scope.steps = response.data.steps;
 
                 })
