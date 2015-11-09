@@ -88,6 +88,7 @@ angular.module('brewKeeper')
                   $(".brew-it-button").removeClass("hidden");
                   $(".no-steps").addClass("hidden");
                   $scope.steps = response.data.steps;
+                  $rootScope.detail = response.data
 
                 })
             })
