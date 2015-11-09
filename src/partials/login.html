@@ -8,7 +8,8 @@
   <a href="" class="show-signup">Signup Here</a>
 </form><!--end form login-->
 
-<form class="register hidden" ng-controller="signupController" ng-submit="submit()">
+
+<form name="registration" class="register hidden" ng-controller="signupController" ng-submit="submit(registration.confirmPassword.$error.match)">
 <h3>AeroPress</h4>
 <p>The AeroPress allows a brewer such control. At first, the range of possibilities for each aspect can be overwhelming, not to mention the possible combinations and remembering what produced good results and what didn’t. And starting with a bean you are unfamiliar with can be like starting all over again. If only there was a way to keep track of your coffee explorations . . .</p>
 <h4>Enter Brew Keeper</h4>
@@ -18,7 +19,10 @@
     <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
     <input class="register-email" type="email" name="email" placeholder=" email" ng-model="users.email" required>
     <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password" required minlength="4">
-    <!-- <input class="register-password" type="password" name="confirmPassword" placeholder=" confirm password" required ng-model="users.confirmPassword" equals="user.password"> -->
+    <input class="register-password" type="password" name="confirmPassword" placeholder=" confirm password" required ng-model="users.confirmPassword" data-match="users.password">
+
+    <!-- <div data-ng-show="registration.confirmPassword.$error.match">Passwords do not match!</div> -->
+
 
   </div>
   <button class="register" type="submit" name="register">SignUp</button>

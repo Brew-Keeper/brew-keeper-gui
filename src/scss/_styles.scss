@@ -147,3 +147,10 @@ nav.recipe-list-options {
   padding: 0 5% 0;
   border-top: 1px solid black;
 }
+
+.ng-invalid.ng-dirty {
+  border-color: red;
+}
+.ng-valid.ng-dirty {
+  border-color: green;
+}
