@@ -110,7 +110,7 @@ angular.module('brewKeeper')
             return;
           };
           var cloneData = {}
-          cloneData.title = $scope.detail.title;
+          cloneData.title = "Clone of: " + $scope.detail.title;
           cloneData.bean_name = $scope.detail.bean_name;
           cloneData.roast = $scope.detail.roast;
           cloneData.orientation = $scope.detail.orientation;
