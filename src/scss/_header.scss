@@ -3,7 +3,7 @@
   nav.menu {
     &.hamburger::before {
       content: '\2261';
-      color: #57321f;
+      color: $heading-color;
       font-size: 4em;
       position: absolute;
       right: 5%;
@@ -21,6 +21,9 @@
         a {
           text-decoration: none;
         }
+      &.hidden {
+        display: none;
+      }
       }
     }
   }//nav.menu
