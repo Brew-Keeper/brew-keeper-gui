@@ -23,7 +23,7 @@ angular.module('brewKeeper')
               $scope.stepTotal = stepArray.length;
               console.log("window reload http.get")
               });
-          // $scope.resetBrew();
+          $scope.resetBrew();
         }
 
 
