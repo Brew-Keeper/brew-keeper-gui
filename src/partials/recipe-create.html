@@ -10,13 +10,14 @@
     <fieldset>
       <legend><h4>Bean Details</h4></legend>
       <input maxlength="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
-      <input list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast">
-        <datalist id="roast">
-          <option value="Light">
-          <option value="Medium">
-          <option value="Dark">
-        </datalist>
-      </datalist>
+      <select class="gray-placeholder" list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast" id="roast">
+        <option value="" disabled selected hidden>Roast</option>
+        <option value="Light">Light</option>
+        <option value="Medium">Medium</option>
+        <option value="Med-Dark">Med-Dark</option>
+        <option value="Dark">Dark</option>
+        <option value="Extra-Dark">Extra-Dark</option>
+      </select>
       <input list="grind" maxlength="12" placeholder="Grind" ng-model="recipe.grind">
         <datalist id="grind">
           <option value="Fine">
