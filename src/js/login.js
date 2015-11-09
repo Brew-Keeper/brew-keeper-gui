@@ -14,8 +14,8 @@ angular.module('brewKeeper')
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = { }
-        $('.login').addClass('hidden')
-        $('.logout').removeClass('hidden')
+        // $('.login').addClass('hidden')
+        // $('.logout').removeClass('hidden')
         $location.path('/')
       }, function errorCallback(response){
         alert("Please fill out all fields carefully.");
@@ -34,8 +34,12 @@ angular.module('brewKeeper')
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = {};
-        $('.login').addClass('hidden')
-        $('.logout').removeClass('hidden')
+        //pseudo-code Hide "login/signup" in nav in index.html
+        //pseudo-code Hide "form.login" in login.html
+        // $('.login').addClass('hidden')
+        // //pseudo-code Show "logout" in nav
+        //pseudo-code Show "Create New Recipe" in nav
+        // $('.logout').removeClass('hidden')
         $location.path('/')
       }, function errorCallback(response){
          alert("Please enter a valid username and password.")
