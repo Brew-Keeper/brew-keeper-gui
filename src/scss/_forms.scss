@@ -41,7 +41,7 @@ form {
     margin: 1ex 30%;
   }//WATCH OUT!  ALL BUTTONS ARE TARGETED!
   .gray-placeholder {
-    color: gray;
+    color: darken(lightgray, 13%);
   &:focus {
     color: black;
     }

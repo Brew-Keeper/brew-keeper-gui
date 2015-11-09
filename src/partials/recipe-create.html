@@ -27,7 +27,7 @@
       </input>
       <input type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
       <select class="gray-placeholder" id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
-        <option value="" disabled selected hidden>bean units</option>
+        <option value="" disabled selected hidden>Bean Units</option>
         <option value="g">g</option>
         <option value="oz">oz</option>
         <option value="scoops">scoops</option>
@@ -45,15 +45,17 @@
           <option value="Deionized">
         </datalist>
       <input type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
-      <input list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
-        <select id="water-units">
-          <option value="oz">
-          <option value="cc">
-          <option value="mL">
+        <select class="gray-placeholder" id="water-units"list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
+          <option value="" disabled selected hidden>Water Units</option>
+          <option value="oz">oz</option>
+          <option value="cc">cc</option>
+          <option value="mL">mL</option>
         </select>
       <input type="number" placeholder="Temp in &deg;F" ng-model="recipe.temp" max="32767"></input>
-      <input type="radio" ng-model="recipe.orientation" value="Standard">Standard</input>
-      <input type="radio" ng-model="recipe.orientation" value="Inverted">Inverted</input>
+      <select class="gray-placeholder" list="orientation" placeholder="Orientation" ng-model="recipe.orientation"  id="orientation">
+        <option value="Standard">Standard</option>
+        <option value="Inverted">Inverted</option>
+      </select>
     </fieldset><!--Water Details-->
   </section>
   <button class="addSteps" type="submit">Submit</button>
