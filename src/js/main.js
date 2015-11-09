@@ -63,9 +63,20 @@
         .then(function(response){
           var username = response.data.username;
           $scope.username = username
+          //pseudo-code Show "logout" in nav
+          //pseudo-code Show "Create New Recipe" in nav
+          $('.logout').removeClass('hidden')
+          //pseudo-code Hide "login/signup" in nav in index.html
+          //pseudo-code Hide "form.login" in login.html
+          $('.login').addClass('hidden')
           $location.path('/users/' + username)
         })//.success
         .catch(function(){
+          //pseudo-code Show "login/signup" in nav in index.html
+          //pseudo-code Show "form.login" in login.html
+          $('.login').removeClass('hidden')
+          //pseudo-code Hide "logout" in nav
+          $('.logout').addClass('hidden')
           $location.path('/login')
         })//.error
     })//END WhoAmIController
