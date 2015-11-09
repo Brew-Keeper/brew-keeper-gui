@@ -46,7 +46,7 @@ cp bower_components/humanize-duration/humanize-duration.js dist/bower_components
 mkdir -p dist/bower_components/angular-cookies/
 cp bower_components/angular-cookies/angular-cookies.js dist/bower_components/angular-cookies/angular-cookies.js
 
-makdir -p dist/bower_components/angular-validation-match/dist/
+mkdir -p dist/bower_components/angular-validation-match/dist/
 cp bower_components/angular-validation-match/dist/angular-validation-match.js dist/bower_components/angular-validation-match/dist/angular-validation-match.js
 
 
