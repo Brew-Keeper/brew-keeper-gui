@@ -8,7 +8,8 @@
   <a href="" class="show-signup">Signup Here</a>
 </form><!--end form login-->
 
-<form name="registration" class="register hidden" ng-controller="signupController" ng-submit="submit()">
+
+<form name="registration" class="register hidden" ng-controller="signupController" ng-submit="submit(registration.confirmPassword.$error.match)">
 <h3>AeroPress</h4>
 <p>The AeroPress allows a brewer such control. At first, the range of possibilities for each aspect can be overwhelming, not to mention the possible combinations and remembering what produced good results and what didn’t. And starting with a bean you are unfamiliar with can be like starting all over again. If only there was a way to keep track of your coffee explorations . . .</p>
 <h4>Enter Brew Keeper</h4>
@@ -20,28 +21,9 @@
     <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password" required minlength="4">
     <input class="register-password" type="password" name="confirmPassword" placeholder=" confirm password" required ng-model="users.confirmPassword" data-match="users.password">
 
-
-    <div data-ng-show="registration.confirmPassword.$error.match">Passwords do not match!</div>
-    <p>Mis-match? {{registration.confirmPassword.$error.match}}</p>
+    <!-- <div data-ng-show="registration.confirmPassword.$error.match">Passwords do not match!</div> -->
 
 
   </div>
-  <button class="register" type="submit" name="register" ng-require="!registration.confirmPassword.$error.match">SignUp</button>
+  <button class="register" type="submit" name="register">SignUp</button>
 </form><!--end form register-->
-
-<!-- test passwor match -->
-<div data-ng-app="myApp">
-    <p>
-        This is a very basic example/demo.<br />
-        It will only fire after the confirm field has been modified (is no longer pristine)
-    </p>
-    <hr />
-    <form name="myForm">
-        Password: <input ng-model="user.password" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" />
-        Confirm: <input ng-model="user.passwordConfirm" type="password" data-match="user.password" name="confirmPassword" />
-        <div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
-    </form>
-    <hr />
-    <p>Mis-match? {{myForm.confirmPassword.$error.match}}</p>
-</div>
-<!-- end test password match -->

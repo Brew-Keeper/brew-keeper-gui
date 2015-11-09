@@ -7,20 +7,23 @@ angular.module('brewKeeper')
       // // email: '',
       // email: ''
     }
-    $scope.submit = function() {
-      console.log("user signup function called")
-      // $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
-      // .then(function successCallback(response) {
-      //   userInfo = "Token " + response.data.token
-      //   $cookies.put("Authorization", userInfo)
-      //   $http.defaults.headers.common = {"Authorization": userInfo}
-      //   $scope.users = { }
-      //   // $('.login').addClass('hidden')
-      //   // $('.logout').removeClass('hidden')
-      //   $location.path('/')
-      // }, function errorCallback(response){
-      //   alert("Please fill out all fields carefully.");
-      // })//Response if bad signup attempt
+    $scope.submit = function(mismatch) {
+      if(mismatch){
+        alert("Passwords Do Not Match")
+        return
+      }
+      $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
+      .then(function successCallback(response) {
+        userInfo = "Token " + response.data.token
+        $cookies.put("Authorization", userInfo)
+        $http.defaults.headers.common = {"Authorization": userInfo}
+        $scope.users = { }
+        // $('.login').addClass('hidden')
+        // $('.logout').removeClass('hidden')
+        $location.path('/')
+      }, function errorCallback(response){
+        alert("Please fill out all fields carefully.");
+      })//Response if bad signup attempt
     };
   })//END CONTROLLER FOR SIGNUP
 
