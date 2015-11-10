@@ -42,7 +42,7 @@ angular.module('brewKeeper')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
 
-  .controller('changePassword', function($scope, $http){
+  .controller('changePassword', function($scope, $http, $location){
     var users = {}
     // $scope.users.username = $scope.username;
 
@@ -54,14 +54,14 @@ angular.module('brewKeeper')
       users.username = $scope.username;
       users.old_password = $scope.users.old_password;
       users.new_password = $scope.users.new_password;
-
       $http.post('https://brew-keeper-api.herokuapp.com/api/change-pw/', users)
         .then(function successCallback(){
-          console.log("success")
+          alert("Password Successfully Changed");
+          $location.path('/');
         },
         function errorCallback(){
-          alert("Please try again.")
-          users = {}
+          alert("Password Incorrect, Please try again.");
+          $scope.users = {};
         })//end http.post to change-pw
     } //end submitChangePassword function
   })//end changePassword controller
