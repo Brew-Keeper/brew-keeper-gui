@@ -38,16 +38,19 @@
         // })
     })
 
-    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies){
+    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope){
+      console.log("main controller fired " + $scope.username)
       var cookie = $cookies.get("Authorization")
       $http.defaults.headers.common = {"Authorization": cookie}
       $scope.$route = $route;
       $scope.$location = $location;
       $scope.$routeParams = $routeParams;
+      $rootScope.username = null;
 
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
-          $scope.username = response.data.username;
+          $rootScope.username = response.data.username;
+          console.log("main controller whoami" + $scope.username)
         })//This is for populating url with username
 
     $scope.logout= function(){
@@ -56,17 +59,19 @@
         .then(function(){
           $('.login').removeClass('hidden');//when logged out
           $('.logout').addClass('hidden');
+          $rootScope.username = null;
+          console.log("log out controller " + $scope.username)
         })
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
       }
     })//END MainController
 
-    .controller('WhoAmIController', function($location, $http, $scope) {
+    .controller('WhoAmIController', function($location, $http, $scope, $rootScope) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           var username = response.data.username;
-          $scope.username = username
+          $rootScope.username = username
           //pseudo-code Show "logout" in nav
           //pseudo-code Show "Create New Recipe" in nav
           $('.logout').removeClass('hidden')
@@ -76,6 +81,8 @@
           $location.path('/users/' + username)
         })//.success
         .catch(function(){
+          $rootScope.username = null
+          console.log("whoami fail " + $scope.username)
           //pseudo-code Show "login/signup" in nav in index.html
           //pseudo-code Show "form.login" in login.html
           $('.login').removeClass('hidden')
