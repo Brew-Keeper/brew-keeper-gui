@@ -45,6 +45,7 @@
       $scope.$location = $location;
       $scope.$routeParams = $routeParams;
       $rootScope.username = null;
+      $scope.changePassword= false;
 
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
@@ -53,15 +54,28 @@
 
     $scope.logout= function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
+      $scope.changePassword = false;
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
         .then(function(){
-          $('.login').removeClass('hidden');//when logged out
-          $('.logout').addClass('hidden');
+          // $('.login').removeClass('hidden');//when logged out
+          // $('.logout').addClass('hidden');
           $rootScope.username = null;
         })
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
       }
+
+      //hamburer controller
+      $(".menu").on('click', function() {
+        $('.menu').toggleClass("active");
+      });
+      $(document).on('click', function(e) {
+        if(!$(e.target).is('.menu.active')) {
+        $('.menu').removeClass("active");
+        }
+        // $scope.changePassword = false;
+      });
+
     })//END MainController
 
     .controller('WhoAmIController', function($location, $http, $scope, $rootScope) {
