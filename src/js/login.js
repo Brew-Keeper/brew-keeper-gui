@@ -42,4 +42,12 @@ angular.module('brewKeeper')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
 
+  .controller('changePassword', function($scope){
+    console.log("changePassword controller fired");
+    $scope.submitChangePassword = function(){
+      console.log("submitChangePassword function called")
+      console.log($scope.username)
+    }
+  })//end changePassword controller
+
 })();//END IFFE

@@ -28,7 +28,7 @@
   <button class="register" type="submit" name="register">SignUp</button>
 </form><!--end form register-->
 
-<form ng-show="changePassword">
+<form ng-show="changePassword" ng-controller="changePassword">
   <h3>password change form</h3>
-  <button><a href="#/" ng-click="changePassword=false">cancel</a></button>
+  <button ng-click="submitChangePassword()">Submit</button>
 </form> <!--end password change form -->
