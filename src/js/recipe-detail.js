@@ -122,7 +122,8 @@ angular.module('brewKeeper')
           $('.recipe-view').removeClass("hidden");
           $('.edit-recipe').addClass("hidden");
         });
-        //Function for cloning recipes
+        
+        // Function for cloning recipes
         $scope.cloneRecipe = function(){
           if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
             return;
@@ -154,12 +155,21 @@ angular.module('brewKeeper')
               steps[step].duration = $scope.detail.steps[step].duration;
               steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-              $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step]).success(function(){
-                $location.path("/users/"+ username +"/recipes/"+ newRecipeId)
-              });//end step post
+              $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
             };//end loop to clone steps
-          });//end post new recipe
+          })
+          .then(function(){
+            $location.path("/users/"+ username +"/recipes/"+ newRecipeId);
+            $('.edit-recipe').removeClass("hidden");
+            $('.recipe-view').addClass("hidden");
+          })//end post new recipe
         }; //end recipe clone function
+        $scope.test = function(){
+          $('.edit-recipe').removeClass("hidden");
+          $('.recipe-view').addClass("hidden");
+        };
+
+
 
       }) //end recipDetail controller
 
