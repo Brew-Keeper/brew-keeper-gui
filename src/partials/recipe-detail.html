@@ -106,6 +106,16 @@
   <!--Brew notes -->
   <!-- <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a> -->
   <h2>Brew Notes</h2>
+  <button ng-click="addNote=true" class="add-brew-note">Add Brew Note</button>
+  <section ng-show="addNote" class="brew-form" >
+  <form ng-submit="addBrewNote()">
+        <!-- <label>Add Brew Note</label> -->
+        <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
+        <button class="save-note" type="submit">Save Note</button>
+  </form>
+        <button ng-click="addNote=false" class="cancel-note">Cancel Note</button>
+  </section> <!-- add brewnote section -->
+
   <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
     <div class="note-view{{note.id}}">
       <strong>{{note.body}}</strong>
@@ -122,7 +132,7 @@
             <button class="save-note" type="submit">Save Edit</button>
         </form><!--END edit-note form-->
       </article><!--END edit-note article-->
-  </div>
+  </div> <!-- .notes -->
 </section><!--.recipe-view-->
 
 
