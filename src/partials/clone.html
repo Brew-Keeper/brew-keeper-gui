@@ -1,1 +1,66 @@
-clone partial
+<h2>Clone partial</h2>
+
+<section class="edit-recipe">
+<form class="edit-recipe" ng-submit="editRecipe(detail)">
+  <section class="columns general">
+  <fieldset>
+    <input placeholder="Title *" maxlength="50"  ng-model="recipe.title" required></input>
+    <textarea placeholder="Comments"  ng-model="recipe.general_recipe_comment"></textarea>
+  </fieldset><!--General Details-->
+  </section>
+  <section class="columns">
+    <fieldset>
+      <legend><h4>Bean Details</h4></legend>
+      <input maxlength="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
+      <select list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast" id="roast">
+        <option value="{{recipe.roast}}" selected>{{recipe.roast}}</option>
+        <option value="Light">Light</option>
+        <option value="Medium">Medium</option>
+        <option value="Med-Dark">Med-Dark</option>
+        <option value="Dark">Dark</option>
+        <option value="Extra-Dark">Extra-Dark</option>
+      </select>
+      <input list="grind" maxlength="12" placeholder="Grind" ng-model="recipe.grind">
+        <datalist id="grind">
+          <option value="Fine">
+          <option value="Medium">
+          <option value="Coarse">
+        </datalist>
+      </input>
+      <input type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
+      <select id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
+        <option value="{{recipe.bean_units}}" selected>{{recipe.bean_units}}</option>
+        <option value="g">g</option>
+        <option value="oz">oz</option>
+        <option value="scoops">scoops</option>
+      </select>
+  </fieldset><!--Bean Details-->
+  </section>
+  <section class="columns">
+    <fieldset>
+      <legend><h4>Water Details</h4></legend>
+      <input list="water-type" maxlength="50" placeholder="Type" ng-model="recipe.water_type">
+        <datalist id="water-type">
+          <option value="Tap">
+          <option value="Distilled">
+          <option value="Spring">
+          <option value="Deionized">
+        </datalist>
+      <input type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
+        <select id="water-units"list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
+          <option value="{{recipe.water_units}}" selected>{{recipe.water_units}}</option>
+          <option value="oz">oz</option>
+          <option value="cc">cc</option>
+          <option value="mL">mL</option>
+        </select>
+      <input type="number" placeholder="Temp in &deg;F" ng-model="recipe.temp" max="32767"></input>
+      <select list="orientation" placeholder="Orientation" ng-model="recipe.orientation"  id="orientation">
+        <option value="{{recipe.orientation}}" selected>{{recipe.orientation}}</option>
+        <option value="Standard">Standard</option>
+        <option value="Inverted">Inverted</option>
+      </select>
+    </fieldset><!--Water Details-->
+  </section>
+  <button class="submit-recipe-edit" type="submit">Submit</button>
+</form><!--Edit Recipe Form-->
+</section>
