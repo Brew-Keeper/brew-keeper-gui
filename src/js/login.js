@@ -22,10 +22,7 @@ angular.module('brewKeeper')
 
 
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
-    $scope.users = {
-      username: '',
-      password: ''
-    }
+    $scope.users = {}
     $scope.submit= function(){
       $http.post('https://brew-keeper-api.herokuapp.com/api/login/', $scope.users)
       .then(function successCallback(response) {
