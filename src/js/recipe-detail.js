@@ -19,6 +19,13 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
+              if(response.data.steps.length == 0){
+                $(".brew-it-button").addClass("hidden");
+                $(".no-steps").removeClass("hidden");
+              }
+              else {
+                $(".brew-it-button").removeClass("hidden");
+              }
           }) //end http.get
 
 
@@ -50,6 +57,10 @@ angular.module('brewKeeper')
                 $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
                   .then(function(response){
                     $scope.steps = response.data.steps;
+                    if(response.data.steps.length == 0){
+                      $(".brew-it-button").addClass("hidden");
+                      $(".no-steps").removeClass("hidden");
+                    }
                   })
               })
             }
@@ -70,11 +81,13 @@ angular.module('brewKeeper')
           }
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-          $scope.submit=function(){
+          $scope.submit=function(){ //add step function
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
-                  $scope.steps = response.data.steps;
+                  $(".brew-it-button").removeClass("hidden");
+                  $(".no-steps").addClass("hidden");
+                  $rootScope.steps = response.data.steps;
                 })
             })
             $scope.step= { };
@@ -93,6 +106,11 @@ angular.module('brewKeeper')
           $('.edit-recipe').removeClass("hidden");
           $('.recipe-view').addClass("hidden");
         });
+
+        $(".no-steps").click(function(){
+          $scope.showAddSteps()
+        })
+
       $scope.editRecipe = function(recipe){
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
         .then( function () {
@@ -104,7 +122,8 @@ angular.module('brewKeeper')
           $('.recipe-view').removeClass("hidden");
           $('.edit-recipe').addClass("hidden");
         });
-        //Function for cloning recipes
+
+        // Function for cloning recipes
         $scope.cloneRecipe = function(){
           if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
             return;
@@ -136,12 +155,16 @@ angular.module('brewKeeper')
               steps[step].duration = $scope.detail.steps[step].duration;
               steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-              $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step]).success(function(){
-                $location.path("/users/"+ username +"/recipes/"+ newRecipeId)
-              });//end step post
+              $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
             };//end loop to clone steps
-          });//end post new recipe
+          })
+          .then(function(){
+            $location.path("/users/"+ username +"/clone/"+ newRecipeId);
+          })//end post new recipe
         }; //end recipe clone function
+
+
+
 
       }) //end recipDetail controller
 

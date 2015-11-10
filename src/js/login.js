@@ -7,7 +7,11 @@ angular.module('brewKeeper')
       // // email: '',
       // email: ''
     }
-    $scope.submit = function() {
+    $scope.submit = function(mismatch) {
+      if(mismatch){
+        alert("Passwords Do Not Match")
+        return
+      }
       $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
@@ -22,6 +26,8 @@ angular.module('brewKeeper')
       })//Response if bad signup attempt
     };
   })//END CONTROLLER FOR SIGNUP
+
+
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
     $scope.users = {
       username: '',

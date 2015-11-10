@@ -34,6 +34,16 @@ $brewit-background: $Acolor5;
       text-align: center;
       padding: 20px 0;
     }
+    .no-steps {
+      display: block;
+      box-sizing: border-box;
+      width: 90%;
+      margin: 0 5%;
+      background-color: $Acolor1;
+      font-size: 2em;
+      text-align: center;
+      padding: 20px 0;
+    }
     .trash-icon {
       width: 22px;
     }
@@ -136,4 +146,11 @@ nav.recipe-list-options {
   height: 22ex;
   padding: 0 5% 0;
   border-top: 1px solid black;
+}
+
+.ng-invalid.ng-dirty {
+  border-color: red;
+}
+.ng-valid.ng-dirty {
+  border-color: green;
 }
