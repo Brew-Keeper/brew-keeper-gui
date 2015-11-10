@@ -122,7 +122,7 @@ angular.module('brewKeeper')
           $('.recipe-view').removeClass("hidden");
           $('.edit-recipe').addClass("hidden");
         });
-        
+
         // Function for cloning recipes
         $scope.cloneRecipe = function(){
           if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
@@ -159,15 +159,10 @@ angular.module('brewKeeper')
             };//end loop to clone steps
           })
           .then(function(){
-            $location.path("/users/"+ username +"/recipes/"+ newRecipeId);
-            $('.edit-recipe').removeClass("hidden");
-            $('.recipe-view').addClass("hidden");
+            $location.path("/users/"+ username +"/clone/"+ newRecipeId);
           })//end post new recipe
         }; //end recipe clone function
-        $scope.test = function(){
-          $('.edit-recipe').removeClass("hidden");
-          $('.recipe-view').addClass("hidden");
-        };
+
 
 
 
