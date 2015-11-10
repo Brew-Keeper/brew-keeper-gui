@@ -39,7 +39,6 @@
     })
 
     .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope){
-      console.log("main controller fired " + $scope.username)
       var cookie = $cookies.get("Authorization")
       $http.defaults.headers.common = {"Authorization": cookie}
       $scope.$route = $route;
@@ -50,7 +49,6 @@
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           $rootScope.username = response.data.username;
-          console.log("main controller whoami" + $scope.username)
         })//This is for populating url with username
 
     $scope.logout= function(){
@@ -60,7 +58,6 @@
           $('.login').removeClass('hidden');//when logged out
           $('.logout').addClass('hidden');
           $rootScope.username = null;
-          console.log("log out controller " + $scope.username)
         })
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
@@ -74,20 +71,19 @@
           $rootScope.username = username
           //pseudo-code Show "logout" in nav
           //pseudo-code Show "Create New Recipe" in nav
-          $('.logout').removeClass('hidden')
+          // $('.logout').removeClass('hidden')
           //pseudo-code Hide "login/signup" in nav in index.html
           //pseudo-code Hide "form.login" in login.html
-          $('.login').addClass('hidden')
+          // $('.login').addClass('hidden')
           $location.path('/users/' + username)
         })//.success
         .catch(function(){
           $rootScope.username = null
-          console.log("whoami fail " + $scope.username)
           //pseudo-code Show "login/signup" in nav in index.html
           //pseudo-code Show "form.login" in login.html
-          $('.login').removeClass('hidden')
+          // $('.login').removeClass('hidden')
           //pseudo-code Hide "logout" in nav
-          $('.logout').addClass('hidden')
+          // $('.logout').addClass('hidden')
           $location.path('/login')
         })//.error
     })//END WhoAmIController

@@ -39,10 +39,8 @@ angular.module('brewKeeper')
         userInfo = "Token " + response.data.token
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
-        console.log("hide login/signup?")
         $scope.username = $scope.users.username
         $scope.users = {};
-        console.log("show logout, etc? " + $scope.username)
         //pseudo-code Hide "login/signup" in nav in index.html
         //pseudo-code Hide "form.login" in login.html
         // $('.login').addClass('hidden')
