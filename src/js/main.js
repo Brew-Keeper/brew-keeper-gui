@@ -38,50 +38,56 @@
         // })
     })
 
-    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies){
+    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope){
       var cookie = $cookies.get("Authorization")
       $http.defaults.headers.common = {"Authorization": cookie}
       $scope.$route = $route;
       $scope.$location = $location;
       $scope.$routeParams = $routeParams;
+      $rootScope.username = null;
+      $scope.changePassword= false;
 
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
-          $scope.username = response.data.username;
+          $rootScope.username = response.data.username;
         })//This is for populating url with username
 
     $scope.logout= function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
+      $scope.changePassword = false;
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
         .then(function(){
-          $('.login').removeClass('hidden');//when logged out
-          $('.logout').addClass('hidden');
+          // $('.login').removeClass('hidden');//when logged out
+          // $('.logout').addClass('hidden');
+          $rootScope.username = null;
         })
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
       }
+
+      //hamburer controller
+      $(".menu").on('click', function() {
+        $('.menu').toggleClass("active");
+      });
+      $(document).on('click', function(e) {
+        if(!$(e.target).is('.menu.active')) {
+        $('.menu').removeClass("active");
+        }
+        // $scope.changePassword = false;
+      });
+
     })//END MainController
 
-    .controller('WhoAmIController', function($location, $http, $scope) {
+    .controller('WhoAmIController', function($location, $http, $scope, $rootScope) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           var username = response.data.username;
-          $scope.username = username
-          //pseudo-code Show "logout" in nav
-          //pseudo-code Show "Create New Recipe" in nav
-          $('.logout').removeClass('hidden')
-          //pseudo-code Hide "login/signup" in nav in index.html
-          //pseudo-code Hide "form.login" in login.html
-          $('.login').addClass('hidden')
-          $location.path('/users/' + username)
+          $rootScope.username = username;
+          $location.path('/users/' + username);
         })//.success
         .catch(function(){
-          //pseudo-code Show "login/signup" in nav in index.html
-          //pseudo-code Show "form.login" in login.html
-          $('.login').removeClass('hidden')
-          //pseudo-code Hide "logout" in nav
-          $('.logout').addClass('hidden')
-          $location.path('/login')
+          $rootScope.username = null; //hides login and shows logout
+          $location.path('/login');
         })//.error
     })//END WhoAmIController
 
