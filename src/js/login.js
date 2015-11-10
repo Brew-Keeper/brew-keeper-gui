@@ -60,7 +60,7 @@ angular.module('brewKeeper')
           $location.path('/');
         },
         function errorCallback(){
-          alert("Password Incorrect, Please try again.");
+          alert("Current password incorrect, please try again.");
           $scope.users = {};
         })//end http.post to change-pw
     } //end submitChangePassword function
