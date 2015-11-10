@@ -10,6 +10,10 @@
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
         })
+        .when('/users/:username/clone/:id', {
+          templateUrl: 'partials/clone.html',
+          controller:  'cloneController'
+        })
         .when('/users/:username/recipes/:id', {
           templateUrl: 'partials/recipe-detail.html',
           controller: 'recipeDetail'
