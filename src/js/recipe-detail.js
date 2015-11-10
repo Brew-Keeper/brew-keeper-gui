@@ -35,7 +35,7 @@ angular.module('brewKeeper')
           }
 
 
-          $scope.Eliminate = function() {
+          $scope.EliminateRecipe = function() {
             if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
               $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/').then(function(){
                 $location.path('/users/'+ username);
@@ -161,6 +161,36 @@ angular.module('brewKeeper')
           });//end post new recipe
         }; //end recipe clone function
 
+
+        $scope.showEditNote = function(noteId) {
+          noteView = "div.note-view" + noteId.toString();
+          editNote = "article.edit-note" + noteId.toString();
+          $(noteView).addClass("hidden")
+          $(editNote).removeClass("hidden")
+        }
+          $scope.showEditStep = function(stepId){
+            stepId = "div." + stepId.toString();
+            $(stepId).removeClass("hidden")
+          }
+
+        $scope.editNote = function(note){
+          var note_id = note.id
+          $http.put("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + note_id + "/", note)
+          .then( function () {
+            $(editNote).addClass("hidden");
+            $(noteView).removeClass("hidden");
+          })
+        } //end editNote function
+
+        $scope.deleteNote = function(noteId) {
+          var noteId = noteId
+          if (window.confirm("Are you sure you want to delete this note?")){
+            $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + noteId + "/")
+            .then(function(){
+              $location.path('/users/' + username + "/recipes/"+ id + "/");
+            })
+          };
+        }; //end deleteNote function
       }) //end recipDetail controller
 
 

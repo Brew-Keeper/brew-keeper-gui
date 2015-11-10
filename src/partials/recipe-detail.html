@@ -5,7 +5,7 @@
   <p>{{detail.general_recipe_comment}}<p>
     <button ng-Click="cloneRecipe(detail)">Clone</button>
     <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
-    <img class="trash-icon" ng-click="Eliminate()" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+    <img class="trash-icon" ng-click="EliminateRecipe()" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
   <br>
   <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
   <a class="no-steps hidden" href="">Add Steps</a>
@@ -107,13 +107,25 @@
   <!-- <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a> -->
   <h2>Brew Notes</h2>
   <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
-    <strong>{{note.body}}</strong>
-    <br>
-    posted {{note.timestamp | date}}
-    <br>
-    <br>
+    <div class="note-view{{note.id}}">
+      <strong>{{note.body}}</strong>
+      <br>
+      posted {{note.timestamp | date}}
+      <br>
+      <br>
+      <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
+      <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+    </div>
+      <article class="edit-note{{note.id}} hidden">
+        <form class="edit-note" ng-submit="editNote(note)"><!--edit brew-note form-->
+            <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
+            <button class="save-note" type="submit">Save Edit</button>
+        </form><!--END edit-note form-->
+      </article><!--END edit-note article-->
   </div>
 </section><!--.recipe-view-->
+
+
 
 
 <section class="edit-recipe hidden">
@@ -128,8 +140,8 @@
     <fieldset>
       <legend><h4>Bean Details</h4></legend>
       <input maxlength="50" placeholder="Name"  ng-model="detail.bean_name"></input>
-      <select list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast" id="roast">
-        <option value="{{detail.roast}}" selected>{{detail.roast}}</option>
+      <select list="roast" maxlength="15" placeholder="Roast" ng-model="detail.roast" id="roast">
+        <option value="" disabled selected hidden>{{detail.roast}}</option>
         <option value="Light">Light</option>
         <option value="Medium">Medium</option>
         <option value="Med-Dark">Med-Dark</option>
@@ -144,8 +156,8 @@
         </datalist>
       </input>
       <input type="number" min="0" max="32767" ng-model="detail.total_bean_amount" placeholder="Amount"></input>
-      <select id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
-        <option value="{{detail.bean_units}}" selected>{{detail.bean_units}}</option>
+      <select id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="detail.bean_units">
+        <option value="{{detail.bean_units}}" disabled selected hidden>{{detail.bean_units}}</option>
         <option value="g">g</option>
         <option value="oz">oz</option>
         <option value="scoops">scoops</option>
@@ -163,15 +175,15 @@
           <option value="Deionized">
         </datalist>
       <input type="number" min="0" max="32767" placeholder="Amount" ng-model="detail.total_water_amount"></input>
-        <select id="water-units"list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
-          <option value="{{detail.water_units}}" selected>{{detail.water_units}}</option>
+        <select id="water-units"list="water-units" maxlength="12" ng-model="detail.water_units" placeholder="Units">
+          <option value="{{detail.water_units}}" disabled selected hidden>{{detail.water_units}}</option>
           <option value="oz">oz</option>
           <option value="cc">cc</option>
           <option value="mL">mL</option>
         </select>
       <input type="number" placeholder="Temp in &deg;F" ng-model="detail.temp" max="32767"></input>
-      <select list="orientation" placeholder="Orientation" ng-model="recipe.orientation"  id="orientation">
-        <option value="{{detail.orientation}}" selected>{{detail.orientation}}</option>
+      <select list="orientation" placeholder="Orientation" ng-model="detail.orientation"  id="orientation">
+        <option value="{{detail.orientation}}" disabled selected hidden>{{detail.orientation}}</option>
         <option value="Standard">Standard</option>
         <option value="Inverted">Inverted</option>
       </select>
