@@ -43,10 +43,16 @@ angular.module('brewKeeper')
   })//END CONTROLLER FOR LOGIN
 
   .controller('changePassword', function($scope){
-    console.log("changePassword controller fired");
-    $scope.submitChangePassword = function(){
-      console.log("submitChangePassword function called")
-      console.log($scope.username)
+    $scope.users = {}
+    $scope.users.username = $scope.username;
+
+    $scope.submitChangePassword = function(mismatch){
+      if(mismatch){
+        alert("Passwords Do Not Match")
+        return
+      }
+      $scope.users.username = $scope.username;
+      console.log($scope.users)
     }
   })//end changePassword controller
 
