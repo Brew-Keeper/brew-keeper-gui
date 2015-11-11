@@ -51,7 +51,7 @@
 }//recipe-detail (top portion)
 
 .trash-icon {
-  width: 22px;
+  // width: 22px;
 }
 
 //bean/water/time detail section of recipe detail view
@@ -194,4 +194,82 @@ div.clone-button {
   padding-bottom: 2%;
   background-color: lightgray;
   text-align: center;
-}
+} //end div.clone-button
+
+section.brew-notes {
+  // background-color: gray;
+  margin-top: 5%;
+  h3 {
+    color: lightgray;
+    // background-color: black;
+    margin: 0;
+    width: 85%;
+    float: left;
+  }
+  img.plus-icon {
+    // background-color: black;
+  }
+
+  div.notes {
+    margin-left: 5%;
+      background-color: gray;
+      margin-top: 0%;
+      // @extend .clearfix;
+      // content: "";
+      // display: table;
+      // clear: both;
+      // float: left;
+      // box-sizing: border-box;
+      // float: left;
+
+      .note-body {
+        // content: "";
+        // display: table;
+        // clear: both;
+        // float: left;
+        // box-sizing: border-box;
+        width: 100%;
+        // background-color: black;
+        float: left;
+        box-sizing: border-box;
+
+      }
+      .note-date {
+        // content: "";
+        // display: table;
+        // clear: both;
+        // float: left;
+        // box-sizing: border-box;
+        width: 75%;
+        margin-bottom: 3%;
+
+        // background-color: lightgray;
+        float: left;
+        box-sizing: border-box;
+        color: lightgray;
+
+
+      }
+      .note-icons {
+        width: 25%;
+        float: left;
+        // background-color: black;
+
+      }
+  } //div.notes
+
+}//end section.brew-notes
+
+
+
+
+
+
+
+
+
+
+
+
+
+////

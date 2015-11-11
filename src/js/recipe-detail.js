@@ -197,6 +197,10 @@ angular.module('brewKeeper')
           };
         }; //end deleteNote function
 
+        $scope.showAddBrewNote = function(){
+          $(".brew-form").toggleClass("hidden");
+        };
+
         $scope.addBrewNote=function(){
           $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
           .success(function (data) {
