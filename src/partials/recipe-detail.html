@@ -16,15 +16,26 @@
     <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
     <a class="no-steps hidden" href="">Add Steps</a>
   </div>
+
   <div class="details">
+    <div class="detail-icon">
+      <img src="img/LightCoffeeBean.svg">
+    </div>
     <section class="bean-details">
+      <!-- <img src="img/LightCoffeeBean.svg"> -->
       <span>{{detail.bean_name}}</span>
-      {{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}},
-      {{detail.grind}}
+      <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}},
+      {{detail.grind}}</span>
     </section> <!--end section.bean-details -->
+    <div class="detail-icon">
+      <img src="img/LightWater.svg">
+    </div>
     <section class="water-details">
        {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
     </section> <!-- end section.water-details-->
+    <div class="detail-icon">
+      <img src="img/LightTimer.svg">
+    </div>
     <section class="brew-time">
       {{detail.total_duration}} sec, {{detail.orientation}}
     </section> <!-- end section.brew-time -->

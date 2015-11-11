@@ -20,87 +20,6 @@ $brewit-button-color: $Acolor6;
   width: 30px;
 }
 
-.recipe-detail {
-  // @extend .clearfix;
-  box-sizing: border-box;
-  width: 90%;
-  margin: 0 5%;
-  & :after {
-    // @extend .clearfix;
-  }
-  h3.title {
-    margin: 5% 0 2%;
-    // background-color: gray;
-  }
-  .recipe-view {
-    & :after {
-      // @extend .clearfix;
-    }
-    // @extend .clearfix;
-
-    .col-1-3{
-      // @extend .clearfix;
-      float: left;
-      box-sizing: border-box;
-      // background-color: lightgray;
-      width: 33%;
-      & :after {
-        // @extend .clearfix;
-      }
-      &.brew-count {
-        // background-color: gray;
-        text-align: center;
-      }
-    }
-
-    img {
-         width: 17px;
-       }
-    a.brew-it-button {
-      // @extend .clearfix;
-      // display: block;
-      box-sizing: border-box;
-      float: left;
-      width: 100%;
-      margin-top: 2%;
-      margin-bottom: 4%;
-      background-color: $brewit-button-color;
-      font-size: 1.1em;
-      text-align: center;
-      // padding-top: 1%;
-      padding: 4px 0;
-      & :after {
-        // @extend .clearfix;
-      }
-    }
-    .no-steps {
-      display: block;
-      box-sizing: border-box;
-      width: 90%;
-      margin: 0 5%;
-      background-color: $Acolor1;
-      font-size: 2em;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .trash-icon {
-      width: 22px;
-    }
-  }
-
-  .step-list {
-    .edit-icon {
-      width: 25px;
-    }
-    .trash-icon {
-      width: 15px;
-    }
-  }
-}//recipe-detail
-
-
-
-
 body {
   font-family: 'Open Sans', 'sans-serif';
   background-color: $body-background;
@@ -128,6 +47,102 @@ textarea, input, select {
     text-decoration: none;
   }
 }
+
+.recipe-detail {
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 5%;
+
+  h3.title {
+    margin: 5% 0 2%;
+  }
+  .recipe-view {
+
+    .col-1-3{
+      float: left;
+      box-sizing: border-box;
+      width: 33%;
+      &.brew-count {
+        text-align: center;
+      }
+    }
+    img {
+         width: 17px;
+       }
+    a.brew-it-button {
+      box-sizing: border-box;
+      float: left;
+      width: 100%;
+      margin-top: 2%;
+      margin-bottom: 4%;
+      background-color: $brewit-button-color;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-align: center;
+      padding: 4px 0;
+    }
+    .no-steps {
+      display: block;
+      box-sizing: border-box;
+      width: 90%;
+      margin: 0 5%;
+      background-color: $Acolor1;
+      font-size: 2em;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .trash-icon {
+      width: 22px;
+    }
+  }
+
+  .step-list {
+    .edit-icon {
+      width: 25px;
+    }
+    .trash-icon {
+      width: 15px;
+    }
+  }
+}//recipe-detail (top portion)
+
+//bean/water/time detail section of recipe detail view
+.recipe-detail & div.details {
+  @extend .clearfix;
+  width: 100%;
+  padding-bottom: 5%;
+  border-bottom: solid 1px lightgray;
+  section {
+    width: 85%;
+    box-sizing: border-box;
+    float: left;
+    span {
+      display: block;
+    }
+    &.water-details {
+      padding-top: 2%;
+    }
+    &.brew-time{
+      padding-top: 2%;
+    }
+  }
+  div.detail-icon {
+    content: "";
+    display: table;
+    clear: both;
+    width: 15%;
+    float: left;
+    box-sizing: border-box;
+  }
+  img {
+    width: 40px;
+  }
+} //end recipe-detail & div.details
+
+
+
+
+
 
 div.current-step {
   padding: 0.5ex 0 0 1em ;
@@ -209,12 +224,12 @@ section.recipe-list {
   }
 
   .col-1-2 {
-    @extend .clearfix;
+    // @extend .clearfix;
     width: 45%;
     float: left;
 
     .col-1-4 {
-      @extend .clearfix;
+      // @extend .clearfix;
       width: 100%;
       float: left;
 
