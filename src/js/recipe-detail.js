@@ -214,6 +214,11 @@ angular.module('brewKeeper')
         $scope.addNote = false;
         }//Add Brew Note Form
 
+        $scope.showNoteIcons = function(noteId){
+          $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+        }
+
+
       }) //end recipDetail controller
 
 
