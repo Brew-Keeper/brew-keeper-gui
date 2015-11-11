@@ -10,7 +10,7 @@
   </div>
   <!-- end star rating -->
   <div class="col-1-3 brew-count">
-    <img src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
+    <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
   </div>
   <div class="brew-it-button">
     <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
@@ -53,22 +53,26 @@
     <!-- <button ng-Click="cloneRecipe(detail)">Clone</button> -->
   <!-- <button>Make Public</button> -->
 
-
-
-  <!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
-
-  <br>
   <!-- steps section -->
   <section class="step-list">
-    <h2>Steps</h2>
     <div ng-repeat="step in steps">
-      <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}</strong> </a><p>{{step.duration}} seconds</p>
+      <!-- <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong></strong></a> -->
+    {{step.step_number}}
+    {{step.step_title}}
+    {{step.step_body}}
+    <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}</span>
+    {{step.duration}} sec
+    <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/>
+    <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/delete-25.svg"/>
+
     <article class="step {{step.id}} hidden">
-      <p>{{step.step_body}}<p>
       <p ng-show="step.water_amount">Water: {{step.water_amount}} {{detail.water_units}}</p>
     <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
     <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
     </article>
+
+
+
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
       <form ng-submit="editStep(step)">

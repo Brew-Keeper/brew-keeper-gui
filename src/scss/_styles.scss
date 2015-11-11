@@ -47,7 +47,7 @@ textarea, input, select {
     text-decoration: none;
   }
 }
-
+//recipe detail page
 .recipe-detail {
   box-sizing: border-box;
   width: 90%;
@@ -66,9 +66,9 @@ textarea, input, select {
         text-align: center;
       }
     }
-    img {
-         width: 17px;
-       }
+    img.cup {
+      width: 17px;
+      }
     a.brew-it-button {
       box-sizing: border-box;
       float: left;
@@ -91,26 +91,21 @@ textarea, input, select {
       text-align: center;
       padding: 20px 0;
     }
-    .trash-icon {
-      width: 22px;
-    }
+
   }
 
-  .step-list {
-    .edit-icon {
-      width: 25px;
-    }
-    .trash-icon {
-      width: 15px;
-    }
-  }
 }//recipe-detail (top portion)
+
+.trash-icon {
+  width: 22px;
+}
 
 //bean/water/time detail section of recipe detail view
 .recipe-detail & div.details {
   @extend .clearfix;
   width: 100%;
-  padding-bottom: 5%;
+  padding-bottom: 2%;
+  margin-bottom: 5%;
   border-bottom: solid 1px lightgray;
   section {
     width: 85%;
@@ -143,17 +138,17 @@ textarea, input, select {
 
   section.icons {
     width: 25%;
-    img.edit-icon{
-      width: 35px;
-    }
-    img.trash-icon {
-      width: 30px;
-    }
   }
 
 } //end recipe-detail & div.details
 
-
+img.edit-icon{
+  // background-color: black;
+  width: 35px;
+}
+img.trash-icon {
+  width: 30px;
+}
 
 
 
