@@ -4,13 +4,18 @@
   margin: 4ex 5%;
   article {
     margin-bottom: -1ex;
-
   }
   h3 {
     color: lighten(black, 25%);
     line-height: 0;
     margin-top: 4ex;
     margin-bottom: 1.5ex;
+  }
+  .links {
+    a[href] {
+      text-decoration: underline;
+      display: block;
+    }
   }
   p {
     font-weight: 400;
