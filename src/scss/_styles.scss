@@ -119,11 +119,14 @@ textarea, input, select {
     span {
       display: block;
     }
+    &.bean-details {
+      // padding-top: -2%;
+    }
     &.water-details {
-      padding-top: 2%;
+      padding-top: 1%;
     }
     &.brew-time{
-      padding-top: 2%;
+      padding-top: 1%;
     }
   }
   div.detail-icon {
@@ -136,6 +139,20 @@ textarea, input, select {
   }
   img {
     width: 40px;
+  }
+  section.brew-time {
+    // background-color: gray;
+    width: 60%;
+  }
+  section.icons {
+    // background-color: black;
+    width: 25%;
+  }
+  img.edit-icon{
+    width: 35px;
+  }
+  img.trash-icon {
+    width: 30px;
   }
 } //end recipe-detail & div.details
 
