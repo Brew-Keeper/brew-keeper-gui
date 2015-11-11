@@ -145,11 +145,9 @@ button {
 //     margin: 3ex 35.5% 1ex 36.5%;
 //   }
 // }//nav.recipe-list-options
+
 nav.recipe-list {
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 5%;
 
   select {
     float: right;
@@ -158,69 +156,58 @@ nav.recipe-list {
 
 section.recipe-list {
   @extend .clearfix;
-  // background-color: lightgray;
   box-sizing: border-box;
   width: 100%;
-  // border: 1px solid;
-  display: block;
-  // height: 22ex;
-  // padding: 0 5% 0;
-  // padding-left: 5%;
-  // padding-right: 5%;
-  // border-top: 1px solid black;
-  margin-bottom: 10%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 10% 5%;
+
   & :after {
     @extend .clearfix;
   }
+
   a {
     font-weight: bold;
-    display: block;
   }
+
   .col-1-2 {
     @extend .clearfix;
     width: 45%;
-    // background-color: gray;
     float: left;
+
     .col-1-4 {
       @extend .clearfix;
       width: 100%;
       float: left;
+
       span {
         float: left;
       }
+
       span.count {
         margin-left: 10%;
-        // background-color: lightgray;
+
         img {
              width: 15px;
            }
+      } //end span.count
+    } //end col-1-4
 
-      }
+    a {
+      margin-left: 5%;
+      width: 90%;
+      background-color: #45A852;
+      float: left;
+      text-align: center;
+      padding-top: 5%;
+      padding-bottom: 5%;
     }
-
-  a {
-
-    // @extend .clearfix;
-    margin-left: 5%;
-    width: 90%;
-    // height: 46px;
-    background-color: #7ec78a;
-    float: left;
-    text-align: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
-
-  }
-  }
-}
+  } // end col-1-2
+} //end section.recipe-list
 
 //end recipe list styles
-
-.ng-invalid.ng-dirty {
-  border-color: red;
-}
-.ng-valid.ng-dirty {
-  border-color: green;
-}
+//
+// .ng-invalid.ng-dirty {
+//   border-color: red;
+// }
+// .ng-valid.ng-dirty {
+//   border-color: green;
+// }
