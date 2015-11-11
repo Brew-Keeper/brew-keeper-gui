@@ -119,16 +119,16 @@ textarea, input, select {
     span {
       display: block;
     }
-    &.bean-details {
-      // padding-top: -2%;
-    }
     &.water-details {
       padding-top: 1%;
     }
     &.brew-time{
-      padding-top: 1%;
     }
-  }
+    &.brew-time {
+      padding-top: 1%;
+      width: 60%;
+    }
+  } //detail sections
   div.detail-icon {
     content: "";
     display: table;
@@ -136,24 +136,21 @@ textarea, input, select {
     width: 15%;
     float: left;
     box-sizing: border-box;
+    img {
+      width: 40px;
+    }
   }
-  img {
-    width: 40px;
-  }
-  section.brew-time {
-    // background-color: gray;
-    width: 60%;
-  }
+
   section.icons {
-    // background-color: black;
     width: 25%;
+    img.edit-icon{
+      width: 35px;
+    }
+    img.trash-icon {
+      width: 30px;
+    }
   }
-  img.edit-icon{
-    width: 35px;
-  }
-  img.trash-icon {
-    width: 30px;
-  }
+
 } //end recipe-detail & div.details
 
 
