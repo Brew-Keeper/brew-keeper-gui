@@ -1,49 +1,92 @@
-form {
-.columns {
-  display: block;
-  width: 50%;
-  float: left;
-  label, input, select, textarea, legend {
+$brewitCurrent: #7ec78a;//bright green
+$brewitCurrentText: #000;//black???
+$brewitCurrentStep: #4d4d4f;//Thunder
+$brewitCurrentOf: #545c56;//Feldgrau
+$brewitInactive: #ebeced;//lightgray
+$brewitInactiveText:#99999d;//inactive text
+$brewitInactiveStep: #abacaf;//Silver Chalice
+$brewitInactiveOf: #b1b2b4;//Magnesium
+
+.clicker-button{
+  font-size: 0.8em;
+  color:darken($brewitInactive, 54%);
+  padding: 0.15ex 2.5em;
+  border: 2.3px solid darken($brewitInactive, 29%);
+  background-color: darken($brewitInactive, 10%);
+  &.login {
+    background-color: $brewitCurrent;
+    margin-left: 5%;
+  }
+  &.register {
     display: block;
+    margin: 0 5% 5ex 2.5%;
+    float: left;
+    font-size: 0.8em;
+    text-decoration: none;
+    color:darken($brewitInactive, 54%);
+    padding: 0.15ex 1.5em;
+    border: 2.3px solid darken($brewitInactive, 29%);
+    background-color: $brewitCurrent;
+    }
+}
+
+form.login {
     width: 90%;
-    margin: 1ex 5%;
+    margin: 0 5%;
+  .show-signup {
+    float: right;
+    margin-right: 5%;
+    font-size: 0.8em;
+    color:darken($brewitInactive, 54%);
+    padding: 0.15ex 1.5em;
+    border: 2.3px solid darken($brewitInactive, 29%);
+    background-color: darken($brewitInactive, 10%);
   }
-  input, textarea, button {
-    margin-bottom: 2ex;
-  }
-  &.general {
-  width: 100%;
-  margin: 0;
+}
+
+
+form {
+  .columns {
+    display: block;
+    width: 50%;
+    float: left;
     label, input, select, textarea, legend {
       display: block;
-      width: 95%;
-      margin: 1ex 2.5%;
+      width: 90%;
+      margin: 1ex 5%;
     }
     input, textarea, button {
       margin-bottom: 2ex;
     }
-  }//&.general
-  &.steps {
+    &.general {
     width: 100%;
-    label {
-      display: inline-block;
-      width: 100% * (3/10);
+    margin: 0;
+      label, input, select, textarea, legend {
+        display: block;
+        width: 95%;
+        margin: 1ex 2.5%;
+      }
+      input, textarea, button {
+        margin-bottom: 2ex;
+      }
+    }//&.general
+    &.steps {
+      width: 100%;
+      label {
+        display: inline-block;
+        width: 100% * (3/10);
+      }
+      input {
+        display: inline-block;
+        width: 5ex;
+        margin-right: 100% * (4/10);
+      }
     }
-    input {
-      display: inline-block;
-      width: 5ex;
-      margin-right: 100% * (4/10);
-    }
-  }
-}//.columns
-  button {
-    width: 40%;
-    margin: 1ex 30%;
-  }//WATCH OUT!  ALL BUTTONS ARE TARGETED!
+  }//.columns
   .gray-placeholder {
     color: darken(lightgray, 13%);
   &:focus {
     color: black;
     }
   }
-}
+}//form
