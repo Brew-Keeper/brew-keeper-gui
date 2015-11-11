@@ -145,14 +145,14 @@
       </form>
     </section> <!-- add brewnote section -->
     <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
-      <div class="note-view{{note.id}}">
+      <div class="note-view{{note.id}}" ng-click="showNoteIcons(note.id)">
         <div class="note-body">{{note.body}}</div>
         <div class="note-date">-{{note.timestamp | date}}</div>
-        <div class="note-icons hidden">
+        <div class="note-icons {{note.id}} hidden">
           <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
           <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
         </div>
-      </div><!-- end div.note-view -->
+      </div>
         <article class="edit-note{{note.id}} hidden">
           <form class="edit-note" ng-submit="editNote(note)"><!--edit brew-note form-->
               <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
