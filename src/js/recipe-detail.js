@@ -96,13 +96,12 @@ angular.module('brewKeeper')
           } //end new step submit function
 
         $scope.showAddSteps = function(){
-          $("form.create-new-step").removeClass("hidden");
-          $("button.done-adding").removeClass("hidden");
+          $("form.create-new-step").toggleClass("hidden");
         };//Reveal "Add Step" when new recipe form is submitted.
-        $scope.hideAddSteps = function(){
-          $("form.create-new-step").addClass("hidden");
-          $("button.done-adding").addClass("hidden");
-        }; //hides the add step form
+        // $scope.hideAddSteps = function(){
+        //   $("form.create-new-step").addClass("hidden");
+        //   $("button.done-adding").addClass("hidden");
+        // }; //hides the add step form
 
         $('.edit-button').on('click', function(){
           $('.edit-recipe').removeClass("hidden");
