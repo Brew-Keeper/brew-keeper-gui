@@ -14,19 +14,19 @@
   <a href="" class="cancel-note">Cancel Note</a>
   </section><!--END brew-form-->
 
-  <div class="delay step current-step">
-  <p class="delay countdown">COUNTDOWN</p>
-    <p class="delay counting"><timer class="delay counting" interval="1000" countdown="5" finish-callback="startBrew(detail.brew_count)">{{countdown}}</timer></p>
+  <div class="step delay">
+  <p class="countdown">COUNTDOWN</p>
+    <p class="counting"><timer class="counting" interval="1000" countdown="5" finish-callback="startBrew(detail.brew_count)">{{countdown}}</timer></p>
   </div><!-- END countdown timer-->
 
-  <div ng-repeat="step in steps | orderBy: 'step_number'" class="step {{step.step_number}} inactive-step">
-    <p class="stepOf minimize-after"><span>{{stepArray.indexOf(step.step_number)+1}}</span> of {{stepTotal}}</p>
-    <div class="minimize-after step-box">
+  <div ng-repeat="step in steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}} animated">
+    <p class="stepOf"><span>{{stepArray.indexOf(step.step_number)+1}}</span> of {{stepTotal}}</p>
+    <div class="step-box">
       <p class="step-name">{{step.step_title | uppercase}}</p>
       <!-- duration - {{step.duration}} sec -->
-      <p class="minimize-after {{step.step_number}} water" ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}</p>
-      <timer class="{{step.step_number}} counting hidden" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number, detail.brew_count)"><p>{{countdown}}</p></timer>
+      <p class="water {{step.step_number}}" ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}</p>
+      <timer class="counting {{step.step_number}} hidden" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number, detail.brew_count)"><p>{{countdown}}</p></timer>
     </div>
-    <p class="minimize-after step-body">{{step.step_body}}</p>
+    <p class="step-body">{{step.step_body}}</p>
   </div><!--END Steps-->
 </section><!--END brewit-page-->

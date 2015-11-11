@@ -46,11 +46,10 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
-
-          $("."+$scope.stepArray[0]).addClass("current-step").removeClass("inactive-step");
-          $("div.delay").addClass("inactive-step").animate({height: 0}, 1000, function(){
-            $("div.delay").addClass("hidden")
-          });
+          $("."+$scope.stepArray[0]).removeClass("inactive-step").addClass("current-step");
+          // $("div.delay").animate({height: 0}, 1000, function(){
+            $("div.delay").addClass("hidden").addClass("inactive-step")
+          // });
           $(".delay timer").addClass("hidden");
           $("timer."+$scope.stepArray[0]).removeClass("hidden");//Show's timer for active step
           $('timer')[1].start();
@@ -76,19 +75,14 @@ angular.module('brewKeeper')
         // }; //This can be used to pause process if needed.
 
         $scope.resetBrew = function(){
-          // $("timer.delay").addClass("hidden");
-          console.log("Restart")
-          $("div.hidden").removeClass("hidden");
+          $(".delay.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
-          $("div.delay").animate({height: 150}).removeClass("inactive-step").addClass("current-step")
-          $("timer").addClass("hidden");
-          $("timer.delay").removeClass("hidden");
-          $(".minimize-after").removeClass("hidden");
+          $("timer").removeClass("hidden");
+          $("timer.counter").addClass("hidden");
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
           $("a[href].add-brew-note").removeClass("hidden");
           $("a[href].reset-brew").addClass("hidden");
-          $(".inactive-step").removeClass("inactive-step");
 
           timerRunning = false;
 
@@ -123,24 +117,11 @@ angular.module('brewKeeper')
             $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe);
             return
           }
-
-//hide all info except step name and of 5
-          $("timer."+stepNumber).addClass("hidden");
-          $(".minimize-after."+stepNumber).addClass("hidden");
-
+          $("timer."+stepNumber).addClass("hidden");// Hide last step
+          $("."+stepNumber).slideUp(1000).addClass("finished");// Hide last step
 //Change next step to green  and grow next step to 200
           $("timer."+nextStep).removeClass("hidden");
-
-        $("div.step."+ stepNumber).prev().animate({height:0}, 1000).addClass("finished-step").removeClass("current-step");
-        $("."+ nextStep).animate({height:200}, 1000, function(){
-          $("."+ nextStep).addClass("current-step").removeClass("inactive-step");
-          $(".minimize-after."+stepNumber).addClass("hidden")
-        });
-
-        $("."+ stepNumber).animate({height:0}, 1000, function(){
-          $("."+ stepNumber).removeClass("active-step").addClass("finished-step");
-          $(".minimize-after."+stepNumber).addClass("hidden")
-        });
+          $("."+nextStep).addClass("current-step").removeClass("inactive-step");
 
           $('timer')[nextTimerId].start();
         }; //end nextStep function
