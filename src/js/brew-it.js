@@ -46,11 +46,21 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
-          // $("timer.delay").addClass("hidden");
-          $("."+$scope.stepArray[0]).addClass("current-step").siblings("div").addClass("inactive");
-          // $(".").addClass("inactive");
-          $("timer."+$scope.stepArray[0]).removeClass("hidden");
-          // $('timer')[0].start();
+          //Shrink countdown time 50%
+          // Fade countdown timer to gray
+
+          //Fadde step 1 to green
+          //Grow step 1 200%
+ // $(this).prev().animate({height:0, opacity:0.5}, 1000);
+ // $(this).next().addClass('ondeck').animate({height:200, opacity:1}, 1000);
+ // $(this).addClass('active').animate({height:100, opacity:0.5}, 1000)
+
+          $("."+$scope.stepArray[0]).addClass("current-step").removeClass("inactive-step");
+          $("div.delay").addClass("inactive-step").animate({height: 0}, 1000, function(){
+            $("div.delay").addClass("hidden")
+          });
+          $(".delay timer").addClass("hidden");
+          $("timer."+$scope.stepArray[0]).removeClass("hidden");//Show's timer for active step
           $('timer')[1].start();
           timerRunning = true;
         };
@@ -61,10 +71,10 @@ angular.module('brewKeeper')
             return;
           }
           $("timer.delay").removeClass("hidden");
-          $(".step").addClass("inactive")
-          $("button.restart-brew").addClass("hidden");
-          $("button.add-brew-note").addClass("hidden");
-          $("button.reset-brew").removeClass("hidden");
+          $(".step").addClass("inactive-step")
+          $("a[href].restart-brew").addClass("hidden");
+          $("a[href].add-brew-note").addClass("hidden");
+          $("a[href].reset-brew").removeClass("hidden");
           $('timer')[0].start();
         }
 
@@ -78,10 +88,10 @@ angular.module('brewKeeper')
           $("div.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
           $scope.$broadcast('timer-reset');
-          $("button.restart-brew").removeClass("hidden");
-          $("button.add-brew-note").removeClass("hidden");
-          $("button.reset-brew").addClass("hidden");
-          $(".inactive").removeClass("inactive");
+          $("a[href].restart-brew").removeClass("hidden");
+          $("a[href].add-brew-note").removeClass("hidden");
+          $("a[href].reset-brew").addClass("hidden");
+          $(".inactive-step").removeClass("inactive-step");
 
           timerRunning = false;
 
@@ -116,12 +126,25 @@ angular.module('brewKeeper')
             $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe);
             return
           }
-          $("."+ stepNumber).removeClass("current-step").addClass("inactive");
-          $("div.delay").addClass("hidden");
-          $("."+ prevStep).addClass("hidden");
-          $("."+ stepNumber).addClass("inactive");
+
+//hide all info except step name and of 5
+          $("timer."+stepNumber).addClass("hidden");
+          $(".minimize-after."+stepNumber).addClass("hidden");
+
+//Change next step to green  and grow next step to 200
           $("timer."+nextStep).removeClass("hidden");
-          $("."+ nextStep).addClass("current-step").removeClass("inactive");
+
+        $("div.step."+ stepNumber).prev().animate({height:0}, 1000).addClass("finished-step").removeClass("current-step");
+        $("."+ nextStep).animate({height:200}, 1000, function(){
+          $("."+ nextStep).addClass("current-step").removeClass("inactive-step");
+          $(".minimize-after."+stepNumber).addClass("hidden")
+        });
+
+        $("."+ stepNumber).animate({height:0}, 1000, function(){
+          $("."+ stepNumber).removeClass("active-step").addClass("finished-step");
+          $(".minimize-after."+stepNumber).addClass("hidden")
+        });
+
           $('timer')[nextTimerId].start();
         }; //end nextStep function
 

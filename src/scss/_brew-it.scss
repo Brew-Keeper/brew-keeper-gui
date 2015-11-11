@@ -1,3 +1,123 @@
-.inactive { //shade out inactive steps
-  color: lightgray;
+
+$brewitCurrent: #7ec78a;//bright green
+$brewitCurrentText: #000;//black???
+$brewitCurrentStep: #4d4d4f;//Thunder
+$brewitCurrentOf: #545c56;//Feldgrau
+$brewitInactive: #ebeced;//lightgray
+$brewitInactiveText:#99999d;//inactive text
+$brewitInactiveStep: #abacaf;//Silver Chalice
+$brewitInactiveOf: #b1b2b4;//Magnesium
+
+.brewit-page{
+  box-sizing: border-box;
+  width:100%;//width: 100% * (2/3); desktop
+  margin: 0 auto;//margin: 0 100% * (1/6); desktop
+  div.step {
+    display: block;
+    // margin-bottom: 1px;
+    padding: 0 1em;
+    .step-box {
+      width:50%;
+      margin-left: 25%;
+    }
+  }//div.step
+
+  div.current-step {
+    background-color:$brewitCurrent;
+    color: $brewitCurrentText;
+    // position: relative;
+    height: 200px;
+    .counting {
+      color:$brewitCurrentText;
+      font-size: 3em;
+      line-height: 0;
+      text-align: center;
+    }
+    p.step-name {
+      // position:absolute;
+      margin-top: -3ex;
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+    }
+    p.water {
+      // position: absolute;
+      top: 3.5ex;
+      width: 100%;
+      line-height: 0;
+      text-align: center;
+      font-weight: 600;
+    }
+    timer.counting > p {
+      // position:absolute;
+      top: 2ex;
+      width: 100%;
+      text-align: center;
+    }
+    p.step-body {
+      color:$brewitCurrentText;
+      // position: absolute;
+      width: 100%;
+      bottom: 1em;
+      text-align: center;
+    }
+    p.stepOf {
+      color:$brewitCurrentOf;
+      text-align: right;
+      padding-top: 1ex;
+      padding-bottom: -1ex;
+      span {
+        color: darken($brewitCurrentOf, 20%);
+      }
+    }
+  }//.current-step
+
+  .inactive-step { //shade out inactive steps
+    background-color: $brewitInactive;
+    color: $brewitInactiveText;
+    position: relative;
+    height:100px;
+    p.stepOf {
+      color: $brewitInactiveOf;
+      position: absolute;
+    }
+  }//.inactive-step
+
+  .delay.step.current-step {
+    display: block;
+    height:150px;
+    padding-top: 1ex;
+    text-align: center;
+    .countdown {
+    text-align: center;
+    }
+    .counting {
+      width: 100%;
+      font-size: 2em;
+    }
+  }//countdown active
+  .delay.step.inactive-step {
+    background-color: $brewitInactive;
+    .countdown {
+    text-align: center;
+    }
+    .counting {
+      width: 0;
+      font-size: 0;
+    }
+  }//countdown active
+
+div.step.finished-step {
+    background-color: $brewitInactive;
+    color: $brewitInactiveText;
+    position: relative;
+  p.stepOf {
+    color: $brewitInactiveOf;
+    position: absolute;
+  }
+  .minimize-after {
+    display: none;
+  }
 }
+
+}//END .brewit-page
