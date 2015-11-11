@@ -24,6 +24,8 @@ angular.module('brewKeeper')
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
     $scope.users = {}
     $scope.loginButton= function(){
+      $cookies.remove("Authorization")
+      $http.defaults.headers.common = {}
       $http.post('https://brew-keeper-api.herokuapp.com/api/login/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
