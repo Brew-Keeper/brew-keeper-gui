@@ -1,24 +1,25 @@
-<form ng-hide="changePassword" class="login" ng-controller="loginCtrl" ng-submit="submit()">
+
+<form ng-hide="changePassword" class="login" ng-controller="loginCtrl">
   <div class="columns general">
     <label class="login" for="login">Login</label>
     <input class="login-user" type="text" name="username" placeholder="username" ng-model="users.username" required>
     <input class="login-password" type="password" name="password" placeholder="password" ng-model="users.password" required>
-    <button class="login" type="submit" name="login">Login</button>
+    <a href="" class="login clicker-button" ng-click="loginButton()" name="login">Login</a>
+    <a href="" class="show-signup">Register</a>
   </div>
-  <a href="" class="show-signup">Signup Here</a>
 </form><!--end form login-->
 
-<section class="more-info register hidden">
+<section class="more-info register hidden columns general">
   <h3>Signup</h3>
 
-  <form name="registration columns general" class="register hidden" ng-controller="signupController" ng-submit="submit(registration.confirmPassword.$error.match)">
+  <form name="registration" class="register hidden" ng-controller="signupController" ng-submit="submit(registration.confirmPassword.$error.match)">
     <div class="columns general">
       <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
       <input class="register-email" type="email" name="email" placeholder=" email" ng-model="users.email" required>
       <input class="register-password" type="password" name="password" placeholder=" password" ng-model="users.password" required minlength="4">
       <input class="register-password" type="password" name="confirmPassword" placeholder=" confirm password" required ng-model="users.confirmPassword" data-match="users.password">
     </div>
-    <button class="register" type="submit" name="register">SignUp</button>
+    <a href="" class="register clicker-button" ng-click="signupButton()" name="register">SignUp</a>
   </form><!--end form register-->
 
   <article>

@@ -10,24 +10,30 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
 .clicker-button{
   font-size: 0.8em;
   color:darken($brewitInactive, 54%);
-  padding: .15ex 2.5em;
+  padding: 0.15ex 2.5em;
   border: 2.3px solid darken($brewitInactive, 29%);
   background-color: darken($brewitInactive, 10%);
+  &.login {
+    background-color: $brewitCurrent;
+    margin-left: 5%;
+  }
+
 }
 
 form.login {
     width: 90%;
     margin: 0 5%;
-  label.login {
-
-  }
-  a.login {
-    margin-left: 5%;
+  .show-signup {
+    float: right;
+    margin-right: 5%;
+    font-size: 0.8em;
+    color:darken($brewitInactive, 54%);
+    padding: 0.15ex 1.5em;
+    border: 2.3px solid darken($brewitInactive, 29%);
+    background-color: darken($brewitInactive, 10%);
   }
 }
-  a.show-signup {
-    margin-left: 10%;
-  }
+
 
 form {
   .columns {

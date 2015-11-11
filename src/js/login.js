@@ -2,7 +2,7 @@
 angular.module('brewKeeper')
   .controller('signupController', function($scope, $http, $cookies, $location){
     $scope.users = {}
-    $scope.submit = function(mismatch) {
+    $scope.signupButton = function(mismatch) {
       if(mismatch){
         alert("Passwords Do Not Match")
         return
@@ -23,7 +23,7 @@ angular.module('brewKeeper')
 
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
     $scope.users = {}
-    $scope.submit= function(){
+    $scope.loginButton= function(){
       $http.post('https://brew-keeper-api.herokuapp.com/api/login/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
