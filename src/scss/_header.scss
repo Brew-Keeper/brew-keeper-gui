@@ -8,10 +8,10 @@
     &.hamburger::before {
       content: '\2261';
       color: $heading-color;
-      font-size: 4em;
+      font-size: 3em;
       position: absolute;
       right: 5%;
-      top: -3%;
+      top: -2%;
       height: 50px;
     }
     ul.menu {
