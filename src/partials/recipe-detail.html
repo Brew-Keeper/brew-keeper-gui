@@ -16,6 +16,19 @@
     <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
     <a class="no-steps hidden" href="">Add Steps</a>
   </div>
+  <div class="details">
+    <section class="bean-details">
+      <span>{{detail.bean_name}}</span>
+      {{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}},
+      {{detail.grind}}
+    </section> <!--end section.bean-details -->
+    <section class="water-details">
+       {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
+    </section> <!-- end section.water-details-->
+    <section class="brew-time">
+      {{detail.total_duration}} sec, {{detail.orientation}}
+    </section> <!-- end section.brew-time -->
+  </div><!--end div.details -->
 <br>
 <br>
 
@@ -28,21 +41,8 @@
 
 
 
-
-  <p ng-show="detail.orientation"><img class="arrows-icon" src="img/noun_arrows.svg"/><!--Created by Creative Stall from the Noun Project-->
-  {{detail.orientation}}
-  <p ng-show="detail.bean_name"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-  {{detail.bean_name}}
-  <p ng-show="detail.roast"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-  {{detail.roast}} Roast
-  <p ng-show="detail.grind"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->{{detail.grind}} Grind
-  <p ng-show="detail.total_bean_amount"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-  {{detail.total_bean_amount}} {{detail.bean_units}}
-  <p ng-show="detail.total_water_amount"><img class="water-icon" src="img/noun_water.svg"/><!--Created by Arthur Shlain from the Noun Project-->
-   {{detail.total_water_amount}} {{detail.water_units}} {{detail.water_type}}
-  <p ng-show="detail.temp"><img class="water-temp-icon" src="img/noun_water-temp.svg"/><!--Created by Juan Leon from the Noun Project-->{{detail.temp}} &deg;F<p>
   <!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
-  <p><img class="stopwatch-icon" src="img/noun_stopwatch.svg"/><!--timer by Alex C. from the Noun Project--> {{detail.total_duration}} seconds total
+
   <br>
   <!-- steps section -->
   <section class="step-list">
