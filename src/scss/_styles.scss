@@ -3,6 +3,7 @@ $Acolor1: #dfdfdf;//lightgray
 $Acolor5: #000;//black
 $Acolor2: #454545;//grey
 $Acolor4: #ffffff;//white
+$Acolor6: #45A852;
 
 $heading-background: $Acolor4;
 $body-background: $Acolor4;
@@ -13,26 +14,64 @@ $body-color: $Acolor5;
 $button-color: $Acolor4;
 $brewit-color: $Acolor1;
 $brewit-background: $Acolor5;
+$brewit-button-color: $Acolor6;
 
 [class*='-icon'] {
   width: 30px;
 }
 
 .recipe-detail {
+  // @extend .clearfix;
   box-sizing: border-box;
-  width: 80%;
-  margin: 0 10%;
-
+  width: 90%;
+  margin: 0 5%;
+  & :after {
+    // @extend .clearfix;
+  }
+  h3.title {
+    margin: 5% 0 2%;
+    // background-color: gray;
+  }
   .recipe-view {
-    .brew-it-button {
-      display: block;
+    & :after {
+      // @extend .clearfix;
+    }
+    // @extend .clearfix;
+
+    .col-1-3{
+      // @extend .clearfix;
+      float: left;
       box-sizing: border-box;
-      width: 90%;
-      margin: 0 5%;
-      background-color: $Acolor1;
-      font-size: 2em;
+      // background-color: lightgray;
+      width: 33%;
+      & :after {
+        // @extend .clearfix;
+      }
+      &.brew-count {
+        // background-color: gray;
+        text-align: center;
+      }
+    }
+
+    img {
+         width: 17px;
+       }
+    a.brew-it-button {
+      // @extend .clearfix;
+      // display: block;
+      box-sizing: border-box;
+      float: left;
+      width: 100%;
+      margin-top: 2%;
+      margin-bottom: 4%;
+      background-color: $brewit-button-color;
+      font-size: 1.1em;
       text-align: center;
-      padding: 20px 0;
+      // padding-top: 1%;
+      padding: 4px 0;
+      & :after {
+        // @extend .clearfix;
+      }
     }
     .no-steps {
       display: block;
@@ -84,6 +123,7 @@ textarea, input, select {
   background-color: $heading-background;
   padding: 1ex 5%;
   border-bottom: 1px solid $border-color;
+
   h1 > a[href]{
     text-decoration: none;
   }
@@ -194,7 +234,7 @@ section.recipe-list {
     a {
       margin-left: 5%;
       width: 90%;
-      background-color: #45A852;
+      background-color: $brewit-button-color;
       float: left;
       text-align: center;
       padding-top: 5%;
