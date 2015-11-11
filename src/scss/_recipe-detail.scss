@@ -91,7 +91,6 @@
   }
 
   section.icons {
-    // background-color: black;
     width: 25%;
   }
 
@@ -99,10 +98,8 @@
 //end bean/water/time detail section of recipe detail view
 
 section.icons {
-  // background-color: black;
   width: 25%;
   img.edit-icon{
-    // background-color: black;
     width: 35px;
   }
   img.trash-icon {
@@ -111,12 +108,9 @@ section.icons {
 }
 
 div.add-steps {
-  // background-color: gray;
   .plus-icon {
     margin-left: 87%;
     margin-bottom: -5%;
-    // background-color: gray;
-    // float: right;
   }
 } //.add-steps
 
@@ -124,10 +118,8 @@ div.add-steps {
 // steps section
 .step-list {
   @extend .clearfix;
-  // margin-bottom: 5%;
 
   div.num-col {
-    // background-color: gray;
     content: "";
     display: table;
     clear: both;
@@ -137,11 +129,9 @@ div.add-steps {
     font-size: 2.5em;
     color: lightgray;
     font-weight: bold;
-    // text-align: center;
     padding-left: 2%;
   } //end div.num-col
   div.step-details {
-    // background-color: lightgray;
     width: 85%;
     margin-bottom: 2%;
     box-sizing: border-box;
@@ -151,7 +141,6 @@ div.add-steps {
     }
     p.step-details{
       width: 80%;
-      // background-color: lightgray;
     }
     div.duration {
       width: 70%;
@@ -160,10 +149,8 @@ div.add-steps {
       clear: both;
       float: left;
       box-sizing: border-box;
-      // background-color: black;
     }
     section.icons {
-      // background-color: black;
       width: 30%;
       float: left;
     }
@@ -173,11 +160,7 @@ div.add-steps {
 // end steps section
 
 section.gen-recipe-comment {
-  // background-color: gray;
-  // margin-left: 5%;
   margin-top: 5%;
-  // padding-top: 3%;
-  // padding-bottom: 5%;
   border-top: solid 1px lightgray;
   border-bottom: solid 1px lightgray;
   p {
@@ -197,79 +180,36 @@ div.clone-button {
 } //end div.clone-button
 
 section.brew-notes {
-  // background-color: gray;
   margin-top: 5%;
   h3 {
     color: lightgray;
-    // background-color: black;
     margin: 0;
     width: 85%;
     float: left;
   }
-  img.plus-icon {
-    // background-color: black;
-  }
-
   div.notes {
     margin-left: 5%;
-      // background-color: gray;
       margin-top: 0%;
-      // @extend .clearfix;
-      // content: "";
-      // display: table;
-      // clear: both;
-      // float: left;
-      // box-sizing: border-box;
-      // float: left;
 
       .note-body {
-        // content: "";
-        // display: table;
-        // clear: both;
-        // float: left;
-        // box-sizing: border-box;
         width: 100%;
-        // background-color: black;
         float: left;
         box-sizing: border-box;
 
       }
       .note-date {
-        // content: "";
-        // display: table;
-        // clear: both;
-        // float: left;
-        // box-sizing: border-box;
         width: 75%;
         margin-bottom: 3%;
-
-        // background-color: lightgray;
         float: left;
         box-sizing: border-box;
         color: lightgray;
-
 
       }
       .note-icons {
         width: 25%;
         float: left;
-        // background-color: black;
 
       }
   } //div.notes
 
 }//end section.brew-notes
-
-
-
-
-
-
-
-
-
-
-
-
-
-////
