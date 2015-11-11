@@ -79,7 +79,7 @@
   <!-- steps section -->
   <section class="step-list" ng-repeat="step in steps">
     <div class="num-col">
-      {{step.step_number}}
+      {{$index + 1}}
     </div> <!-- end number column -->
     <div class="step-details">
       <p>{{step.step_title}}</p>
