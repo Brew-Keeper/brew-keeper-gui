@@ -110,9 +110,10 @@ section.icons {
 div.add-steps {
   // background-color: gray;
   .plus-icon {
-    float: right;
-    margin-right: 5%;
+    margin-left: 87%;
     margin-bottom: -5%;
+    // background-color: gray;
+    // float: right;
   }
 } //.add-steps
 
@@ -145,6 +146,10 @@ div.add-steps {
     p {
       margin: 0;
     }
+    p.step-details{
+      width: 80%;
+      // background-color: lightgray;
+    }
     div.duration {
       width: 70%;
       content: "";
@@ -162,3 +167,17 @@ div.add-steps {
   } //end div.step-details
 }
 // end steps section
+
+section.gen-recipe-comment {
+  // background-color: gray;
+  // margin-left: 5%;
+  margin-top: 5%;
+  // padding-top: 3%;
+  // padding-bottom: 5%;
+  border-top: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
+  p {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}

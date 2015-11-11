@@ -47,7 +47,7 @@
 <!-- <br>
 <br> -->
 
-  <!-- <p>{{detail.general_recipe_comment}}<p> -->
+
     <!-- <button ng-Click="cloneRecipe(detail)">Clone</button> -->
   <!-- <button>Make Public</button> -->
 
@@ -84,7 +84,7 @@
     </div> <!-- end number column -->
     <div class="step-details">
       <p>{{step.step_title}}</p>
-      <p>{{step.step_body}}</p>
+      <p class="step-details">{{step.step_body}}</p>
       <div class="duration">
         <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}, </span>
         {{step.duration}} sec
@@ -123,6 +123,9 @@
       </div> <!-- edit step form div -->
   </section><!-- end steps section -->
 
+  <section class="gen-recipe-comment">
+    <p>{{detail.general_recipe_comment}}<p>
+  </section> <!-- end general recipe comment -->
 
 
   <!--Brew notes -->
