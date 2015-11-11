@@ -19,13 +19,13 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
-              if(response.data.steps.length == 0){
-                $(".brew-it-button").addClass("hidden");
-                $(".no-steps").removeClass("hidden");
-              }
-              else {
-                $(".brew-it-button").removeClass("hidden");
-              }
+              // if(response.data.steps.length == 0){
+              //   $(".brew-it-button").addClass("hidden");
+              //   $(".no-steps").removeClass("hidden");
+              // }
+              // else {
+              //   $(".brew-it-button").removeClass("hidden");
+              // }
           }) //end http.get
 
 

@@ -31,16 +31,19 @@
       font-weight: bold;
       text-align: center;
       padding: 4px 0;
+
     }
-    .no-steps {
-      display: block;
+    a.no-steps {
       box-sizing: border-box;
-      width: 90%;
-      margin: 0 5%;
-      background-color: $Acolor1;
-      font-size: 2em;
+      float: left;
+      width: 100%;
+      margin-top: 2%;
+      margin-bottom: 4%;
+      background-color: lightgray;;
+      font-size: 1.1em;
+      font-weight: bold;
       text-align: center;
-      padding: 20px 0;
+      padding: 4px 0;
     }
 
   }
@@ -161,6 +164,7 @@ div.add-steps {
     }
     section.icons {
       // background-color: black;
+      width: 30%;
       float: left;
     }
 

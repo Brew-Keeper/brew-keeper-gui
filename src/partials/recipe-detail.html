@@ -13,8 +13,8 @@
       <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
     </div>
     <div class="brew-it-button">
-      <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
-      <a class="no-steps hidden" href="">Add Steps</a>
+      <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
+      <a ng-hide="detail.steps.length" class="no-steps" href="">Add Steps</a>
     </div>
     <div class="details">
       <div class="detail-icon">
