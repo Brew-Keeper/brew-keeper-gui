@@ -46,14 +46,6 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
-          //Shrink countdown time 50%
-          // Fade countdown timer to gray
-
-          //Fadde step 1 to green
-          //Grow step 1 200%
- // $(this).prev().animate({height:0, opacity:0.5}, 1000);
- // $(this).next().addClass('ondeck').animate({height:200, opacity:1}, 1000);
- // $(this).addClass('active').animate({height:100, opacity:0.5}, 1000)
 
           $("."+$scope.stepArray[0]).addClass("current-step").removeClass("inactive-step");
           $("div.delay").addClass("inactive-step").animate({height: 0}, 1000, function(){
@@ -85,8 +77,13 @@ angular.module('brewKeeper')
 
         $scope.resetBrew = function(){
           // $("timer.delay").addClass("hidden");
+          console.log("Restart")
           $("div.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
+          $("div.delay").animate({height: 150}).removeClass("inactive-step").addClass("current-step")
+          $("timer").addClass("hidden");
+          $("timer.delay").removeClass("hidden");
+          $(".minimize-after").removeClass("hidden");
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
           $("a[href].add-brew-note").removeClass("hidden");
