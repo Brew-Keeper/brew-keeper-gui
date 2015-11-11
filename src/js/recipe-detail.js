@@ -51,6 +51,11 @@ angular.module('brewKeeper')
           // $scope.showNotes = function(){
           //   $("div.notes").toggleClass("hidden")
           // };
+          $scope.showEditStep = function(stepId){
+            stepId = "div." + stepId.toString();
+            $(stepId).removeClass("hidden")
+          }
+
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){
@@ -66,10 +71,7 @@ angular.module('brewKeeper')
             }
           } //end deleteStep function
 
-          $scope.showEditStep = function(stepId){
-            stepId = "div." + stepId.toString();
-            $(stepId).removeClass("hidden")
-          }
+
 
           $scope.editStep = function(step){
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
@@ -169,10 +171,10 @@ angular.module('brewKeeper')
           $(noteView).addClass("hidden")
           $(editNote).removeClass("hidden")
         }
-          $scope.showEditStep = function(stepId){
-            stepId = "div." + stepId.toString();
-            $(stepId).removeClass("hidden")
-          }
+          // $scope.showEditStep = function(stepId){
+          //   stepId = "div." + stepId.toString();
+          //   $(stepId).removeClass("hidden")
+          // }
 
         $scope.editNote = function(note){
           var note_id = note.id
