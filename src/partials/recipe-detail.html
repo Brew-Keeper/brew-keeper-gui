@@ -1,49 +1,48 @@
 <section class="recipe-detail">
-<button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
-<section class="recipe-view">
-  <h3 class="title">{{detail.title}}</h3>
-  <!-- star rating -->
-  <div class="col-1-3">
-    <span ng-repeat="rating in ratings">
+  <button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
+  <section class="recipe-view">
+    <h3 class="title">{{detail.title}}</h3>
+    <!-- star rating -->
+    <div class="col-1-3">
+      <span ng-repeat="rating in ratings">
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
-    </span>
-  </div>
-  <!-- end star rating -->
-  <div class="col-1-3 brew-count">
-    <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
-  </div>
-  <div class="brew-it-button">
-    <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
-    <a class="no-steps hidden" href="">Add Steps</a>
-  </div>
+      </span>
+    </div>
+    <!-- end star rating -->
+    <div class="col-1-3 brew-count">
+      <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
+    </div>
+    <div class="brew-it-button">
+      <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
+      <a class="no-steps hidden" href="">Add Steps</a>
+    </div>
 
-  <div class="details">
-    <div class="detail-icon">
-      <img src="img/LightCoffeeBean.svg">
-    </div>
-    <section class="bean-details">
+    <div class="details">
+      <div class="detail-icon">
+        <img src="img/LightCoffeeBean.svg">
+      </div>
+      <section class="details bean-details">
       <!-- <img src="img/LightCoffeeBean.svg"> -->
-      <span>{{detail.bean_name}}</span>
-      <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}},
-      {{detail.grind}}</span>
-    </section> <!--end section.bean-details -->
-    <div class="detail-icon">
-      <img src="img/LightWater.svg">
-    </div>
-    <section class="water-details">
-       {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
-    </section> <!-- end section.water-details-->
-    <div class="detail-icon">
-      <img src="img/LightTimer.svg">
-    </div>
-    <section class="brew-time">
-      {{detail.total_duration}} sec, {{detail.orientation}}
-    </section> <!-- end section.brew-time -->
-    <section class="icons">
-      <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
-      <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/>
-    </section>
-  </div><!--end div.details -->
+        <span>{{detail.bean_name}}</span>
+        <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
+      </section> <!--end section.bean-details -->
+      <div class="detail-icon">
+        <img src="img/LightWater.svg">
+      </div>
+      <section class="details water-details">
+        {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
+      </section> <!-- end section.water-details-->
+      <div class="detail-icon">
+        <img src="img/LightTimer.svg">
+      </div>
+      <section class="details brew-time">
+        {{detail.total_duration}} sec, {{detail.orientation}}
+      </section> <!-- end section.brew-time -->
+      <section class="details icons">
+        <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
+        <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/>
+      </section>
+    </div><!--end div.details -->
   <!-- <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
   <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/> -->
 <!-- <br>
@@ -54,16 +53,50 @@
   <!-- <button>Make Public</button> -->
 
   <!-- steps section -->
-  <section class="step-list">
-    <div ng-repeat="step in steps">
-      <!-- <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong></strong></a> -->
-    {{step.step_number}}
-    {{step.step_title}}
-    {{step.step_body}}
-    <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}</span>
-    {{step.duration}} sec
-    <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/>
-    <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/delete-25.svg"/>
+    <section class="step-list" ng-repeat="step in steps">
+      <div class="num-col">
+        {{step.step_number}}
+      </div> <!-- end number column -->
+      <div class="step-details">
+        <p>{{step.step_title}}</p>
+        <p>{{step.step_body}}</p>
+        <div class="duration" ng-show="step.water_amount">{{step.water_amount}}   {{detail.water_units}}
+        {{step.duration}} sec</div>
+        <section class="icons">
+          <!-- <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/> -->
+          <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/>
+          <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/delete-25.svg"/>
+        </section>
+      </div> <!-- end step details -->
+      <!-- edit step form -->
+      <div class="hidden edit-step {{step.id}}">
+        <form ng-submit="editStep(step)">
+          <section class="columns general">
+            <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+              <datalist id="step-title">
+                <option value="Pour">
+                <option value="Bloom">
+                <option value="Steep">
+                <option value="Plunge">
+              </datalist>
+            </input>
+            <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+          <!-- </section>
+          <section class="columns steps"> -->
+            <input type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
+            <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+            <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
+          </section>
+          <div class="columns general">
+            <button type="submit">Save</button>
+            <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
+          </div>
+        </form><!--edit Step Form-->
+        <button ng-click="hideEditStep(step.id)">Cancel</button>
+        </div> <!-- edit step form div -->
+    </section><!-- end steps section -->
+
+
 
     <article class="step {{step.id}} hidden">
       <p ng-show="step.water_amount">Water: {{step.water_amount}} {{detail.water_units}}</p>
@@ -73,35 +106,9 @@
 
 
 
-    <!-- edit step form -->
-    <div class="hidden edit-step {{step.id}}">
-      <form ng-submit="editStep(step)">
-        <section class="columns general">
-          <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
-            <datalist id="step-title">
-              <option value="Pour">
-              <option value="Bloom">
-              <option value="Steep">
-              <option value="Plunge">
-            </datalist>
-          </input>
-          <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
-        <!-- </section>
-        <section class="columns steps"> -->
-          <input type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
-          <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
-          <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
-        </section>
-        <div class="columns general">
-          <button type="submit">Save</button>
-          <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
-        </div>
-      </form><!--edit Step Form-->
-      <button ng-click="hideEditStep(step.id)">Cancel</button>
-      </div> <!-- edit step form div -->
+
       <br>
-    </div> <!--end ng-repeat for steps -->
-  </section><!--END .step-list-->
+
 
   <!-- <div class="addSteps" ng-controller="createNewStep"> -->
   <div class="addSteps">
