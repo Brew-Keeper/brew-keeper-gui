@@ -1,0 +1,23 @@
+.more-info {
+  box-sizing: border-box;
+  width: 80%;
+  margin: 4ex 10%;
+  article {
+    margin-bottom: -1ex;
+  }
+  h3 {
+    color: lighten(black, 25%);
+    line-height: 0;
+    margin-top: 4ex;
+    margin-bottom: 1.5ex;
+  }
+  a[href] {
+    text-decoration: underline;
+    display: block;
+  }
+  p {
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: -1ex;
+  }
+}
