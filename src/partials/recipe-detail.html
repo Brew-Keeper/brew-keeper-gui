@@ -52,8 +52,8 @@
   <!-- <button>Make Public</button> -->
 
   <!-- <div class="addSteps" ng-controller="createNewStep"> -->
-  <div class="addSteps">
-    <button ng-click="showAddSteps()">Add Steps</button>
+  <div class="add-steps">
+    <img class="plus-icon" ng-click="showAddSteps()" src="img/plusSign.svg"/>
     <form class="hidden create-new-step"  ng-submit="submit()">
       <section class="columns general">
         <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
@@ -73,10 +73,8 @@
       </section>
       <div class="columns general">
         <button type="submit">Add Step</button>
-        <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
       </div>
     </form><!--Add Step Form-->
-    <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
   </div> <!-- add step section -->
 
   <!-- steps section -->
