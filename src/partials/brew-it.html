@@ -1,10 +1,12 @@
 <section class="brewit-page">
-  <a href="#users/{{username}}/recipes/{{detail.id}}"><h2>{{detail.title}}</h2></a>
-  <!-- <p ng-show="detail.rating"><strong>Rating: </strong>{{detail.rating}}</p> -->
-  <!-- <p ng-show="detail.brew_count"><strong>Brew Count: </strong>{{detail.brew_count}}</p> -->
-  <a href="" class="hidden restart-brew" ng-click="reStartBrew()">Brew Again</a>
-  <a href="" class="reset-brew" ng-click="resetBrew()">Reset</a>
-  <a href="" class="hidden add-brew-note">Add Brew Note</a>
+  <nav class="brewit-nav">
+    <a class="brewit-title" href="#users/{{username}}/recipes/{{detail.id}}"><h2 class="brewit-title">{{detail.title}}</h2></a>
+    <!-- <p ng-show="detail.rating"><strong>Rating: </strong>{{detail.rating}}</p> -->
+    <!-- <p ng-show="detail.brew_count"><strong>Brew Count: </strong>{{detail.brew_count}}</p> -->
+    <a href="" class="reset-brew" ng-click="resetBrew()">RESET</a>
+    <a href="" class="hidden restart-brew" ng-click="reStartBrew()">Brew Again</a>
+    <a href="" class="hidden add-brew-note">Add Brew Note</a>
+  </nav>
   <section class="brew-form hidden" >
     <form ng-submit="addBrewNote()">
       <!-- <label>Add Brew Note</label> -->
@@ -16,17 +18,17 @@
 
   <div class="step delay">
   <p class="countdown">COUNTDOWN</p>
-    <p class="counting"><timer class="counting" interval="1000" countdown="5" finish-callback="startBrew(detail.brew_count)">{{countdown}}</timer></p>
+    <p class="counting"><timer class="counting" interval="1000" countdown="10" finish-callback="startBrew(detail.brew_count)">{{countdown}}</timer></p>
   </div><!-- END countdown timer-->
 
   <div ng-repeat="step in steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}} animated">
     <p class="stepOf"><span>{{stepArray.indexOf(step.step_number)+1}}</span> of {{stepTotal}}</p>
-    <div class="step-box">
+    <article class="step-box">
       <p class="step-name">{{step.step_title | uppercase}}</p>
       <!-- duration - {{step.duration}} sec -->
       <p class="water {{step.step_number}}" ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}</p>
       <timer class="counting {{step.step_number}} hidden" autostart="false" interval="1000" countdown="step.duration" finish-callback="nextStep(step.step_number, detail.brew_count)"><p>{{countdown}}</p></timer>
-    </div>
+    </article>
     <p class="step-body">{{step.step_body}}</p>
   </div><!--END Steps-->
 </section><!--END brewit-page-->
