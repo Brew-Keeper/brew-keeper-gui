@@ -37,7 +37,7 @@ angular.module('brewKeeper')
       })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
-      $('form.register').removeClass('hidden');
+      $('.register').removeClass('hidden');
       $('form.login').addClass('hidden')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
