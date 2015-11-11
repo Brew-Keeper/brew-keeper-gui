@@ -1,51 +1,99 @@
 <section class="recipe-detail">
-<button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
-<section class="recipe-view">
-  <h2>{{detail.title}}</h2>
-  <p>{{detail.general_recipe_comment}}<p>
-    <button ng-Click="cloneRecipe(detail)">Clone</button>
-    <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
-    <img class="trash-icon" ng-click="EliminateRecipe()" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
-  <br>
-  <a class="brew-it-button hidden" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
-  <a class="no-steps hidden" href="">Add Steps</a>
-  <!-- <button>Make Public</button> -->
-  <br>
-
-  <!-- star rating -->
-  <div> <span ng-repeat="rating in ratings">
+  <button class="edit-recipe cancel-recipe-edit hidden">Cancel Edit</button>
+  <section class="recipe-view">
+    <h3 class="title">{{detail.title}}</h3>
+    <!-- star rating -->
+    <div class="col-1-3">
+      <span ng-repeat="rating in ratings">
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
-    </span>
-  </div>
-  <!-- end star rating -->
+      </span>
+    </div>
+    <!-- end star rating -->
+    <div class="col-1-3 brew-count">
+      <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
+    </div>
+    <div class="brew-it-button">
+      <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
+      <a ng-hide="detail.steps.length" class="no-steps" href="">Add Steps</a>
+    </div>
+    <div class="details">
+      <div class="detail-icon">
+        <img src="img/LightCoffeeBean.svg">
+      </div>
+      <section class="details bean-details">
+      <!-- <img src="img/LightCoffeeBean.svg"> -->
+        <span>{{detail.bean_name}}</span>
+        <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
+      </section> <!--end section.bean-details -->
+      <div class="detail-icon">
+        <img src="img/LightWater.svg">
+      </div>
+      <section class="details water-details">
+        {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
+      </section> <!-- end section.water-details-->
+      <div class="detail-icon">
+        <img src="img/LightTimer.svg">
+      </div>
+      <section class="details brew-time">
+        {{detail.total_duration}} sec, {{detail.orientation}}
+      </section> <!-- end section.brew-time -->
+      <section class="details icons">
+        <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
+        <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/>
+      </section>
+    </div><!--end div.details -->
+  <!-- <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
+  <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/> -->
+<!-- <br>
+<br> -->
 
-  <p ng-show="detail.brew_count"><strong>Brew Count:</strong> {{detail.brew_count}}
-  <p ng-show="detail.orientation"><img class="arrows-icon" src="img/noun_arrows.svg"/><!--Created by Creative Stall from the Noun Project-->
-  {{detail.orientation}}
-  <p ng-show="detail.bean_name"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-  {{detail.bean_name}}
-  <p ng-show="detail.roast"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-  {{detail.roast}} Roast
-  <p ng-show="detail.grind"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->{{detail.grind}} Grind
-  <p ng-show="detail.total_bean_amount"><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-  {{detail.total_bean_amount}} {{detail.bean_units}}
-  <p ng-show="detail.total_water_amount"><img class="water-icon" src="img/noun_water.svg"/><!--Created by Arthur Shlain from the Noun Project-->
-   {{detail.total_water_amount}} {{detail.water_units}} {{detail.water_type}}
-  <p ng-show="detail.temp"><img class="water-temp-icon" src="img/noun_water-temp.svg"/><!--Created by Juan Leon from the Noun Project-->{{detail.temp}} &deg;F<p>
-  <!-- <strong>Brew Count:</strong> {{detail.brew_count}} brews -->
-  <p><img class="stopwatch-icon" src="img/noun_stopwatch.svg"/><!--timer by Alex C. from the Noun Project--> {{detail.total_duration}} seconds total
-  <br>
+
+  <!-- <button>Make Public</button> -->
+
+  <!-- <div class="addSteps" ng-controller="createNewStep"> -->
+  <div class="add-steps">
+    <img class="plus-icon" ng-click="showAddSteps()" src="img/plusSign.svg"/>
+    <form class="hidden create-new-step"  ng-submit="submit()">
+      <section class="columns general">
+        <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+          <datalist id="step-title">
+            <option value="Pour">
+            <option value="Bloom">
+            <option value="Steep">
+            <option value="Plunge">
+          </datalist>
+        </input>
+        <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+      <!-- </section>
+      <section class="columns steps"> -->
+        <input type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
+        <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+        <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
+      </section>
+      <div class="columns general">
+        <button type="submit">Add Step</button>
+      </div>
+    </form><!--Add Step Form-->
+  </div> <!-- add step section -->
+
   <!-- steps section -->
-  <section class="step-list">
-    <h2>Steps</h2>
-    <div ng-repeat="step in steps">
-      <a href="" class="show-steps" ng-click="showSteps(step.id)"><strong>{{step.step_title}}</strong> </a><p>{{step.duration}} seconds</p>
-    <article class="step {{step.id}} hidden">
-      <p>{{step.step_body}}<p>
-      <p ng-show="step.water_amount">Water: {{step.water_amount}} {{detail.water_units}}</p>
-    <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
-    <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
-    </article>
+  <section class="step-list" ng-repeat="step in steps">
+    <div class="num-col">
+      {{$index + 1}}
+    </div> <!-- end number column -->
+    <div class="step-details">
+      <p>{{step.step_title}}</p>
+      <p class="step-details">{{step.step_body}}</p>
+      <div class="duration">
+        <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}, </span>
+        {{step.duration}} sec
+      </div>
+      <section class="icons">
+        <!-- <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/> -->
+        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/>
+        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/delete-25.svg"/>
+      </section>
+    </div> <!-- end step details -->
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
       <form ng-submit="editStep(step)">
@@ -72,67 +120,47 @@
       </form><!--edit Step Form-->
       <button ng-click="hideEditStep(step.id)">Cancel</button>
       </div> <!-- edit step form div -->
-      <br>
-    </div> <!--end ng-repeat for steps -->
-  </section><!--END .step-list-->
+  </section><!-- end steps section -->
 
-  <!-- <div class="addSteps" ng-controller="createNewStep"> -->
-  <div class="addSteps">
-    <button ng-click="showAddSteps()">Add Steps</button>
-    <form class="hidden create-new-step"  ng-submit="submit()">
-      <section class="columns general">
-        <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
-          <datalist id="step-title">
-            <option value="Pour">
-            <option value="Bloom">
-            <option value="Steep">
-            <option value="Plunge">
-          </datalist>
-        </input>
-        <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
-      <!-- </section>
-      <section class="columns steps"> -->
-        <input type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
-        <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
-        <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
-      </section>
-      <div class="columns general">
-        <button type="submit">Add Step</button>
-        <!-- <button><a href="#/recipe/brew">BREW IT!</a></button> -->
-      </div>
-    </form><!--Add Step Form-->
-    <button class="hidden done-adding" ng-click="hideAddSteps()">Done Adding Steps</button>
-  </div> <!-- add step section -->
+  <section class="gen-recipe-comment">
+    <p>{{detail.general_recipe_comment}}<p>
+  </section> <!-- end general recipe comment -->
+
+  <div class="clone-button" ng-Click="cloneRecipe(detail)">
+    <a>CLONE THIS RECIPE</a>
+  </div>
+
+
   <!--Brew notes -->
-  <!-- <a href="" ng-click="showNotes()"><h2>Brew Notes:</h2></a> -->
-  <h2>Brew Notes</h2>
-  <button ng-click="addNote=true" class="add-brew-note">Add Brew Note</button>
-  <section ng-show="addNote" class="brew-form" >
-  <form ng-submit="addBrewNote()">
-        <!-- <label>Add Brew Note</label> -->
-        <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
-        <button class="save-note" type="submit">Save Note</button>
-  </form>
-        <button ng-click="addNote=false" class="cancel-note">Cancel Note</button>
-  </section> <!-- add brewnote section -->
-
-  <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
-    <div class="note-view{{note.id}}">
-      <strong>{{note.body}}</strong>
-      <br>
-      posted {{note.timestamp | date}}
-      <br>
-      <br>
-      <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/noun_edit.svg"/><!--Created by Daniel Boros from the Noun Project-->
-      <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/noun_trash.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+  <section class="brew-notes">
+    <div class="brew-notes-heading">
+      <h3>Brew Notes</h3>
+      <img class="plus-icon" ng-click="showAddBrewNote()" src="img/plusSign.svg"/>
     </div>
-      <article class="edit-note{{note.id}} hidden">
-        <form class="edit-note" ng-submit="editNote(note)"><!--edit brew-note form-->
-            <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
-            <button class="save-note" type="submit">Save Edit</button>
-        </form><!--END edit-note form-->
-      </article><!--END edit-note article-->
-  </div> <!-- .notes -->
+    <section class="brew-form hidden" >
+      <form ng-submit="addBrewNote()">
+            <!-- <label>Add Brew Note</label> -->
+            <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
+            <button class="save-note" type="submit">Save Note</button>
+      </form>
+    </section> <!-- add brewnote section -->
+    <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
+      <div class="note-view{{note.id}}" ng-click="showNoteIcons(note.id)">
+        <div class="note-body">{{note.body}}</div>
+        <div class="note-date">-{{note.timestamp | date}}</div>
+        <div class="note-icons {{note.id}} hidden">
+          <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
+          <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+        </div>
+      </div>
+        <article class="edit-note{{note.id}} hidden">
+          <form class="edit-note" ng-submit="editNote(note)"><!--edit brew-note form-->
+              <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
+              <button class="save-note" type="submit">Save Edit</button>
+          </form><!--END edit-note form-->
+        </article><!--END edit-note article-->
+    </div> <!-- .notes -->
+  </section><!-- end section.brew-notes -->
 </section><!--.recipe-view-->
 
 

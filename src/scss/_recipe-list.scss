@@ -1,3 +1,56 @@
-body {
-  // background-color: black;
+nav.recipe-list {
+  margin: 5% 5% -5%;
+
+  select {
+    float: right;
+  }
 }
+
+section.recipe-list {
+  @extend .clearfix;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10% 5%;
+
+  & :after {
+    @extend .clearfix;
+  }
+
+  a {
+    font-weight: bold;
+  }
+
+  .col-1-2 {
+    // @extend .clearfix;
+    width: 45%;
+    float: left;
+
+    .col-1-4 {
+      // @extend .clearfix;
+      width: 100%;
+      float: left;
+
+      span {
+        float: left;
+      }
+
+      span.count {
+        margin-left: 7%;
+
+        img {
+             width: 17px;
+           }
+      } //end span.count
+    } //end col-1-4
+
+    a {
+      margin-left: 5%;
+      width: 90%;
+      background-color: $brewit-button-color;
+      float: left;
+      text-align: center;
+      padding-top: 5%;
+      padding-bottom: 5%;
+    }
+  } // end col-1-2
+} //end section.recipe-list

@@ -3,6 +3,7 @@ $Acolor1: #dfdfdf;//lightgray
 $Acolor5: #000;//black
 $Acolor2: #454545;//grey
 $Acolor4: #ffffff;//white
+$Acolor6: #45A852;
 
 $heading-background: $Acolor4;
 $body-background: $Acolor4;
@@ -13,54 +14,11 @@ $body-color: $Acolor5;
 $button-color: $Acolor4;
 $brewit-color: $Acolor1;
 $brewit-background: $Acolor5;
+$brewit-button-color: $Acolor6;
 
 [class*='-icon'] {
   width: 30px;
 }
-
-.recipe-detail {
-  box-sizing: border-box;
-  width: 80%;
-  margin: 0 10%;
-
-  .recipe-view {
-    .brew-it-button {
-      display: block;
-      box-sizing: border-box;
-      width: 90%;
-      margin: 0 5%;
-      background-color: $Acolor1;
-      font-size: 2em;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .no-steps {
-      display: block;
-      box-sizing: border-box;
-      width: 90%;
-      margin: 0 5%;
-      background-color: $Acolor1;
-      font-size: 2em;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .trash-icon {
-      width: 22px;
-    }
-  }
-
-  .step-list {
-    .edit-icon {
-      width: 25px;
-    }
-    .trash-icon {
-      width: 15px;
-    }
-  }
-}//recipe-detail
-
-
-
 
 body {
   font-family: 'Open Sans', 'sans-serif';
@@ -84,10 +42,15 @@ textarea, input, select {
   background-color: $heading-background;
   padding: 1ex 5%;
   border-bottom: 1px solid $border-color;
+
   h1 > a[href]{
     text-decoration: none;
   }
 }
+
+
+
+
 
 div.current-step {
   padding: 0.5ex 0 0 1em ;
@@ -103,107 +66,8 @@ button {
   font-weight: 100;
 }
 
-// recipe list view styles
 
-// nav.recipe-list-options {
-//   box-sizing: border-box;
-//   margin: 2ex 0;
-//   padding: 2ex 0;
-//   h2 {
-//   text-align: center;
-//   font-weight:100;
-//   font-size: 3em;
-//   color: $heading-color;
-//   margin: -1.5ex 0 0;
-//   }
-//   a {
-//     text-align: center;
-//     display: block;
-//     color: black;
-//     font-size: 2em;
-//     font-weight:100;
-//     padding-top: 0.5ex 0;
-//     border-radius: 3px;
-//     text-decoration: none;
-//     &:hover {
-//       color: lighten($heading-color, 45%);
-//     }
-//     img {
-//       width: 30px;
-//     }
-//   }//a
-//   input {
-//     font-size: 1em;
-//     text-align: center;
-//     width: 30%;
-//     margin: 1ex 35% 2ex 35%;
-//   }
-//   select {
-//     font-size: 1em;
-//     text-align: center;
-//     width: 28%;
-//     margin: 3ex 35.5% 1ex 36.5%;
-//   }
-// }//nav.recipe-list-options
 
-nav.recipe-list {
-  margin: 5% 5% -5%;
-
-  select {
-    float: right;
-  }
-}
-
-section.recipe-list {
-  @extend .clearfix;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 10% 5%;
-
-  & :after {
-    @extend .clearfix;
-  }
-
-  a {
-    font-weight: bold;
-  }
-
-  .col-1-2 {
-    @extend .clearfix;
-    width: 45%;
-    float: left;
-
-    .col-1-4 {
-      @extend .clearfix;
-      width: 100%;
-      float: left;
-
-      span {
-        float: left;
-      }
-
-      span.count {
-        margin-left: 10%;
-
-        img {
-             width: 15px;
-           }
-      } //end span.count
-    } //end col-1-4
-
-    a {
-      margin-left: 5%;
-      width: 90%;
-      background-color: #45A852;
-      float: left;
-      text-align: center;
-      padding-top: 5%;
-      padding-bottom: 5%;
-    }
-  } // end col-1-2
-} //end section.recipe-list
-
-//end recipe list styles
 //
 // .ng-invalid.ng-dirty {
 //   border-color: red;

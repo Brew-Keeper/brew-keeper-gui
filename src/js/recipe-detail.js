@@ -19,13 +19,7 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
-              if(response.data.steps.length == 0){
-                $(".brew-it-button").addClass("hidden");
-                $(".no-steps").removeClass("hidden");
-              }
-              else {
-                $(".brew-it-button").removeClass("hidden");
-              }
+
           }) //end http.get
 
 
@@ -51,6 +45,11 @@ angular.module('brewKeeper')
           // $scope.showNotes = function(){
           //   $("div.notes").toggleClass("hidden")
           // };
+          $scope.showEditStep = function(stepId){
+            stepId = "div." + stepId.toString();
+            $(stepId).toggleClass("hidden")
+          }
+
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){
@@ -66,10 +65,7 @@ angular.module('brewKeeper')
             }
           } //end deleteStep function
 
-          $scope.showEditStep = function(stepId){
-            stepId = "div." + stepId.toString();
-            $(stepId).removeClass("hidden")
-          }
+
 
           $scope.editStep = function(step){
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
@@ -94,13 +90,12 @@ angular.module('brewKeeper')
           } //end new step submit function
 
         $scope.showAddSteps = function(){
-          $("form.create-new-step").removeClass("hidden");
-          $("button.done-adding").removeClass("hidden");
+          $("form.create-new-step").toggleClass("hidden");
         };//Reveal "Add Step" when new recipe form is submitted.
-        $scope.hideAddSteps = function(){
-          $("form.create-new-step").addClass("hidden");
-          $("button.done-adding").addClass("hidden");
-        }; //hides the add step form
+        // $scope.hideAddSteps = function(){
+        //   $("form.create-new-step").addClass("hidden");
+        //   $("button.done-adding").addClass("hidden");
+        // }; //hides the add step form
 
         $('.edit-button').on('click', function(){
           $('.edit-recipe').removeClass("hidden");
@@ -169,10 +164,10 @@ angular.module('brewKeeper')
           $(noteView).addClass("hidden")
           $(editNote).removeClass("hidden")
         }
-          $scope.showEditStep = function(stepId){
-            stepId = "div." + stepId.toString();
-            $(stepId).removeClass("hidden")
-          }
+          // $scope.showEditStep = function(stepId){
+          //   stepId = "div." + stepId.toString();
+          //   $(stepId).removeClass("hidden")
+          // }
 
         $scope.editNote = function(note){
           var note_id = note.id
@@ -196,6 +191,10 @@ angular.module('brewKeeper')
           };
         }; //end deleteNote function
 
+        $scope.showAddBrewNote = function(){
+          $(".brew-form").toggleClass("hidden");
+        };
+
         $scope.addBrewNote=function(){
           $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
           .success(function (data) {
@@ -208,6 +207,11 @@ angular.module('brewKeeper')
         $scope.brewnote = { };
         $scope.addNote = false;
         }//Add Brew Note Form
+
+        $scope.showNoteIcons = function(noteId){
+          $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+        }
+
 
       }) //end recipDetail controller
 
