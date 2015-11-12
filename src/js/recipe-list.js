@@ -47,6 +47,9 @@ angular.module('brewKeeper')
         console.log($scope.recipes)
         $scope.username = "public"
         console.log($scope.username)
+        $scope.ratings = [{
+            max: 5
+        }];
       })
 
   })//end publicRecipe controller

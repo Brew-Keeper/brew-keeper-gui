@@ -23,15 +23,15 @@
       <!-- star rating -->
       <!-- rating : {{recipe.rating}} -->
       <span class="rating" ng-repeat="rating in ratings">
-        <span star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></span>
+        <span star-rating rating-value="recipe.rating" max="5"></span>
       </span>
       <!-- end star rating -->
-      <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> x {{recipe.brew_count}}</span>
+      <!-- <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> x {{recipe.brew_count}}</span> -->
     </div>
 
   </div> <!-- end col-1-2 -->
   <div class="col-1-2 button">
     <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)">BREW IT!</a>
-    <a href="#users/public/recipes/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a>
+    <!-- <a href="#users/public/recipes/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a> -->
   </div> <!--end col-1-2 -->
 </section><!-- end ng-repeat for recipe list -->
