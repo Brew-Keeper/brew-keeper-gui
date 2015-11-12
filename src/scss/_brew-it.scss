@@ -47,16 +47,14 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     box-sizing: border-box;
     background-color:$brewitCurrent;
     color: $brewitCurrentText;
-    height: 19.75ex;
-    .step-box {
-      box-sizing: border-box;
-      margin: 0 0 0 -1.85ex;
-      padding: 0;
-    }
+    padding: 1ex 5%;
+    // .step-box {
+    //   box-sizing: border-box;
+    // }
     p.stepOf {
       color:$brewitCurrentOf;
       text-align: right;
-      padding: 0 1.5em 0 0;
+      // padding-right: 0;
       span {
         color: $brewitCurrentOf;
         font-weight: bold;
@@ -91,9 +89,9 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     p.step-body {
       color:$brewitCurrentText;
       width: 100%;
-      text-align: center;
-      line-height: 0;
-      margin: -.6ex 0 -1.6ex 0;
+      text-align: justify;
+      // line-height: 0;
+      margin: -.6ex 0 1ex 0;
     }
   }//.current-step
 
@@ -105,7 +103,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     p.stepOf {
       color: $brewitInactiveOf;
       text-align: right;
-      padding: 1ex 1.5em;
+      padding: 1ex 5%;
       span {
         font-weight: bold;
       }
@@ -126,12 +124,10 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       text-align: center;
     }
     p.step-body {
-      width: 100%;
+      // outline: 1px solid black;
       font-size: 0.8em;
-      text-align: center;
-      line-height: 0;
-      margin-top: -.6ex;
-      margin-bottom: -1.6ex;
+      text-align: justify;
+      margin: -1.6ex 5% -3.1ex 5%;
     }
   }//.inactive-step
 
@@ -169,14 +165,14 @@ div.step.finished {
         color: lighten($brewitCurrentText, 15%);
         font-size: 1.4em;
         font-weight: 600;
-        margin: 1ex 1em 3.7ex;
+        margin: 1ex 5% 3.7ex;
         opacity: 85%;
       }
     }
     .reset-brew {
       position: absolute;
       top: 3.8ex;
-      right: 2em;
+      right: 5%;
       margin-bottom: 2ex;
       font-size: 0.8em;
       color:darken($brewitInactive, 54%);
