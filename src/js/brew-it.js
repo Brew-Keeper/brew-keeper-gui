@@ -13,7 +13,6 @@ angular.module('brewKeeper')
             $scope.steps = response.data.steps;
             $scope.notes = response.data.brewnotes;
             $scope.countdownVal = response.data.total_duration;
-            console.log($scope.detail.rating)
             $scope.ratings = [{
                 max: 5
             }];
@@ -149,6 +148,10 @@ angular.module('brewKeeper')
         $(".brew-form").addClass("hidden");
       });//Cancel BrewNote form
 
+      $scope.rateRecipe = function (rating, id) {
+        var newRating = {"rating": rating}
+        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
+      }
 
     }) //end brewit controller
 })();//END Angular IIFE
