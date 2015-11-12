@@ -16,7 +16,7 @@
         })
         .when('/public/recipes/:id/brewit', {
           templateUrl: 'partials/public-brewit.html',
-          controller: 'brewIt'
+          controller: 'public-brewIt'
         })
         .when('/users/:username/recipes/new', {
           templateUrl: 'partials/recipe-create.html',
