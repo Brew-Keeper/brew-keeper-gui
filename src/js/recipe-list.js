@@ -37,20 +37,33 @@ angular.module('brewKeeper')
 
   })//end recipe-list controller
 
-  .controller('publicRecipe', function($http, $scope, $rootScope){
-    console.log("publicRecipe controller")
-    console.log($scope.username)
+  .controller('publicRecipe', function($http, $scope, $rootScope, $location){
+    // `console.log("publicRecipe controller")
+    // console.log($scope.username)`
 
     $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
       .then(function(response){
         $scope.recipes = response.data;
-        console.log($scope.recipes)
-        $scope.username = "public"
-        console.log($scope.username)
+        // console.log($scope.recipes)
+        // $scope.username = "public"
+        // console.log($scope.username)
         $scope.ratings = [{
             max: 5
         }];
       })
+
+      $scope.publicListBrewIt = function(id){
+        //get indexOf recipe id
+        for (var index = 0; index < $scope.recipes.length; index ++) {
+          if($scope.recipes[index].id == id){
+            var recipeId = index;
+          }
+        }
+        $rootScope.steps = $scope.recipes[recipeId].steps;
+        $rootScope.detail = $scope.recipes[recipeId];
+        $location.path("/public/recipes/" + id + "/brewit")
+        $(document).scrollTop(0);
+      }//end listBrewit function
 
   })//end publicRecipe controller
 
