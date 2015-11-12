@@ -64,8 +64,15 @@ h3.form-heading {
     font-size: 0.8em;
   }
   &.add-step {
-    // display: block;
     margin: 2ex 30% 5ex 30%;
+    font-size: 0.8em;
+  }
+  &.save-note {
+    margin: 0 30%;
+    font-size: 0.8em;
+  }
+  &.save-edit {
+    margin: 0 27%;
     font-size: 0.8em;
   }
 }//.clicker-button
@@ -328,3 +335,19 @@ form.create-new-step {
     }
   }//.columns
 }//form.add-step
+
+form.add-note {
+  textarea {
+    width: 95%;
+    height: 7ex;
+    margin: 1.5ex -5% 1ex 0;
+  }
+}//.form.add-note
+
+form.edit-note {
+  textarea {
+    width: 100%;
+    height: 7ex;
+    margin: 1.5ex 0 1ex -5%;
+  }
+}
