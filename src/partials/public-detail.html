@@ -8,11 +8,11 @@
       </span>
     </div>
     <!-- end star rating -->
-    <div class="col-1-3 brew-count">
+    <!-- <div class="col-1-3 brew-count">
       <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
-    </div>
+    </div> -->
     <div class="brew-it-button">
-      <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{detail.id}}/brewit">BREW IT!</a>
+      <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/users/public/recipes/{{detail.id}}/brewit">BREW IT!</a>
       <a ng-hide="detail.steps.length" class="no-steps" href="">Add Steps</a>
     </div>
     <div class="details">
@@ -36,10 +36,10 @@
       <section class="details brew-time">
         {{detail.total_duration}} sec, {{detail.orientation}}
       </section> <!-- end section.brew-time -->
-      <section class="details icons">
+      <!-- <section class="details icons">
         <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/Edit-25.svg"/>
         <img class="trash-icon" ng-click="EliminateRecipe()" src="img/Delete-25.svg"/>
-      </section>
+      </section> -->
     </div><!--end div.details -->
   <!-- <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
   <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/> -->
@@ -54,8 +54,8 @@
   <section class="step-list" ng-repeat="step in steps">
     <div class="num-col">
       {{$index + 1}}
-      <a ng-click="increaseStep(step)">v</a>
-      <a ng-click="decreaseStep(step)">^</a>
+      <!-- <a ng-click="increaseStep(step)">v</a>
+      <a ng-click="decreaseStep(step)">^</a> -->
     </div> <!-- end number column -->
     <div class="step-details">
       <p>{{step.step_title}}</p>
@@ -64,13 +64,13 @@
         <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}, </span>
         {{step.duration}} sec
       </div>
-      <section class="icons">
+      <!-- <section class="icons">
         <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
         <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
-      </section>
+      </section> -->
     </div> <!-- end step details -->
     <!-- edit step form -->
-    <div class="hidden edit-step {{step.id}}">
+    <!-- <div class="hidden edit-step {{step.id}}">
       <form class="edit-step">
         <section class="columns">
           <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
@@ -97,12 +97,14 @@
           </section>
         </section>
           <a class="edit-step clicker-button" ng-click="editStep(step)">Save</a>
-      </form><!--edit Step Form-->
-    </div> <!-- edit step form div -->
+      </form> -->
+      <!--edit Step Form-->
+    <!-- </div> -->
+     <!-- edit step form div -->
   </section><!-- end steps section -->
 
   <!-- <div class="addSteps" ng-controller="createNewStep"> -->
-  <div class="add-steps">
+  <!-- <div class="add-steps">
     <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign.svg"/>
     <form class="hidden create-new-step"  ng-submit="submit()">
       <section class="columns">
@@ -115,17 +117,19 @@
             <option value="Plunge">
           </datalist>
         </input>
-        <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+        <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea> -->
       <!-- </section>
       <section class="columns steps"> -->
-        <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+        <!-- <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
         <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
       </section>
       <div class="columns general">
         <a class="clicker-button add-step" ng-click="addStep()">Add Step</a>
-      </div>
-    </form><!--Add Step Form-->
-  </div> <!-- add step section -->
+      </div> -->
+    <!-- </form> -->
+    <!--Add Step Form-->
+  <!-- </div>  -->
+  <!-- add step section -->
 
 
   <section ng-show="detail.general_recipe_comment" class="gen-recipe-comment">
@@ -138,35 +142,43 @@
 
 
   <!--Brew notes -->
-  <section class="brew-notes">
+  <!-- <section class="brew-notes">
     <div class="brew-notes-heading">
       <h3>Brew Notes</h3>
       <img class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign.svg"/>
     </div>
     <section class="brew-form hidden" >
-      <form class="add-note">
+      <form class="add-note"> -->
             <!-- <label>Add Brew Note</label> -->
-            <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
+            <!-- <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
             <a class="save-note clicker-button" ng-click="addBrewNote()">Save Note</a>
-      </form>
-    </section> <!-- add brewnote section -->
-    <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
+      </form> -->
+    <!-- </section>  -->
+    <!-- add brewnote section -->
+    <!-- <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
       <div class="note-view{{note.id}}" ng-click="showNoteIcons(note.id)">
         <div class="note-body">{{note.body}}</div>
         <div class="note-date">-{{note.timestamp | date}}</div>
-        <div class="note-icons {{note.id}} hidden">
-          <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/Edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
-          <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/Delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
-        </div>
+        <div class="note-icons {{note.id}} hidden"> -->
+          <!-- <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/Edit-25.svg"/> -->
+          <!--Created by Daniel Boros from the Noun Project-->
+          <!-- <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/Delete-25.svg"/> -->
+          <!--Created by Pham Thi Dieu Linh from the Noun Project-->
+        <!-- </div>
       </div>
         <article class="edit-note{{note.id}} hidden">
-          <form class="edit-note"><!--edit brew-note form-->
-              <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
-              <a class="save-edit clicker-button" ng-click="editNote(note)">Save Edit</a>
-          </form><!--END edit-note form-->
-        </article><!--END edit-note article-->
-    </div> <!-- .notes -->
-  </section><!-- end section.brew-notes -->
+          <form class="edit-note"> -->
+            <!--edit brew-note form-->
+              <!-- <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
+              <a class="save-edit clicker-button" ng-click="editNote(note)">Save Edit</a> -->
+          <!-- </form> -->
+          <!--END edit-note form-->
+        <!-- </article> -->
+        <!--END edit-note article-->
+    <!-- </div>  -->
+    <!-- .notes -->
+  <!-- </section> -->
+  <!-- end section.brew-notes -->
 </section><!--.recipe-view-->
 
 
