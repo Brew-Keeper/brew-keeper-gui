@@ -10,6 +10,10 @@
           templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
         })
+        .when('/public/recipes/:id',{
+          templateUrl: 'partials/public-detail.html',
+          controller: 'publicDetail'
+        })
         .when('/users/:username/recipes/new', {
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
