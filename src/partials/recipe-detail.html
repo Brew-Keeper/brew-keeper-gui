@@ -65,7 +65,6 @@
         {{step.duration}} sec
       </div>
       <section class="icons">
-        <!-- <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/> -->
         <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
         <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
       </section>
@@ -85,8 +84,6 @@
           <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
           <section>
           <div class="small-field">
-            <label>Step</label>
-            <!-- <input class="small-field" type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input> -->
           </div>
           <div class="small-field">
             <label>Duration</label>
