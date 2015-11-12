@@ -37,8 +37,8 @@
         {{detail.total_duration}} sec, {{detail.orientation}}
       </section> <!-- end section.brew-time -->
       <section class="details icons">
-        <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
-        <img class="trash-icon" ng-click="EliminateRecipe()" src="img/delete-25.svg"/>
+        <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/Edit-25.svg"/>
+        <img class="trash-icon" ng-click="EliminateRecipe()" src="img/Delete-25.svg"/>
       </section>
     </div><!--end div.details -->
   <!-- <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/edit-25.svg"/>
@@ -51,7 +51,7 @@
 
   <!-- <div class="addSteps" ng-controller="createNewStep"> -->
   <div class="add-steps">
-    <img class="plus-icon" ng-click="showAddSteps()" src="img/plusSign.svg"/>
+    <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign.svg"/>
     <form class="hidden create-new-step"  ng-submit="submit()">
       <section class="columns">
         <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
@@ -89,8 +89,8 @@
       </div>
       <section class="icons">
         <!-- <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/> -->
-        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/>
-        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/delete-25.svg"/>
+        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
+        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
       </section>
     </div> <!-- end step details -->
     <!-- edit step form -->
@@ -139,7 +139,7 @@
   <section class="brew-notes">
     <div class="brew-notes-heading">
       <h3>Brew Notes</h3>
-      <img class="plus-icon" ng-click="showAddBrewNote()" src="img/plusSign.svg"/>
+      <img class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign.svg"/>
     </div>
     <section class="brew-form hidden" >
       <form class="add-note">
@@ -153,8 +153,8 @@
         <div class="note-body">{{note.body}}</div>
         <div class="note-date">-{{note.timestamp | date}}</div>
         <div class="note-icons {{note.id}} hidden">
-          <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
-          <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+          <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/Edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
+          <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/Delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
         </div>
       </div>
         <article class="edit-note{{note.id}} hidden">
