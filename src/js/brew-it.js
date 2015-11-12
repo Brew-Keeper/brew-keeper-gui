@@ -143,7 +143,7 @@ angular.module('brewKeeper')
       }//Add Brew Note Form
 
       $(".add-brew-note").on('click', function() {
-        $(".brew-form").removeClass("hidden");
+        $(".brew-form").toggleClass("hidden");
       })
       $(".save-note").on('click', function() {
         $(".brew-form").addClass("hidden");
