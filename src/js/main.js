@@ -7,7 +7,7 @@
           controller: 'WhoAmIController'
         })
         .when('/public',{
-          templateUrl: 'partials/recipe-list.html',
+          templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
         })
         .when('/users/:username/recipes/new', {
