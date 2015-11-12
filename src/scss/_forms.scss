@@ -41,7 +41,6 @@ h3.form-heading {
     font-size: 0.8em;
     text-decoration: none;
     padding: 0.15ex 1.5em;
-    border: 2.3px solid
   }
   &.submit-recipe-edit.clone {
     display: block;
@@ -50,7 +49,6 @@ h3.form-heading {
     float: left;
     font-size: 0.8em;
     text-decoration: none;
-    border: 2.3px solid
   }
   &.submit-recipe-edit.edit {
     display: block;
@@ -58,8 +56,13 @@ h3.form-heading {
     float: left;
     font-size: 0.8em;
     text-decoration: none;
-    border: 2.3px solid
   }
+    &.edit-step {
+      display: block;
+      margin: 2ex 35% 5ex 35%;
+      float: left;
+      font-size: 0.8em;
+    }
 }//.clicker-button
 
 form.login {
@@ -188,11 +191,6 @@ form.edit-recipe.clone {
   }//.columns
 }//form.edit-recipe.clone
 
-
-
-
-
-
 form.edit-recipe {
   .columns {
       display: block;
@@ -241,4 +239,45 @@ form.edit-recipe {
         margin-left: 0.3em;
       }
   }//.columns
-}//form
+}//form.edit-recipe
+
+form.edit-step {
+  .columns {
+    display: block;
+    width: 100%;
+    input {
+      display: block;
+      width: 88%;
+      margin: 1ex 2.6% 1ex;
+    }
+    textarea {
+      height: 8ex;
+      display: block;
+      width: 90%;
+      margin: 1ex 2.5% 0.5ex;
+    }
+    div.small-field {
+      box-sizing: border-box;
+      // outline: 1px solid yellow;
+      display: block;
+      float: left;
+      width: 100% * (1/3);
+      margin: 0.5ex auto 1ex 0;
+      font-size: 0.9em;
+      label {
+        width: 76%;
+        margin: 0 12%;
+      }
+      img {
+        height: 25px;
+        margin: -0.7ex;
+      }
+    }
+    input.small-field {
+      margin-bottom:1.5ex;
+      font-size: 0.9em;
+      width: 60%;
+      margin: 1ex 29% 0 11%;
+    }
+  }//.columns
+}//form.edit-step
