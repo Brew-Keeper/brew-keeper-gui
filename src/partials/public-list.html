@@ -15,7 +15,7 @@
 </nav>
 
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
-  <a href="#users/public/recipes/{{recipe.id}}">{{recipe.title}}</a>
+  <a href="#public/recipes/{{recipe.id}}">{{recipe.title}}</a>
   <span>{{recipe.bean_name}}</span>
   <div class="col-1-2">
     <span>{{recipe.roast}}</span>
