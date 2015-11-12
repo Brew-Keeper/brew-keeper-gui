@@ -73,22 +73,31 @@ angular.module('brewKeeper')
           } //end editStep function
 
           $scope.increaseStep = function(step){
-            console.log("increase step number ")
-            // console.log(step)
+            if(step.step_number >= $rootScope.steps.length){
+              return
+            }
             step.step_number++
-            // console.log(step)
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
                   $rootScope.steps = response.data.steps;
                 })
             })
-          } //end increastStep function
+          } //end increaseStep function
 
 
-          $scope.decreaseStep = function(stepNum){
-            console.log("decrease step number " + stepNum)
-          }
+          $scope.decreaseStep = function(step){
+            if(step.step_number <= 1){
+              return
+            }
+            step.step_number--
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+                .then(function(response){
+                  $rootScope.steps = response.data.steps;
+                })
+            })
+          } //end decreaseStep function
 
           $scope.hideEditStep = function(stepId){
             stepId = "div." + stepId.toString();
