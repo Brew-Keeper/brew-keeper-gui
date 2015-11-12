@@ -6,10 +6,10 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'WhoAmIController'
         })
-        // .when('/visitor',{
-        //   templateUrl: 'partials/recipe-list.html',
-        //   controller: 'publicRecipe'
-        // })
+        .when('/public',{
+          templateUrl: 'partials/recipe-list.html',
+          controller: 'publicRecipe'
+        })
         .when('/users/:username/recipes/new', {
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
@@ -93,7 +93,7 @@
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
           // $location.path('/login');
-          $location.path('/users/public');
+          $location.path('/public');
         })//.error
     })//END WhoAmIController
 

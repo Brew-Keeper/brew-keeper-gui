@@ -2,6 +2,8 @@
 
 angular.module('brewKeeper')
   .controller('recipeList', function($rootScope, $scope, $http, $routeParams, $location){
+
+
       var username = $routeParams.username;
       console.log(username)
 
@@ -35,14 +37,19 @@ angular.module('brewKeeper')
 
   })//end recipe-list controller
 
-  // .controller('publicRecipe', function(){
-  //   console.log("publicRecipe controller")
-  //   $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
-  //     .then(function(response){
-  //       $scope.recipes = response.data;
-  //     })
-  //
-  // })//end publicRecipe controller
+  .controller('publicRecipe', function($http, $scope, $rootScope){
+    console.log("publicRecipe controller")
+    console.log($scope.username)
+
+    $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
+      .then(function(response){
+        $scope.recipes = response.data;
+        console.log($scope.recipes)
+        $scope.username = "public"
+        console.log($scope.username)
+      })
+
+  })//end publicRecipe controller
 
 
 
