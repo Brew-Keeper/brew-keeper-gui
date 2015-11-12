@@ -7,6 +7,12 @@ $brewitInactiveText:#99999d;//inactive text
 $brewitInactiveStep: #abacaf;//Silver Chalice
 $brewitInactiveOf: #b1b2b4;//Magnesium
 
+h3.form-heading {
+  margin-left: 5%;
+  color: $brewitCurrentOf;
+  font-weight: 600;
+}
+
 .clicker-button{
   font-size: 0.8em;
   color:darken($brewitInactive, 54%);
@@ -37,6 +43,15 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     padding: 0.15ex 1.5em;
     border: 2.3px solid
   }
+  &.submit-recipe-edit {
+    display: block;
+    width: 7em;
+    margin: 2ex 30% 5ex 30%;
+    float: left;
+    font-size: 0.8em;
+    text-decoration: none;
+    border: 2.3px solid
+  }
 }//.clicker-button
 
 form.login {
@@ -53,11 +68,6 @@ form.login {
   }
 }//form.login
 
-h3.create-new-recipe {
-  margin-left: 5%;
-  color: $brewitCurrentOf;
-  font-weight: 600;
-}
 form.create-new-recipe {
   .columns {
     display: block;
@@ -72,7 +82,7 @@ form.create-new-recipe {
       width: 84%;
       margin-top: -0.5em;
     }
-    input, textarea, button {
+    input, textarea {
       margin-bottom: 2ex;
     }
     .small-field {
@@ -120,23 +130,78 @@ form.create-new-recipe {
   }
 }//form.create-new-recipe
 
+form.edit-recipe.clone {
+  .columns {
+    display: block;
+    width: 50%;
+    float: left;
+    input {
+      margin: -0.8ex 5% 2ex 5%;
+      width: 79%;
+    }
+    input.small-field {
+      margin-right: 0.2em;
+    }
+    select {
+      width: 84%;
+      margin: -0.5em 5% 2ex 5%;
+    }
+    select.small-field {
+      width: 40%;
+      margin-left: 0.4em;
+      margin-right: 0;
+      margin-bottom: -.5em
+    }
+    .small-field {
+      display: inline;
+      font-size: 0.9em;
+      margin-top: -0.5em;
+      margin-bottom: 1em;
+      float: left;
+      box-sizing: border-box;
+      width: 40%;
+    }
+    &.general {
+      display: block;
+      width: 100%;
+      margin: 0;
+      input, textarea {
+        display: block;
+        width: 90%;
+        margin: 1ex 2.5% 2ex;
+      }
+    }//&.general
+    .details-legend {
+      color: $brewitInactiveStep;
+      font-size: 1.2em;
+      font-weight: 500;
+      margin-left: 0.3em;
+    }
+  }//.columns
+}//form.edit-recipe.clone
+
+
+
+
+
+
 form {
   .columns {
-  //   display: block;
-  //   width: 50%;
-  //   float: left;
-  //   label, input, select, textarea, legend {
-  //     display: block;
-  //     width: 80%;
-  //     margin: 1ex 5%;
-  //   }
-  //   select {
-  //     width: 84%;
-  //     margin-top: -0.5em;
-  //   }
-  //   input, textarea, button {
-  //     margin-bottom: 2ex;
-  //   }
+    // display: block;
+    // width: 50%;
+    // float: left;
+    // label, input, select, textarea, legend {
+    //   display: block;
+    //   width: 80%;
+    //   margin: 1ex 5%;
+    // }
+    // select {
+    //   width: 84%;
+    //   margin-top: -0.5em;
+    // }
+    // input, textarea, button {
+    //   margin-bottom: 2ex;
+    // }
     // .small-field {
     //   display: inline;
     //   font-size: 0.9em;
@@ -167,18 +232,23 @@ form {
     //     margin-bottom: 2ex;
     //   }
     // }//&.general
-    &.steps {
-      width: 100%;
-      label {
-        display: inline-block;
-        width: 100% * (3/10);
-      }
-
-      input {
-        display: inline-block;
-        width: 5ex;
-        margin-right: 100% * (4/10);
-      }
-    }
+    // &.steps {
+    //   width: 100%;
+    //   label {
+    //     display: inline-block;
+    //     width: 100% * (3/10);
+    //   }
+    //
+    //   input {
+    //     display: inline-block;
+    //     width: 5ex;
+    //     margin-right: 100% * (4/10);
+    //   }
+    // }
+    // .details-legend {
+    //   color: $brewitInactiveStep;
+    //   font-size: 1.2em;
+    //   font-weight: 500;
+    // }
   }//.columns
 }//form

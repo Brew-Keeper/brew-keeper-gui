@@ -1,16 +1,16 @@
-<h2>Clone partial</h2>
+<h3 class="form-heading">Edit Clone</h3>
 
 <section class="edit-recipe">
-<form class="edit-recipe" ng-submit="finishClone(recipe)">
+<form class="edit-recipe clone" ng-submit="finishClone(recipe)">
   <section class="columns general">
-  <fieldset>
-    <input placeholder="Title *" maxlength="50"  ng-model="recipe.title" required></input>
-    <textarea placeholder="Comments"  ng-model="recipe.general_recipe_comment"></textarea>
-  </fieldset><!--General Details-->
+    <fieldset>
+      <input placeholder="Title *" maxlength="50"  ng-model="recipe.title" required></input>
+      <textarea placeholder="Comments"  ng-model="recipe.general_recipe_comment"></textarea>
+    </fieldset><!--General Details-->
   </section>
   <section class="columns">
     <fieldset>
-      <legend><h4>Bean Details</h4></legend>
+      <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean.svg"/> Details</h4></legend>
       <input maxlength="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
       <select list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast" id="roast" selected="recipe.roast">
         <option value="{{recipe.roast}}" selected>{{recipe.roast}}</option>
@@ -26,8 +26,8 @@
           <option value="Medium">Medium</option>
           <option value="Coarse">Coarse</option>
       </select>
-      <input type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
-      <select id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
+      <input class="small-field" type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
+      <select class="small-field" id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
         <option value="{{recipe.bean_units}}" selected>{{recipe.bean_units}}</option>
         <option value="g">g</option>
         <option value="oz">oz</option>
@@ -37,15 +37,15 @@
   </section>
   <section class="columns">
     <fieldset>
-      <legend><h4>Water Details</h4></legend>
+      <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater.svg"/> Details</h4></legend>
       <select list="water-type" maxlength="50" placeholder="Type" ng-model="recipe.water_type">
           <option value="{{recipe.water_type}}" selected>{{recipe.water_type}} water</option>
           <option value="Tap">Tap</option>
           <option value="Distilled">Distilled</option>
           <option value="Spring">Spring</option>
           <option value="Deionized">Deionized</option>
-      <input type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
-      <select id="water-units" list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
+      <input class="small-field" type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
+      <select class="small-field" id="water-units" list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
         <option value="{{recipe.water_units}}" selected>{{recipe.water_units}}</option>
         <option value="oz">oz</option>
         <option value="cc">cc</option>
