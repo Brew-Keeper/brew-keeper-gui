@@ -66,7 +66,10 @@ angular.module('brewKeeper')
 
           $scope.editStep = function(step){
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
-              .then($scope.hideEditStep(step.id))
+              .then(function() {
+                $scope.hideEditStep(step.id)
+                $scope.showEditStep(step.id)
+              });
           } //end editStep function
 
           $scope.increaseStep = function(step){
