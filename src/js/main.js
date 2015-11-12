@@ -14,7 +14,7 @@
           templateUrl: 'partials/public-detail.html',
           controller: 'publicDetail'
         })
-        .when('public/recipes/:id/brewit', {
+        .when('/public/recipes/:id/brewit', {
           templateUrl: 'partials/public-brewit.html',
           controller: 'brewIt'
         })
