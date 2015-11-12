@@ -6,33 +6,55 @@ $brewitInactive: #ebeced;//lightgray
 $brewitInactiveText:#99999d;//inactive text
 $brewitInactiveStep: #abacaf;//Silver Chalice
 $brewitInactiveOf: #b1b2b4;//Magnesium
+$brewIt: #33B55D; //Brewit-Green
 
 h3.form-heading {
   margin-left: 5%;
   color: $brewitCurrentOf;
   font-weight: 600;
 }
-
 .clicker-button{
-  font-size: 0.8em;
-  color:darken($brewitInactive, 54%);
-  padding: 0.15ex 2.5em;
-  border: 2.3px solid darken($brewitInactive, 29%);
+  box-sizing: border-box;
+  float: left;
+  color:darken($brewitInactive, 75%);
+  border: 2.3px solid darken($brewitInactive, 10%);
   background-color: darken($brewitInactive, 10%);
+  text-decoration: none;
+  font-size: 0.9em;
+  text-align: center;
+  &.reset-brew {
+
+  }
+  &.add-brew-note {
+
+  }
+  &.restart-brew {
+
+  }
+  &.cancel-note {
+
+  }
   &.login {
-    background-color: $brewitCurrent;
-    margin-left: 5%;
+    background-color: $brewIt;//brewit-green
+    border: 2.3px solid $brewIt;
+    color: black;
+    width: 100% * (1/4);
+    margin-left: 100% * (3/16);
+    margin-right: 100% * (1/8);
+    margin-top: 1ex;
+  }
+  &.show-signup {
+    width: 100% * (1/4);
+    // margin-left: 100% * (3/16);
+    margin-right: 0;
+    margin-top: 1ex;
   }
   &.register {
     display: block;
     margin: 0 5% 5ex 2.5%;
     float: left;
     font-size: 0.8em;
-    text-decoration: none;
-    color:darken($brewitInactive, 54%);
     padding: 0.15ex 1.5em;
-    border: 2.3px solid darken($brewitInactive, 29%);
-    background-color: $brewitCurrent;
     }
   &.addSteps {
     display: block;
@@ -78,16 +100,21 @@ h3.form-heading {
 }//.clicker-button
 
 form.login {
-    width: 90%;
-    margin: 0 5%;
-  .show-signup {
-    float: right;
-    margin-right: 5%;
-    font-size: 0.8em;
-    color:darken($brewitInactive, 54%);
-    padding: 0.15ex 1.5em;
-    border: 2.3px solid darken($brewitInactive, 29%);
-    background-color: darken($brewitInactive, 10%);
+  width: 90%;
+  margin: 0 5%;
+  .columns {
+    display: block;
+    margin-top: 5%;
+    label.login {
+      display: block;
+      width: 100%;
+      margin: 5% 0 2%;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      margin: 1ex 0;
+    }
   }
 }//form.login
 
