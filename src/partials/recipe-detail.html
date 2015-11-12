@@ -54,6 +54,8 @@
   <section class="step-list" ng-repeat="step in steps">
     <div class="num-col">
       {{$index + 1}}
+      <a ng-click="increaseStep(step)">+</a>
+      <a ng-click="decreaseStep(step)">-</a>
     </div> <!-- end number column -->
     <div class="step-details">
       <p>{{step.step_title}}</p>
@@ -84,7 +86,7 @@
           <section>
           <div class="small-field">
             <label>Step</label>
-            <input class="small-field" type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
+            <!-- <input class="small-field" type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input> -->
           </div>
           <div class="small-field">
             <label>Duration</label>

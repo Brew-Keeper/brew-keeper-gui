@@ -71,6 +71,25 @@ angular.module('brewKeeper')
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
               .then($scope.hideEditStep(step.id))
           } //end editStep function
+
+          $scope.increaseStep = function(step){
+            console.log("increase step number ")
+            // console.log(step)
+            step.step_number++
+            // console.log(step)
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+                .then(function(response){
+                  $rootScope.steps = response.data.steps;
+                })
+            })
+          } //end increastStep function
+
+
+          $scope.decreaseStep = function(stepNum){
+            console.log("decrease step number " + stepNum)
+          }
+
           $scope.hideEditStep = function(stepId){
             stepId = "div." + stepId.toString();
             $(stepId).addClass("hidden")
