@@ -77,7 +77,7 @@ angular.module('brewKeeper')
           }
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
-          $scope.submit=function(){ //add step function
+          $scope.addStep=function(){ //add step function
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
