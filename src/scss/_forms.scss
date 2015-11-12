@@ -66,27 +66,26 @@ h3.form-heading {
     font-size: 0.8em;
   }
   &.edit-step {
-    display: block;
-    margin: 2ex 35% 5ex 35%;
-    float: left;
-    font-size: 0.8em;
+    width: 100% * (1/4);
+    margin-left: 100% *(3/8);
+    margin-right: 100% *(3/8);
+    margin-top: 2.5ex;
+    margin-bottom: 2ex;
   }
   &.submit-recipe-edit.clone {
-    display: block;
-    width: 7em;
-    margin: 2ex 30% 5ex 30%;
-    float: left;
-    font-size: 0.8em;
-    text-decoration: none;
+    width: 100% * (1/4);
+    margin-left: 100% *(3/8);
+    margin-right: 100% *(3/8);
+    margin-top: 2.5ex;
+    margin-bottom: 2ex;
   }
   &.submit-recipe-edit.edit {
-    display: block;
-    margin: 2ex 0 5ex 38%;
-    float: left;
-    font-size: 0.8em;
-    text-decoration: none;
+    width: 100% * (1/4);
+    margin-left: 100% *(3/8);
+    margin-right: 100% *(3/8);
+    margin-top: 2.5ex;
+    margin-bottom: 2ex;
   }
-
   &.save-note {
     margin: 0 30%;
     font-size: 0.8em;
