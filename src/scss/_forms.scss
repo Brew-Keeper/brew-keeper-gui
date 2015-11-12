@@ -55,13 +55,21 @@ h3.form-heading {
     margin-right: 100% *(3/8);
     margin-top: 2.5ex;
     }
-  &.addSteps {
+  &.addSteps {//submit form button which shows Add Steps.
+    width: 100% * (1/4);
+    margin-left: 100% *(3/8);
+    margin-right: 100% *(3/8);
+    margin-top: 2.5ex;
+  }
+  &.add-step {
+    margin: 2ex 30% 5ex 30%;
+    font-size: 0.8em;
+  }
+  &.edit-step {
     display: block;
-    margin: 2ex 41% 5ex 41%;
+    margin: 2ex 35% 5ex 35%;
     float: left;
     font-size: 0.8em;
-    text-decoration: none;
-    padding: 0.15ex 1.5em;
   }
   &.submit-recipe-edit.clone {
     display: block;
@@ -78,16 +86,7 @@ h3.form-heading {
     font-size: 0.8em;
     text-decoration: none;
   }
-  &.edit-step {
-    display: block;
-    margin: 2ex 35% 5ex 35%;
-    float: left;
-    font-size: 0.8em;
-  }
-  &.add-step {
-    margin: 2ex 30% 5ex 30%;
-    font-size: 0.8em;
-  }
+
   &.save-note {
     margin: 0 30%;
     font-size: 0.8em;
