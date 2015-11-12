@@ -11,9 +11,9 @@
 </form><!--end form login-->
 
 <section class="more-info register hidden columns general">
-  <h3>Register</h3>
-
   <form name="registration" class="register hidden" ng-controller="signupController" ng-submit="submit(registration.confirmPassword.$error.match)">
+  <label>Register</label>
+
     <div class="columns general">
       <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
       <input class="register-email" type="email" name="email" placeholder=" email" ng-model="users.email" required>
