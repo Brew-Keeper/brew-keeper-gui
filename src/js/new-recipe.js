@@ -5,10 +5,12 @@ angular.module('brewKeeper')
     $scope.recipe = { }
     $scope.recipe.orientation = "Standard";
 
-    $scope.submit=function(){
+    $scope.createNew=function(){
       var username = ""
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
+        $("form-placeholder").removeClass("changed")
+
           username = response.data.username;
           $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/', $scope.recipe)
             .success(function (data) {
@@ -16,10 +18,12 @@ angular.module('brewKeeper')
               $location.path('/users/' + username + '/recipes/' + id);
             })
         $scope.recipe= { };
-
       })
   } //end submit function
 
+  $(".form-placeholder").on("change", function(){
+    $(this).addClass("changed");
+  })
   })//controller for creating new step
 
 })();//END IFEE
