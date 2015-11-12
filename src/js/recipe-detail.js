@@ -42,12 +42,9 @@ angular.module('brewKeeper')
             $(stepId).toggleClass("hidden")
           };
 
-          // $scope.showNotes = function(){
-          //   $("div.notes").toggleClass("hidden")
-          // };
           $scope.showEditStep = function(stepId){
             stepId = "div." + stepId.toString();
-            $(stepId).toggleClass("hidden")
+            $(stepId).toggleClass("hidden");
           }
 
           $scope.deleteStep = function(stepNumber, stepId){

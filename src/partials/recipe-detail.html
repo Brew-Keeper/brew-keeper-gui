@@ -57,18 +57,19 @@
       <a ng-click="increaseStep(step)">v</a>
       <a ng-click="decreaseStep(step)">^</a>
     </div> <!-- end number column -->
-    <div class="step-details">
+    <div class="step-details {{step.id}}">
       <p>{{step.step_title}}</p>
       <p class="step-details">{{step.step_body}}</p>
-      <div class="duration">
+      <div class="duration {{step.id}}">
         <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}, </span>
         {{step.duration}} sec
       </div>
+    </div> <!-- end step details -->
+
       <section class="icons">
         <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
         <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
       </section>
-    </div> <!-- end step details -->
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
       <form class="edit-step">
