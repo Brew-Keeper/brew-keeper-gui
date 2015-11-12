@@ -2,6 +2,7 @@
     color: #a9a9a9;
     margin: 0;
     padding: 0;
+    font-size: 1.2em;
 }
 ul.rating {
     display: inline-block;
@@ -15,5 +16,5 @@ ul.rating {
     cursor: pointer;
 }
 .rating .filled {
-    color: black;
+    color: $brewit-button-color;
 }

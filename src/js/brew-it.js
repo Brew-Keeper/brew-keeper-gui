@@ -6,6 +6,7 @@ angular.module('brewKeeper')
         var id = $routeParams.id;
         var username =$routeParams.username;
         $scope.username = $routeParams.username;
+        $scope.showStars = false;
 
         $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
           .then(function(response){
@@ -13,6 +14,9 @@ angular.module('brewKeeper')
             $scope.steps = response.data.steps;
             $scope.notes = response.data.brewnotes;
             $scope.countdownVal = response.data.total_duration;
+            $scope.ratings = [{
+                max: 5
+            }];
           });
 
         //load the data if the page is manually reset
@@ -65,8 +69,10 @@ angular.module('brewKeeper')
           $(".step").addClass("inactive-step")
           $("a[href].restart-brew").addClass("hidden");
           $("a[href].add-brew-note").addClass("hidden");
+          // $(".rating").addClass("hidden");
           $("a[href].reset-brew").removeClass("hidden");
           $('timer')[0].start();
+          $scope.showStars = false;
         }
 
         // $scope.stopBrew = function(){
@@ -82,8 +88,9 @@ angular.module('brewKeeper')
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
           $("a[href].add-brew-note").removeClass("hidden");
+          // $(".rating").removeClass("hidden");
           $("a[href].reset-brew").addClass("hidden");
-
+          $scope.showStars = true;
           timerRunning = false;
 
           //getting the data again solves the timers not
@@ -136,7 +143,7 @@ angular.module('brewKeeper')
       }//Add Brew Note Form
 
       $(".add-brew-note").on('click', function() {
-        $(".brew-form").removeClass("hidden");
+        $(".brew-form").toggleClass("hidden");
       })
       $(".save-note").on('click', function() {
         $(".brew-form").addClass("hidden");
@@ -145,6 +152,10 @@ angular.module('brewKeeper')
         $(".brew-form").addClass("hidden");
       });//Cancel BrewNote form
 
+      $scope.rateRecipe = function (rating, id) {
+        var newRating = {"rating": rating}
+        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
+      }
 
     }) //end brewit controller
 })();//END Angular IIFE
