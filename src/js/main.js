@@ -14,6 +14,10 @@
           templateUrl: 'partials/public-detail.html',
           controller: 'publicDetail'
         })
+        .when('public/recipes/:id/brewit', {
+          templateUrl: 'partials/public-brewit.html',
+          controller: 'brewIt'
+        })
         .when('/users/:username/recipes/new', {
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
