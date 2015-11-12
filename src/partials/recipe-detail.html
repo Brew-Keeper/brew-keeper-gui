@@ -53,7 +53,7 @@
   <div class="add-steps">
     <img class="plus-icon" ng-click="showAddSteps()" src="img/plusSign.svg"/>
     <form class="hidden create-new-step"  ng-submit="submit()">
-      <section class="columns general">
+      <section class="columns">
         <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
           <datalist id="step-title">
             <option value="Pour">
@@ -70,7 +70,7 @@
         <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
       </section>
       <div class="columns general">
-        <button type="submit">Add Step</button>
+        <a class="clicker-button add-step" ng-click="addStep()">Add Step</a>
       </div>
     </form><!--Add Step Form-->
   </div> <!-- add step section -->
@@ -142,10 +142,10 @@
       <img class="plus-icon" ng-click="showAddBrewNote()" src="img/plusSign.svg"/>
     </div>
     <section class="brew-form hidden" >
-      <form ng-submit="addBrewNote()">
+      <form class="add-note">
             <!-- <label>Add Brew Note</label> -->
             <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
-            <button class="save-note" type="submit">Save Note</button>
+            <a class="save-note clicker-button" ng-click="addBrewNote()">Save Note</a>
       </form>
     </section> <!-- add brewnote section -->
     <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
@@ -158,9 +158,9 @@
         </div>
       </div>
         <article class="edit-note{{note.id}} hidden">
-          <form class="edit-note" ng-submit="editNote(note)"><!--edit brew-note form-->
+          <form class="edit-note"><!--edit brew-note form-->
               <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
-              <button class="save-note" type="submit">Save Edit</button>
+              <a class="save-edit clicker-button" ng-click="editNote(note)">Save Edit</a>
           </form><!--END edit-note form-->
         </article><!--END edit-note article-->
     </div> <!-- .notes -->
