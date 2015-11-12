@@ -49,36 +49,13 @@
 
   <!-- <button>Make Public</button> -->
 
-  <!-- <div class="addSteps" ng-controller="createNewStep"> -->
-  <div class="add-steps">
-    <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign.svg"/>
-    <form class="hidden create-new-step"  ng-submit="submit()">
-      <section class="columns">
-        <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
-          <datalist id="step-title">
-            <option value="Pour">
-            <option value="Bloom">
-            <option value="Steep">
-            <option value="Plunge">
-          </datalist>
-        </input>
-        <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
-      <!-- </section>
-      <section class="columns steps"> -->
-        <input type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
-        <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
-        <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
-      </section>
-      <div class="columns general">
-        <a class="clicker-button add-step" ng-click="addStep()">Add Step</a>
-      </div>
-    </form><!--Add Step Form-->
-  </div> <!-- add step section -->
 
   <!-- steps section -->
   <section class="step-list" ng-repeat="step in steps">
     <div class="num-col">
       {{$index + 1}}
+      <a ng-click="increaseStep(step)">v</a>
+      <a ng-click="decreaseStep(step)">^</a>
     </div> <!-- end number column -->
     <div class="step-details">
       <p>{{step.step_title}}</p>
@@ -88,7 +65,6 @@
         {{step.duration}} sec
       </div>
       <section class="icons">
-        <!-- <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/edit-25.svg"/> -->
         <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
         <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
       </section>
@@ -102,14 +78,13 @@
               <option value="Pour">
               <option value="Bloom">
               <option value="Steep">
+              <option value="Flip">
               <option value="Plunge">
             </datalist>
           </input>
           <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
           <section>
           <div class="small-field">
-            <label>Step</label>
-            <input class="small-field" type="number" placeholder="Step Number *" ng-model="step.step_number" min="1" max="32767" required></input>
           </div>
           <div class="small-field">
             <label>Duration</label>
@@ -125,6 +100,33 @@
       </form><!--edit Step Form-->
     </div> <!-- edit step form div -->
   </section><!-- end steps section -->
+
+  <!-- <div class="addSteps" ng-controller="createNewStep"> -->
+  <div class="add-steps">
+    <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign.svg"/>
+    <form class="hidden create-new-step"  ng-submit="submit()">
+      <section class="columns">
+        <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+          <datalist id="step-title">
+            <option value="Pour">
+            <option value="Bloom">
+            <option value="Steep">
+            <option value="Flip">
+            <option value="Plunge">
+          </datalist>
+        </input>
+        <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+      <!-- </section>
+      <section class="columns steps"> -->
+        <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+        <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
+      </section>
+      <div class="columns general">
+        <a class="clicker-button add-step" ng-click="addStep()">Add Step</a>
+      </div>
+    </form><!--Add Step Form-->
+  </div> <!-- add step section -->
+
 
   <section ng-show="detail.general_recipe_comment" class="gen-recipe-comment">
     <p>{{detail.general_recipe_comment}}<p>

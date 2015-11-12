@@ -71,6 +71,34 @@ angular.module('brewKeeper')
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
               .then($scope.hideEditStep(step.id))
           } //end editStep function
+
+          $scope.increaseStep = function(step){
+            if(step.step_number >= $rootScope.steps.length){
+              return
+            }
+            step.step_number++
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+                .then(function(response){
+                  $rootScope.steps = response.data.steps;
+                })
+            })
+          } //end increaseStep function
+
+
+          $scope.decreaseStep = function(step){
+            if(step.step_number <= 1){
+              return
+            }
+            step.step_number--
+            $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
+              $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+                .then(function(response){
+                  $rootScope.steps = response.data.steps;
+                })
+            })
+          } //end decreaseStep function
+
           $scope.hideEditStep = function(stepId){
             stepId = "div." + stepId.toString();
             $(stepId).addClass("hidden")
@@ -78,6 +106,7 @@ angular.module('brewKeeper')
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
           $scope.addStep=function(){ //add step function
+            $scope.step.step_number = $scope.steps.length + 1;
             $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
               $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
                 .then(function(response){
