@@ -13,6 +13,10 @@ angular.module('brewKeeper')
             $scope.steps = response.data.steps;
             $scope.notes = response.data.brewnotes;
             $scope.countdownVal = response.data.total_duration;
+            console.log($scope.detail.rating)
+            $scope.ratings = [{
+                max: 5
+            }];
           });
 
         //load the data if the page is manually reset

@@ -6,6 +6,12 @@
     <a href="" class="reset-brew" ng-click="resetBrew()">RESET</a>
     <a href="" class="hidden restart-brew" ng-click="reStartBrew()">Brew Again</a>
     <a href="" class="hidden add-brew-note">Add Brew Note</a>
+    <!--star ratings-->
+    rating: {{detail.rating}}
+    <span class="rating" ng-repeat="rating in ratings">
+      <span star-rating rating-value="detail.rating" max="5" ng-click="rateRecipe(detail.rating, recipe.id)"></span>
+    </span>
+    <!--end star ratings-->
   </nav>
   <section class="brew-form hidden" >
     <form ng-submit="addBrewNote()">
