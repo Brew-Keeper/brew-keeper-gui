@@ -1,7 +1,7 @@
 <h3 class="form-heading">Edit Clone</h3>
 
 <section class="edit-recipe">
-<form class="edit-recipe clone" ng-submit="finishClone(recipe)">
+<form class="edit-recipe clone">
   <section class="columns general">
     <fieldset>
       <input placeholder="Title *" maxlength="50"  ng-model="recipe.title" required></input>
@@ -59,6 +59,6 @@
       </select>
     </fieldset><!--Water Details-->
   </section>
-  <a class="submit-recipe-edit clicker-button" type="submit">Finish Cloning</a>
+  <a class="submit-recipe-edit clicker-button" ng-click="finishClone(recipe)">Finish Cloning</a>
 </form><!--Edit Recipe Form-->
 </section>
