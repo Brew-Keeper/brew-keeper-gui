@@ -7,7 +7,7 @@
     <a href="" class="hidden restart-brew" ng-click="reStartBrew()">Brew Again</a>
     <a href="" class="hidden add-brew-note">Add Brew Note</a>
     <!--star ratings-->
-    <span class="rating" ng-repeat="rating in ratings">
+    <span ng-show="showStars" class="rating" ng-repeat="rating in ratings">
       <span star-rating rating-value="detail.rating" max="5" ng-click="rateRecipe(detail.rating, detail.id)"></span>
     </span>
     <!--end star ratings-->
