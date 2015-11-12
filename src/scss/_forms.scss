@@ -50,11 +50,10 @@ h3.form-heading {
     margin-top: 1ex;
   }
   &.register {
-    display: block;
-    margin: 0 5% 5ex 2.5%;
-    float: left;
-    font-size: 0.8em;
-    padding: 0.15ex 1.5em;
+    width: 100% * (1/4);
+    margin-left: 100% *(3/8);
+    margin-right: 100% *(3/8);
+    margin-top: 2ex;
     }
   &.addSteps {
     display: block;
