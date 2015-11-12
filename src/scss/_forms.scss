@@ -43,10 +43,18 @@ h3.form-heading {
     padding: 0.15ex 1.5em;
     border: 2.3px solid
   }
-  &.submit-recipe-edit {
+  &.submit-recipe-edit.clone {
     display: block;
     width: 7em;
     margin: 2ex 30% 5ex 30%;
+    float: left;
+    font-size: 0.8em;
+    text-decoration: none;
+    border: 2.3px solid
+  }
+  &.submit-recipe-edit.edit {
+    display: block;
+    margin: 2ex 0 5ex 38%;
     float: left;
     font-size: 0.8em;
     text-decoration: none;
@@ -185,70 +193,52 @@ form.edit-recipe.clone {
 
 
 
-form {
+form.edit-recipe {
   .columns {
-    // display: block;
-    // width: 50%;
-    // float: left;
-    // label, input, select, textarea, legend {
-    //   display: block;
-    //   width: 80%;
-    //   margin: 1ex 5%;
-    // }
-    // select {
-    //   width: 84%;
-    //   margin-top: -0.5em;
-    // }
-    // input, textarea, button {
-    //   margin-bottom: 2ex;
-    // }
-    // .small-field {
-    //   display: inline;
-    //   font-size: 0.9em;
-    //   margin-top: -0.5em;
-    //   margin-bottom: .5em;
-    //   float: left;
-    //   box-sizing: border-box;
-    //   width: 40%;
-    // }
-    //   input.small-field {
-    //     margin-right: 0.2em;
-    //   }
-    //   select.small-field {
-    //     width: 40%;
-    //     margin-left: 0.4em;
-    //     margin-right: 0;
-    //     margin-bottom: -.5em
-    //   }
-    // &.general {
-    // width: 90%;
-    // margin: 0 5%;
-    //   label, input, select, textarea, legend {
-    //     display: block;
-    //     width: 95%;
-    //     margin: 1ex 2.5%;
-    //   }
-    //   input, textarea, button {
-    //     margin-bottom: 2ex;
-    //   }
-    // }//&.general
-    // &.steps {
-    //   width: 100%;
-    //   label {
-    //     display: inline-block;
-    //     width: 100% * (3/10);
-    //   }
-    //
-    //   input {
-    //     display: inline-block;
-    //     width: 5ex;
-    //     margin-right: 100% * (4/10);
-    //   }
-    // }
-    // .details-legend {
-    //   color: $brewitInactiveStep;
-    //   font-size: 1.2em;
-    //   font-weight: 500;
-    // }
+      display: block;
+      width: 50%;
+      float: left;
+      input {
+        margin: -0.8ex 5% 2ex 5%;
+        width: 79%;
+      }
+      input.small-field {
+        margin-right: 0.2em;
+      }
+      select {
+        width: 84%;
+        margin: -0.5em 5% 2ex 5%;
+      }
+      select.small-field {
+        width: 40%;
+        margin-left: 0.4em;
+        margin-right: 0;
+        margin-bottom: -.5em
+      }
+      .small-field {
+        display: inline;
+        font-size: 0.9em;
+        margin-top: -0.5em;
+        margin-bottom: 1em;
+        float: left;
+        box-sizing: border-box;
+        width: 40%;
+      }
+      &.general {
+        display: block;
+        width: 100%;
+        margin: 0;
+        input, textarea {
+          display: block;
+          width: 90%;
+          margin: 1ex 2.5% 2ex;
+        }
+      }//&.general
+      .details-legend {
+        color: $brewitInactiveStep;
+        font-size: 1.2em;
+        font-weight: 500;
+        margin-left: 0.3em;
+      }
   }//.columns
 }//form
