@@ -18,6 +18,12 @@
           templateUrl: 'partials/public-brewit.html',
           controller: 'public-brewIt'
         })
+        .when('/login', {
+          templateUrl: 'partials/login.html'
+        })
+        .when('/info', {
+          templateUrl: 'partials/more-info.html'
+        })
         .when('/:username/new', {
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
@@ -41,9 +47,7 @@
         .when('/info', {
           templateUrl: 'partials/more-info.html'
         })
-        .when('/login', {
-          templateUrl: 'partials/login.html'
-        })
+
         // .otherwise({
         //   redirectTo: '/404.html',
         //   templateUrl: 'partials/404.html'
