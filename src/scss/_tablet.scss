@@ -1,20 +1,60 @@
-@media (min-width: 48em) {
+@media (min-width: 28em) {
+  body {
+    background: teal;
+  }
 
- form.login {
-  width:50%;
-  margin: auto 25%;
-}
 
-form.register {
-  width:50%;
-  margin: auto 25%;
-}
+//Recipe List Page
+  nav.recipe-list {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+  section.recipe-list {
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    .col-1-2 {
+      width: 50%;
+      .col-1-4 {
+        width: 9.5em;
+        span.count {
+          margin-left: 2%;
+          img {
+           width: 25px;
+          }//make cup bigger for tablet
+        } //end span.count
+      } //end col-1-4
+      a {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 10em;
+      }
+    } // end col-1-2
+  } //end section.recipe-list
+//END Recipe List Page
 
-section.more-info >article {
-  width: 100%*(9/10);
-  margin-right: 100% *(1/20);
-  margin-left: 100% *(1/20);
 
-}
 
-}
+
+  //Login/Registration Page
+  form.login {
+    width:50%;
+    margin: auto 25%;
+  }
+
+  form.register {
+    width:50%;
+    margin: auto 25%;
+  }
+
+  section.more-info >article {
+    width: 100%*(9/10);
+    margin-right: 100% *(1/20);
+    margin-left: 100% *(1/20);
+  }
+//END Login/Registration Page
+
+
+
+
+}//END @media

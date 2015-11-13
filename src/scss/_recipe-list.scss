@@ -27,7 +27,7 @@ section.recipe-list {
 
     .col-1-4 {
       // @extend .clearfix;
-      width: 100%;
+      width: 88%;
       float: left;
 
       span {
@@ -35,19 +35,19 @@ section.recipe-list {
       }
 
       span.count {
-        margin-left: 7%;
+        margin-left: 2%;
 
-        img {
-             width: 17px;
-           }
+        img {   //See Tablet View
+         width: 17px;
+        }
       } //end span.count
     } //end col-1-4
 
-    a {
+    a {//See Tablet View
       margin-left: 5%;
       width: 90%;
       background-color: $brewit-button-color;
-      float: left;
+      float: right;
       text-align: center;
       padding-top: 5%;
       padding-bottom: 5%;
