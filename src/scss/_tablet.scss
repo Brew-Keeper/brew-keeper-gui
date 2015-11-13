@@ -1,0 +1,20 @@
+@media (min-width: 48em) {
+
+ form.login {
+  width:50%;
+  margin: auto 25%;
+}
+
+form.register {
+  width:50%;
+  margin: auto 25%;
+}
+
+section.more-info >article {
+  width: 100%*(9/10);
+  margin-right: 100% *(1/20);
+  margin-left: 100% *(1/20);
+
+}
+
+}
