@@ -46,8 +46,8 @@
     <section class="step-list" ng-repeat="step in steps">
       <div class="num-col">
         {{$index + 1}}
-        <a ng-click="increaseStep(step)">v</a>
-        <a ng-click="decreaseStep(step)">^</a>
+        <a ng-click="decreaseStep(step)"><img class="down-arrow-icon" src="img/UpArrow-25.svg"/></a>
+        <a ng-click="increaseStep(step)"><img class="up-arrow-icon" src="img/DownArrow-25.svg"/></a>
       </div> <!-- end number column -->
       <div class="step-details {{step.id}}">
         <p>{{step.step_title}}</p>
