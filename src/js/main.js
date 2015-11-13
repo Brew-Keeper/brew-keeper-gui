@@ -44,10 +44,7 @@
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
         })
-        .when('/info', {
-          templateUrl: 'partials/more-info.html'
-        })
-
+        
         // .otherwise({
         //   redirectTo: '/404.html',
         //   templateUrl: 'partials/404.html'
