@@ -45,8 +45,8 @@
   .directive('viewRating', function () {
       return {
           restrict: 'A',
-          template: '<ul class="rating">' +
-              '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
+          template: '<ul class="rating read-only">' +
+              '<li ng-repeat="star in stars" ng-class="star">' +
               '\u2605' +
               // '&#9733' +
               '</li>' +
