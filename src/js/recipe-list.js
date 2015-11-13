@@ -25,7 +25,7 @@ angular.module('brewKeeper')
         }
         $rootScope.steps = $scope.recipes[recipeId].steps;
         $rootScope.detail = $scope.recipes[recipeId];
-        $location.path("/users/" + username + "/recipes/" + id + "/brewit")
+        $location.path("/" + username + "/" + id + "/brewit")
         $(document).scrollTop(0);
       }//end listBrewit function
 
@@ -60,7 +60,7 @@ angular.module('brewKeeper')
         }
         $rootScope.steps = $scope.recipes[recipeId].steps;
         $rootScope.detail = $scope.recipes[recipeId];
-        $location.path("/public/recipes/" + id + "/brewit")
+        $location.path("/public/" + id + "/brewit")
         $(document).scrollTop(0);
       }//end listBrewit function
 
