@@ -15,7 +15,7 @@ angular.module('brewKeeper')
           $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/', $scope.recipe)
             .success(function (data) {
               var id = data.id
-              $location.path('/users/' + username + '/recipes/' + id);
+              $location.path('/' + username + '/' + id);
             })
         $scope.recipe= { };
       })
