@@ -37,16 +37,6 @@ angular.module('brewKeeper')
             };
           }; //end Eliminate function
 
-          $scope.showSteps = function(stepId){
-            stepId= "article." + stepId.toString()
-            $(stepId).toggleClass("hidden")
-          };
-
-          $scope.showEditStep = function(stepId){
-            stepId = "div." + stepId.toString();
-            $(stepId).toggleClass("hidden");
-          }
-
           $scope.deleteStep = function(stepNumber, stepId){
             if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
               $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/").then(function(){
@@ -62,15 +52,28 @@ angular.module('brewKeeper')
             }
           } //end deleteStep function
 
+          // $scope.showSteps = function(stepId){
+          //   stepId= "div." + stepId.toString()
+          //   $(stepId).removeClass("hidden")
+          // };
 
+          $scope.hideEditStep = function(stepId){
+            stepId = "div." + stepId.toString();
+            $(stepId).toggleClass("hidden")
+          }
 
           $scope.editStep = function(step){
             $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
               .then(function() {
                 $scope.hideEditStep(step.id)
-                $scope.showEditStep(step.id)
+                // $scope.showEditSteps(step.id)
               });
           } //end editStep function
+
+          $scope.showEditStep = function(stepId){
+            stepId = "div." + stepId.toString();
+            $(stepId).toggleClass("hidden");
+          }
 
           $scope.increaseStep = function(step){
             if(step.step_number >= $rootScope.steps.length){
@@ -98,11 +101,6 @@ angular.module('brewKeeper')
                 })
             })
           } //end decreaseStep function
-
-          $scope.hideEditStep = function(stepId){
-            stepId = "div." + stepId.toString();
-            $(stepId).addClass("hidden")
-          }
 
           $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
           $scope.addStep=function(){ //add step function

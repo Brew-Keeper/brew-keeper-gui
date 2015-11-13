@@ -61,18 +61,14 @@
       <p>{{step.step_title}}</p>
       <p class="step-details">{{step.step_body}}</p>
       <div class="duration {{step.id}}">
-        <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}, </span>
+        <span ng-show="step.water_amount"><img class="water-icon" src="img/LightWater.svg"/>{{step.water_amount}}  {{detail.water_units}} </span><img class="timer-icon" src="img/LightTimer.svg">
         {{step.duration}} sec
       </div>
     </div> <!-- end step details -->
 
-      <section class=" edit-step-icons">
-        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
-        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
-      </section>
     <!-- edit step form -->
     <div class="hidden edit-step {{step.id}}">
-      <form class="edit-step">
+      <form class="edit-step" ng-submit="editStep(step)">
         <section class="columns">
           <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
             <datalist id="step-title">
@@ -88,18 +84,23 @@
           <div class="small-field">
           </div>
           <div class="small-field">
-            <label>Duration</label>
-            <input class="small-field" type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
-          </div>
-          <div class="small-field">
-            <label><img class="water-icon" src="img/LightWater.svg"/>Amount</label>
+            <label><img class="water-icon" src="img/LightWater.svg"/></label>
             <input class="small-field" type="number" min="0" max="32767" ng-model="step.water_amount"> </input>
           </div>
+          <div class="small-field">
+            <label class="time-label"><img class="timer-icon" src="img/LightTimer.svg"></label>
+            <input class="small-field" type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+          </div>
+
           </section>
         </section>
-          <a class="edit-step clicker-button" ng-click="editStep(step)">Save</a>
+          <button class="edit-step clicker-button" type="submit">Save</button>
       </form><!--edit Step Form-->
     </div> <!-- edit step form div -->
+      <section class=" edit-step-icons">
+        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
+        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
+      </section>
   </section><!-- end steps section -->
 
   <!-- <div class="addSteps" ng-controller="createNewStep"> -->
