@@ -2,7 +2,6 @@
 
 angular.module('brewKeeper')
   .controller('public-brewIt', function($scope, $http, $routeParams, $location, $route, $rootScope){
-    console.log("public-brewit controller")
 
     $(document).scrollTop(0);
     var id = $routeParams.id;
