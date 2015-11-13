@@ -25,7 +25,7 @@
               <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
               <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
               <li><a href="#/info">More Info/About</a></li>
-              <li ng-show="username"><a href="#/users/{{username}}/recipes/new">Create New Recipe</a></li>
+              <li ng-show="username"><a href="#/{{username}}/new">Create New Recipe</a></li>
               <li><a href="#/public">View Public Recipes</a><li>
               <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
             </ul>
