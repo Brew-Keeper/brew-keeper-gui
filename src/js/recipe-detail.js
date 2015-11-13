@@ -225,6 +225,7 @@ angular.module('brewKeeper')
         $scope.addBrewNote=function(){
           $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
           .success(function (data) {
+            $(".brew-form").toggleClass("hidden");
             var id = $scope.id;
             $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
               .then(function(response){
