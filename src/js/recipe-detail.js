@@ -32,7 +32,7 @@ angular.module('brewKeeper')
           $scope.EliminateRecipe = function() {
             if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
               $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/').then(function(){
-                $location.path('/users/'+ username);
+                $location.path('/'+ username);
               })
             };
           }; //end Eliminate function
@@ -181,7 +181,7 @@ angular.module('brewKeeper')
             };//end loop to clone steps
           })
           .then(function(){
-            $location.path("/users/"+ username +"/clone/"+ newRecipeId);
+            $location.path("/"+ username +"/clone/"+ newRecipeId);
           })//end post new recipe
         }; //end recipe clone function
 

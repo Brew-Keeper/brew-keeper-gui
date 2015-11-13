@@ -10,40 +10,44 @@
           templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
         })
-        .when('/public/recipes/:id',{
+        .when('/public/:id',{
           templateUrl: 'partials/public-detail.html',
           controller: 'publicDetail'
         })
-        .when('/public/recipes/:id/brewit', {
+        .when('/public/:id/brewit', {
           templateUrl: 'partials/public-brewit.html',
           controller: 'public-brewIt'
         })
-        .when('/users/:username/recipes/new', {
+        .when('/login', {
+          templateUrl: 'partials/login.html'
+        })
+        .when('/info', {
+          templateUrl: 'partials/more-info.html'
+        })
+        .when('/:username/new', {
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
         })
-        .when('/users/:username/clone/:id', {
+        .when('/:username/clone/:id', {
           templateUrl: 'partials/clone.html',
           controller:  'cloneController'
         })
-        .when('/users/:username/recipes/:id', {
+        .when('/:username/:id', {
           templateUrl: 'partials/recipe-detail.html',
           controller: 'recipeDetail'
         })
-        .when('/users/:username', {
+        .when('/:username', {
           templateUrl: 'partials/recipe-list.html',
           controller: 'recipeList'
         })
-        .when('/users/:username/recipes/:id/brewit', {
+        .when('/:username/:id/brewit', {
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
         })
         .when('/info', {
           templateUrl: 'partials/more-info.html'
         })
-        .when('/login', {
-          templateUrl: 'partials/login.html'
-        })
+
         // .otherwise({
         //   redirectTo: '/404.html',
         //   templateUrl: 'partials/404.html'
@@ -95,7 +99,7 @@
         .then(function(response){
           var username = response.data.username;
           $rootScope.username = username;
-          $location.path('/users/' + username);
+          $location.path('/' + username);
         })//.success
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
