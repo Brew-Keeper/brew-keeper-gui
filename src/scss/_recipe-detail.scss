@@ -97,8 +97,10 @@
 } //end recipe-detail & div.details
 //end bean/water/time detail section of recipe detail view
 
-section.icons {
+section.edit-step-icons {
+  clear:both;
   width: 25%;
+  margin-left: 75%;
   img.edit-icon{
     width: 35px;
   }

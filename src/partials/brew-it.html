@@ -7,16 +7,18 @@
     <a href="" class="hidden restart-brew clicker-button" ng-click="reStartBrew()">Brew Again</a>
     <a href="" class="hidden add-brew-note clicker-button">Add Brew Note</a>
     <!--star ratings-->
-    <span ng-show="showStars" class="rating" ng-repeat="rating in ratings">
+    <div class="stars">
+    <span ng-show="showStars" class="post-brew rating" ng-repeat="rating in ratings">
       <span star-rating rating-value="detail.rating" max="5" ng-click="rateRecipe(detail.rating, detail.id)"></span>
     </span>
+    </div>
     <!--end star ratings-->
   </nav>
   <section class="brew-form hidden" >
     <form ng-submit="addBrewNote()">
       <!-- <label>Add Brew Note</label> -->
       <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
-      <button class="save-note" type="submit">Save Note</button>
+      <button class="save-note clicker-button" type="submit">Save Note</button>
     </form>
   <!-- <a href="" class="cancel-note clicker-button">Cancel Note</a> -->
   </section><!--END brew-form-->

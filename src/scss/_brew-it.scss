@@ -124,7 +124,6 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       text-align: center;
     }
     p.step-body {
-      // outline: 1px solid black;
       font-size: 0.8em;
       text-align: justify;
       margin: -1.6ex 5% -3.1ex 5%;
@@ -158,6 +157,9 @@ div.step.finished {
 }//.step.finished
 
   .brewit-nav {
+    display: block;
+    height: 8.5ex;
+    margin-bottom: 2ex;
     position: relative;
     .brewit-title {
       text-decoration: none;
@@ -165,9 +167,14 @@ div.step.finished {
         color: lighten($brewitCurrentText, 15%);
         font-size: 1.4em;
         font-weight: 600;
-        margin: 1ex 5% 3.7ex;
+        margin-left: 5%;
+        // margin: 1ex 5% 3.7ex;
         opacity: 85%;
       }
+    .stars {
+      display: block;
+      width: 100%;
+    }
     }
     .reset-brew {
       position: absolute;
