@@ -91,7 +91,6 @@
     })//END MainController
 
     .controller('WhoAmIController', function($location, $http, $scope, $rootScope) {
-      console.log("whoami 1")
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           var username = response.data.username;

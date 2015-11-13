@@ -24,8 +24,6 @@ angular.module('brewKeeper')
       if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
         return;
       };
-      console.log("pubic clone function")
-      console.log($rootScope.username)
       var cloneData = {}
       cloneData.title = "Clone of: " + $scope.detail.title;
       cloneData.bean_name = $scope.detail.bean_name;
@@ -40,7 +38,7 @@ angular.module('brewKeeper')
       cloneData.water_units = $scope.detail.water_units;
       cloneData.temp = $scope.detail.temp;
       cloneData.steps = [];
-      console.log(cloneData)
+
       $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ $rootScope.username +"/recipes/", cloneData).success(function(response){
 
         newRecipeId = response.id;
