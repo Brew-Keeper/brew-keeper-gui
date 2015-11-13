@@ -12,7 +12,7 @@
       $scope.finishClone = function(recipe){
         $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe)
           .then(function(){
-            $location.path("/users/"+ username + "/recipes/" + id + "/")
+            $location.path("/"+ username + "/" + id + "/")
           })
       }//end finishClone function
 
