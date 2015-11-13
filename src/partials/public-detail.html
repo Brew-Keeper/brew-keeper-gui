@@ -136,9 +136,12 @@
     <p>{{detail.general_recipe_comment}}<p>
   </section> <!-- end general recipe comment -->
 
-  <div class="clone-button" ng-Click="cloneRecipe(detail)">
+  <div ng-show="username" class="clone-button" ng-click="cloneRecipe(detail)">
     <a>CLONE THIS RECIPE</a>
   </div>
+
+  <a href="#/login"><div ng-hide="username" class="clone-button">Login to Clone this Recipe</div></a>
+
 
 
   <!--Brew notes -->
