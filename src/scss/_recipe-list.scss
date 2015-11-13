@@ -27,7 +27,7 @@ section.recipe-list {
 
     .col-1-4 {
       // @extend .clearfix;
-      width: 88%;
+      width: 110%;
       float: left;
 
       span {
@@ -35,8 +35,8 @@ section.recipe-list {
       }
 
       span.count {
-        margin-left: 2%;
-
+          margin-left: 2%;
+        margin-top: 1ex;
         img {   //See Tablet View
          width: 17px;
         }
