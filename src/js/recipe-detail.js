@@ -242,7 +242,12 @@ angular.module('brewKeeper')
         }
 
         $scope.makePublic = function(){ //makes recipes public
-          if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
+          if ($rootScope.steps.length < 1) {
+            window.alert("Plese add steps to recipe before making it public.")
+            return;
+          };
+
+          if (!window.confirm("Are you sure you want to make this recipe public?")){
             return;
           };
 
