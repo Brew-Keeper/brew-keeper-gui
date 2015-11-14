@@ -136,6 +136,26 @@ form.login {
   }
 }//form.login
 
+form.changeForm {
+  width: 80%;
+  max-width: 15em;
+  margin: 0 10%;
+  .columns.general {
+    display: block;
+    margin-top: 5%;
+    label.changeForm {
+      display: block;
+      width: 100%;
+      margin: 5% 0 2%;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      margin: 1ex 0;
+    }
+  }
+}//form.changeForm
+
 form.create-new-recipe {
   .columns {
     display: block;
