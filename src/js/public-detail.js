@@ -11,7 +11,7 @@ angular.module('brewKeeper')
         $rootScope.detail = response.data;
         $rootScope.steps = response.data.steps;
         $rootScope.notes = response.data.brewnotes;
-        var currentRating = $rootScope.detail.rating;
+        var currentRating = $rootScope.detail.average_rating;
         $scope.rating = 0;
         $scope.ratings = [{
             current: currentRating,
