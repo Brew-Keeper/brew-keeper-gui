@@ -1,6 +1,6 @@
 <section class="recipe-detail">
   <section class="recipe-view">
-    <h3 class="title">{{detail.title}}</h3>
+    <h3 class="title"><a href="#/public">{{detail.title}}</a></h3>
     <!-- star rating -->
     <div class="col-1-3">
       <span ng-repeat="rating in ratings">
@@ -12,7 +12,7 @@
       <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
     </div> -->
     <div class="brew-it-button">
-      <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/public/recipes/{{detail.id}}/brewit">BREW IT!</a>
+      <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/public/{{detail.id}}/brewit">BREW IT!</a>
       <a ng-hide="detail.steps.length" class="no-steps" href="">Add Steps</a>
     </div>
     <div class="details">
@@ -136,9 +136,12 @@
     <p>{{detail.general_recipe_comment}}<p>
   </section> <!-- end general recipe comment -->
 
-  <div class="clone-button" ng-Click="cloneRecipe(detail)">
+  <div ng-show="username" class="clone-button" ng-click="cloneRecipe(detail)">
     <a>CLONE THIS RECIPE</a>
   </div>
+
+  <a href="#/login"><div ng-hide="username" class="clone-button">Login to Clone this Recipe</div></a>
+
 
 
   <!--Brew notes -->

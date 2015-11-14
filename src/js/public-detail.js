@@ -55,7 +55,7 @@ angular.module('brewKeeper')
         };//end loop to clone steps
       })
       .then(function(){
-        $location.path("/users/"+ $rootScope.username +"/clone/"+ newRecipeId);
+        $location.path("/"+ $rootScope.username +"/clone/"+ newRecipeId);
       })//end post new recipe
     }; //end recipe clone function
 

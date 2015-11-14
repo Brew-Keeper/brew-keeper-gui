@@ -10,40 +10,41 @@
           templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
         })
-        .when('/public/recipes/:id',{
+        .when('/public/:id',{
           templateUrl: 'partials/public-detail.html',
           controller: 'publicDetail'
         })
-        .when('/public/recipes/:id/brewit', {
+        .when('/public/:id/brewit', {
           templateUrl: 'partials/public-brewit.html',
           controller: 'public-brewIt'
-        })
-        .when('/users/:username/recipes/new', {
-          templateUrl: 'partials/recipe-create.html',
-          controller: 'createNewRecipe'
-        })
-        .when('/users/:username/clone/:id', {
-          templateUrl: 'partials/clone.html',
-          controller:  'cloneController'
-        })
-        .when('/users/:username/recipes/:id', {
-          templateUrl: 'partials/recipe-detail.html',
-          controller: 'recipeDetail'
-        })
-        .when('/users/:username', {
-          templateUrl: 'partials/recipe-list.html',
-          controller: 'recipeList'
-        })
-        .when('/users/:username/recipes/:id/brewit', {
-          templateUrl: 'partials/brew-it.html',
-          controller: 'brewIt'
-        })
-        .when('/info', {
-          templateUrl: 'partials/more-info.html'
         })
         .when('/login', {
           templateUrl: 'partials/login.html'
         })
+        .when('/info', {
+          templateUrl: 'partials/more-info.html'
+        })
+        .when('/:username/new', {
+          templateUrl: 'partials/recipe-create.html',
+          controller: 'createNewRecipe'
+        })
+        .when('/:username/clone/:id', {
+          templateUrl: 'partials/clone.html',
+          controller:  'cloneController'
+        })
+        .when('/:username/:id', {
+          templateUrl: 'partials/recipe-detail.html',
+          controller: 'recipeDetail'
+        })
+        .when('/:username', {
+          templateUrl: 'partials/recipe-list.html',
+          controller: 'recipeList'
+        })
+        .when('/:username/:id/brewit', {
+          templateUrl: 'partials/brew-it.html',
+          controller: 'brewIt'
+        })
+        
         // .otherwise({
         //   redirectTo: '/404.html',
         //   templateUrl: 'partials/404.html'
@@ -63,6 +64,13 @@
         .then(function(response){
           $rootScope.username = response.data.username;
         })//This is for populating url with username
+        .catch(function(){
+          $rootScope.username = null; //hides login and shows logout
+          $cookies.remove("Authorization")
+          $http.defaults.headers.common = {}
+          $location.path('/public');
+        })//.error
+
 
     $scope.logout= function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
@@ -90,16 +98,18 @@
 
     })//END MainController
 
-    .controller('WhoAmIController', function($location, $http, $scope, $rootScope) {
+    .controller('WhoAmIController', function($location, $http, $scope, $rootScope, $cookies) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           var username = response.data.username;
           $rootScope.username = username;
-          $location.path('/users/' + username);
+          $location.path('/' + username);
         })//.success
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
           // $location.path('/login');
+          $cookies.remove("Authorization")
+          $http.defaults.headers.common = {}
           $location.path('/public');
         })//.error
     })//END WhoAmIController

@@ -33,6 +33,6 @@
   </div> <!-- end col-1-2 -->
   <div class="col-1-2 button">
     <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)">BREW IT!</a>
-    <a href="#users/{{username}}/recipes/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a>
+    <a href="#{{username}}/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a>
   </div> <!--end col-1-2 -->
 </section><!-- end ng-repeat for recipe list -->
