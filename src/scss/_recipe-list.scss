@@ -35,8 +35,9 @@ section.recipe-list {
       }
 
       span.count {
+        font-size: 0.8em;
           margin-left: 2%;
-        margin-top: 1ex;
+        margin-top: 1.5ex;
         img {   //See Tablet View
          width: 17px;
         }
@@ -44,8 +45,9 @@ section.recipe-list {
     } //end col-1-4
 
     a {//See Tablet View
+      margin-top: 0.6em;
       margin-left: 5%;
-      width: 90%;
+      width: 85%;
       background-color: $brewit-button-color;
       float: right;
       text-align: center;
