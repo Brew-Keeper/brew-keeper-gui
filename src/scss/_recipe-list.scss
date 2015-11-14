@@ -20,8 +20,16 @@ section.recipe-list {
   }
 
   a {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 9em;
     font-weight: bold;
-  }
+    &.recipe-title {
+      display: block;
+      width: 90%;
+      max-width: 90%;
+   }
+}
 
   .col-1-2 {
     // @extend .clearfix;
@@ -32,14 +40,13 @@ section.recipe-list {
       // @extend .clearfix;
       width: 110%;
       float: left;
-
       span {
         float: left;
       }
 
       span.count {
         font-size: 0.8em;
-          margin-left: 2%;
+        margin-left: 2%;
         margin-top: 1.9ex;
         img {   //See Tablet View
          width: 17px;
