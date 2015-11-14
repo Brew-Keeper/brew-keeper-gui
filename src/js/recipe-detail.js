@@ -185,6 +185,7 @@ angular.module('brewKeeper')
           })//end post new recipe
         }; //end recipe clone function
 
+
         $scope.showEditNote = function(noteId) {
           noteView = "div.note-view" + noteId.toString();
           editNote = "article.edit-note" + noteId.toString();
@@ -240,9 +241,14 @@ angular.module('brewKeeper')
           $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
         }
 
+        $scope.makePublic = function(){ //makes recipes public
+          if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
+            return;
+          };
+          console.log("making it public!!!")
+      }; // end makePublic function
+
 
       }) //end recipDetail controller
-
-
 
 })();//END Angular IFEE
