@@ -10,7 +10,7 @@ angular.module('brewKeeper')
       .then(function(response){
         $rootScope.detail = response.data;
         $rootScope.steps = response.data.steps;
-        $rootScope.notes = response.data.brewnotes;
+        $rootScope.comments = response.data.public_comments;
         var currentRating = $rootScope.detail.rating;
         $scope.rating = 0;
         $scope.ratings = [{
@@ -59,7 +59,60 @@ angular.module('brewKeeper')
       })//end post new recipe
     }; //end recipe clone function
 
+    // $scope.showEditNote = function(noteId) {
+    //   noteView = "div.note-view" + noteId.toString();
+    //   editNote = "article.edit-note" + noteId.toString();
+    //   $(noteView).addClass("hidden")
+    //   $(editNote).removeClass("hidden")
+    // }
+      // $scope.showEditStep = function(stepId){
+      //   stepId = "div." + stepId.toString();
+      //   $(stepId).removeClass("hidden")
+      // }
 
+    // $scope.editNote = function(note){
+    //   var note_id = note.id
+    //   $http.put("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + note_id + "/", note)
+    //   .then( function () {
+    //     $(editNote).addClass("hidden");
+    //     $(noteView).removeClass("hidden");
+    //   })
+    // } //end editNote function
+
+    // $scope.deleteNote = function(noteId) {
+    //   var noteId = noteId
+    //   if (window.confirm("Are you sure you want to delete this note?")){
+    //     $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + noteId + "/")
+    //     .then(function(){var id = $scope.id;
+    //     $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
+    //       .then(function(response){
+    //         $rootScope.notes = response.data.brewnotes;
+    //       })
+    //     })
+    //   };
+    // }; //end deleteNote function
+
+    $scope.showAddBrewNote = function(){
+      $(".brew-form").toggleClass("hidden");
+    };
+
+    $scope.addBrewNote=function(){
+      $http.post('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + '/comments/', $scope.comment)
+      .success(function (data) {
+        $(".brew-form").toggleClass("hidden");
+        var id = $scope.id;
+        $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
+          .then(function(response){
+            $rootScope.comments = response.data.public_comments;
+          })
+      })
+    $scope.comment = { };
+    $scope.addNote = false;
+    }//Add Brew Note Form
+
+    $scope.showNoteIcons = function(noteId){
+      $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+    }
 
   }) //end recipDetail controller
 })();//END Angular IFEE
