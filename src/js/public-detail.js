@@ -5,6 +5,8 @@ angular.module('brewKeeper')
     var id = $routeParams.id;
     $scope.id = $routeParams.id;
     $(document).scrollTop(0);
+    var ratingId = null;
+    var userRating = 0;
 
     $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
       .then(function(response){
@@ -17,6 +19,26 @@ angular.module('brewKeeper')
             current: currentRating,
             max: 5
         }];
+
+
+        $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/ratings/")
+        .then(function(response){
+          var publicRatings = response.data;
+            publicRatings.forEach(function(rating){
+              if (rating.username == $rootScope.username){
+                ratingId = rating.id;
+                userRating = rating.public_rating;
+
+              }
+              return userRating, ratingId
+            })
+        })
+
+        $scope.userRating = userRating;
+        $scope.userRatings = [{
+          current: userRating,
+          max: 5
+        }]
     }) //end http.get
 
     // Function for cloning public recipes
@@ -61,8 +83,16 @@ angular.module('brewKeeper')
 
     $scope.rateRecipe = function (rating) {
       var newRating = {"public_rating": rating}
-      console.log(newRating)
-      $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
+      if(!ratingId) {
+        console.log("new rating")
+        console.log(newRating)
+        $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
+      }
+      if(ratingId) {
+        console.log("update rating")
+        console.log(newRating)
+        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/" + ratingId + "/", newRating)
+      }
     }; //end public recipe rating function
 
 

@@ -6,8 +6,8 @@
       Avg: <span ng-repeat="rating in ratings">
       <div view-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
       </span>
-      Your Rating: <span ng-repeat="rating in ratings">
-      <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
+      Your Rating: <span ng-repeat="userRating in userRatings">
+      <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="rateRecipe(userRating.current)"></div>
       </span>
     </div>
     <!-- end star rating -->
