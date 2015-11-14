@@ -246,6 +246,33 @@ angular.module('brewKeeper')
             return;
           };
           console.log("making it public!!!")
+          var publicData = {}  //build the recipe
+          publicData.title = "Public Copy of: " + $scope.detail.title;
+          publicData.bean_name = $scope.detail.bean_name;
+          publicData.roast = $scope.detail.roast;
+          publicData.orientation = $scope.detail.orientation;
+          publicData.general_recipe_comment = $scope.detail.general_recipe_comment;
+          publicData.grind = $scope.detail.grind;
+          publicData.total_bean_amount = $scope.detail.total_bean_amount;
+          publicData.bean_units = $scope.detail.bean_units;
+          publicData.water_type = $scope.detail.water_type;
+          publicData.total_water_amount = $scope.detail.total_water_amount;
+          publicData.water_units = $scope.detail.water_units;
+          publicData.temp = $scope.detail.temp;
+          publicData.steps = [];
+          console.log(publicDatas)
+
+          steps = []; //build the steps
+          for(step in $scope.detail.steps){
+            steps[step] = {};
+            steps[step].step_number = $scope.detail.steps[step].step_number;
+            steps[step].step_title = $scope.detail.steps[step].step_title;
+            steps[step].step_body = $scope.detail.steps[step].step_body;
+            steps[step].duration = $scope.detail.steps[step].duration;
+            steps[step].water_amount = $scope.detail.steps[step].water_amount;
+          }
+
+          console.log(steps);
       }; // end makePublic function
 
 
