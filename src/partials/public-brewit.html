@@ -4,10 +4,10 @@
     <!-- <p ng-show="detail.rating"><strong>Rating: </strong>{{detail.rating}}</p> -->
     <!-- <p ng-show="detail.brew_count"><strong>Brew Count: </strong>{{detail.brew_count}}</p> -->
     <a href="" class="reset-brew clicker-button" ng-click="resetBrew()">RESET</a>
-    <a href="" class="hidden restart-brew clicker-button" ng-click="reStartBrew()">Brew Again</a>
+    <a href="" class="hidden restart-brew  public clicker-button" ng-click="reStartBrew()">Brew Again</a>
     <!-- <a href="" class="hidden add-brew-note clicker-button">Add Brew Note</a> -->
     <!--star ratings-->
-    <span ng-show="showStars" class="rating" ng-repeat="rating in ratings">
+    <span ng-show="showStars" class="rating public" ng-repeat="rating in ratings">
       <span view-rating rating-value="detail.rating" max="5"></span>
     </span>
     <!--end star ratings-->
