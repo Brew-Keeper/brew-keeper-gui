@@ -245,7 +245,7 @@ angular.module('brewKeeper')
           if (!window.confirm("Are you sure you want to clone "+ $scope.detail.title +" ?")){
             return;
           };
-          console.log("making it public!!!")
+
           var publicData = {}  //build the recipe
           publicData.title = "Public Copy of: " + $scope.detail.title;
           publicData.bean_name = $scope.detail.bean_name;
@@ -260,19 +260,28 @@ angular.module('brewKeeper')
           publicData.water_units = $scope.detail.water_units;
           publicData.temp = $scope.detail.temp;
           publicData.steps = [];
-          console.log(publicDatas)
 
-          steps = []; //build the steps
-          for(step in $scope.detail.steps){
-            steps[step] = {};
-            steps[step].step_number = $scope.detail.steps[step].step_number;
-            steps[step].step_title = $scope.detail.steps[step].step_title;
-            steps[step].step_body = $scope.detail.steps[step].step_body;
-            steps[step].duration = $scope.detail.steps[step].duration;
-            steps[step].water_amount = $scope.detail.steps[step].water_amount;
-          }
+          $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/", publicData).success(function(response){
 
-          console.log(steps);
+            newRecipeId = response.id;
+
+            steps = []; //build the steps
+            for(step in $scope.detail.steps){
+              steps[step] = {};
+              steps[step].step_number = $scope.detail.steps[step].step_number;
+              steps[step].step_title = $scope.detail.steps[step].step_title;
+              steps[step].step_body = $scope.detail.steps[step].step_body;
+              steps[step].duration = $scope.detail.steps[step].duration;
+              steps[step].water_amount = $scope.detail.steps[step].water_amount;
+
+              $http.post("https://brew-keeper-api.herokuapp.com/api/users/pubic/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
+
+            } //end for loop to build steps
+          }) //end .success for posting new recipe to public
+          .then(function(){
+            window.alert("Thank you for sharing " + $scope.detail.title)
+          })
+
       }; // end makePublic function
 
 
