@@ -1,8 +1,11 @@
 nav.recipe-list {
   margin: 5% 5% -5%;
-
+  input {
+    width: 40%;
+  }
   select {
     float: right;
+    margin-right: 2%;
   }
 }
 
@@ -37,7 +40,7 @@ section.recipe-list {
       span.count {
         font-size: 0.8em;
           margin-left: 2%;
-        margin-top: 1.5ex;
+        margin-top: 1.9ex;
         img {   //See Tablet View
          width: 17px;
         }
@@ -48,6 +51,7 @@ section.recipe-list {
       margin-top: 0.6em;
       margin-left: 5%;
       width: 85%;
+      margin-right: 5%;
       background-color: $brewit-button-color;
       float: right;
       text-align: center;

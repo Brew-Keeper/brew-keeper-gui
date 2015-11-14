@@ -72,15 +72,15 @@ h3.form-heading {
     margin-top: 2.5ex;
   }
   &.add-step {
-    margin: 2ex 30% 5ex 30%;
+    margin: -5ex 0 5ex 2%;
     font-size: 0.8em;
   }
   &.edit-step {
     float: left;
-    width: 100% * (1/4);
-    margin-left: 100% *(4/8);
-    margin-top: -2.2ex;
-    margin-right: 0;
+    width: 100% * (1/5);
+    // margin-left: 100% *(3/5);
+    // margin-top: -2.2ex;
+    margin-right: 2em;
     margin-bottom: 0;
   }
   &.submit-recipe-edit.clone {
