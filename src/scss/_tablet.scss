@@ -6,6 +6,12 @@
     .logo {
       width:14em;
     }
+  nav.menu {
+    &.hamburger::before {
+      font-size: 3.5em;
+      top: -0.5ex;
+    }
+  }
 }
   //BrewIt Page
 .brewit-page{

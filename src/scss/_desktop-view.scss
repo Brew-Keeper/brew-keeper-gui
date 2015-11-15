@@ -30,7 +30,9 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
           margin-left: 0.7em;
           a {
             text-decoration: none;
-
+            &:hover {
+              color: $brewitCurrent;
+            }
           }
         }
       }
