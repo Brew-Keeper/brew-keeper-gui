@@ -8,8 +8,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link href='https://fonts.googleapis.com/css?family=Josefin+Slab:400,700,600,300,100' rel='stylesheet' type='text/css'> -->
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
-        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="img/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="img/favicons/android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="img/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="img/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="favicons/manifest.json">
+        <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#33b55d">
+        <meta name="msapplication-TileColor" content="#00a300">
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+        <meta name="theme-color" content="#33b55d">
+
+
         <!-- bower:css -->
         <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css" />
         <!-- endbower -->
@@ -17,15 +36,16 @@
     </head>
     <body  ng-app="brewKeeper" ng-controller="MainController">
         <heading class="heading">
-          <h1><a href="#/">Brew Keeper</a><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project-->
-</h1>
+          <a  class="logo" href="#/"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
           <nav class="menu hamburger">
             <ul class="menu">
-              <li class="login"><a href="#/login">Login/Signup</a></li>
-              <li class="logout"><a ng-click="logout()" href="#/login">Logout</a></li>
-              <li class="logout"><a href="#/users/{{username}}/recipes/new">Create New Recipe</a></li>
+              <li ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login/Signup</a></li>
+              <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
+              <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
+              <li><a href="#/info">About</a></li>
+              <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
+              <li><a href="#/public">View Public Recipes</a><li>
               <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
-              <li><a href="#/info">More info/About</a></li>
             </ul>
           </nav>
         </heading>
@@ -47,18 +67,23 @@
       <script src="../bower_components/humanize-duration/humanize-duration.js"></script>
       <script src="../bower_components/angular-timer/dist/angular-timer.js"></script>
       <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="../bower_components/angular-validation-match/dist/angular-validation-match.js"></script>
       <!-- endbower -->
       <script src="js/plugins.js"></script>
       <script src="js/main.js"></script>
       <script src="js/recipe-list.js"></script>
-      <script src="js/hamburger.js"></script>
       <script src="js/login.js"></script>
       <script src="js/new-recipe.js"></script>
       <script src="js/recipe-detail.js"></script>
       <script src="js/brew-it.js"></script>
-      <script src="js/rating.js"
+      <script src="js/rating.js"></script>
+      <script src="js/clone.js"></script>
+      <script src="js/public-detail.js"></script>
+      <script src="js/public-brewit.js"></script>
+
 
       </script>
+
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
       <script>
           (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -1,0 +1,211 @@
+@media (min-width: 28em) {
+  body {
+    background: white;
+  }
+.heading {
+    img.logo {
+      width:14em;
+    }
+    a[href].logo {
+      display: block;
+      width: 14em;
+   }
+  nav.menu {
+    &.hamburger::before {
+      font-size: 3.5em;
+      top: -0.5ex;
+    }
+  }
+}
+  //BrewIt Page
+.brewit-page{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    h2 {
+    margin-left: 0;
+    margin-right: 5%;
+    padding-bottom: 0.5ex;
+    }
+  div.step.delay{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  div.current-step {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  div.inactive-step {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .clicker-button {
+      &.restart-brew {
+      width: 100% * (1/5);
+      margin-bottom: 2ex;
+    }
+    &.add-brew-note {
+      width: 100% * (1/5);
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+}//END .brewit-page
+  //END BrewIt Page
+
+
+  //Recipe Detail Page
+  .recipe-detail {
+    width: 80%;
+    margin: 0 10%;
+    .recipe-view {
+      img.cup {
+        width: 25px;//See recipe-detail.scss
+        }
+      a.brew-it-button {//See recipe-dtail.scss
+        width: 100% * (1/2);
+        margin-left: 100% * (1/4);
+      }
+      a.no-steps {
+        width: 100% * (1/2);
+        margin-left: 100% * (1/4);
+      }
+    }
+  }//recipe-detail (top portion)
+  .recipe-detail & div.details {
+    section.icons {
+      width: 25%;
+      float: right;
+    }
+  } //end recipe-detail & div.details
+  section.edit-step-icons {
+    clear:both;
+    width: 25%;
+    margin-left: 75%;
+    img.edit-icon{
+      width: 35px;
+      float: right;
+    }
+    img.trash-icon {
+      width: 30px;
+    }
+  }
+  .step-list { // steps section
+    div.step-details {
+      p.step-details{
+        width: 95%;
+      }
+    } //end div.step-details
+  }
+  // end steps section
+
+  div.clone-button {
+    width: 50%;
+    margin-left: 25%;
+  } //end div.clone-button
+  // END Recipe Detail Page
+  //Recipe List Page
+  nav.recipe-list {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+  section.recipe-list {
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    .col-1-2 {
+      width: 50%;
+      .col-1-4 {
+        width: 110%;
+        span.count {
+          font-size: 1em;
+          margin-left: 2%;
+          margin-top: 1ex;
+          img {
+           width: 20px;
+          }
+        } //end span.count
+      } //end col-1-4
+  a {
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 9em;
+    font-weight: bold;
+    padding: 1ex 0;
+    &.recipe-title {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+   }
+}
+    } // end col-1-2
+  } //end section.recipe-list
+  //END Recipe List Page
+
+  //Login-Registration Page
+  form.login {
+    width:50%;
+    margin: auto 25%;
+  }
+  form.register {
+    width:50%;
+    margin: auto 25%;
+  }
+  section.more-info >article {
+    width: 100%*(9/10);
+    margin-right: 100% *(1/20);
+    margin-left: 100% *(1/20);
+  }
+  //END Login/Registration Page
+
+}//END @media min-width 28
+
+@media (min-width: 47em) {
+
+  //BrewIt Page
+.brewit-page{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    nav {
+    width: 76%;
+    margin-left: 12%;
+    margin-right: 12%;
+      h2 {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  div.step.delay{
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  div.current-step {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  div.inactive-step {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  .clicker-button {
+      &.restart-brew {
+      width: 100% * (1/5);
+      margin-bottom: 2ex;
+    }
+    &.add-brew-note {
+      width: 100% * (1/5);
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+  }
+}//END .brewit-page
+  //END BrewIt Page
+
+}//END @media min-width 47

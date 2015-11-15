@@ -3,6 +3,16 @@ $Acolor1: #dfdfdf;//lightgray
 $Acolor5: #000;//black
 $Acolor2: #454545;//grey
 $Acolor4: #ffffff;//white
+$Acolor6: #45A852;
+
+$brewitCurrent: #7ec78a;//bright green
+$brewitCurrentText: #000;//black???
+$brewitCurrentStep: #4d4d4f;//Thunder
+$brewitCurrentOf: #545c56;//Feldgrau
+$brewitInactive: #ebeced;//lightgray
+$brewitInactiveText:#99999d;//inactive text
+$brewitInactiveStep: #abacaf;//Silver Chalice
+$brewitInactiveOf: #b1b2b4;//Magnesium
 
 $heading-background: $Acolor4;
 $body-background: $Acolor4;
@@ -13,51 +23,23 @@ $body-color: $Acolor5;
 $button-color: $Acolor4;
 $brewit-color: $Acolor1;
 $brewit-background: $Acolor5;
+$brewit-button-color: $Acolor6;
 
 [class*='-icon'] {
   width: 30px;
 }
 
-.recipe-detail {
-  box-sizing: border-box;
-  width: 80%;
-  margin: 0 10%;
-
-  .recipe-view {
-    .brew-it-button {
-      display: block;
-      box-sizing: border-box;
-      width: 90%;
-      margin: 0 5%;
-      background-color: $Acolor1;
-      font-size: 2em;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .trash-icon {
-      width: 22px;
-    }
-  }
-
-  .step-list {
-    .edit-icon {
-      width: 25px;
-    }
-    .trash-icon {
-      width: 15px;
-    }
-  }
-}//recipe-detail
-
-
-
-
 body {
   font-family: 'Open Sans', 'sans-serif';
-  background-color: $body-background;
+  // background-color: $body-background;
   color: $body-color;
   a {
     color: $heading-color;
+    text-decoration: none;
+    &:hover {
+      // color: red;
+      // text-decoration: inherit;
+    }
   }
 }
 
@@ -69,10 +51,15 @@ textarea, input, select {
   background-color: $heading-background;
   padding: 1ex 5%;
   border-bottom: 1px solid $border-color;
+
   h1 > a[href]{
     text-decoration: none;
   }
 }
+
+
+
+
 
 div.current-step {
   padding: 0.5ex 0 0 1em ;
@@ -88,52 +75,12 @@ button {
   font-weight: 100;
 }
 
-nav.recipe-list-options {
-  box-sizing: border-box;
-  margin: 2ex 0;
-  padding: 2ex 0;
-  h2 {
-  text-align: center;
-  font-weight:100;
-  font-size: 3em;
-  color: $heading-color;
-  margin: -1.5ex 0 0;
-  }
-  a {
-    text-align: center;
-    display: block;
-    color: black;
-    font-size: 2em;
-    font-weight:100;
-    padding-top: 0.5ex 0;
-    border-radius: 3px;
-    text-decoration: none;
-    &:hover {
-      color: lighten($heading-color, 45%);
-    }
-    img {
-      width: 30px;
-    }
-  }//a
-  input {
-    font-size: 1em;
-    text-align: center;
-    width: 30%;
-    margin: 1ex 35% 2ex 35%;
-  }
-  select {
-    font-size: 1em;
-    text-align: center;
-    width: 28%;
-    margin: 3ex 35.5% 1ex 36.5%;
-  }
-}//nav.recipe-list-options
 
 
-.recipe-list {
-  box-sizing: border-box;
-  width: 100%;
-  height: 22ex;
-  padding: 0 5% 0;
-  border-top: 1px solid black;
-}
+//
+// .ng-invalid.ng-dirty {
+//   border-color: red;
+// }
+// .ng-valid.ng-dirty {
+//   border-color: green;
+// }

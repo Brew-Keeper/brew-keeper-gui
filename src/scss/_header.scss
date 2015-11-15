@@ -1,13 +1,21 @@
 .heading {
   box-sizing: border-box;
+    img.logo {
+      width:12em;
+    }
+    a[href].logo {
+      display: block;
+      width: 12em;
+   }
   nav.menu {
     &.hamburger::before {
       content: '\2261';
       color: $heading-color;
-      font-size: 4em;
+      font-size: 3em;
       position: absolute;
       right: 5%;
-      top: 0;
+      top: -2%;
+      height: 50px;
     }
     ul.menu {
       display: none;
@@ -20,6 +28,9 @@
         text-align:right;
         a {
           text-decoration: none;
+          &:hover {
+            color: $brewitCurrent;
+          }
         }
       &.hidden {
         display: none;
