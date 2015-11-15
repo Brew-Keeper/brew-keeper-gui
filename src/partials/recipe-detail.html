@@ -97,11 +97,11 @@
 
     <!-- <div class="addSteps" ng-controller="createNewStep"> -->
     <div class="add-steps">
+    <div class="add-steps-heading">
+      <h3>Add Step</h3>
       <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign.svg"/>
+    </div>
       <form class="hidden create-new-step" ng-submit="addStep()">
-        <div class="columns general">
-          <button class="clicker-button add-step">Add Step</button>
-        </div>
         <section class="columns">
           <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
             <datalist id="step-title">
@@ -116,7 +116,9 @@
           <input type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
           <input type="number" min="0" max="32767" placeholder="Water Amount (in {{detail.water_units}})" ng-model="step.water_amount"> </input>
         </section>
-
+        <div class="columns general">
+          <button class="clicker-button add-step">Add Step</button>
+        </div>
       </form><!--Add Step Form-->
     </div> <!-- add step section -->
 

@@ -62,7 +62,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
 .recipe-detail & div.details {
   @extend .clearfix;
   width: 100%;
-  padding-bottom: 2%;
+  padding-bottom: 2ex;
   margin-bottom: 5%;
   border-bottom: solid 1px $brewitInactiveStep;
   section.details {//TODO: Check this again once font sizes have been set.
@@ -122,17 +122,40 @@ section.edit-step-icons {
     float: right;
   }
 }
-
-div.add-steps {
-  .plus-icon {
-    margin-left: 90%;
-    margin-right: 0;
-    margin-bottom: 0;
+div.brew-notes-heading > h3 {
+    display: block;
+    width: 86%;
   }
+
+div.brew-notes-heading >  .plus-icon {
+    margin-left: 5%;
+    float: right;
+  }
+div.add-steps {
+  margin-bottom: 4ex;
+  padding-bottom: 1ex;
+  border-bottom: 1px solid $brewitInactiveStep;
+}
+div.add-steps-heading {
+  display: block;
+  margin-bottom: 2ex;
+}
+div.add-steps-heading > h3 {
+  color: $brewitCurrentStep;
+  margin: 0;
+  width: 86%;
+  font-weight: 500;
+}
+div.add-steps-heading  > .plus-icon {
+    margin-left: 5%;
+    margin-right: 0;
+    margin-top: -3ex;
+    float: right;
 } //.add-steps
 // steps section
 .step-list {
   @extend .clearfix;
+  margin-bottom: 2ex;
   div.num-col {
     content: "";
     display: table;
@@ -181,10 +204,8 @@ div.add-steps {
 }
 // end steps section
 
-section.gen-recipe-comment {
-  margin-top: 5%;
-  border-top: solid 1px lightgray;
-  border-bottom: solid 1px lightgray;
+.gen-recipe-comment {
+  border-bottom: solid 1px $brewitInactiveStep;
   p {
     margin-left: 5%;
     margin-right: 5%;
@@ -202,7 +223,7 @@ div.clone-button {
   text-align: center;
 } //end div.clone-button
 
-section.brew-notes {
+.brew-notes {
   margin-bottom: 10ex;
     h3 {
       color: $brewitCurrentStep;

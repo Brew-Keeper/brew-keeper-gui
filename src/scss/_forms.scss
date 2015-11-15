@@ -61,14 +61,14 @@ h3.form-heading {
     margin-left: 100% * (3/4);
     margin-right: 0;
     margin-top: 0;
-  box-sizing: border-box;
-  float: left;
-  color:darken($brewitInactive, 75%);
-  border: none;
-  border-radius: 0;
-  background-color: white;
-  text-decoration: underline;
-  font-size: 0.9em;
+    box-sizing: border-box;
+    float: left;
+    color:darken($brewitInactive, 75%);
+    border: none;
+    border-radius: 0;
+    background-color: white;
+    text-decoration: underline;
+    font-size: 0.9em;
   }
   &.register {
     width: 100% * (1/4);
@@ -83,7 +83,14 @@ h3.form-heading {
     margin-top: 2.5ex;
   }
   &.add-step {
-    margin: -5ex 0 5ex 3%;
+    box-sizing: border-box;
+    display: block;
+    float: none;
+    width: 100% * (1/4);
+    margin-top: 0;
+    margin-bottom: 2ex;
+    margin-left: 100% * (3/8);
+    margin-right: 100% * (3/8);
     font-size: 0.8em;
   }
   &.edit-step {
@@ -384,16 +391,20 @@ form.edit-step {
 }//form.edit-step
 
 form.create-new-step {
+  box-sizing: border-box;
+  display: block;
   .columns {
     display: block;
     width: 100%;
     margin-top: 2.5ex;
     input {
+      box-sizing: border-box;
       display: block;
-      width: 88%;
+      width: 90%;
       margin: 1ex 2.6% 1ex;
     }
     textarea {
+      box-sizing: border-box;
       height: 6ex;
       display: block;
       width: 90%;
