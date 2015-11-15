@@ -5,20 +5,15 @@
 
     <!-- star rating -->
     <div class="col-1-3">
-      <span ng-hide="username" ng-repeat="rating in ratings">Public View:
+      <span ng-hide="username" ng-repeat="rating in ratings">
       <div view-rating rating-value="rating.current" max="rating.max" ng-click="" class="public"></div>
       </span>
-
-
       <!-- userRating.current = {{userRating.current}} -->
       <section ng-show="username">
-        userRating value = {{userRating}}
-        rating id = {{ratingId}}
-        <br>
-        <span ng-hide="ratingId" ng-repeat="rating in ratings">have not rated:
+        <span ng-hide="ratingId" ng-repeat="rating in ratings">
           <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)" class="public"></div>
         </span>
-        <span ng-show="ratingId" ng-repeat="userRating in userRatings">have rated:
+        <span ng-show="ratingId" ng-repeat="userRating in userRatings">
           <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="rateRecipe(userRating.current)"></div>
         </span>
       </section>
