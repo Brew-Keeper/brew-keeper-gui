@@ -36,6 +36,8 @@ angular.module('brewKeeper')
 
   })//end recipe-list controller
 
+
+
   .controller('publicRecipe', function($http, $scope, $rootScope, $location){
     // `console.log("publicRecipe controller")
     // console.log($scope.username)`
@@ -43,6 +45,7 @@ angular.module('brewKeeper')
     $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
       .then(function(response){
         $scope.recipes = response.data;
+        $scope.rating = 0;
         $scope.ratings = [{
             max: 5
         }];
