@@ -18,24 +18,30 @@ angular.module('brewKeeper')
         $scope.ratings = [{
             max: 5
         }];
+        var stepArray = [] //create an array of step #'s'
+        for(step in $scope.steps){
+          stepArray.push($scope.steps[step].step_number)
+        };
+        $scope.stepArray = stepArray;
+        $scope.stepTotal = stepArray.length;
       });
 
       //load the data if the page is manually reset
-      window.onload = function(){
-        $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
-          .then(function(response){
-            $rootScope.detail = response.data;
-            $rootScope.steps = response.data.steps;
-            $rootScope.notes = response.data.brewnotes;
-            var stepArray = []; //create an array of step #'s'
-            for(step in $rootScope.steps){
-              stepArray.push($rootScope.steps[step].step_number)
-            };
-            $rootScope.stepArray = stepArray;
-            $scope.stepTotal = stepArray.length;
-            });
-        $scope.resetBrew();
-      }
+      // window.onload = function(){
+      //   $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
+      //     .then(function(response){
+      //       $rootScope.detail = response.data;
+      //       $rootScope.steps = response.data.steps;
+      //       $rootScope.notes = response.data.brewnotes;
+      //       var stepArray = []; //create an array of step #'s'
+      //       for(step in $rootScope.steps){
+      //         stepArray.push($rootScope.steps[step].step_number)
+      //       };
+      //       $rootScope.stepArray = stepArray;
+      //       $scope.stepTotal = stepArray.length;
+      //       });
+      //   $scope.resetBrew();
+      // }
 
       var stepArray = [] //create an array of step #'s'
       for(step in $rootScope.steps){
