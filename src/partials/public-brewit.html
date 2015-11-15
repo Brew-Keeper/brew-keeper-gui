@@ -1,24 +1,22 @@
 <section class="brewit-page">
   <nav class="brewit-nav">
-    <a class="brewit-title" href="#{{username}}/{{detail.id}}"><h2 class="brewit-title">{{detail.title}}</h2></a>
+    <a class="brewit-title" href="#public/{{detail.id}}"><h2 class="brewit-title">{{detail.title}}</h2></a>
     <!-- <p ng-show="detail.rating"><strong>Rating: </strong>{{detail.rating}}</p> -->
     <!-- <p ng-show="detail.brew_count"><strong>Brew Count: </strong>{{detail.brew_count}}</p> -->
     <a href="" class="reset-brew clicker-button" ng-click="resetBrew()">RESET</a>
-    <a href="" class="hidden restart-brew clicker-button" ng-click="reStartBrew()">Brew Again</a>
-    <a href="" class="hidden add-brew-note clicker-button">Add Note</a>
+    <a href="" class="hidden restart-brew  public clicker-button" ng-click="reStartBrew()">Brew Again</a>
+    <!-- <a href="" class="hidden add-brew-note clicker-button">Add Brew Note</a> -->
     <!--star ratings-->
-    <div class="stars">
-    <span ng-show="showStars" class="post-brew rating" ng-repeat="rating in ratings">
-      <span star-rating rating-value="detail.rating" max="5" ng-click="rateRecipe(detail.rating, detail.id)"></span>
+    <span ng-show="showStars" class="rating public" ng-repeat="rating in ratings">
+      <span view-rating rating-value="detail.rating" max="5"></span>
     </span>
-    </div>
     <!--end star ratings-->
   </nav>
   <section class="brew-form hidden" >
     <form ng-submit="addBrewNote()">
       <!-- <label>Add Brew Note</label> -->
       <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
-      <button class="save-note clicker-button" type="submit">Save Note</button>
+      <button class="save-note" type="submit">Save Note</button>
     </form>
   <!-- <a href="" class="cancel-note clicker-button">Cancel Note</a> -->
   </section><!--END brew-form-->
