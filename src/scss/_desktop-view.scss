@@ -1,15 +1,27 @@
 @media (min-width: 60em){
-  body {
-  background: tomato;
-}
+
+$brewitCurrent: #7ec78a;//bright green
+$brewitCurrentText: #000;//black???
+$brewitCurrentStep: #4d4d4f;//Thunder
+$brewitCurrentOf: #545c56;//Feldgrau
+$brewitInactive: #ebeced;//lightgray
+$brewitInactiveText:#99999d;//inactive text
+$brewitInactiveStep: #abacaf;//Silver Chalice
+$brewitInactiveOf: #b1b2b4;//Magnesium
+
+body {
   .heading {
-    h1 {
-      width:60%;
+    img.logo {
+      width:17em;
     }
+    a[href].logo {
+      display: block;
+      width: 17em;
+   }
     > nav.menu {
-      width: 50%;
+      width: 60%;
       position: absolute;
-      top: 0.6ex;
+      top: 0;
       right: 5%;
       &.hamburger::before {
         display: none;
@@ -17,33 +29,44 @@
       ul.menu {
         display: block;
         float: right;
-        margin-top: 4ex;
+        margin-top: 3.5ex;
+        margin-left: 0;
+        margin-bottom: 0;
         li {
           display: inline-block;
-          margin-left: 0.7em;
+          margin-left: 0.5em;
+          padding-left: 0;
           a {
             text-decoration: none;
+            &:hover {
+              color: $brewitCurrent;
+            }
           }
         }
       }
     }//nav.menu
   }//.heading
+
   .container {
-    .recipe-list-options {
-      input, select {
-        width: 20%;
-        margin: 3ex 40%;
-      }
-  input {
-    box-sizing: border-box;
-    width: 20%;
-    margin: 1ex 40% 2ex 40%;
+    width: 50em;
+    // margin: 0 10%;
+    // .recipe-list-options {
+
+  //     input, select {
+  //       width: 20%;
+  //       margin: 3ex 40%;
+  //     }
+  // input {
+  //   box-sizing: border-box;
+  //   width: 20%;
+  //   margin: 1ex 40% 2ex 40%;
+  // }
+  // select {
+  //   box-sizing: border-box;
+  //   width: 18%;
+  //   margin: 3ex 41% 1ex 41%;
+  // }
+  //   }//nav.recipe-list-options
   }
-  select {
-    box-sizing: border-box;
-    width: 18%;
-    margin: 3ex 41% 1ex 41%;
-  }
-    }//nav.recipe-list-options
-  }
-}
+}//body
+}//END media query

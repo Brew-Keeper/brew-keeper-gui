@@ -2,7 +2,21 @@
   body {
     background: white;
   }
-
+.heading {
+    img.logo {
+      width:14em;
+    }
+    a[href].logo {
+      display: block;
+      width: 14em;
+   }
+  nav.menu {
+    &.hamburger::before {
+      font-size: 3.5em;
+      top: -0.5ex;
+    }
+  }
+}
   //BrewIt Page
 .brewit-page{
     width: 90%;
@@ -87,15 +101,7 @@
     } //end div.step-details
   }
   // end steps section
-  section.gen-recipe-comment {
-    margin-top: 5%;
-    border-top: solid 1px lightgray;
-    border-bottom: solid 1px lightgray;
-    p {
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-  } //end section.gen-recipe-comment
+
   div.clone-button {
     width: 50%;
     margin-left: 25%;
