@@ -3,8 +3,11 @@
     <h3 class="title"><a href="#/public">{{detail.title}}</a></h3>
     <!-- star rating -->
     <div class="col-1-3">
-      <span ng-repeat="rating in ratings">
+      Avg: <span ng-repeat="rating in ratings">
       <div view-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
+      </span>
+      <span ng-show="username" ng-repeat="userRating in userRatings">Rate It: 
+      <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="rateRecipe(userRating.current)"></div>
       </span>
     </div>
     <!-- end star rating -->
