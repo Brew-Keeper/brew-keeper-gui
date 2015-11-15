@@ -72,8 +72,17 @@ angular.module('brewKeeper')
       $('form.login').addClass('hidden')
     });
 
-    $scope.resetPassword = function(){
+    $scope.resetPassword = function(users){
       console.log("reset password function")
+      console.log($scope.users)
+      $http.post('https://brew-keeper-api.herokuapp.com/api/get-reset/', $scope.users)
+        .then(function(){
+          console.log("sucess")
+        })
+        .catch(function(){
+          console.log("error")
+        })
+
     };//end reset password function
 
   })//end changePassword controller
