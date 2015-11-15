@@ -52,15 +52,15 @@ h3.form-heading {
     border: 2.3px solid $brewIt;
     color: black;
     width: 100% * (1/4);
-    margin-left: 100% * (3/16);
-    margin-right: 100% * (1/8);
+    margin-left: 100% * (3/8);
+    margin-right: 100% * (3/8);
     margin-top: 1ex;
   }
   &.show-signup {
     width: 100% * (1/4);
-    // margin-left: 100% * (3/16);
+    margin-left: 100% * (3/4);
     margin-right: 0;
-    margin-top: 1ex;
+    margin-top: 0;
   }
   &.register {
     width: 100% * (1/4);
@@ -75,7 +75,7 @@ h3.form-heading {
     margin-top: 2.5ex;
   }
   &.add-step {
-    margin: -5ex 0 5ex 2%;
+    margin: -5ex 0 5ex 3%;
     font-size: 0.8em;
   }
   &.edit-step {

@@ -1,5 +1,5 @@
 <h3 class="form-heading">Create A New Recipe</h3>
-<form class="create-new-recipe" ng-controller="createNewRecipe" ng-submit="submit()">
+<form class="create-new-recipe" ng-controller="createNewRecipe"  ng-submit="createNew()">
   <section class="columns general">
   <fieldset>
     <input placeholder="Title (Required)" maxlength="50"  ng-model="recipe.title" required></input>
@@ -63,5 +63,5 @@
     </select>
     </fieldset><!--Water Details-->
   </section>
-  <a href="" class="addSteps clicker-button" ng-click="createNew()">Submit</a>
+  <button href="" class="addSteps clicker-button">Submit</button>
 </form><!--Recipe Form-->
