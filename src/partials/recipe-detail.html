@@ -146,7 +146,7 @@
       <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
         <div class="note-view{{note.id}}" ng-click="showNoteIcons(note.id)">
           <div class="note-body">{{note.body}}</div>
-          <div class="note-date">-{{note.timestamp | date}}</div>
+          <div class="note-date">— {{note.timestamp | date}}</div>
           <div class="note-icons {{note.id}} hidden">
             <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/Delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
             <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/Edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
