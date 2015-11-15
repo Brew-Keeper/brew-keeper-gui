@@ -7,7 +7,7 @@ angular.module('brewKeeper')
     var id = $routeParams.id;
     // var username =$routeParams.username;
     // $scope.username = $routeParams.username;
-    // $scope.showStars = false;
+    $scope.showStars = false;
     var ratingId = null;
     var userRating = 0;
 
