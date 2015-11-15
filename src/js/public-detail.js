@@ -31,6 +31,7 @@ angular.module('brewKeeper')
             publicRatings.forEach(function(rating){
               if (rating.username == $rootScope.username){
                 ratingId = rating.id;
+                $scope.ratingId = ratingId;
                 userRating = rating.public_rating;
 
               }
@@ -86,14 +87,19 @@ angular.module('brewKeeper')
 
     $scope.rateRecipe = function (rating) {
       var newRating = {"public_rating": rating}
-
+      console.log(ratingId)
       if(!ratingId) { //if the user has not rated, create new rating
+        console.log("new rating")
         $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
-        .then(function(){ //get the updated rating
+        .then(function(response){ //get the updated rating
+          ratingId = response.data.id;
+          $scope.ratingId = ratingId;
           $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/").then(function(response){
-            var currentRating = response.data.average_rating;
+            var currentRating = newRating.public_rating;
             // $scope.rating = 0;
-            $scope.ratings = [{
+            $scope.userRating = newRating.public_rating;
+            // $scope.userRating.current = newRating.public_rating;
+            $scope.userRatings = [{
                 current: currentRating,
                 max: 5
             }];
@@ -103,11 +109,14 @@ angular.module('brewKeeper')
 
       if(ratingId) { //if the user has already rated, update their current rating
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/" + ratingId + "/", newRating)
-        .then(function(){ //get the updated rating
+        .then(function(response){ //get the updated rating
+          ratingId = response.data.id;
+          $scope.ratingId = ratingId;
           $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/").then(function(response){
-            var currentRating = response.data.average_rating;
+            var currentRating = newRating.public_rating;
             // $scope.rating = 0;
-            $scope.ratings = [{
+            $scope.userRating = newRating.public_rating;
+            $scope.userRatings = [{
                 current: currentRating,
                 max: 5
             }];

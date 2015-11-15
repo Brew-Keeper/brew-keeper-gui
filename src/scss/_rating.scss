@@ -23,6 +23,9 @@ ul.rating {
 .rating .filled {
     color: $brewit-button-color;
 }
+.public & .rating .filled {
+  color: #555555;
+}
 
 .read-only li {
   cursor: default;
