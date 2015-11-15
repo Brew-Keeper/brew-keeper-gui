@@ -18,14 +18,15 @@
     </head>
     <body  ng-app="brewKeeper" ng-controller="MainController">
         <heading class="heading">
-          <h1><a href="#/">Brew Keeper</a><img class="bean-icon" src="img/noun_bean.svg"/><!--Created by Sergey Patulin from the Noun Project--></h1>
+          <a href="#/"><img class="logo" src="img/Brew_Keeper_Logo_v3.svg"/></a>
           <nav class="menu hamburger">
             <ul class="menu">
               <li ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login/Signup</a></li>
               <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
               <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
-              <li><a href="#/info">More info/About</a></li>
-              <li ng-show="username"><a href="#/users/{{username}}/recipes/new">Create New Recipe</a></li>
+              <li><a href="#/info">More Info/About</a></li>
+              <li ng-show="username"><a href="#/{{username}}/new">Create New Recipe</a></li>
+              <li><a href="#/public">View Public Recipes</a><li>
               <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
             </ul>
           </nav>
@@ -53,13 +54,17 @@
       <script src="js/plugins.js"></script>
       <script src="js/main.js"></script>
       <script src="js/recipe-list.js"></script>
-      <script src="js/hamburger.js"></script>
       <script src="js/login.js"></script>
       <script src="js/new-recipe.js"></script>
       <script src="js/recipe-detail.js"></script>
       <script src="js/brew-it.js"></script>
       <script src="js/rating.js"></script>
       <script src="js/clone.js"></script>
+      <script src="js/public-detail.js"></script>
+      <script src="js/public-brewit.js"></script>
+
+
+      </script>
 
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
       <script>

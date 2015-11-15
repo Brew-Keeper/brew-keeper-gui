@@ -29,17 +29,20 @@ h3.form-heading {
   &.restart-brew {
     background-color: $brewIt;//brewit-green
     border: 1px solid $brewIt;
-    width: 100% * (3/12);
+    width: 100% * (1/4);
     margin-left: 5%;
     margin-right: 0;
     margin-bottom: 2ex;
+    &.public {
+      margin-right: 30%;
+    }
   }
   &.add-brew-note {
-    width: 100% * (4/15);
-    margin-left: 2ex;
-    margin-right: 2ex;
+    width: 100% * (7/24);
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     margin-bottom: 2ex;
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
   &.cancel-note {
 
@@ -72,15 +75,15 @@ h3.form-heading {
     margin-top: 2.5ex;
   }
   &.add-step {
-    margin: 2ex 30% 5ex 30%;
+    margin: -5ex 0 5ex 2%;
     font-size: 0.8em;
   }
   &.edit-step {
     float: left;
-    width: 100% * (1/4);
-    margin-left: 100% *(4/8);
-    margin-top: -2.2ex;
-    margin-right: 0;
+    width: 100% * (1/5);
+    // margin-left: 100% *(3/5);
+    // margin-top: -2.2ex;
+    margin-right: 2em;
     margin-bottom: 0;
   }
   &.submit-recipe-edit.clone {
@@ -99,10 +102,11 @@ h3.form-heading {
   }
   &.save-note {
     width: 100% * (1/4);
-    margin-left: 100% *(3/8);
-    margin-right: 100% *(3/8);
-    margin-top: 2ex;
+    // margin-left: 100% *(3/8);
+    // margin-right: 100% *(3/8);
+    margin-top: 1ex;
     margin-bottom: 2.5ex;
+    float: right;
   }
   &.save-edit {
     width: 100% * (1/4);
@@ -131,6 +135,26 @@ form.login {
     }
   }
 }//form.login
+
+form.changeForm {
+  width: 80%;
+  max-width: 15em;
+  margin: 0 10%;
+  .columns.general {
+    display: block;
+    margin-top: 5%;
+    label.changeForm {
+      display: block;
+      width: 100%;
+      margin: 5% 0 2%;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      margin: 1ex 0;
+    }
+  }
+}//form.changeForm
 
 form.create-new-recipe {
   .columns {

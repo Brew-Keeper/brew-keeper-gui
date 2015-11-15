@@ -1,4 +1,3 @@
-
 <nav class="recipe-list">
   <!-- <h2>Recipe List</h2> -->
   <input placeholder="Filter Recipes" ng-model="filter"></input>
@@ -8,15 +7,15 @@
     <option value="rating">Lowest Rating</option>
     <option value="-id">Newest</option>
     <option value="id">Oldest</option>
-    <option value="-brew_count">Most Brewed</option>
-    <option value="brew_count">Least Brewed</option>
+    <!-- <option value="-brew_count">Most Brewed</option> -->
+    <!-- <option value="brew_count">Least Brewed</option> -->
   </select>
   <!-- <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a> -->
   <!--Flask by Mister Pixel from the Noun Project-->
 </nav>
 
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
-  <a class="recipe-title" href="#{{username}}/{{recipe.id}}">{{recipe.title}}</a>
+  <a href="#public/{{recipe.id}}">{{recipe.title}}</a>
   <span>{{recipe.bean_name}}</span>
   <div class="col-1-2">
     <span>{{recipe.roast}}</span>
@@ -24,15 +23,16 @@
       <!-- star rating -->
       <!-- rating : {{recipe.rating}} -->
       <span class="rating" ng-repeat="rating in ratings">
-        <span star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></span>
+        <!-- <span star-rating rating-value="recipe.rating" max="5"></span> -->
+        <span view-rating rating-value="recipe.average_rating" max="5"></span>
       </span>
       <!-- end star rating -->
-      <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> x {{recipe.brew_count}}</span>
+      <!-- <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> x {{recipe.brew_count}}</span> -->
     </div>
 
   </div> <!-- end col-1-2 -->
   <div class="col-1-2 button">
-    <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)">BREW IT!</a>
-    <a href="#{{username}}/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a>
+    <a ng-show="recipe.steps.length" ng-click="publicListBrewIt(recipe.id)">BREW IT!</a>
+    <!-- <a href="#users/public/recipes/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a> -->
   </div> <!--end col-1-2 -->
 </section><!-- end ng-repeat for recipe list -->

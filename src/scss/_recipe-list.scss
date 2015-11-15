@@ -1,8 +1,11 @@
 nav.recipe-list {
   margin: 5% 5% -5%;
-
+  input {
+    width: 40%;
+  }
   select {
     float: right;
+    margin-right: 2%;
   }
 }
 
@@ -17,8 +20,16 @@ section.recipe-list {
   }
 
   a {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 9em;
     font-weight: bold;
-  }
+    &.recipe-title {
+      display: block;
+      width: 90%;
+      max-width: 90%;
+   }
+}
 
   .col-1-2 {
     // @extend .clearfix;
@@ -27,27 +38,29 @@ section.recipe-list {
 
     .col-1-4 {
       // @extend .clearfix;
-      width: 100%;
+      width: 110%;
       float: left;
-
       span {
         float: left;
       }
 
       span.count {
-        margin-left: 7%;
-
-        img {
-             width: 17px;
-           }
+        font-size: 0.8em;
+        margin-left: 2%;
+        margin-top: 1.9ex;
+        img {   //See Tablet View
+         width: 17px;
+        }
       } //end span.count
     } //end col-1-4
 
-    a {
+    a {//See Tablet View
+      margin-top: 0.6em;
       margin-left: 5%;
-      width: 90%;
+      width: 85%;
+      margin-right: 5%;
       background-color: $brewit-button-color;
-      float: left;
+      float: right;
       text-align: center;
       padding-top: 5%;
       padding-bottom: 5%;

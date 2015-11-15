@@ -17,7 +17,13 @@ ul.rating {
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+
+
 }
 .rating .filled {
     color: $brewit-button-color;
+}
+
+.read-only li {
+  cursor: default;
 }
