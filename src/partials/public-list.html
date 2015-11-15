@@ -21,11 +21,24 @@
     <span>{{recipe.roast}}</span>
     <div class="col-1-4">
       <!-- star rating -->
-      <!-- rating : {{recipe.rating}} -->
-      <span class="rating" ng-repeat="rating in ratings">
-        <!-- <span star-rating rating-value="recipe.rating" max="5"></span> -->
-        <span view-rating rating-value="recipe.average_rating" max="5"></span>
-      </span>
+
+
+      <div class="col-1-3">
+          <span ng-repeat="rating in ratings">
+              <div view-rating rating-value="recipe.average_rating" max="rating.max" ng-click="" class=""></div>
+          </span>
+        <!-- userRating.current = {{userRating.current}} -->
+        <!-- <section ng-show="username">
+          <span ng-hide="ratingId" ng-repeat="rating in ratings">not rated: {{$index}}
+            <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)" class="public"></div>
+          </span>
+          <span ng-show="ratingId" ng-repeat="userRating in userRatings">rated:
+            <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="rateRecipe(userRating.current)"></div>
+          </span>
+        </section>
+      </div> -->
+
+
       <!-- end star rating -->
       <!-- <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> x {{recipe.brew_count}}</span> -->
     </div>
