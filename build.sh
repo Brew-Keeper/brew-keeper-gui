@@ -54,7 +54,7 @@ cp bower_components/angular-validation-match/dist/angular-validation-match.js di
 # cp bower_components/d3/d3.js dist/bower_components/d3/d3.js
 
 echo 'Step 5: Copy img folder'
-cp  -r src/img/ dist/img
+cp  -r src/img/ dist/img/
 cp  -r src/favicon.ico dist/favicon.ico
 
 echo 'Step 6: verify working project in dist/'

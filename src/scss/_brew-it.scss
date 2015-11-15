@@ -1,3 +1,215 @@
-.inactive { //shade out inactive steps
-  color: lightgray;
-}
+
+$brewitCurrent: #7ec78a;//bright green
+$brewitCurrentText: #000;//black???
+$brewitCurrentStep: #4d4d4f;//Thunder
+$brewitCurrentOf: #545c56;//Feldgrau
+$brewitInactive: #ebeced;//lightgray
+$brewitInactiveText:#99999d;//inactive text
+$brewitInactiveStep: #abacaf;//Silver Chalice
+$brewitInactiveOf: #b1b2b4;//Magnesium
+
+.brewit-page{
+  box-sizing: border-box;
+  width:100%;//width: 100% * (2/3); desktop
+  margin: 0 auto;//margin: 0 100% * (1/6); desktop
+  .brewit-nav {
+    display: block;
+    height: 12ex;
+    margin-bottom: 2ex;
+    position: relative;
+    .brewit-title {
+      text-decoration: none;
+      h2 {
+        color: lighten($brewitCurrentText, 15%);
+        font-size: 1.4em;
+        font-weight: 600;
+        margin-left: 5%;
+        margin-bottom: 0;
+        opacity: 85%;
+        padding-bottom: 1.5ex;
+      }
+      .stars {
+        display: block;
+        width: 100%;
+      }
+    }
+    .reset-brew {
+      position: absolute;
+      top: 4.5ex;
+      right: 5%;
+      font-size: 0.8em;
+      color:darken($brewitInactive, 54%);
+      text-decoration: none;
+      padding: .15ex 2.5em;
+      border: 2.3px solid darken($brewitInactive, 29%);
+      background-color: darken($brewitInactive, 10%);
+    }
+    span.rating {
+      margin-top: 1ex;
+      display: inline-block;
+      margin-right: 5%;
+      float: right;
+    }
+    span.rating.public {
+      margin-top: -1ex;
+      display: inline-block;
+      margin-right: 5%;
+      float: right;
+    }
+  }//.brewit-nav
+
+  section.brew-form {
+    margin-top: -2ex;
+    margin-bottom: 1ex;
+    width: 80%;
+    margin-left: 10%;
+    form {
+    textarea {
+    }
+    }
+  }
+  div.step.delay {
+    width: 100%;
+    box-sizing: border-box;
+    background-color:darken($brewitInactive, 10%);
+    color: $brewitCurrentText;
+    height: 19.75ex;
+    padding-top: 0.025ex;
+    p.countdown {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    p.counting {
+      text-align: center;
+      font-size: 2.8em;
+      font-weight: 300;
+      line-height: 0.25;
+    }
+  }//.delay
+  div.delay.step.finished {
+    display: none;
+    .countdown {
+      display: none;
+    }
+    .counting {
+      display: none;
+    }
+  }//.delay.step.finished
+
+
+  div.current-step {
+    box-sizing: border-box;
+    background-color:$brewitCurrent;
+    color: $brewitCurrentText;
+    padding: 1ex 5%;
+    // .step-box {
+    //   box-sizing: border-box;
+    // }
+    p.stepOf {
+      color:$brewitCurrentOf;
+      text-align: right;
+      // padding-right: 0;
+      span {
+        color: $brewitCurrentOf;
+        font-weight: bold;
+      }
+    }
+    .counting {
+      color:$brewitCurrentText;
+      font-size: 2.8em;
+      font-weight: 300;
+      line-height: 0;
+      text-align: center;
+    }
+    p.step-name {
+      margin-top: -3.9ex;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    p.water {
+      width: 100%;
+      margin: -.6ex 0;
+      font-size: 1.1em;
+      font-weight: bold;
+      line-height: 0;
+      text-align: center;
+    }
+    timer.counting > p {
+      width: 100%;
+      text-align: center;
+    }
+    p.step-body {
+      color:$brewitCurrentText;
+      width: 100%;
+      text-align: justify;
+      // line-height: 0;
+      margin: -.6ex 0 1ex 0;
+    }
+  }//.current-step
+
+  div.inactive-step {
+    background-color: $brewitInactive;
+    color: $brewitInactiveText;
+    padding-bottom: 4.0ex;
+    margin-top: -1.4ex;
+    p.stepOf {
+      color: $brewitInactiveOf;
+      text-align: right;
+      padding: 1ex 5%;
+      span {
+        font-weight: bold;
+      }
+    }
+    p.step-name {
+      margin-top: -4.4ex;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+    p.water {
+      width: 100%;
+      margin-top: -2ex;
+      margin-bottom: 2ex;
+      font-size: 1.1em;
+      font-weight: 600;
+      text-align: center;
+    }
+    p.step-body {
+      font-size: 0.8em;
+      text-align: justify;
+      margin: -1.6ex 5% -3.1ex 5%;
+    }
+  }//.inactive-step
+
+div.step.finished {
+    background-color: $brewitInactive;
+    color: $brewitInactiveText;
+  p.stepOf {
+    display: none;
+    span {
+      display: none;
+    }
+  }
+  .counting {
+    display: none;
+  }
+  p.step-name {
+    display: none;
+  }
+  p.water {
+    display: none;
+  }
+  timer.counting > p {
+    display: none;
+  }
+  p.step-body {
+    display: none;
+  }
+}//.step.finished
+
+}//END .brewit-page

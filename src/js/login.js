@@ -1,13 +1,8 @@
 ;(function(){ //IIFE for angular
 angular.module('brewKeeper')
   .controller('signupController', function($scope, $http, $cookies, $location){
-    $scope.users = {
-      // username: '',
-      // password: '',
-      // // email: '',
-      // email: ''
-    }
-    $scope.submit = function(mismatch) {
+    $scope.users = {}
+    $scope.signupButton = function(mismatch) {
       if(mismatch){
         alert("Passwords Do Not Match")
         return
@@ -18,8 +13,6 @@ angular.module('brewKeeper')
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = { }
-        // $('.login').addClass('hidden')
-        // $('.logout').removeClass('hidden')
         $location.path('/')
       }, function errorCallback(response){
         alert("Please fill out all fields carefully.");
@@ -29,32 +22,50 @@ angular.module('brewKeeper')
 
 
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
-    $scope.users = {
-      username: '',
-      password: ''
-    }
-    $scope.submit= function(){
+    $scope.users = {}
+    $scope.loginButton= function(){
+      $cookies.remove("Authorization")
+      $http.defaults.headers.common = {}
       $http.post('https://brew-keeper-api.herokuapp.com/api/login/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
         $cookies.put("Authorization", userInfo)
         $http.defaults.headers.common = {"Authorization": userInfo}
+        $scope.username = $scope.users.username
         $scope.users = {};
-        //pseudo-code Hide "login/signup" in nav in index.html
-        //pseudo-code Hide "form.login" in login.html
-        // $('.login').addClass('hidden')
-        // //pseudo-code Show "logout" in nav
-        //pseudo-code Show "Create New Recipe" in nav
-        // $('.logout').removeClass('hidden')
         $location.path('/')
       }, function errorCallback(response){
          alert("Please enter a valid username and password.")
       })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
-      $('form.register').removeClass('hidden');
+      $('.register').removeClass('hidden');
       $('form.login').addClass('hidden')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
+
+  .controller('changePassword', function($scope, $http, $location){
+    var users = {}
+    // $scope.users.username = $scope.username;
+
+    $scope.submitChangePassword = function(mismatch){
+      if(mismatch){
+        alert("Passwords Do Not Match")
+        return
+      }
+      users.username = $scope.username;
+      users.old_password = $scope.users.old_password;
+      users.new_password = $scope.users.new_password;
+      $http.post('https://brew-keeper-api.herokuapp.com/api/change-pw/', users)
+        .then(function successCallback(){
+          alert("Password Successfully Changed");
+          $location.path('/');
+        },
+        function errorCallback(){
+          alert("Current password incorrect, please try again.");
+          $scope.users = {};
+        })//end http.post to change-pw
+    } //end submitChangePassword function
+  })//end changePassword controller
 
 })();//END IFFE

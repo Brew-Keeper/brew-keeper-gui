@@ -1,0 +1,40 @@
+$brewitInactiveStep: #abacaf;//Silver Chalice
+
+
+.more-info {
+  width: 90%;
+  margin: 2ex 5%;
+  &.register > label {
+    font-weight: 400;
+  }
+  article {
+    box-sizing: border-box;
+    // outline: 1px solid red;
+    margin-top: 7ex;
+    margin-bottom: -6.5ex;
+  }
+  article:first-of-type {
+  border-top: 1px solid $brewitInactiveStep;
+    h3 {
+      padding-top: 1ex;
+    }
+  }
+  h3 {
+    display: block;
+    color: lighten(black, 25%);
+    line-height: 0;
+    padding-top: 2ex;
+    margin-bottom: 2ex;
+  }
+  input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin-top: 2ex;
+  }
+  p {
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: -1ex;
+  }
+}

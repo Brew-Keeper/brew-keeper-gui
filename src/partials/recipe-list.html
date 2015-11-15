@@ -1,36 +1,38 @@
 
-<nav class="recipe-list-options">
-  <h2>Recipe List</h2>
+<nav class="recipe-list">
+  <!-- <h2>Recipe List</h2> -->
+  <input placeholder="&#x1f50d Search" ng-model="filter"></input>
   <select name="OrderBy" value="OrderBy" ng-model="query">
     <option value="">Sort By</>
-    <option value="roast">Roast</option>
-    <option value="bean_name">Bean</option>
-    <option value="-rating">Rating</option>
+    <option value="-rating">Highest Rating</option>
+    <option value="rating">Lowest Rating</option>
     <option value="-id">Newest</option>
-    <option value="-brew_count">Brew Count</option>
+    <option value="id">Oldest</option>
+    <option value="-brew_count">Most Brewed</option>
+    <option value="brew_count">Least Brewed</option>
   </select>
-  <input placeholder="Filter Recipes" ng-model="filter"></input>
-  <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a><!--Flask by Mister Pixel from the Noun Project-->
+  <!-- <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a> -->
+  <!--Flask by Mister Pixel from the Noun Project-->
 </nav>
 
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
-  <p class="recipe-title">
-    <a href="#users/{{username}}/recipes/{{recipe.id}}">{{recipe.title}}</a>
-    <!-- star rating -->
-    <!-- rating : {{recipe.rating}} -->
-    <span ng-repeat="rating in ratings">
+  <a class="recipe-title" href="#{{username}}/{{recipe.id}}">{{recipe.title}}</a>
+  <span>{{recipe.bean_name}}</span>
+  <div class="col-1-2">
+    <span>{{recipe.roast}}</span>
+    <div class="col-1-4">
+      <!-- star rating -->
+      <!-- rating : {{recipe.rating}} -->
+      <span class="rating" ng-repeat="rating in ratings">
         <span star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></span>
-    </span>
-    <!-- end star rating -->
-    <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)"><button>BREW IT!</button></a>
-    <a href="#users/{{username}}/recipes/{{recipe.id}}" ng-hide="recipe.steps.length"><button>Add steps</button></a>
+      </span>
+      <!-- end star rating -->
+      <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> x {{recipe.brew_count}}</span>
+    </div>
 
-
-    <!-- ng-show=recipe.steps.length -->
-  </p>
-  <p ng-show="recipe.bean_name"><strong>Bean </strong> {{recipe.bean_name}}</p>
-  <p ng-show="recipe.roast"><strong>Roast </strong> {{recipe.roast}}</p>
-
-
-  <p ng-show="recipe.brew_count">Brew Count: {{recipe.brew_count}}<p>
-</section>
+  </div> <!-- end col-1-2 -->
+  <div class="col-1-2 button">
+    <a ng-show="recipe.steps.length" ng-click="listBrewIt(username, recipe.id)">BREW IT!</a>
+    <a href="#{{username}}/{{recipe.id}}" ng-hide="recipe.steps.length">Add steps</a>
+  </div> <!--end col-1-2 -->
+</section><!-- end ng-repeat for recipe list -->
