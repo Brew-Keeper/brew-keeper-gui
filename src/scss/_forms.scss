@@ -61,6 +61,14 @@ h3.form-heading {
     margin-left: 100% * (3/4);
     margin-right: 0;
     margin-top: 0;
+  box-sizing: border-box;
+  float: left;
+  color:darken($brewitInactive, 75%);
+  border: none;
+  border-radius: 0;
+  background-color: white;
+  text-decoration: underline;
+  font-size: 0.9em;
   }
   &.register {
     width: 100% * (1/4);
