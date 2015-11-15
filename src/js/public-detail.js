@@ -144,7 +144,6 @@ angular.module('brewKeeper')
         $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/")
           .then(function(response){
             $rootScope.comments = response.data.public_comments;
-            console.log($rootScope.comments);
           })
         })
       };
