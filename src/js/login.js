@@ -66,6 +66,15 @@ angular.module('brewKeeper')
           $scope.users = {};
         })//end http.post to change-pw
     } //end submitChangePassword function
-  })//end changePassword controller
 
+    $('.show-reset').on('click', function(){
+      $('.reset-password').removeClass('hidden');
+      $('form.login').addClass('hidden')
+    });
+
+    $scope.resetPassword = function(){
+      console.log("reset password function")
+    };//end reset password function
+
+  })//end changePassword controller
 })();//END IFFE
