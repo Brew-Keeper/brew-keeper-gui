@@ -7,9 +7,20 @@
     <a href="" class="hidden restart-brew  public clicker-button" ng-click="reStartBrew()">Brew Again</a>
     <!-- <a href="" class="hidden add-brew-note clicker-button">Add Brew Note</a> -->
     <!--star ratings-->
-    <span ng-show="showStars" class="rating public" ng-repeat="rating in ratings">
-      <span view-rating rating-value="detail.rating" max="5"></span>
-    </span>
+    <div class="col-1-3">
+      <span ng-hide="username" ng-repeat="rating in ratings">
+      <div view-rating rating-value="rating.current" max="rating.max" ng-click="" class="public"></div>
+      </span>
+      <!-- userRating.current = {{userRating.current}} -->
+      <section ng-show="username">
+        <span ng-hide="ratingId" ng-repeat="rating in ratings">
+          <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)" class="public"></div>
+        </span>
+        <span ng-show="ratingId" ng-repeat="userRating in userRatings">
+          <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="rateRecipe(userRating.current)"></div>
+        </span>
+      </section>
+    </div>
     <!--end star ratings-->
   </nav>
   <section class="brew-form hidden" >
@@ -23,7 +34,7 @@
 
   <div class="step delay">
   <p class="countdown">COUNTDOWN</p>
-    <p class="counting"><timer class="counting" interval="1000" countdown="3" finish-callback="startBrew(detail.brew_count)">{{seconds}}</timer></p>
+    <p class="counting"><timer autostart="false" class="counting" interval="1000" countdown="3" finish-callback="startBrew(detail.brew_count)">{{seconds}}</timer></p>
   </div><!-- END countdown timer-->
 
   <div ng-repeat="step in steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}} animated">
