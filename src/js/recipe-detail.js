@@ -151,7 +151,7 @@ angular.module('brewKeeper')
             return;
           };
           var cloneData = {}
-          cloneData.title = "Clone of: " + $scope.detail.title;
+          cloneData.title = $scope.detail.title;
           cloneData.bean_name = $scope.detail.bean_name;
           cloneData.roast = $scope.detail.roast;
           cloneData.orientation = $scope.detail.orientation;
@@ -252,7 +252,7 @@ angular.module('brewKeeper')
           };
 
           var publicData = {}  //build the recipe
-          publicData.title = "Public Copy of: " + $scope.detail.title;
+          publicData.title = $scope.detail.title;
           publicData.bean_name = $scope.detail.bean_name;
           publicData.roast = $scope.detail.roast;
           publicData.orientation = $scope.detail.orientation;
