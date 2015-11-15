@@ -24,25 +24,26 @@ angular.module('brewKeeper')
             max: 5
         }];
 
+        if($rootScope.username){
+          $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/ratings/")
+          .then(function(response){
+            var publicRatings = response.data;
+              publicRatings.forEach(function(rating){
+                if (rating.username == $rootScope.username){
+                  ratingId = rating.id;
+                  $scope.ratingId = ratingId;
+                  userRating = rating.public_rating;
 
-        $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/ratings/")
-        .then(function(response){
-          var publicRatings = response.data;
-            publicRatings.forEach(function(rating){
-              if (rating.username == $rootScope.username){
-                ratingId = rating.id;
-                $scope.ratingId = ratingId;
-                userRating = rating.public_rating;
-
-              }
-              return userRating, ratingId
-            })
-            $scope.userRating = userRating;
-            $scope.userRatings = [{
-              current: userRating,
-              max: 5
-            }]
-        })
+                }
+                return userRating, ratingId
+              })
+              $scope.userRating = userRating;
+              $scope.userRatings = [{
+                current: userRating,
+                max: 5
+              }]
+          })
+        }//end if(username)
     }) //end http.get
 
     // Function for cloning public recipes
