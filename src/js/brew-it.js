@@ -87,10 +87,14 @@ angular.module('brewKeeper')
         // }; //This can be used to pause process if needed.
 
         $scope.resetBrew = function(){
+
+          $(".current-step").addClass("hidden")
+          $("timer.counter").addClass("hidden");
+
+
           $(".delay.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
-          $("timer").removeClass("hidden");
-          $("timer.counter").addClass("hidden");
+          $(".countdown").removeClass("hidden");
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
           $("a[href].add-brew-note").removeClass("hidden");
