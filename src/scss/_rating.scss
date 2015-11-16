@@ -21,10 +21,10 @@ ul.rating {
 
 }
 .rating .filled {
-    color: $brewit-button-color;
+    color: gold;
 }
 .public & .rating .filled {
-  color: #555555;
+  color: $brewit-button-color;
 }
 
 .read-only li {
