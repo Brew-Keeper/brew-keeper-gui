@@ -210,7 +210,6 @@ angular.module('brewKeeper')
 
     $scope.deleteNote = function(noteId) {
       var noteId = noteId
-      if (window.confirm("Are you sure you want to delete this note?")){
         $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + noteId + "/")
         .then(function(){var id = $scope.id;
         $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
@@ -218,7 +217,6 @@ angular.module('brewKeeper')
             $rootScope.notes = response.data.brewnotes;
           })
         })
-      };
     }; //end deleteNote function
 
     $scope.showAddBrewNote = function(){
