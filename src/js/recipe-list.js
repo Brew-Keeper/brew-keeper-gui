@@ -34,6 +34,17 @@ angular.module('brewKeeper')
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
       }
 
+      $scope.search = function(searchString){
+        $http.get("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/?search="+searchString)
+          .then(function(response){
+            $scope.recipes = response.data;
+            $scope.rating = 0;
+            $scope.ratings = [{
+                max: 5
+            }];
+          })
+      } //end search function
+
   })//end recipe-list controller
 
 
@@ -65,18 +76,15 @@ angular.module('brewKeeper')
     }//end listBrewit function
 
     $scope.search = function(searchString){
-      console.log("search function")
-      console.log(searchString)
       $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/?search="+searchString)
         .then(function(response){
-          console.log(response)
           $scope.recipes = response.data;
           $scope.rating = 0;
           $scope.ratings = [{
               max: 5
           }];
         })
-    }
+    } //end search function
 
 
   })//end publicRecipe controller
