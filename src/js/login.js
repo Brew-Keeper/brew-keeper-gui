@@ -46,6 +46,10 @@ angular.module('brewKeeper')
 
   .controller('changePassword', function($scope, $http, $location){
     var users = {}
+    $scope.resetError = false;
+    $scope.resetSuccess = false;
+    $scope.generalError = false;
+
     // $scope.users.username = $scope.username;
 
     $scope.submitChangePassword = function(mismatch){
@@ -73,14 +77,19 @@ angular.module('brewKeeper')
     });
 
     $scope.resetPassword = function(users){
-      console.log("reset password function")
-      console.log($scope.users)
+      $scope.resetError = false;
+      $scope.resetSuccess = false;
+      $scope.generalError = false;
       $http.post('https://brew-keeper-api.herokuapp.com/api/get-reset/', $scope.users)
-        .then(function(){
-          console.log("sucess")
+        .then(function(response){
+          if(response.data){
+            $scope.resetError = true;
+            return
+          };
+          $scope.resetSuccess = true;
         })
         .catch(function(){
-          console.log("error")
+          $scope.generalError = true;
         })
 
     };//end reset password function
