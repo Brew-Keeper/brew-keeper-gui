@@ -34,6 +34,17 @@ angular.module('brewKeeper')
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
       }
 
+      $scope.search = function(searchString){
+        $http.get("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/?search="+searchString)
+          .then(function(response){
+            $scope.recipes = response.data;
+            $scope.rating = 0;
+            $scope.ratings = [{
+                max: 5
+            }];
+          })
+      } //end search function
+
   })//end recipe-list controller
 
 
@@ -51,23 +62,32 @@ angular.module('brewKeeper')
         }];
       })
 
-      $scope.publicListBrewIt = function(id){
-        //get indexOf recipe id
-        for (var index = 0; index < $scope.recipes.length; index ++) {
-          if($scope.recipes[index].id == id){
-            var recipeId = index;
-          }
+    $scope.publicListBrewIt = function(id){
+      //get indexOf recipe id
+      for (var index = 0; index < $scope.recipes.length; index ++) {
+        if($scope.recipes[index].id == id){
+          var recipeId = index;
         }
-        $rootScope.steps = $scope.recipes[recipeId].steps;
-        $rootScope.detail = $scope.recipes[recipeId];
-        $location.path("/public/" + id + "/brewit")
-        $(document).scrollTop(0);
-      }//end listBrewit function
+      }
+      $rootScope.steps = $scope.recipes[recipeId].steps;
+      $rootScope.detail = $scope.recipes[recipeId];
+      $location.path("/public/" + id + "/brewit")
+      $(document).scrollTop(0);
+    }//end listBrewit function
+
+    $scope.search = function(searchString){
+      $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/?search="+searchString)
+        .then(function(response){
+          $scope.recipes = response.data;
+          $scope.rating = 0;
+          $scope.ratings = [{
+              max: 5
+          }];
+        })
+    } //end search function
+
 
   })//end publicRecipe controller
-
-
-
 
 })();//END IFEE
 

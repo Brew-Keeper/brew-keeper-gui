@@ -36,26 +36,95 @@
     </head>
     <body  ng-app="brewKeeper" ng-controller="MainController">
         <heading class="heading">
-          <a  class="logo" href="#/"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
+          <a  class="logo" href="#/public"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
           <nav class="menu hamburger">
             <ul class="menu">
-              <li ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login/Signup</a></li>
+              <li ng-show="username"><a href="#/{{username}}">My Recipes</a><li>
+              <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
+              <li><a href="#/info">About</a></li>
+              <li class="login-link" ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login</a></li>
               <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
               <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
-              <li><a href="#/info">About</a></li>
-              <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
-              <li><a href="#/public">View Public Recipes</a><li>
-              <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
             </ul>
           </nav>
         </heading>
-      <main class="container">
+      <main class="container wrapper">
 
         <div class="place-holder">
           <ng-view />
         <div> <!-- end div.place-holder -->
       </main>
 
+<section class="register-modal inactive">
+<div>Please make sure your passwords match.
+    <button class="clicker-button password-fail">OK</button>
+</div>
+</section><!--END register-modal-->
+
+<section class="login-modal inactive">
+<div>Please enter a valid username and password.
+    <button class="clicker-button login-fail">OK</button>
+</div>
+</section><!--END login-modal-->
+
+<section class="successful-modal inactive">
+<div>Password Successfully Changed!
+    <button class="clicker-button change-not-fail">OK</button>
+</div>
+</section><!--END successful-modal-->
+
+<section class="password-modal inactive">
+<div>Current password incorrect, please try again.
+    <button class="clicker-button password-fail">OK</button>
+</div>
+</section><!--END password-modal-->
+
+<section class="steps-modal inactive">
+<div>Plese add steps to recipe before making it public.
+    <button class="clicker-button steps-fail">OK</button>
+</div>
+</section><!--END steps-modal-->
+
+<section class="confirm-modal inactive">
+<div>Are you sure you want to make this recipe public?
+    <button class="clicker-button confirm-fail">OK</button>
+    <button class="clicker-button cancel-fail">Cancel</button>
+</div>
+</section><!--END steps-modal-->
+
+<section class="confirm-clone-modal inactive">
+<div>Are you sure you want to clone this recipe?
+    <button class="clicker-button confirm-clone-fail">OK</button>
+    <button class="clicker-button cancel-clone-fail">Cancel</button>
+</div>
+</section><!--END steps-modal-->
+
+<section class="confirm-delete-modal inactive">
+<div>Are you sure you want to delete this step?
+    <button class="clicker-button confirm-delete-fail">OK</button>
+    <button class="clicker-button cancel-clone-fail">Cancel</button>
+</div>
+</section><!--END steps-modal-->
+
+<section class="confirm-eliminate-modal inactive">
+<div>Are you sure you want to delete this recipe?
+    <button class="clicker-button confirm-eliminate-fail">OK</button>
+    <button class="clicker-button cancel-clone-fail">Cancel</button>
+</div>
+</section><!--END steps-modal-->
+
+
+<section class="sharing-modal inactive">
+<div>Thanks for sharing!
+    <button class="clicker-button sharing-not-fail">OK</button>
+</div>
+</section><!--END steps-modal-->
+
+<section class="welcome-modal inactive">
+<div><p>Thanks for choosing Brew Keeper!  Here's a few recipes to get you started.</p>
+    <button class="clicker-button welcome-fail">OK</button>
+</div>
+</section><!--END steps-modal-->
 
 
       <!-- bower:js -->
