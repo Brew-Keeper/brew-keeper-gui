@@ -4,9 +4,23 @@ angular.module('brewKeeper')
     $scope.users = {}
     $scope.signupButton = function(mismatch) {
       if(mismatch){
-        alert("Passwords Do Not Match")
+//Below is entering register mismatch modal test
+          $(".register-wrapper").addClass("openerror");
+          $("section.register-modal").removeClass("inactive");
+//Above is modal text.  line below is what it's replacing.
+        // alert("Passwords Do Not Match")
+//Below is exiting register mismatch modal test
+        $("button.password-fail").on("click", function() {
+          console.log("click")
+          $(".register-wrapper").removeClass("openerror");
+          $("section.register-modal").addClass("inactive");
+        });
+//Above is existing register mismatch modal text.
         return
       }
+
+
+
       $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
@@ -18,6 +32,9 @@ angular.module('brewKeeper')
         alert("Please fill out all fields carefully.");
       })//Response if bad signup attempt
     };
+
+
+
   })//END CONTROLLER FOR SIGNUP
 
 

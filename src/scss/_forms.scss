@@ -23,8 +23,15 @@ h3.form-heading {
   text-decoration: none;
   font-size: 0.9em;
   text-align: center;
-  &.reset-brew {
-
+  &.password-fail {
+    display: block;
+    float: right;
+    background-color: $brewIt;//brewit-green
+    border: 1px solid $brewIt;
+    width: 100% * (1/4);
+    margin-left: 100% * (3/8);
+    margin-right: 100% * (3/8);
+    margin-top: 2ex;
   }
   &.restart-brew {
     background-color: $brewIt;//brewit-green
