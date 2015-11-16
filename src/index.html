@@ -49,18 +49,24 @@
             </ul>
           </nav>
         </heading>
-      <main class="container register-wrapper">
+      <main class="container wrapper">
 
         <div class="place-holder">
           <ng-view />
         <div> <!-- end div.place-holder -->
       </main>
+
 <section class="register-modal inactive">
 <div>Please make sure your password matches.
     <button class="clicker-button password-fail">OK</button>
 </div>
 </section><!--END register-modal-->
 
+<section class="login-modal inactive">
+<div>Please enter a valid username and password.
+    <button class="clicker-button login-fail">OK</button>
+</div>
+</section><!--END login-modal-->
 
       <!-- bower:js -->
       <script src="../bower_components/jquery/dist/jquery.js"></script>

@@ -5,14 +5,14 @@ angular.module('brewKeeper')
     $scope.signupButton = function(mismatch) {
       if(mismatch){
 //Below is entering register mismatch modal test
-          $(".register-wrapper").addClass("openerror");
+          $(".wrapper").addClass("openerror");
           $("section.register-modal").removeClass("inactive");
 //Above is modal text.  line below is what it's replacing.
         // alert("Passwords Do Not Match")
 //Below is exiting register mismatch modal test
         $("button.password-fail").on("click", function() {
           console.log("click")
-          $(".register-wrapper").removeClass("openerror");
+          $(".wrapper").removeClass("openerror");
           $("section.register-modal").addClass("inactive");
         });
 //Above is existing register mismatch modal text.
@@ -52,7 +52,19 @@ angular.module('brewKeeper')
         $scope.users = {};
         $location.path('/')
       }, function errorCallback(response){
-         alert("Please enter a valid username and password.")
+//Below is entering register mismatch modal test
+          $(".wrapper").addClass("openerror");
+          $("section.login-modal").removeClass("inactive");
+//Above is modal text.  line below is what it's replacing.
+        // alert("Passwords Do Not Match")
+//Below is exiting register mismatch modal test
+        $("button.login-fail").on("click", function() {
+          console.log("click")
+          $(".wrapper").removeClass("openerror");
+          $("section.login-modal").addClass("inactive");
+        });
+//Above is existing register mismatch modal text.
+
       })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
