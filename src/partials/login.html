@@ -35,12 +35,12 @@
 </section>
 
 <section class="more-info reset-password hidden columns general">
-  <form name="reset-password" class="register" ng-controller="changePassword" ng-submit="resetPassword(users)">
+  <form name="request-reset" class="register" ng-controller="changePassword" ng-submit="requestReset(users)">
      <label>Reset Password</label>
 
      <div class="columns general">
       <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
-     <button href="" class="register clicker-button" name="reset-password">Reset</button>
+     <button href="" class="register clicker-button" name="request-reset">Reset</button>
      <span ng-show="resetError">Invalid username, try again</span>
      <span ng-show="resetSuccess">An email has been sent to the address you provided at registration. Follow the instructions to reset your password.</span>
      <span ng-show="generalError">There was a problem processing your request. Please try again</span>

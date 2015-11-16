@@ -76,7 +76,7 @@ angular.module('brewKeeper')
       $('form.login').addClass('hidden')
     });
 
-    $scope.resetPassword = function(users){
+    $scope.requestReset = function(users){
       $scope.resetError = false;
       $scope.resetSuccess = false;
       $scope.generalError = false;
