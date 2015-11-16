@@ -62,11 +62,7 @@ angular.module('brewKeeper')
         $(stepId).toggleClass("hidden")
       };
 
-      $scope.testFunction = function(step){
-        console.log("test")
-        console.log(step)
-      }
-
+      
 
       $scope.editStep = function(step){
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
