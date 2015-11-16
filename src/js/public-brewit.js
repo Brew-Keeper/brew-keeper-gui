@@ -132,6 +132,9 @@ angular.module('brewKeeper')
         if(timerRunning){
           return;
         }
+        $(".countdown").removeClass("hidden");
+        $("div.restart").addClass("hidden");
+        $(".countdown").removeClass("hidden");
         $("timer.delay").removeClass("hidden");
         $(".step").addClass("inactive-step")
         $("a[href].restart-brew").addClass("hidden");
@@ -148,10 +151,16 @@ angular.module('brewKeeper')
       // }; //This can be used to pause process if needed.
 
       $scope.resetBrew = function(){
+        $(".current-step").addClass("hidden")
+        $("timer.counter").addClass("hidden");
         $(".delay.hidden").removeClass("hidden");
         $(".current-step").removeClass("current-step");
-        $("timer").removeClass("hidden");
-        $("timer.counter").addClass("hidden");
+        $(".countdown").removeClass("hidden");
+
+        $("div.countdown").addClass("hidden");
+
+        // $("timer").removeClass("hidden");
+        // $("timer.counter").addClass("hidden");
         $scope.$broadcast('timer-reset');
         $("a[href].restart-brew").removeClass("hidden");
         $("a[href].add-brew-note").removeClass("hidden");
