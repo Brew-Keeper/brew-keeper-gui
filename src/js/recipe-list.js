@@ -87,12 +87,7 @@ angular.module('brewKeeper')
     } //end search function
 
     $scope.newRating = function(rating, recipeId){
-      console.log("rating for the first time");
-      console.log(rating)
-      console.log(recipeId)
-
       var newRating = {"public_rating": rating}
-      console.log(newRating)
       $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/", newRating)
         .then(function(){$http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
           .then(function(response){
@@ -102,15 +97,10 @@ angular.module('brewKeeper')
                 max: 5
             }];
           })
-
         })// end http.post
     }//end newRating
 
     $scope.updateRating = function(rating, ratingId, recipeId){
-      // console.log("updating the rating");
-      // console.log(rating)
-      // console.log(ratingId)
-      // console.log(recipeId)
       var newRating = {"public_rating": rating}
       $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/" + ratingId + "/", newRating)
     }//end updateRating
