@@ -53,8 +53,6 @@ angular.module('brewKeeper')
     $scope.generalError = false;
 
 
-    // $scope.users.username = $scope.username;
-
     $scope.submitChangePassword = function(mismatch){
       if(mismatch){
         alert("Passwords Do Not Match")
@@ -121,7 +119,8 @@ angular.module('brewKeeper')
           $location.path('/');
         })//end .then
         .catch(function(response){
-          alert(response.data);
+          $rootScope.errorMessage = response.data
+          // alert(response.data);
         })//end .catch
     }; //end resetPassword function
 
