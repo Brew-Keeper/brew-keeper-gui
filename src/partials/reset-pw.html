@@ -1,3 +1,5 @@
+<span ng-show="$scope.errorMessage">error message: {{errorMessage}} </span>
+
 <form class="changeForm" name="changeForm" ng-controller="changePassword" ng-submit="resetPassword(changeForm.confirmNewPassword.$error.match)">
 <!-- <form class="changeForm" name="resetForm" ng-controller="changePassword" ng-submit="resetPassword(users)"> -->
   <div class="columns general">

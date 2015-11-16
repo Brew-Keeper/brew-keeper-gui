@@ -44,11 +44,14 @@ angular.module('brewKeeper')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
 
-  .controller('changePassword', function($scope, $http, $location, $cookies){
+
+
+  .controller('changePassword', function($scope, $http, $location, $cookies, $rootScope){
     var users = {}
     $scope.resetError = false;
     $scope.resetSuccess = false;
     $scope.generalError = false;
+
 
     // $scope.users.username = $scope.username;
 
@@ -118,8 +121,6 @@ angular.module('brewKeeper')
           $location.path('/');
         })//end .then
         .catch(function(response){
-          // console.log("failure")
-          // console.log(response)
           alert(response.data);
         })//end .catch
     }; //end resetPassword function
