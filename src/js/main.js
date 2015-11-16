@@ -68,6 +68,13 @@
       $rootScope.username = null;
       $scope.changePassword= false;
 
+      // $(".login-link").click(function(){
+      //   console.log("login link clicked")
+      //   $('.register').addClass('hidden');
+      //   $('form.login').removeClass('hidden')
+      // })
+
+
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           $rootScope.username = response.data.username;

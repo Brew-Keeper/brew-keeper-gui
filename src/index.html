@@ -39,7 +39,7 @@
           <a  class="logo" href="#/"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
           <nav class="menu hamburger">
             <ul class="menu">
-              <li ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login/Signup</a></li>
+              <li class="login-link" ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login/Signup</a></li>
               <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
               <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
               <li><a href="#/info">About</a></li>
