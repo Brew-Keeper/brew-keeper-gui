@@ -91,6 +91,21 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
 
   div.step.delay.restart {
     background-color: $brewIt;
+    box-sizing: border-box;
+    // border: solid 50px $brewitInactive;
+    p {
+      // background-color: lightgray;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+    img {
+      width: 100% * (1/3);
+      max-height: 5em;
+      margin-left: 36%;
+      fill: white;
+      // margin-right: 100% * (1/3);
+    }
   }
 
   div.delay.step.finished {
