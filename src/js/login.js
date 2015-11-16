@@ -108,7 +108,15 @@ angular.module('brewKeeper')
 //Above is existing register mismatch modal text.
         },
         function errorCallback(){
-          alert("Current password incorrect, please try again.");
+          $(".wrapper").addClass("openerror");
+          $("section.password-modal").removeClass("inactive");
+//Above is modal text.  line below is what it's replacing.
+        // alert("Passwords Do Not Match")
+//Below is exiting register mismatch modal test
+        $("button.password-fail").on("click", function() {
+          $(".wrapper").removeClass("openerror");
+          $("section.password-modal").addClass("inactive");
+        })
           $scope.users = {};
         })//end http.post to change-pw
     } //end submitChangePassword function
