@@ -62,7 +62,7 @@ angular.module('brewKeeper')
         $(stepId).toggleClass("hidden")
       };
 
-      
+
 
       $scope.editStep = function(step){
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
@@ -235,23 +235,35 @@ angular.module('brewKeeper')
             $rootScope.notes = response.data.brewnotes;
           })
       })
-    $scope.brewnote = { };
-    $scope.addNote = false;
-    }//Add Brew Note Form
 
-    $scope.showNoteIcons = function(noteId){
-      $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+
+        $scope.brewnote = { };
+        $scope.addNote = false;
+        }//Add Brew Note Form
+
+        $scope.showNoteIcons = function(noteId){
+          $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+        }
+
+  $scope.makePublic = function(){ //makes recipes public
+    if ($rootScope.steps.length < 1) {
+      $(".wrapper").addClass("openerror");
+      $("section.steps-modal").removeClass("inactive");
+      $("button.steps-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.steps-modal").addClass("inactive");
+      })
+        return;
     }
-
-    $scope.makePublic = function(){ //makes recipes public
-      if ($rootScope.steps.length < 1) {
-        window.alert("Plese add steps to recipe before making it public.")
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-modal").removeClass("inactive");
+      $("button.cancel-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.confirm-modal").addClass("inactive");
         return;
-      };
-
-      if (!window.confirm("Are you sure you want to make this recipe public?")){
-        return;
-      };
+      })
+      $("button.confirm-fail").on("click", function() {
+      $("section.confirm-modal").addClass("inactive");
 
       var publicData = {}  //build the recipe
       publicData.title = $scope.detail.title;
@@ -285,13 +297,18 @@ angular.module('brewKeeper')
 
         } //end for loop to build steps
       }) //end .success for posting new recipe to public
-      .then(function(){
-        window.alert("Thank you for sharing " + $scope.detail.title)
+
+    .then(function(){
+      $(".wrapper").addClass("openerror");
+      $("section.sharing-modal").removeClass("inactive");
+      $("button.sharing-not-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.sharing-modal").addClass("inactive");
       })
+    })
+      })//end confirm-fail
 
   }; // end makePublic function
-
-
-  }) //end recipDetail controller
+}) //end recipDetail controller
 
 })();//END Angular IFEE
