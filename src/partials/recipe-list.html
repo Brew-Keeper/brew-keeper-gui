@@ -1,9 +1,8 @@
 
 <nav class="recipe-list">
-  <!-- <h2>Recipe List</h2> -->
-  <!-- <input placeholder="&#x1f50d Search" ng-model="filter"></input> -->
-  <input placeholder="&#x1f50d Search" ng-model="searchString" name="search" ng-submit="search(searchString)">
-    <button href="" name="search"  ng-click="search(searchString)">Search</button>
+  <h3>{{username}}'s Recipes</h3>
+  <input placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="search(searchString)">
+    <button href="" name="search" class="clicker-button" ng-click="search(searchString)">Search</button>
   </input>
   <select name="OrderBy" value="OrderBy" ng-model="query">
     <option value="">Sort By</>
