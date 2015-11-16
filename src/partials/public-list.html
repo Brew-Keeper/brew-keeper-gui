@@ -34,17 +34,17 @@
           </span>
         <!-- userRating.current = {{userRating.current}} -->
         <section ng-show="username">
-          combined rating: {{recipe.combined_rating}}<br>
+          <!-- combined rating: {{recipe.combined_rating}}<br>
           username:  {{recipe.public_ratings.username}}<br>
           user rating: {{recipe.public_ratings.public_rating}}<br>
-          user rating id: {{recipe.public_ratings.id}}<br><br>
+          user rating id: {{recipe.public_ratings.id}}<br><br> -->
           <span ng-hide="recipe.public_ratings.id" ng-repeat="rating in ratings">not rated: {{recipe.combined_rating}}
             <p>{{recipe.public_ratings[0].username}}</p>
-            <div star-rating rating-value="recipe.combined_rating" max="rating.max" ng-click="rateRecipe(rating.current)" class="public"></div>
+            <div star-rating rating-value="recipe.combined_rating" max="rating.max" ng-click="newRating(recipe.combined_rating, recipe.id)" class="public"></div>
           </span>
           <span ng-show="recipe.public_ratings.id" ng-repeat="rating in ratings">rated:
             <p>{{recipe.public_ratings[0].username}}</p>
-            <div star-rating rating-value="recipe.public_ratings.public_rating" max="5" ng-click="rateRecipe(userRating.current)"></div>
+            <div star-rating rating-value="recipe.public_ratings.public_rating" max="5" ng-click="updateRating(recipe.public_ratings.public_rating, recipe.public_ratings.id, recipe.id)"></div>
           </span>
         </section>
       </div>
