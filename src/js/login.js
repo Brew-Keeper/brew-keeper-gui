@@ -55,15 +55,12 @@ angular.module('brewKeeper')
 //Below is entering register mismatch modal test
           $(".wrapper").addClass("openerror");
           $("section.login-modal").removeClass("inactive");
-//Above is modal text.  line below is what it's replacing.
-        // alert("Passwords Do Not Match")
-//Below is exiting register mismatch modal test
         $("button.login-fail").on("click", function() {
           console.log("click")
           $(".wrapper").removeClass("openerror");
           $("section.login-modal").addClass("inactive");
         });
-//Above is existing register mismatch modal text.
+//Above is exiting register mismatch modal text.
 
       })//responses for bad login attempts
     }//submit function
@@ -79,16 +76,36 @@ angular.module('brewKeeper')
 
     $scope.submitChangePassword = function(mismatch){
       if(mismatch){
-        alert("Passwords Do Not Match")
-        return
+//Below is entering register mismatch modal test
+          $(".wrapper").addClass("openerror");
+          $("section.register-modal").removeClass("inactive");
+//Above is modal text.  line below is what it's replacing.
+        // alert("Passwords Do Not Match")
+//Below is exiting register mismatch modal test
+        $("button.password-fail").on("click", function() {
+          $(".wrapper").removeClass("openerror");
+          $("section.register-modal").addClass("inactive");
+        });
+//Above is existing register mismatch modal text.
+       return
       }
       users.username = $scope.username;
       users.old_password = $scope.users.old_password;
       users.new_password = $scope.users.new_password;
       $http.post('https://brew-keeper-api.herokuapp.com/api/change-pw/', users)
         .then(function successCallback(){
-          alert("Password Successfully Changed");
+//Below is entering register mismatch modal test
+          $(".wrapper").addClass("openerror");
+          $("section.successful-modal").removeClass("inactive");
+//Above is modal text.  line below is what it's replacing.
+        // alert("Passwords Do Not Match")
+//Below is exiting register mismatch modal test
+        $("button.change-not-fail").on("click", function() {
+          $(".wrapper").removeClass("openerror");
+          $("section.successful-modal").addClass("inactive");
+        })
           $location.path('/');
+//Above is existing register mismatch modal text.
         },
         function errorCallback(){
           alert("Current password incorrect, please try again.");
