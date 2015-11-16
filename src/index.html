@@ -36,16 +36,15 @@
     </head>
     <body  ng-app="brewKeeper" ng-controller="MainController">
         <heading class="heading">
-          <a  class="logo" href="#/"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
+          <a  class="logo" href="#/public"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
           <nav class="menu hamburger">
             <ul class="menu">
-              <li class="login-link" ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login/Signup</a></li>
+              <li ng-show="username"><a href="#/{{username}}/recipes">My Recipes</a><li>
+              <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
+              <li><a href="#/info">About</a></li>
+              <li class="login-link" ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login</a></li>
               <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
               <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
-              <li><a href="#/info">About</a></li>
-              <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
-              <li><a href="#/public">View Public Recipes</a><li>
-              <!-- <li><a href="#/users/:username">User Recipes</a></li> DO WE NEED THIS IN MENU BAR?-->
             </ul>
           </nav>
         </heading>

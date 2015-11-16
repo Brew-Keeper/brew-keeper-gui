@@ -33,12 +33,6 @@ angular.module('brewKeeper')
 
 
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
-    // console.log("loginCtrl")
-    $(".login-link").click(function(){
-      console.log("login link clicked")
-      $('.register').addClass('hidden');
-      $('form.login').removeClass('hidden')
-    })
 
     $scope.users = {}
     $scope.loginButton= function(){
@@ -68,6 +62,11 @@ angular.module('brewKeeper')
       $('.register').removeClass('hidden');
       $('form.login').addClass('hidden')
     })//show signup form
+
+    $(".login-link").click(function(){
+      $('.register').addClass('hidden');
+      $('form.login').removeClass('hidden')
+    })
   })//END CONTROLLER FOR LOGIN
 
 
