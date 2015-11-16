@@ -13,8 +13,6 @@ angular.module('brewKeeper')
         return
       }
 
-
-
       $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token
@@ -22,15 +20,18 @@ angular.module('brewKeeper')
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = { }
         $location.path('/')
+        $(".wrapper").addClass("openerror");
+        $("section.welcome-modal").removeClass("inactive");
+        $("button.welcome-fail").on("click", function() {
+          $(".wrapper").removeClass("openerror");
+          $("section.welcome-modal").addClass("inactive");
+      });
       }, function errorCallback(response){
         alert("Please fill out all fields carefully.");
       })//Response if bad signup attempt
     };
 
-
-
   })//END CONTROLLER FOR SIGNUP
-
 
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
 
@@ -59,11 +60,13 @@ angular.module('brewKeeper')
       })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
+      console.log("Show me the registration!")
       $('section.register').removeClass('hidden');
+      $('form.register').removeClass('hidden');
       $('form.login').addClass('hidden')
     })//show signup form
 
-    
+
   })//END CONTROLLER FOR LOGIN
 
 
