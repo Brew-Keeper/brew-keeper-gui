@@ -24,6 +24,10 @@
         .when('/info', {
           templateUrl: 'partials/more-info.html'
         })
+        .when('/reset-pw', {
+          templateUrl: 'partials/reset-pw.html',
+          controller: 'changePassword'
+        })
         .when('/:username/new', {
           templateUrl: 'partials/recipe-create.html',
           controller: 'createNewRecipe'
@@ -44,7 +48,7 @@
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
         })
-        
+
         // .otherwise({
         //   redirectTo: '/404.html',
         //   templateUrl: 'partials/404.html'

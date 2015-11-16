@@ -6,6 +6,7 @@
     <input class="login-password" type="password" name="password" placeholder="password" ng-model="users.password" required>
     <button href="" class="login clicker-button" name="login">Login</button>
     <a href="" class="show-signup clicker-button">Register</a>
+    <a href="" class="show-reset clicker-button">Reset Password</a>
   </div>
 </form><!--end form login-->
 
@@ -34,9 +35,21 @@
 <!-- </section> -->
 <!--end register-wrapper-->
 
-
-
 </section>
+
+<section class="more-info reset-password hidden columns general">
+  <form name="request-reset" class="register" ng-controller="changePassword" ng-submit="requestReset(users)">
+     <label>Reset Password</label>
+
+     <div class="columns general">
+      <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
+     <button href="" class="register clicker-button" name="request-reset">Reset</button>
+     <span ng-show="resetError">Invalid username, try again</span>
+     <span ng-show="resetSuccess">An email has been sent to the address you provided at registration. Follow the instructions to reset your password.</span>
+     <span ng-show="generalError">There was a problem processing your request. Please try again</span>
+    </div>
+  </form><!-- end reset password form -->
+ </section>
 
 <form class="changeForm" name="changeForm" ng-show="changePassword" ng-controller="changePassword" ng-submit="submitChangePassword(changeForm.confirmNewPassword.$error.match)">
   <div class="columns general">
