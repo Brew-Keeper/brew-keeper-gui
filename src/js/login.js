@@ -20,6 +20,12 @@ angular.module('brewKeeper')
         $http.defaults.headers.common = {"Authorization": userInfo}
         $scope.users = { }
         $location.path('/')
+        $(".wrapper").addClass("openerror");
+        $("section.welcome-modal").removeClass("inactive");
+        $("button.welcome-fail").on("click", function() {
+          $(".wrapper").removeClass("openerror");
+          $("section.welcome-modal").addClass("inactive");
+      });
       }, function errorCallback(response){
         alert("Please fill out all fields carefully.");
       })//Response if bad signup attempt
