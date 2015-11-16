@@ -88,6 +88,11 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       line-height: 0.25;
     }
   }//.delay
+
+  div.step.delay.restart {
+    background-color: $brewIt;
+  }
+
   div.delay.step.finished {
     display: none;
     .countdown {

@@ -33,17 +33,7 @@ h3.form-heading {
     margin-right: 100% * (3/8);
     margin-top: 2ex;
   }
-  &.restart-brew {
-    background-color: $brewIt;//brewit-green
-    border: 1px solid $brewIt;
-    width: 100% * (1/4);
-    margin-left: 5%;
-    margin-right: 0;
-    margin-bottom: 2ex;
-    &.public {
-      margin-right: 30%;
-    }
-  }
+
   &.add-brew-note {
     width: 100% * (7/24);
     margin-left: 0.5em;
@@ -138,6 +128,22 @@ h3.form-heading {
     margin-bottom: 2ex;
   }
 }//.clicker-button
+
+.restart-brew {
+  background-color: $brewIt;//brewit-green
+  border: 1px solid $brewIt;
+  // width: 50%;
+  // padding: 5%;
+  // padding-top: 10%;
+  // margin-left: 25%;
+  margin-top: 50%;
+  // margin-right: 0;
+  // margin-bottom: -2ex;
+  &.public {
+    margin-right: 30%;
+  }
+}
+
 
 form.login {
   width: 90%;

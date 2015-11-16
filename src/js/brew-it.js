@@ -72,6 +72,9 @@ angular.module('brewKeeper')
             return;
           }
           $(".countdown").removeClass("hidden");
+          $("div.restart").addClass("hidden");
+
+          $(".countdown").removeClass("hidden");
           $("timer.delay").removeClass("hidden");
           $(".step").addClass("inactive-step")
           $("a[href].restart-brew").addClass("hidden");
