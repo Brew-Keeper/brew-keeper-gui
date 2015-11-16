@@ -22,35 +22,14 @@ $brewitCurrent: #7ec78a;//bright green
   }
 }
 
-// section.login-modal {
-//   position: fixed;
-//   width: 100%;
-//   top: 45%;
-//   // padding-left: 40%;
-//   transform: scale(1.5);
-//   div {
-//   width: 50%;
-//   margin: 0 25%;
-//   text-align: center;
-//   }
-//     &.inactive {
-//       height: 0;
-//       width: 0;
-//       left: 0;
-//       top: 0;
-//       margin: 0;
-//       opacity: 0;
-//       pointer-events: none;
-//   }
-// }
-
 .openerror {
   background-color: $brewitCurrent;
   -webkit-filter: blur(5px) grayscale(50%);
   -webkit-transform: scale(0.9);
 }
 
-.register-modal, .login-modal, .wrapper {
+
+[class*='-modal'], .wrapper {
   transition: all 0.3s ease;
 }
 
