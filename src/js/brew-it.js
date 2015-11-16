@@ -90,8 +90,6 @@ angular.module('brewKeeper')
 
           $(".current-step").addClass("hidden")
           $("timer.counter").addClass("hidden");
-
-
           $(".delay.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
           $(".countdown").removeClass("hidden");
