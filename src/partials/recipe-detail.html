@@ -63,7 +63,7 @@
       <div class="hidden edit-step {{step.id}}">
         <form class="edit-step" ng-submit="editStep(step)">
           <section class="columns">
-            <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+            <input ng-blur="editStep(step)" list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
               <datalist id="step-title">
                 <option value="Pour">
                 <option value="Bloom">
@@ -72,21 +72,21 @@
                 <option value="Plunge">
               </datalist>
             </input>
-            <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+            <textarea ng-blur="editStep(step)" maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
             <section>
               <div class="small-field">
               </div>
               <div class="small-field">
                 <label><img class="water-icon" src="img/LightWater.svg"/></label>
-                <input class="small-field" type="number" min="0" max="32767" ng-model="step.water_amount"> </input>
+                <input ng-blur="editStep(step)" class="small-field target" type="number" min="0" max="32767" ng-model="step.water_amount"> </input>
               </div>
               <div class="small-field">
                 <label class="time-label"><img class="timer-icon" src="img/LightTimer.svg"></label>
-                <input class="small-field" type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+                <input ng-blur="editStep(step)" class="small-field target" type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
               </div>
             </section>
           </section>
-          <button class="edit-step clicker-button" type="submit">Save</button>
+          <!-- <button class="edit-step clicker-button" type="submit">Save</button> -->
         </form><!--edit Step Form-->
       </div> <!-- edit step form div -->
       <section class=" edit-step-icons">
