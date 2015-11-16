@@ -28,7 +28,7 @@
         <img src="img/LightWater.svg">
       </div>
       <section class="details water-details">
-        {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
+        {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}} <span ng-show="detail.temp">@ {{detail.temp}} &deg;F</span>
       </section> <!-- end section.water-details-->
       <div class="detail-icon">
         <img src="img/LightTimer.svg">

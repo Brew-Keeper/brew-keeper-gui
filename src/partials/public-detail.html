@@ -35,19 +35,19 @@
       <section class="details bean-details">
       <!-- <img src="img/LightCoffeeBean.svg"> -->
         <span>{{detail.bean_name}}</span>
-        <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
+        <span ng-show="">{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
       </section> <!--end section.bean-details -->
       <div class="detail-icon">
         <img src="img/LightWater.svg">
       </div>
       <section class="details water-details">
-        {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
+        {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}} <span ng-show="detail.temp">@ {{detail.temp}} &deg;F</span>
       </section> <!-- end section.water-details-->
       <div class="detail-icon">
         <img src="img/LightTimer.svg">
       </div>
       <section class="details brew-time">
-        {{detail.total_duration}} sec, {{detail.orientation}}
+        <span >{{detail.total_duration}} sec, {{detail.orientation}}
       </section> <!-- end section.brew-time -->
       <!-- <section class="details icons">
         <img class="edit-icon recipe-view edit-button" ng-Click="" src="img/Edit-25.svg"/>
