@@ -2,9 +2,17 @@
 
   angular.module('brewKeeper', ['ngRoute', 'timer', 'ngCookies', 'validation.match'], function($httpProvider, $routeProvider){
       $routeProvider
+        // .when('/reset-pw', {
+        //   templateUrl: 'partials/reset-pw.html',
+        //   controller: 'changePassword'
+        // })
         .when('/',{
           templateUrl: 'partials/recipe-list.html',
           controller: 'WhoAmIController'
+        })
+        .when('/reset-pw', {
+          templateUrl: 'partials/reset-pw.html',
+          controller: 'changePassword'
         })
         .when('/public',{
           templateUrl: 'partials/public-list.html',
@@ -66,12 +74,18 @@
 
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
+          console.log("MainController whoami")
           $rootScope.username = response.data.username;
         })//This is for populating url with username
         .catch(function(){
+          console.log("MainController whoami")
+          console.log($location.path())
           $rootScope.username = null; //hides login and shows logout
           $cookies.remove("Authorization")
           $http.defaults.headers.common = {}
+          if($location.path() == "/reset-pw" || "/login" || "/info"){
+            return
+          }
           $location.path('/public');
         })//.error
 
