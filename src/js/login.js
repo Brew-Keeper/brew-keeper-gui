@@ -33,6 +33,7 @@ angular.module('brewKeeper')
 
 
   .controller('loginCtrl', function($scope, $http, $rootScope, $cookies, $location){//CONTROLLER FOR LOGIN
+
     $scope.users = {}
     $scope.loginButton= function(){
       $cookies.remove("Authorization")
@@ -58,9 +59,11 @@ angular.module('brewKeeper')
       })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
-      $('.register').removeClass('hidden');
+      $('section.register').removeClass('hidden');
       $('form.login').addClass('hidden')
     })//show signup form
+
+    
   })//END CONTROLLER FOR LOGIN
 
 
@@ -120,9 +123,17 @@ angular.module('brewKeeper')
     } //end submitChangePassword function
 
     $('.show-reset').on('click', function(){
+      console.log("reset password button pressed")
       $('.reset-password').removeClass('hidden');
       $('form.login').addClass('hidden')
     });
+
+    $(".login-link").click(function(){
+      console.log("login link from change password controller")
+      $('section.register').addClass('hidden');
+      $('form.login').removeClass('hidden');
+      $('section.reset-password').addClass('hidden');
+    })
 
     $scope.requestReset = function(users){
       $scope.resetError = false;

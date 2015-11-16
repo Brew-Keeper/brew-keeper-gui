@@ -6,6 +6,10 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'WhoAmIController'
         })
+        .when('/reset-pw', {
+          templateUrl: 'partials/reset-pw.html',
+          controller: 'changePassword'
+        })
         .when('/public',{
           templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
@@ -64,6 +68,13 @@
       $rootScope.username = null;
       $scope.changePassword= false;
 
+      // $(".login-link").click(function(){
+      //   console.log("login link clicked")
+      //   $('.register').addClass('hidden');
+      //   $('form.login').removeClass('hidden')
+      // })
+
+
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           $rootScope.username = response.data.username;
@@ -72,6 +83,9 @@
           $rootScope.username = null; //hides login and shows logout
           $cookies.remove("Authorization")
           $http.defaults.headers.common = {}
+          if($location.path() == "/reset-pw" || "/login" || "/info"){
+            return
+          }
           $location.path('/public');
         })//.error
 
