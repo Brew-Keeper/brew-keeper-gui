@@ -86,6 +86,13 @@ angular.module('brewKeeper')
         })
     } //end search function
 
+    $scope.newRating = function(){
+      console.log("rating for the first time");
+    }
+
+    $scope.updateRating = function(){
+      console.log("updating the rating");
+    }
 
   })//end publicRecipe controller
 
