@@ -44,7 +44,7 @@ angular.module('brewKeeper')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
 
-  .controller('changePassword', function($scope, $http, $location){
+  .controller('changePassword', function($scope, $http, $location, $cookies){
     var users = {}
     $scope.resetError = false;
     $scope.resetSuccess = false;
@@ -91,8 +91,39 @@ angular.module('brewKeeper')
         .catch(function(){
           $scope.generalError = true;
         })
+    };//end requestReset function
 
-    };//end reset password function
+    $scope.resetPassword = function(mismatch){
+      // console.log("resetPassword function")
+      // console.log($scope.users)
+      // console.log(mismatch)
+      if(mismatch){
+        alert("Passwords Do Not Match")
+        return
+      }
+      users.username = $scope.users.username;
+      users.reset_string= $scope.users.reset_string;
+      users.email = $scope.users.email;
+      users.new_password = $scope.users.new_password;
+      // console.log(users)
+      $http.post('https://brew-keeper-api.herokuapp.com/api/reset-pw/', users)
+        .then(function(response){
+          // console.log("success")
+          // console.log(response);
+          userInfo = "Token " + response.data.token;
+          $cookies.put("Authorization", userInfo);
+          $http.defaults.headers.common = {"Authorization": userInfo};
+          $scope.username = $scope.users.username;
+          $scope.users = {};
+          $location.path('/');
+        })//end .then
+        .catch(function(response){
+          // console.log("failure")
+          // console.log(response)
+          alert(response.data);
+        })//end .catch
+    }; //end resetPassword function
+
 
   })//end changePassword controller
 })();//END IFFE
