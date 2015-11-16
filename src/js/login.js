@@ -44,9 +44,14 @@ angular.module('brewKeeper')
     })//show signup form
   })//END CONTROLLER FOR LOGIN
 
-  .controller('changePassword', function($scope, $http, $location){
+
+
+  .controller('changePassword', function($scope, $http, $location, $cookies, $rootScope){
     var users = {}
-    // $scope.users.username = $scope.username;
+    $scope.resetError = false;
+    $scope.resetSuccess = false;
+    $scope.generalError = false;
+
 
     $scope.submitChangePassword = function(mismatch){
       if(mismatch){
@@ -66,6 +71,59 @@ angular.module('brewKeeper')
           $scope.users = {};
         })//end http.post to change-pw
     } //end submitChangePassword function
-  })//end changePassword controller
 
+    $('.show-reset').on('click', function(){
+      $('.reset-password').removeClass('hidden');
+      $('form.login').addClass('hidden')
+    });
+
+    $scope.requestReset = function(users){
+      $scope.resetError = false;
+      $scope.resetSuccess = false;
+      $scope.generalError = false;
+      $http.post('https://brew-keeper-api.herokuapp.com/api/get-reset/', $scope.users)
+        .then(function(response){
+          if(response.data){
+            $scope.resetError = true;
+            return
+          };
+          $scope.resetSuccess = true;
+        })
+        .catch(function(){
+          $scope.generalError = true;
+        })
+    };//end requestReset function
+
+    $scope.resetPassword = function(mismatch){
+      // console.log("resetPassword function")
+      // console.log($scope.users)
+      // console.log(mismatch)
+      if(mismatch){
+        alert("Passwords Do Not Match")
+        return
+      }
+      users.username = $scope.users.username;
+      users.reset_string= $scope.users.reset_string;
+      users.email = $scope.users.email;
+      users.new_password = $scope.users.new_password;
+      // console.log(users)
+      $http.post('https://brew-keeper-api.herokuapp.com/api/reset-pw/', users)
+        .then(function(response){
+          // console.log("success")
+          // console.log(response);
+          userInfo = "Token " + response.data.token;
+          $cookies.put("Authorization", userInfo);
+          $http.defaults.headers.common = {"Authorization": userInfo};
+          $scope.username = $scope.users.username;
+          $scope.users = {};
+          $location.path('/');
+        })//end .then
+        .catch(function(response){
+          $rootScope.errorMessage = response.data
+          // alert(response.data);
+        })//end .catch
+    }; //end resetPassword function
+
+
+  })//end changePassword controller
 })();//END IFFE
