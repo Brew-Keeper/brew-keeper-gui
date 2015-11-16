@@ -1,4 +1,3 @@
-
 <form ng-hide="changePassword" class="login" ng-controller="loginCtrl" ng-submit="loginButton()">
 <!-- <form class="login" ng-controller="loginCtrl"> -->
   <div class="columns general">
@@ -14,6 +13,7 @@
   <form name="registration" class="register hidden" ng-controller="signupController" ng-submit="signupButton(registration.confirmPassword.$error.match)">
   <label>Register</label>
 
+<!-- <section class="register-wrapper"> -->
     <div class="columns general">
       <input class="register-user" type="text" name="username" placeholder=" username" ng-model="users.username" required>
       <input class="register-email" type="email" name="email" placeholder=" email" ng-model="users.email" required>
@@ -31,6 +31,10 @@
   <h3>Enter Brew Keeper</h3>
     <p>Brew Keeper provides a way to ​create​, ​brew​, ​refine, and ​store notes on coffee recipes so you can zero in on your best brew for each bean. Recipes store the detailed components of coffee recipes and general notes can hold any additional information that you might not have a place for. This site was designed with the AeroPress in mind, but can easily support other brewing equipment.</p>
   </article>
+<!-- </section> -->
+<!--end register-wrapper-->
+
+
 
 </section>
 

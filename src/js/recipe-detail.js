@@ -241,55 +241,69 @@ angular.module('brewKeeper')
           $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
         }
 
-        $scope.makePublic = function(){ //makes recipes public
-          if ($rootScope.steps.length < 1) {
-            window.alert("Plese add steps to recipe before making it public.")
-            return;
-          };
+  $scope.makePublic = function(){ //makes recipes public
+    if ($rootScope.steps.length < 1) {
+      $(".wrapper").addClass("openerror");
+      $("section.steps-modal").removeClass("inactive");
+      $("button.steps-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.steps-modal").addClass("inactive");
+      })
+        return;
+    }
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-modal").removeClass("inactive");
+      $("button.cancel-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.confirm-modal").addClass("inactive");
+        return;
+      })
+      $("button.confirm-fail").on("click", function() {
+      $("section.confirm-modal").addClass("inactive");
 
-          if (!window.confirm("Are you sure you want to make this recipe public?")){
-            return;
-          };
+      var publicData = {}  //build the recipe
+      publicData.title = $scope.detail.title;
+      publicData.bean_name = $scope.detail.bean_name;
+      publicData.roast = $scope.detail.roast;
+      publicData.orientation = $scope.detail.orientation;
+      publicData.general_recipe_comment = $scope.detail.general_recipe_comment;
+      publicData.grind = $scope.detail.grind;
+      publicData.total_bean_amount = $scope.detail.total_bean_amount;
+      publicData.bean_units = $scope.detail.bean_units;
+      publicData.water_type = $scope.detail.water_type;
+      publicData.total_water_amount = $scope.detail.total_water_amount;
+      publicData.water_units = $scope.detail.water_units;
+      publicData.temp = $scope.detail.temp;
+      publicData.steps = [];
 
-          var publicData = {}  //build the recipe
-          publicData.title = $scope.detail.title;
-          publicData.bean_name = $scope.detail.bean_name;
-          publicData.roast = $scope.detail.roast;
-          publicData.orientation = $scope.detail.orientation;
-          publicData.general_recipe_comment = $scope.detail.general_recipe_comment;
-          publicData.grind = $scope.detail.grind;
-          publicData.total_bean_amount = $scope.detail.total_bean_amount;
-          publicData.bean_units = $scope.detail.bean_units;
-          publicData.water_type = $scope.detail.water_type;
-          publicData.total_water_amount = $scope.detail.total_water_amount;
-          publicData.water_units = $scope.detail.water_units;
-          publicData.temp = $scope.detail.temp;
-          publicData.steps = [];
+      $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/", publicData).success(function(response){
 
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/", publicData).success(function(response){
+        newRecipeId = response.id;
 
-            newRecipeId = response.id;
+        steps = []; //build the steps
+        for(step in $scope.detail.steps){
+          steps[step] = {};
+          steps[step].step_number = $scope.detail.steps[step].step_number;
+          steps[step].step_title = $scope.detail.steps[step].step_title;
+          steps[step].step_body = $scope.detail.steps[step].step_body;
+          steps[step].duration = $scope.detail.steps[step].duration;
+          steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-            steps = []; //build the steps
-            for(step in $scope.detail.steps){
-              steps[step] = {};
-              steps[step].step_number = $scope.detail.steps[step].step_number;
-              steps[step].step_title = $scope.detail.steps[step].step_title;
-              steps[step].step_body = $scope.detail.steps[step].step_body;
-              steps[step].duration = $scope.detail.steps[step].duration;
-              steps[step].water_amount = $scope.detail.steps[step].water_amount;
+          $http.post("https://brew-keeper-api.herokuapp.com/api/users/pubic/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
 
-              $http.post("https://brew-keeper-api.herokuapp.com/api/users/pubic/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
+        } //end for loop to build steps
+      }) //end .success for posting new recipe to public
+    .then(function(){
+      $(".wrapper").addClass("openerror");
+      $("section.sharing-modal").removeClass("inactive");
+      $("button.sharing-not-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.sharing-modal").addClass("inactive");
+      })
+    })
+      })//end confirm-fail
 
-            } //end for loop to build steps
-          }) //end .success for posting new recipe to public
-          .then(function(){
-            window.alert("Thank you for sharing " + $scope.detail.title)
-          })
-
-      }; // end makePublic function
-
-
-      }) //end recipDetail controller
+  }; // end makePublic function
+}) //end recipDetail controller
 
 })();//END Angular IFEE
