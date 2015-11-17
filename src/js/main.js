@@ -14,6 +14,10 @@
           templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
         })
+        .when('/public/users/:username', {
+          templateUrl: 'partials/public-list.html',
+          controller: 'publicRecipe'
+        })
         .when('/public/:id',{
           templateUrl: 'partials/public-detail.html',
           controller: 'publicDetail'

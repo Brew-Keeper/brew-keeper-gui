@@ -325,6 +325,7 @@ angular.module('brewKeeper')
       publicData.total_water_amount = $scope.detail.total_water_amount;
       publicData.water_units = $scope.detail.water_units;
       publicData.temp = $scope.detail.temp;
+      publicData.shared_by = username;
       publicData.steps = [];
 
       $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/", publicData).success(function(response){
