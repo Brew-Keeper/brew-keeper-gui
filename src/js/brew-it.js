@@ -97,6 +97,7 @@ angular.module('brewKeeper')
           $(".delay.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
           $(".countdown").removeClass("hidden");
+          $("div.countdown").addClass("hidden");
 
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
