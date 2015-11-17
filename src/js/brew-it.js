@@ -72,6 +72,7 @@ angular.module('brewKeeper')
             return;
           }
           $(".countdown").removeClass("hidden");
+          $(".brew-form").addClass("hidden");
           $("div.restart").addClass("hidden");
           $(".countdown").removeClass("hidden");
           $("timer.delay").removeClass("hidden");
@@ -156,6 +157,7 @@ angular.module('brewKeeper')
 
       $(".add-brew-note").on('click', function() {
         $(".brew-form").toggleClass("hidden");
+        $('.input-focus').focus();
       })
       $(".save-note").on('click', function() {
         $(".brew-form").addClass("hidden");

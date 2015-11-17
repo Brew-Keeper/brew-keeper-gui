@@ -216,14 +216,22 @@ div.add-steps-heading  > .plus-icon {
 } //end section.gen-recipe-comment
 
 div.clone-button {
-  width: 80%;
-  margin-left: 10%;
+  display: inline-block;
+  width: 40%;
+  margin-left: 5%;
+  // margin-right: 5%;
   margin-top: 2ex;
   margin-bottom: 3ex;
   padding-top: 1ex;
   padding-bottom: 1ex;
   background-color: $brewitInactiveStep;
   text-align: center;
+  &:last-of-type {
+    // background-color: black;
+    float: right;
+    margin-right: 5%;
+  }
+
 } //end div.clone-button
 
 .brew-notes {

@@ -48,10 +48,12 @@ h3.form-heading {
     background-color: $brewIt;//brewit-green
     border: 2.3px solid $brewIt;
     color: black;
-    width: 100% * (1/4);
-    margin-left: 100% * (3/8);
-    margin-right: 100% * (3/8);
+    width: 100% * (1/2);
+    margin-left: 100% * (1/4);
+    margin-right: 100% * (1/4);
     margin-top: 1ex;
+    padding-top: 1ex;
+    padding-bottom: 1ex;
   }
   &.show-signup {
     width: 100% * (1/4);
@@ -66,12 +68,21 @@ h3.form-heading {
     background-color: white;
     text-decoration: underline;
     font-size: 0.9em;
+    text-align: right;
+
+    &.reset{
+      width: 100%;
+      margin-right: 5%;
+      margin-left: 0;
+    }
   }
+
   &.register {
-    width: 100% * (1/4);
-    margin-left: 100% *(3/8);
-    margin-right: 100% *(3/8);
-    margin-top: 2.5ex;
+    width: 100% * (1/2);
+    margin-left: 100% *(1/4);
+    margin-right: 100% *(1/4);
+    padding-top: 1ex;
+    padding-bottom: 1ex;
     }
   &.addSteps {//submit form button which shows Add Steps.
     width: 100% * (1/4);
@@ -185,6 +196,15 @@ form.changeForm {
 }//form.changeForm
 
 form.create-new-recipe {
+
+  fieldset.details {
+    margin-top: 2ex;
+    // background-color: black;
+    input.top-row {
+      // background-color: black;
+      margin-top: -.5ex;
+    }
+  }
   .columns {
     display: block;
     width: 50%;
@@ -299,6 +319,14 @@ form.edit-recipe.clone {
 form.edit-recipe {
   box-sizing: border-box;
   .columns {
+    fieldset.details {
+      margin-top: 2ex;
+      // background-color: black;
+      input.top-row {
+        // background-color: black;
+        margin-top: -.5ex;
+      }
+    }
       box-sizing: border-box;
       display: block;
       width: 50%;

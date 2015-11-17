@@ -2,6 +2,7 @@
 
 angular.module('brewKeeper')
   .controller('createNewRecipe', function($scope, $http, $location, $rootScope, $cookies){
+    $('.input-focus').focus();
     $scope.recipe = { }
     $scope.recipe.orientation = "Standard";
 
