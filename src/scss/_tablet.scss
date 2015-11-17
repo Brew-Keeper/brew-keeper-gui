@@ -19,14 +19,17 @@
 }
   //BrewIt Page
 .brewit-page{
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-    h2 {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  h2 {
     margin-left: 0;
     margin-right: 5%;
     padding-bottom: 0.5ex;
-    }
+  }
+  span.rating {
+    margin-left: 5%;
+  }
   div.step.delay{
     width: 90%;
     margin-left: 5%;
@@ -43,15 +46,19 @@
     margin-right: 5%;
   }
   .clicker-button {
-      &.restart-brew {
+    &.reset-brew {
+      margin-right: 5%;
+    }
+    &.restart-brew {
       width: 100% * (1/5);
       margin-bottom: 2ex;
     }
     &.add-brew-note {
       width: 100% * (1/5);
-      margin-left: 1em;
-      margin-right: 1em;
+      // margin-left: 1em;
+      margin-right: 5%;
     }
+
   }
 }//END .brewit-page
   //END BrewIt Page
@@ -205,21 +212,17 @@
     margin-right: 15%;
   }
   .clicker-button {
-      &.restart-brew {
+    &.restart-brew {
       width: 100% * (1/5);
       margin-bottom: 2ex;
     }
     &.add-brew-note {
       width: 100% * (1/5);
-      margin-left: 1em;
-      margin-right: 1em;
     }
   }
 }//END .brewit-page
   //END BrewIt Page
 .recipe-detail {
-  // width: 80%;
-  // margin: 0 10%;
   .recipe-view {
     .col-1-3{
       float: left;
