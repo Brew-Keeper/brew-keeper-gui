@@ -48,10 +48,14 @@ h3.form-heading {
     background-color: $brewIt;//brewit-green
     border: 2.3px solid $brewIt;
     color: black;
-    width: 100% * (1/4);
-    margin-left: 100% * (3/8);
-    margin-right: 100% * (3/8);
+    width: 100% * (1/2);
+    margin-left: 100% * (1/4);
+    margin-right: 100% * (1/4);
     margin-top: 1ex;
+    padding-top: 1ex;
+    padding-bottom: 1ex;
+    // padding-left: 1em;
+    // padding-right: 1em;
   }
   &.show-signup {
     width: 100% * (1/4);
