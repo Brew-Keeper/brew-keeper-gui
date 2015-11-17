@@ -39,8 +39,10 @@
         </section>
       </div>
     </div>
+    <a class="shared-by" ng-show="recipe.shared_by" ng-href="#public/users/{{recipe.shared_by}}">Shared by <span>{{recipe.shared_by}}</span></a>
+    <!-- <span ng-show="recipe.shared_by" ng-click="search(recipe.shared_by)">Shared by {{recipe.shared_by}}</span> -->
   </div> <!-- end col-1-2 -->
   <div class="col-1-2 button">
-    <a ng-show="recipe.steps.length" ng-click="publicListBrewIt(recipe.id)">BREW IT!</a>
+    <a class="list-brew-it" ng-show="recipe.steps.length" ng-click="publicListBrewIt(recipe.id)">BREW IT!</a>
   </div> <!--end col-1-2 -->
 </section><!-- end ng-repeat for recipe list -->
