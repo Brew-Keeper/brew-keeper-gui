@@ -142,7 +142,7 @@
       <section class="brew-form hidden" >
         <form class="add-note" ng-submit="addBrewNote()">
           <textarea class="input-focus" required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
-          <button class="save-note clicker-button" >Save Note</button>
+          <button class="save-note clicker-button" >Save</button>
         </form>
       </section> <!-- add brewnote section -->
       <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
