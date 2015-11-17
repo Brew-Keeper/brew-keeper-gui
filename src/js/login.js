@@ -125,13 +125,11 @@ angular.module('brewKeeper')
     } //end submitChangePassword function
 
     $('.show-reset').on('click', function(){
-      console.log("reset password button pressed")
       $('.reset-password').removeClass('hidden');
       $('form.login').addClass('hidden')
     });
 
     $(".login-link").click(function(){
-      console.log("login link from change password controller")
       $('section.register').addClass('hidden');
       $('form.login').removeClass('hidden');
       $('section.reset-password').addClass('hidden');
