@@ -30,7 +30,7 @@
     </div>
     <div class="details">
       <div class="detail-icon">
-        <img src="img/LightCoffeeBean.svg">
+        <img src="img/LightCoffeeBean_darker.svg">
       </div>
       <section class="details bean-details">
       <!-- <img src="img/LightCoffeeBean.svg"> -->
@@ -38,13 +38,13 @@
         <span ng-show="">{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
       </section> <!--end section.bean-details -->
       <div class="detail-icon">
-        <img src="img/LightWater.svg">
+        <img src="img/LightWater_darker.svg">
       </div>
       <section class="details water-details">
         {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}} <span ng-show="detail.temp">@ {{detail.temp}} &deg;F</span>
       </section> <!-- end section.water-details-->
       <div class="detail-icon">
-        <img src="img/LightTimer.svg">
+        <img src="img/LightTimer_darker.svg">
       </div>
       <section class="details brew-time">
         <span >{{detail.total_duration}} sec, {{detail.orientation}}
@@ -69,11 +69,11 @@
       <a ng-click="decreaseStep(step)">^</a> -->
     </div> <!-- end number column -->
     <div class="step-details">
-      <p>{{step.step_title}}</p>
+      <p class="bold-text">{{step.step_title}}</p>
       <p class="step-details">{{step.step_body}}</p>
       <div class="duration">
-        <span ng-show="step.water_amount">{{step.water_amount}} {{detail.water_units}}, </span>
-        {{step.duration}} sec
+        <span ng-show="step.water_amount"><span class="bold-text">{{step.water_amount}}</span> {{detail.water_units}}, </span>
+        <span class="bold-text">{{step.duration}}</span> sec
       </div>
       <!-- <section class="icons">
         <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
@@ -159,7 +159,7 @@
   <section class="brew-notes">
     <div class="brew-notes-heading">
       <h3>Comments</h3>
-      <img ng-show="username" class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign.svg"/>
+      <img ng-show="username" class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign-40.svg"/>
     </div>
     <section class="brew-form hidden"  ng-submit="addBrewNote()">
       <form class="add-note">
@@ -174,9 +174,9 @@
         <div class="note-body">{{comment.public_comment}}</div>
         <div class="note-date">— {{comment.comment_timestamp | date}} by {{comment.username}}</div>
         <div class="note-icons {{note.id}}" ng-show="username == comment.username">
-          <img class="trash-icon" ng-Click="deleteComment(comment.id)" src="img/Delete-25.svg"/>
+          <img class="trash-icon" ng-Click="deleteComment(comment.id)" src="img/Delete-40.svg"/>
           <!--Created by Pham Thi Dieu Linh from the Noun Project-->
-          <img class="edit-icon" ng-Click="showEditNote(comment.id)" src="img/Edit-25.svg"/>
+          <img class="edit-icon" ng-Click="showEditNote(comment.id)" src="img/Edit-40.svg"/>
           <!--Created by Daniel Boros from the Noun Project-->
         </div>
       </div>
