@@ -147,6 +147,7 @@ angular.module('brewKeeper')
       $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
       $scope.addStep=function(){ //add step function
         $scope.step.step_number = $scope.steps.length + 1;
+        $('.input-focus').focus();
         $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
