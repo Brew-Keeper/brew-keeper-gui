@@ -68,5 +68,17 @@ body {
   // }
   //   }//nav.recipe-list-options
   }
+  .recipe-detail{
+    .recipe-view {
+      .col-1-3{
+        width: 100% * (1/5);
+        &.brew-count {
+          text-align: left;
+          padding-top: 0.5ex;
+        }
+      }
+    }
+  }//end recipe-detail view
+
 }//body
 }//END media query
