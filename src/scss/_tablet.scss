@@ -13,9 +13,24 @@
         font-size: 3.5em;
         top: -0.5ex;
       }
+      ul.menu.active {
+        top: 4.8ex;
+        li {
+          text-align:right;
+          a {
+            text-decoration: none;
+            &:hover {
+              color: $brewitCurrent;
+            }
+          }
+          &.hidden {
+            display: none;
+          }
+        }
+      }
     }
   }
-// }
+
   //BrewIt Page
 .brewit-page{
   width: 90%;
@@ -182,6 +197,37 @@
   }
   //END Login/Registration Page
 
+.about-creators {
+    figure {
+      box-sizing: border-box;
+      margin-top: 1ex;
+      margin-left:  0;
+      margin-right: 0;
+      display: block;
+      float: left;
+      width: 25%;
+      max-width: 100px;
+      img {
+        width: 100%;
+      }
+    }
+    div {
+      box-sizing: border-box;
+      display: block;
+      float: left;
+      width: 75%;
+      padding-left: 5%;
+      h4 {
+        line-height: 0;
+      }
+    }
+  .link-icons {
+    width: 30px;
+    max-width: 30px;
+    margin-top: 1ex;
+  }
+}
+
 }//END @media min-width 28
 
 @media (min-width: 47em) {
@@ -264,5 +310,43 @@ a {
     }
   }
 }//end recipe-detaiil view
+
+
+.about-creators {
+  article {
+    figure {
+      box-sizing: border-box;
+      margin-top: 1ex;
+      margin-left:  0;
+      margin-right: 0;
+      display: block;
+      float: left;
+      width: 25%;
+      max-width: 100px;
+      img {
+        width: 100%;
+      }
+    }
+    div {
+      box-sizing: border-box;
+      display: block;
+      float: left;
+      width: 75%;
+      padding-left: 5%;
+      h4 {
+        line-height: 0;
+      }
+      p {
+        font-size: 0.8em;
+      }
+    }
+    .link-icons {
+      width: 35px;
+      max-width: 35px;
+      margin-top: 1ex;
+      margin-right: 0.5em;
+    }
+  }
+}
 
 }//END @media min-width 47

@@ -19,10 +19,6 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       width: 17em;
     }
     > nav.menu {
-      // width: 60%;
-      // position: static;
-      // top: 0;
-      // right: 5%;
       &.hamburger::before {
         display: none;
       }
@@ -42,6 +38,10 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
           padding: 0;
           margin-right: 0;
           margin-left: 3ex;
+          &:hover {
+            color: $brewitCurrent;
+            font-weight: normal;
+          }
         }
       }
       ul.menu.active {
@@ -49,12 +49,17 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
         position: absolute;
         top: 1ex;
         padding: 0;
+        background-color: white;
         li > a {
           display: block;
           float: right;
           padding: 0;
           margin-right: 0;
           margin-left: 3ex;
+          &:hover {
+            color: $brewitCurrent;
+            font-weight: normal;
+          }
         }
       }
     }//nav.menu

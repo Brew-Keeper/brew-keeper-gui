@@ -66,6 +66,22 @@ angular.module('brewKeeper')
       $('form.login').addClass('hidden')
     })//show signup form
 
+//About Creators
+$(".keeper-clicker").on('click', function() {
+  $(".more-info").addClass("hidden");
+  $(".about-creators").removeClass("hidden");
+})
+
+//About Creators
+$(".keeper-clicker").on('click', function() {
+  $(".more-info").addClass("hidden");
+  $(".about-creators").removeClass("hidden");
+})
+
+$("a[href].about").on('click', function() {
+  $(".more-info").removeClass("hidden");
+  $(".about-creators").addClass("hidden");
+})
 
   })//END CONTROLLER FOR LOGIN
 
@@ -185,6 +201,6 @@ angular.module('brewKeeper')
         })//end .catch
     }; //end resetPassword function
 
-
   })//end changePassword controller
+
 })();//END IFFE
