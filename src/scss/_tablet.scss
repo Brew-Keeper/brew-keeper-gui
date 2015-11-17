@@ -117,10 +117,10 @@
   }
   // end steps section
 
-  div.clone-button {
-    width: 50%;
-    margin-left: 25%;
-  } //end div.clone-button
+  // div.clone-button {
+  //   width: 50%;
+  //   margin-left: 25%;
+  // } //end div.clone-button
 
   // END Recipe Detail Page
   //Recipe List Page
@@ -194,22 +194,22 @@ section.recipe-list {
   width: 70%;
   margin-right: 15%;
   margin-left: 15%;
-a {
-  width: 85%;
-  // margin-top: 0.6ex;
-  margin-left: 0;
-  margin-right: 5%;
-  padding-top: 1ex;
-  padding-bottom: 1ex;
-  max-width: 12em;
-  font-weight: bold;
-  padding: 2ex 0;
-  &.recipe-title {
-    display: block;
-    width: 100%;
-    max-width: 100%;
+  a {
+    width: 85%;
+    // margin-top: 0.6ex;
+    margin-left: 0;
+    margin-right: 5%;
+    padding-top: 1ex;
+    padding-bottom: 1ex;
+    max-width: 12em;
+    font-weight: bold;
+    padding: 2ex 0;
+    &.recipe-title {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
   }
-}
 }
   //BrewIt Page
 .brewit-page{
@@ -263,6 +263,14 @@ a {
       }
     }
   }
+  div.clone-button {
+    width: 25%;
+    margin-left: 15%;
+    &:last-of-type {
+      // background-color: black;
+      margin-right: 15%;
+    }
+  } //end div.clone-button
 }//end recipe-detaiil view
 
 }//END @media min-width 47
