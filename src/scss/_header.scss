@@ -1,3 +1,5 @@
+$brewitInactive: #ebeced;//lightgray
+
 .heading {
   box-sizing: border-box;
     img.logo {
@@ -25,18 +27,20 @@
       display: block;
       position: absolute;
       width: 10.5em;
-      top: 5.5ex;
+      top: 4.2ex;
       right: 0;
-      padding: 2ex 2em;
-      background-color: white;
+      padding: 1.7ex 2em;
+      background-color: $brewitInactive;
       list-style-type: none;
       padding-left: 0;
+      z-index: 1;
       li {
         text-align:right;
         a {
           text-decoration: none;
           &:hover {
             color: $brewitCurrent;
+            font-weight: bold;
           }
         }
       &.hidden {

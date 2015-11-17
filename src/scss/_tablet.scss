@@ -13,6 +13,27 @@
         font-size: 3.5em;
         top: -0.5ex;
       }
+
+
+    ul.menu.active {
+      top: 4.8ex;
+      li {
+        text-align:right;
+        a {
+          text-decoration: none;
+          &:hover {
+            color: $brewitCurrent;
+          }
+        }
+      &.hidden {
+        display: none;
+      }
+      }
+    }
+
+
+
+
     }
   }
 // }
