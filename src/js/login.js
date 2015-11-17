@@ -60,7 +60,6 @@ angular.module('brewKeeper')
       })//responses for bad login attempts
     }//submit function
     $('.show-signup').on('click', function(){
-      console.log("Show me the registration!")
       $('section.register').removeClass('hidden');
       $('form.register').removeClass('hidden');
       $('form.login').addClass('hidden')
