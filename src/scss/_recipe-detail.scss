@@ -227,12 +227,14 @@ div.clone-button {
   background-color: $brewitInactiveStep;
   text-align: center;
   &:last-of-type {
-    // background-color: black;
     float: right;
     margin-right: 5%;
   }
-
 } //end div.clone-button
+div.clone-button.public {
+  float: left;
+  margin-left: 30%;
+}
 
 .brew-notes {
   margin-bottom: 10ex;
