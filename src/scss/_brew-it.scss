@@ -35,8 +35,8 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     }
     .reset-brew {
       position: absolute;
-      top: 4.5ex;
-      right: 5%;
+      top: 6.9ex;
+      right: 2%;
       font-size: 0.8em;
       color:darken($brewitInactive, 54%);
       text-decoration: none;
@@ -44,11 +44,13 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       border: 2.3px solid darken($brewitInactive, 29%);
       background-color: darken($brewitInactive, 10%);
     }
+    a.add-brew-note {
+      float: right;
+    }
     span.rating {
       margin-top: 1ex;
       display: inline-block;
-      margin-right: 5%;
-      float: right;
+      float: left;
     }
     span.rating.public {
       margin-top: -1ex;
