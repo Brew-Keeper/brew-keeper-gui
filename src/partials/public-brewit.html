@@ -7,16 +7,16 @@
     <!-- <a href="" class="hidden restart-brew  public clicker-button" ng-click="reStartBrew()">Brew Again</a> -->
     <!-- <a href="" class="hidden add-brew-note clicker-button">Add Brew Note</a> -->
     <!--star ratings-->
-    <div class="col-1-3" ng-show="showStars">
-      <span ng-hide="username" ng-repeat="rating in ratings">
+    <div class="stars" ng-show="showStars">
+      <span ng-hide="username" ng-repeat="rating in ratings" class="rating">
       <div view-rating rating-value="rating.current" max="rating.max" ng-click="" class="rating public"></div>
       </span>
       <!-- userRating.current = {{userRating.current}} -->
       <section ng-show="username">
-        <span ng-hide="ratingId" ng-repeat="rating in ratings">
+        <span ng-hide="ratingId" ng-repeat="rating in ratings" class="rating">
           <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)" class="rating public"></div>
         </span>
-        <span ng-show="ratingId" ng-repeat="userRating in userRatings">
+        <span ng-show="ratingId" ng-repeat="userRating in userRatings" class="rating">
           <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="rateRecipe(userRating.current)" class="rating"></div>
         </span>
       </section>
