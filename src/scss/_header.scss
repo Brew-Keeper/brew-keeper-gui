@@ -19,9 +19,16 @@
     }
     ul.menu {
       display: none;
+      width: 0;
     }
     ul.menu.active {
       display: block;
+      position: absolute;
+      width: 10.5em;
+      top: 5.5ex;
+      right: 0;
+      padding: 2ex 2em;
+      background-color: white;
       list-style-type: none;
       padding-left: 0;
       li {

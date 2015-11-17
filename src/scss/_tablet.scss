@@ -1,22 +1,21 @@
 @media (min-width: 28em) {
-  body {
-    background: white;
-  }
-.heading {
-    img.logo {
-      width:14em;
+
+  .heading {
+      img.logo {
+        width:14em;
+      }
+      a[href].logo {
+        display: block;
+        width: 14em;
+     }
+    nav.menu {
+      &.hamburger::before {
+        font-size: 3.5em;
+        top: -0.5ex;
+      }
     }
-    a[href].logo {
-      display: block;
-      width: 14em;
-   }
-  nav.menu {
-    &.hamburger::before {
-      font-size: 3.5em;
-      top: -0.5ex;
-    }
   }
-}
+// }
   //BrewIt Page
 .brewit-page{
   width: 90%;
@@ -61,8 +60,8 @@
 
   }
 }//END .brewit-page
-  //END BrewIt Page
 
+  //END BrewIt Page
 
   //Recipe Detail Page
   .recipe-detail {
@@ -79,8 +78,8 @@
         }
       }
       img.cup {
-        width: 25px;//See recipe-detail.scss
-        }
+        width: 25px;
+      }
       a.brew-it-button {//See recipe-dtail.scss
         width: 100% * (1/2);
         margin-left: 100% * (1/4);
@@ -126,6 +125,7 @@
   // END Recipe Detail Page
   //Recipe List Page
   nav.recipe-list {
+    width: 80%;
     margin-right: 10%;
     margin-left: 10%;
   }
@@ -142,22 +142,26 @@
           margin-left: 2%;
           margin-top: 1ex;
           img {
-           width: 20px;
+            width: 20px;
           }
         } //end span.count
       } //end col-1-4
-  a {
-    box-sizing: border-box;
-    width: 80%;
-    max-width: 9em;
-    font-weight: bold;
-    padding: 1ex 0;
-    &.recipe-title {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-   }
-}
+      a {
+        width: 85%;
+        margin-top: -2ex;
+        // margin-left: 0;
+        // margin-right: 5%;
+        // padding-top: 1ex;
+        // padding-bottom: 1ex;
+        // max-width: 12em;
+        // font-weight: bold;
+        // padding: 2ex 0;
+        &.recipe-title {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
     } // end col-1-2
   } //end section.recipe-list
   //END Recipe List Page
@@ -181,7 +185,32 @@
 }//END @media min-width 28
 
 @media (min-width: 47em) {
-
+  nav.recipe-list {
+    width: 70%;
+    margin-right: 15%;
+    margin-left: 15%;
+  }
+section.recipe-list {
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+a {
+  width: 85%;
+  // margin-top: 0.6ex;
+  margin-left: 0;
+  margin-right: 5%;
+  padding-top: 1ex;
+  padding-bottom: 1ex;
+  max-width: 12em;
+  font-weight: bold;
+  padding: 2ex 0;
+  &.recipe-title {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+}
   //BrewIt Page
 .brewit-page{
     width: 90%;

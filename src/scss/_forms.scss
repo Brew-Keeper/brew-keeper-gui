@@ -297,25 +297,27 @@ form.edit-recipe.clone {
 }//form.edit-recipe.clone
 
 form.edit-recipe {
+  box-sizing: border-box;
   .columns {
+      box-sizing: border-box;
       display: block;
       width: 50%;
       float: left;
       input {
-        margin: -0.8ex 5% 2ex 5%;
-        width: 79%;
+        margin: -0.8ex 0 2ex 0;
+        width: 78%;
       }
       input.small-field {
-        margin-right: 0.2em;
+        // margin-right: 0.2em;
       }
       select {
-        width: 84%;
-        margin: -0.5em 5% 2ex 5%;
+        width: 80%;
+        margin: -0.5em 0 2ex 0;
       }
       select.small-field {
-        width: 40%;
-        margin-left: 0.4em;
-        margin-right: 0;
+        width: 35%;
+        // margin-left: 0.4em;
+        margin-left: 5%;
         margin-bottom: -.5em
       }
       .small-field {
@@ -329,19 +331,19 @@ form.edit-recipe {
       }
       &.general {
         display: block;
-        width: 100%;
+        width: 99%;
         margin: 0;
         input, textarea {
           display: block;
           width: 90%;
-          margin: 1ex 2.5% 2ex;
+          margin: 1ex 0 1.5ex;
         }
       }//&.general
       .details-legend {
         color: $brewitInactiveStep;
         font-size: 1.2em;
         font-weight: 500;
-        margin-left: 0.3em;
+        padding-bottom: 0.25em;
       }
   }//.columns
 }//form.edit-recipe
