@@ -83,7 +83,10 @@ section.recipe-list {
     }
     a.shared-by {
       // background-color: lightgray;
-      // color: gray;
+      color: gray;
+      & span {
+        color: $brewit-button-color;
+      }
     }
   } // end col-1-2
 } //end section.recipe-list
