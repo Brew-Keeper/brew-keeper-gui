@@ -185,6 +185,15 @@ form.changeForm {
 }//form.changeForm
 
 form.create-new-recipe {
+
+  fieldset.details {
+    margin-top: 2ex;
+    // background-color: black;
+    input.top-row {
+      // background-color: black;
+      margin-top: -.5ex;
+    }
+  }
   .columns {
     display: block;
     width: 50%;
