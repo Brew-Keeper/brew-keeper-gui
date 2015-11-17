@@ -173,9 +173,9 @@
         </fieldset><!--General Details-->
       </section>
       <section class="columns">
-        <fieldset>
+        <fieldset class="details">
           <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean_darker.svg"/> Details</h4></legend>
-          <input maxlength="50" placeholder="Name"  ng-model="detail.bean_name"></input>
+          <input class="top-row" maxlength="50" placeholder="Name"  ng-model="detail.bean_name"></input>
           <select list="roast" maxlength="15" placeholder="Roast" ng-model="detail.roast" id="roast">
             <option value="" disabled selected hidden>{{detail.roast}}</option>
             <option value="Light">Light</option>
@@ -201,9 +201,9 @@
         </fieldset><!--Bean Details-->
       </section>
       <section class="columns">
-        <fieldset>
+        <fieldset class="details">
           <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater_darker.svg"/> Details</h4></legend>
-          <input list="water-type" maxlength="50" placeholder="Type" ng-model="detail.water_type">
+          <input class="top-row" list="water-type" maxlength="50" placeholder="Type" ng-model="detail.water_type">
             <datalist id="water-type">
               <option value="Tap">
               <option value="Distilled">

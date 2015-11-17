@@ -319,6 +319,14 @@ form.edit-recipe.clone {
 form.edit-recipe {
   box-sizing: border-box;
   .columns {
+    fieldset.details {
+      margin-top: 2ex;
+      // background-color: black;
+      input.top-row {
+        // background-color: black;
+        margin-top: -.5ex;
+      }
+    }
       box-sizing: border-box;
       display: block;
       width: 50%;
