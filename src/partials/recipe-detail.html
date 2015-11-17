@@ -141,7 +141,7 @@
       </div>
       <section class="brew-form hidden" >
         <form class="add-note" ng-submit="addBrewNote()">
-          <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
+          <textarea class="input-focus" required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
           <button class="save-note clicker-button" >Save Note</button>
         </form>
       </section> <!-- add brewnote section -->
@@ -168,7 +168,7 @@
     <form class="edit-recipe" ng-submit="editRecipe(detail)">
       <section class="columns general">
         <fieldset>
-          <input placeholder="Title *" maxlength="50"  ng-model="detail.title" required></input>
+          <input class="input-focus" placeholder="Title *" maxlength="50"  ng-model="detail.title" required></input>
           <textarea placeholder="Comments"  ng-model="detail.general_recipe_comment"></textarea>
         </fieldset><!--General Details-->
       </section>

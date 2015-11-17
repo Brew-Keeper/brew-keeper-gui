@@ -161,6 +161,7 @@ angular.module('brewKeeper')
 
     $scope.showAddSteps = function(){
       $("form.create-new-step").toggleClass("hidden");
+        $('.input-focus').focus();
     };//Reveal "Add Step" when new recipe form is submitted.
     // $scope.hideAddSteps = function(){
     //   $("form.create-new-step").addClass("hidden");
@@ -170,6 +171,7 @@ angular.module('brewKeeper')
     $('.edit-button').on('click', function(){
       $('.edit-recipe').removeClass("hidden");
       $('.recipe-view').addClass("hidden");
+      $('.input-focus').focus();
     });
 
     $(".no-steps").click(function(){
@@ -271,6 +273,7 @@ angular.module('brewKeeper')
 
     $scope.showAddBrewNote = function(){
       $(".brew-form").toggleClass("hidden");
+      $('.input-focus').focus();
     };
 
     $scope.addBrewNote=function(){

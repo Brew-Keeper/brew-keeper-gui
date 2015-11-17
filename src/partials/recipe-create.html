@@ -2,7 +2,7 @@
 <form class="create-new-recipe" ng-controller="createNewRecipe"  ng-submit="createNew()">
   <section class="columns general">
   <fieldset>
-    <input placeholder="Title (Required)" maxlength="50"  ng-model="recipe.title" required></input>
+    <input class="input-focus" placeholder="Title (Required)" maxlength="50"  ng-model="recipe.title" required></input>
     <textarea placeholder="Comments"  ng-model="recipe.general_recipe_comment"></textarea>
 
   </fieldset><!--General Details-->

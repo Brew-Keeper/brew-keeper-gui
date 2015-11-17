@@ -157,6 +157,7 @@ angular.module('brewKeeper')
 
       $(".add-brew-note").on('click', function() {
         $(".brew-form").toggleClass("hidden");
+        $('.input-focus').focus();
       })
       $(".save-note").on('click', function() {
         $(".brew-form").addClass("hidden");
