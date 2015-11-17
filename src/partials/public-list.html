@@ -39,7 +39,7 @@
         </section>
       </div>
     </div>
-    <span ng-show="recipe.shared_by" ng-click="">Shared by {{recipe.shared_by}}</span>
+    <span ng-show="recipe.shared_by" ng-click="search(recipe.shared_by)">Shared by {{recipe.shared_by}}</span>
   </div> <!-- end col-1-2 -->
   <div class="col-1-2 button">
     <a ng-show="recipe.steps.length" ng-click="publicListBrewIt(recipe.id)">BREW IT!</a>

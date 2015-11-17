@@ -49,10 +49,25 @@ angular.module('brewKeeper')
 
 
 
-  .controller('publicRecipe', function($http, $scope, $rootScope, $location){
+  .controller('publicRecipe', function($http, $scope, $rootScope, $location, $routeParams){
     // `console.log("publicRecipe controller")
     // console.log($scope.username)`
 
+    $scope.search = function(searchString){
+      $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/?search="+searchString)
+        .then(function(response){
+          $scope.recipes = response.data;
+          $scope.rating = 0;
+          $scope.ratings = [{
+              max: 5
+          }];
+        })
+    } //end search function
+
+    if($routeParams.username){
+      $scope.search($routeParams.username)
+    }
+    else {
     $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
       .then(function(response){
         $scope.recipes = response.data;
@@ -61,7 +76,8 @@ angular.module('brewKeeper')
             max: 5
         }];
       })
-
+    }
+    
     $scope.publicListBrewIt = function(id){
       //get indexOf recipe id
       for (var index = 0; index < $scope.recipes.length; index ++) {
@@ -75,16 +91,7 @@ angular.module('brewKeeper')
       $(document).scrollTop(0);
     }//end listBrewit function
 
-    $scope.search = function(searchString){
-      $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/?search="+searchString)
-        .then(function(response){
-          $scope.recipes = response.data;
-          $scope.rating = 0;
-          $scope.ratings = [{
-              max: 5
-          }];
-        })
-    } //end search function
+
 
     $scope.newRating = function(rating, recipeId){
       var newRating = {"public_rating": rating}
@@ -104,6 +111,7 @@ angular.module('brewKeeper')
       var newRating = {"public_rating": rating}
       $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/" + ratingId + "/", newRating)
     }//end updateRating
+
 
   })//end publicRecipe controller
 
