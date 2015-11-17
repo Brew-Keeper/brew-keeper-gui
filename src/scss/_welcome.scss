@@ -1,5 +1,48 @@
 $brewitInactiveStep: #abacaf;//Silver Chalice
 
+.about-creators {
+    width: 90%;
+    margin: 2ex 5%;
+    article {
+      @extend .clearfix;
+      width: 100%;
+      display: block;
+    figure {
+      box-sizing: border-box;
+      margin-top: 1ex;
+      margin-left:  0;
+      margin-right: 0;
+      display: block;
+      float: left;
+      width: 25%;
+      max-width: 100px;
+      img {
+        width: 100%;
+      }
+    }
+    div {
+      box-sizing: border-box;
+      display: block;
+      float: left;
+      width: 75%;
+      padding-left: 5%;
+      h4 {
+        line-height: 0;
+      }
+      p {
+        font-size: 0.7em;
+        line-height: 2.2ex;
+      }
+
+    }
+  }
+  .link-icons {
+    width: 20px;
+    max-width: 20px;
+    margin-top: -1ex;
+  }
+}
+
 
 .more-info {
   width: 90%;
@@ -9,14 +52,46 @@ $brewitInactiveStep: #abacaf;//Silver Chalice
   }
   article {
     box-sizing: border-box;
-    // outline: 1px solid red;
     margin-top: 7ex;
     margin-bottom: -6.5ex;
   }
-  article:first-of-type {
-  border-top: 1px solid $brewitInactiveStep;
+  article.keepers {
+    @extend .clearfix;
+    border-top: 1px solid $brewitInactiveStep;
+    padding-bottom: 2ex;
+    h3 {
+      &:hover {
+      color: $brewitCurrent;
+      }
+    }
+    figure {
+      box-sizing: border-box;
+      margin-top: 1ex;
+      margin-left:  0;
+      margin-right: 0;
+      display: block;
+      float: left;
+      width: 25%;
+      max-width: 150px;
+      img {
+        width: 100%;
+        border: 5px solid white;
+        border-bottom: 0;
+        border-top: 0;
+      }
+      figcaption {
+        text-align: center;
+      }
+    }
+  }
+  article.links {
+    // outline: 1px solid red;
+    padding-bottom: 2ex;
     h3 {
       padding-top: 1ex;
+    }
+    a:hover {
+      color: $brewitCurrent;
     }
   }
   h3 {

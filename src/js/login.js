@@ -66,7 +66,11 @@ angular.module('brewKeeper')
       $('form.login').addClass('hidden')
     })//show signup form
 
-
+//About Creators
+$(".keeper-clicker").on('click', function() {
+  $(".more-info").addClass("hidden");
+  $(".about-creators").removeClass("hidden");
+})
   })//END CONTROLLER FOR LOGIN
 
 
@@ -185,6 +189,6 @@ angular.module('brewKeeper')
         })//end .catch
     }; //end resetPassword function
 
-
   })//end changePassword controller
+
 })();//END IFFE

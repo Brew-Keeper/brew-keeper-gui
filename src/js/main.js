@@ -26,7 +26,8 @@
           templateUrl: 'partials/login.html'
         })
         .when('/info', {
-          templateUrl: 'partials/more-info.html'
+          templateUrl: 'partials/more-info.html',
+          controller: 'loginCtrl'
         })
         .when('/reset-pw', {
           templateUrl: 'partials/reset-pw.html',
