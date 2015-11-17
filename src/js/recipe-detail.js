@@ -103,7 +103,17 @@ angular.module('brewKeeper')
         if(step.step_number >= $rootScope.steps.length){
           return
         }
+
+        //code to swap the steps manually incase of a slow connection
+        // var currentStep = step.step_number - 1
+        // var nextStep = step.step_number
+        var swapStep = $rootScope.steps[step.step_number - 1]
+        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number]
+        $rootScope.steps[step.step_number] = swapStep;
+        // end code to swap the steps manually
+
         step.step_number++
+
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
@@ -117,6 +127,14 @@ angular.module('brewKeeper')
         if(step.step_number <= 1){
           return
         }
+        //code to swap the steps manually incase of a slow connection
+        // var currentStep = step.step_number - 1
+        // var prevStep = step.step_number - 2
+        var swapStep = $rootScope.steps[step.step_number - 1]
+        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number - 2]
+        $rootScope.steps[step.step_number - 2] = swapStep;
+        // end code to swap the steps manually
+
         step.step_number--
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')

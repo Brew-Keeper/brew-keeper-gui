@@ -86,6 +86,24 @@ angular.module('brewKeeper')
         })
     } //end search function
 
+    $scope.newRating = function(rating, recipeId){
+      var newRating = {"public_rating": rating}
+      $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/", newRating)
+        .then(function(){$http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
+          .then(function(response){
+            $scope.recipes = response.data;
+            $scope.rating = 0;
+            $scope.ratings = [{
+                max: 5
+            }];
+          })
+        })// end http.post
+    }//end newRating
+
+    $scope.updateRating = function(rating, ratingId, recipeId){
+      var newRating = {"public_rating": rating}
+      $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/" + ratingId + "/", newRating)
+    }//end updateRating
 
   })//end publicRecipe controller
 
