@@ -30,7 +30,6 @@ angular.module('brewKeeper')
 
 
       $scope.EliminateRecipe = function() {
-        // if (window.confirm("Are you sure you want to delete " + $scope.detail.title + "?")){
         $(".wrapper").addClass("openerror");
         $("section.confirm-eliminate-modal").removeClass("inactive");
         $("button.cancel-clone-fail").on("click", function() {
@@ -49,7 +48,6 @@ angular.module('brewKeeper')
       }; //end Eliminate function
 
       $scope.deleteStep = function(stepNumber, stepId){
-        // if (window.confirm("Are you sure you want to delete step " + stepNumber + "?")){
         $(".wrapper").addClass("openerror");
         $("section.confirm-delete-modal").removeClass("inactive");
         $("button.cancel-delete-fail").on("click", function() {
@@ -74,24 +72,13 @@ angular.module('brewKeeper')
         })
       } //end deleteStep function
 
-      // $scope.showSteps = function(stepId){
-      //   stepId= "div." + stepId.toString()
-      //   $(stepId).removeClass("hidden")
-      // };
-
       $scope.hideEditStep = function(stepId){
         stepId = "div." + stepId.toString();
         $(stepId).toggleClass("hidden")
       };
 
-
-
       $scope.editStep = function(step){
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
-          .then(function() {
-            // $scope.hideEditStep(step.id)
-            // $scope.showEditSteps(step.id)
-          });
       } //end editStep function
 
       $scope.showEditStep = function(stepId){
@@ -163,10 +150,6 @@ angular.module('brewKeeper')
       $("form.create-new-step").toggleClass("hidden");
         $('.input-focus').focus();
     };//Reveal "Add Step" when new recipe form is submitted.
-    // $scope.hideAddSteps = function(){
-    //   $("form.create-new-step").addClass("hidden");
-    //   $("button.done-adding").addClass("hidden");
-    // }; //hides the add step form
 
     $('.edit-button').on('click', function(){
       $('.edit-recipe').removeClass("hidden");
@@ -246,10 +229,7 @@ angular.module('brewKeeper')
       $(noteView).addClass("hidden")
       $(editNote).removeClass("hidden")
     }
-      // $scope.showEditStep = function(stepId){
-      //   stepId = "div." + stepId.toString();
-      //   $(stepId).removeClass("hidden")
-      // }
+    
 
     $scope.editNote = function(note){
       var note_id = note.id

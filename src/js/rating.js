@@ -7,7 +7,6 @@
           template: '<ul class="rating">' +
               '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
               '\u2605' +
-              // '&#9733' +
               '</li>' +
               '</ul>',
           scope: {
@@ -48,7 +47,6 @@
           template: '<ul class="rating read-only">' +
               '<li ng-repeat="star in stars" ng-class="star">' +
               '\u2605' +
-              // '&#9733' +
               '</li>' +
               '</ul>',
           scope: {
@@ -66,18 +64,7 @@
                   // }
               };
 
-              // scope.toggle = function (index) {
-              //     scope.ratingValue = index + 1;
-              //     scope.onRatingSelected({
-              //         rating: index + 1
-              //     });
-              // };
-
-              // scope.$watch('ratingValue', function (oldVal, newVal) {
-              //     if (newVal >=0 ) {
-              //         updateStars();
-              //     }
-              // });
+            
           }
       }
   })
