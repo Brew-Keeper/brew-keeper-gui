@@ -130,10 +130,6 @@ angular.module('brewKeeper')
       $(noteView).addClass("hidden")
       $(editNote).removeClass("hidden")
     }
-      // $scope.showEditStep = function(stepId){
-      //   stepId = "div." + stepId.toString();
-      //   $(stepId).removeClass("hidden")
-      // }
 
     $scope.editComment = function(comment){
       var comment_id = comment.id
@@ -146,7 +142,6 @@ angular.module('brewKeeper')
     //
     $scope.deleteComment = function(commentId) {
       var commentId = commentId
-      // if (window.confirm("Are you sure you want to delete this comment?")){
         $http.delete("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/comments/" + commentId + "/")
         .then(function(){
         var id = $scope.id;
