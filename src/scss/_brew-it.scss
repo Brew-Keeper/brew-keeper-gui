@@ -1,13 +1,3 @@
-
-$brewitCurrent: #7ec78a;//bright green
-$brewitCurrentText: #000;//black???
-$brewitCurrentStep: #4d4d4f;//Thunder
-$brewitCurrentOf: #545c56;//Feldgrau
-$brewitInactive: #ebeced;//lightgray
-$brewitInactiveText:#99999d;//inactive text
-$brewitInactiveStep: #abacaf;//Silver Chalice
-$brewitInactiveOf: #b1b2b4;//Magnesium
-
 .brewit-page{
   box-sizing: border-box;
   width:100%;//width: 100% * (2/3); desktop
@@ -20,7 +10,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     .brewit-title {
       text-decoration: none;
       h2 {
-        color: lighten($brewitCurrentText, 15%);
+        color: $heading;
         font-size: 1.4em;
         font-weight: 600;
         margin-left: 5%;
@@ -38,11 +28,10 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       top: 6.9ex;
       right: 2%;
       font-size: 0.8em;
-      color:darken($brewitInactive, 54%);
+      color: #000;
       text-decoration: none;
       padding: .15ex 2.5em;
-      border: 2.3px solid darken($brewitInactive, 29%);
-      background-color: darken($brewitInactive, 10%);
+      background-color: $Inactive;
     }
     a.add-brew-note {
       float: right;
@@ -66,16 +55,12 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     margin-bottom: 1ex;
     width: 80%;
     margin-left: 10%;
-    form {
-    textarea {
-    }
-    }
   }
   div.step.delay {
     width: 100%;
     box-sizing: border-box;
-    background-color:darken($brewitInactive, 10%);
-    color: $brewitCurrentText;
+    background-color: $Inactive;
+    color: #000;
     height: 19.75ex;
     padding-top: 0.025ex;
     p.countdown {
@@ -93,9 +78,8 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
   }//.delay
 
   div.step.delay.restart {
-    background-color: $brewIt;
+    background-color: $BrewIt;
     box-sizing: border-box;
-    // border: solid 50px $brewitInactive;
     p {
       text-align: center;
       font-size: 1.2em;
@@ -106,10 +90,8 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       max-height: 5em;
       margin-left: 35%;
       fill: white;
-      // margin-right: 100% * (1/3);
     }
   }
-
   div.delay.step.finished {
     display: none;
     .countdown {
@@ -119,27 +101,18 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       display: none;
     }
   }//.delay.step.finished
-
-
   div.current-step {
     box-sizing: border-box;
-    background-color:$brewitCurrent;
-    color: $brewitCurrentText;
+    background-color:$BrewIt;
+    color: #000;
     padding: 1ex 5%;
-    // .step-box {
-    //   box-sizing: border-box;
-    // }
     p.stepOf {
-      color:$brewitCurrentOf;
       text-align: right;
-      // padding-right: 0;
       span {
-        color: $brewitCurrentOf;
         font-weight: bold;
       }
     }
     .counting {
-      color:$brewitCurrentText;
       font-size: 2.8em;
       font-weight: 300;
       line-height: 0;
@@ -165,21 +138,19 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       text-align: center;
     }
     p.step-body {
-      color:$brewitCurrentText;
       width: 100%;
       text-align: justify;
-      // line-height: 0;
       margin: -.6ex 0 1ex 0;
     }
   }//.current-step
 
   div.inactive-step {
-    background-color: $brewitInactive;
-    color: $brewitInactiveText;
+    background-color: $Inactive;
+    color: $InactiveText;
     padding-bottom: 4.0ex;
     margin-top: -1.4ex;
     p.stepOf {
-      color: $brewitInactiveOf;
+      color: $InactiveText;
       text-align: right;
       padding: 1ex 5%;
       span {
@@ -209,8 +180,8 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
   }//.inactive-step
 
 div.step.finished {
-    background-color: $brewitInactive;
-    color: $brewitInactiveText;
+    background-color: $Inactive;
+    color: $InactiveText;
   p.stepOf {
     display: none;
     span {

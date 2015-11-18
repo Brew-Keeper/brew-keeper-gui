@@ -1,14 +1,5 @@
 @media (min-width: 60em){
 
-$brewitCurrent: #7ec78a;//bright green
-$brewitCurrentText: #000;//black???
-$brewitCurrentStep: #4d4d4f;//Thunder
-$brewitCurrentOf: #545c56;//Feldgrau
-$brewitInactive: #ebeced;//lightgray
-$brewitInactiveText:#99999d;//inactive text
-$brewitInactiveStep: #abacaf;//Silver Chalice
-$brewitInactiveOf: #b1b2b4;//Magnesium
-
   body {
   .heading {
     img.logo {
@@ -39,7 +30,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
           margin-right: 0;
           margin-left: 3ex;
           &:hover {
-            color: $brewitCurrent;
+            color: $BrewIt;
             font-weight: normal;
           }
         }
@@ -50,6 +41,8 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
         top: 1ex;
         padding: 0;
         background-color: white;
+        border: 1px solid #fff;
+
         li > a {
           display: block;
           float: right;
@@ -57,34 +50,15 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
           margin-right: 0;
           margin-left: 3ex;
           &:hover {
-            color: $brewitCurrent;
+            color: $BrewIt;
             font-weight: normal;
           }
         }
       }
     }//nav.menu
   }//.heading
-
-    .container {
-      width: 50em;
-      // margin: 0 10%;
-      // .recipe-list-options {
-
-  //     input, select {
-  //       width: 20%;
-  //       margin: 3ex 40%;
-  //     }
-  // input {
-  //   box-sizing: border-box;
-  //   width: 20%;
-  //   margin: 1ex 40% 2ex 40%;
-  // }
-  // select {
-  //   box-sizing: border-box;
-  //   width: 18%;
-  //   margin: 3ex 41% 1ex 41%;
-  // }
-  //   }//nav.recipe-list-options
+  .container {
+    width: 50em;
   }
   .recipe-detail{
     .recipe-view {
@@ -97,7 +71,5 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       }
     }
   }//end recipe-detail view
-
 }//body
-
 }//END media query
