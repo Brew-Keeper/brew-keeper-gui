@@ -1,8 +1,6 @@
-
 <nav class="recipe-list">
   <h3>{{username}}'s Recipes</h3>
   <input class="magnify" placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="search(searchString)">
-
   </input>
   <select name="OrderBy" value="OrderBy" ng-model="query">
     <option value="">Sort By</>
@@ -14,8 +12,6 @@
     <option value="brew_count">Least Brewed</option>
   </select>
     <button href="" name="search" class="clicker-button" ng-click="search(searchString)">Search</button>
-  <!-- <a href="#/users/{{username}}/recipes/new">Create New<img src="img/flask.svg"/></a> -->
-  <!--Flask by Mister Pixel from the Noun Project-->
 </nav>
 
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
@@ -24,12 +20,9 @@
   <div class="col-1-2">
     <span>{{recipe.roast}}</span>
     <div class="col-1-4">
-      <!-- star rating -->
-      <!-- rating : {{recipe.rating}} -->
       <span class="rating" ng-repeat="rating in ratings">
         <span star-rating rating-value="recipe.rating" max="5" ng-click="rateRecipe(recipe.rating, recipe.id)"></span>
-      </span>
-      <!-- end star rating -->
+      </span>  <!-- end star rating -->
       <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> &#215; {{recipe.brew_count}}</span>
     </div>
   </div> <!-- end col-1-2 -->
