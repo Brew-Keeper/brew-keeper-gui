@@ -1,12 +1,3 @@
-$brewitCurrent: #7ec78a;//bright green
-$brewitCurrentText: #000;//black???
-$brewitCurrentStep: #4d4d4f;//Thunder
-$brewitCurrentOf: #545c56;//Feldgrau
-$brewitInactive: #ebeced;//lightgray
-$brewitInactiveText:#99999d;//inactive text
-$brewitInactiveStep: #abacaf;//Silver Chalice
-$brewitInactiveOf: #b1b2b4;//Magnesium
-
 //recipe detail page
 .recipe-detail {
   box-sizing: border-box;
@@ -14,7 +5,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
   margin: 0 5%;
 
   h3.title {
-    color: $brewitCurrentOf;
+    color: $heading;
     font-weight: 600;
     margin: 5% 0 2%;
   }
@@ -37,7 +28,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       width: 100%;
       margin-top: 1ex;
       margin-bottom: 2ex;
-      background-color: $brewit-button-color;
+      background-color: $BrewIt;
       font-size: 1.1em;
       font-weight: bold;
       text-align: center;
@@ -49,7 +40,7 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
       width: 100%;
       margin-top: 1ex;
       margin-bottom: 2ex;
-      background-color:$brewitInactiveStep;
+      background-color:$Inactive;
       font-size: 1em;
       font-weight: 500;
       text-align: center;
@@ -58,14 +49,13 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
   }
 }//recipe-detail (top portion)
 
-//bean/water/time detail section of recipe detail view
 .recipe-detail & div.details {
   @extend .clearfix;
   width: 100%;
   padding-bottom: 2ex;
   margin-bottom: 5%;
-  border-bottom: solid 1px $brewitInactiveStep;
-  section.details {//TODO: Check this again once font sizes have been set.
+  border-bottom: solid 1px $heading;
+  section.details {
     box-sizing: border-box;
     width: 85%;
     float: left;
@@ -105,7 +95,6 @@ $brewitInactiveOf: #b1b2b4;//Magnesium
     }
   }
 } //end recipe-detail & div.details
-//end bean/water/time detail section of recipe detail view
 
 section.edit-step-icons {
   float:right;
@@ -134,14 +123,14 @@ div.brew-notes-heading >  .plus-icon {
 div.add-steps {
   margin-bottom: 4ex;
   padding-bottom: 1ex;
-  border-bottom: 1px solid $brewitInactiveStep;
+  border-bottom: 1px solid $heading;
 }
 div.add-steps-heading {
   display: block;
   margin-bottom: 2ex;
 }
 div.add-steps-heading > h3 {
-  color: $brewitCurrentStep;
+  color: $heading;
   margin: 0;
   width: 86%;
   font-weight: 500;
@@ -163,16 +152,13 @@ div.add-steps-heading  > .plus-icon {
     float: left;
     box-sizing: border-box;
     font-size: 2em;
-    color: darken(lightgray, 15%);
+    color: $Inactive;
     font-weight: bold;
     text-align: center;
     [class*='-arrow-icon'] {
       float: right;
       margin-left: 2.5%;
       margin-right: 20%;
-    }
-    &:active {
-    color: $brewitCurrentOf;
     }
   } //end div.num-col
 
@@ -208,7 +194,7 @@ div.add-steps-heading  > .plus-icon {
 // end steps section
 
 .gen-recipe-comment {
-  border-bottom: solid 1px $brewitInactiveStep;
+  border-bottom: solid 1px $heading;
   p {
     margin-left: 5%;
     margin-right: 5%;
@@ -219,25 +205,22 @@ div.clone-button {
   display: inline-block;
   width: 40%;
   margin-left: 5%;
-  // margin-right: 5%;
   margin-top: 2ex;
   margin-bottom: 3ex;
   padding-top: 1ex;
   padding-bottom: 1ex;
-  background-color: $brewitInactiveStep;
+  background-color: $Inactive;
   text-align: center;
   &:last-of-type {
-    // background-color: black;
     float: right;
     margin-right: 5%;
   }
-
 } //end div.clone-button
 
 .brew-notes {
   margin-bottom: 10ex;
     h3 {
-      color: $brewitCurrentStep;
+      color: $heading;
       margin: 0;
       width: 90%;
       float: left;
@@ -258,7 +241,7 @@ div.clone-button {
         margin-bottom: 2ex;
         float: left;
         box-sizing: border-box;
-        color: $brewitInactiveStep;
+        color: $heading;
       }
       .note-icons {
         width: 25%;
@@ -266,9 +249,7 @@ div.clone-button {
         [class*='-icon'] {
           float: right;
           margin-left: 2.5%;
-          // margin-right: 20%;
         }
       }
   } //div.notes
-
 }//end section.brew-notes

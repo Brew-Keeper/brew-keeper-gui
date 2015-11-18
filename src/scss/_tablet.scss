@@ -14,13 +14,17 @@
         top: -0.5ex;
       }
       ul.menu.active {
-        top: 4.8ex;
+        top: 4.7ex;
+        border: 1px solid $heading;
+        border-top: 1px solid #fff;
+        border-right: 1px solid #fff;
+        padding: 0 5% 1.7ex 0.5em;
         li {
           text-align:right;
           a {
             text-decoration: none;
             &:hover {
-              color: $brewitCurrent;
+              color: $BrewIt;
             }
           }
           &.hidden {
@@ -313,12 +317,10 @@ section.recipe-list {
     width: 25%;
     margin-left: 15%;
     &:last-of-type {
-      // background-color: black;
       margin-right: 15%;
     }
   } //end div.clone-button
 }//end recipe-detaiil view
-
 
 .about-creators {
   article {

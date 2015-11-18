@@ -45,14 +45,10 @@ section.recipe-list {
       max-width: 90%;
    }
 }
-
   .col-1-2 {
-    // @extend .clearfix;
     width: 45%;
     float: left;
-
     .col-1-4 {
-      // @extend .clearfix;
       width: 110%;
       float: left;
       span {
@@ -74,18 +70,15 @@ section.recipe-list {
       float: right;
       width: 85%;
       margin-top: 0.6em;
-      // margin-left: 2ex;
-      // margin-right: 2ex;
       padding-top: 1ex;
       padding-bottom: 1ex;
-      background-color: $brewit-button-color;
+      background-color: $BrewIt;
       text-align: center;
     }
     a.shared-by {
-      // background-color: lightgray;
-      color: gray;
+      color: #b1b2b4;
       & span {
-        color: $brewit-button-color;
+        color: $BrewIt;
       }
     }
   } // end col-1-2
