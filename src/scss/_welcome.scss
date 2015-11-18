@@ -55,9 +55,10 @@
   }
   article.keepers {
     @extend .clearfix;
-    border-top: 1px solid $heading;
     padding-bottom: 2ex;
     h3 {
+      text-decoration: underline;
+
       &:hover {
       color: $BrewIt;
       }
@@ -86,6 +87,9 @@
     padding-bottom: 2ex;
     h3 {
       padding-top: 1ex;
+    }
+    a {
+      text-decoration: underline;
     }
     a:hover {
       color: $BrewIt;
