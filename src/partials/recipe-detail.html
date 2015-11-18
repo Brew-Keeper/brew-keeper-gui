@@ -1,13 +1,11 @@
 <section class="recipe-detail">
   <section class="recipe-view">
     <h3 class="title"><a href="#/{{username}}">{{detail.title}}</a></h3>
-    <!-- star rating -->
     <div class="col-1-3">
       <span ng-repeat="rating in ratings">
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
       </span>
     </div>
-    <!--END star rating -->
     <div class="col-1-3 brew-count">
       <img class="cup" src="img/CoffeeCup-65.svg"> &#215; {{detail.brew_count}}
     </div>
@@ -20,7 +18,6 @@
         <img src="img/LightCoffeeBean_darker.svg">
       </div>
       <section class="details bean-details">
-      <!-- <img src="img/LightCoffeeBean.svg"> -->
         <span>{{detail.bean_name}}</span>
         <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
       </section> <!--end section.bean-details -->
@@ -41,7 +38,6 @@
         <img class="edit-icon recipe-view edit-button" ng-click="" src="img/Edit-40.svg"/>
       </section>
     </div><!--end div.details -->
-
     <!-- steps section -->
     <section class="step-list" ng-repeat="step in steps">
       <div class="num-col">
@@ -57,7 +53,6 @@
           <span class="bold-text">{{step.duration}}</span> sec
         </div>
       </div> <!-- end step details -->
-
       <!-- edit step form -->
       <div class="hidden edit-step {{step.id}}">
         <form class="edit-step" ng-submit="editStep(step)">
@@ -85,7 +80,6 @@
               </div>
             </section>
           </section>
-          <!-- <button class="edit-step clicker-button" type="submit">Save</button> -->
         </form><!--edit Step Form-->
       </div> <!-- edit step form div -->
       <section class=" edit-step-icons">
@@ -93,13 +87,11 @@
         <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-40.svg"/>
       </section>
     </section><!-- end steps section -->
-
-    <!-- <div class="addSteps" ng-controller="createNewStep"> -->
     <div class="add-steps">
-    <div class="add-steps-heading">
-      <h3>Add Step</h3>
-      <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign-40.svg"/>
-    </div>
+      <div class="add-steps-heading">
+        <h3>Add Step</h3>
+        <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign-40.svg"/>
+      </div>
       <form class="hidden create-new-step" ng-submit="addStep()">
         <section class="columns">
           <input class="input-focus" list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
@@ -132,12 +124,11 @@
       <a>SHARE</a>
     </div>
 
-
     <!--Brew notes -->
     <section class="brew-notes">
       <div class="brew-notes-heading">
         <h3>Brew Notes</h3>
-        <img class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign-40.svg"/><!--TODO: Add tooltip to say "Add Brew Note" on this icon-->
+        <img class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign-40.svg"/>
       </div>
       <section class="brew-form hidden" >
         <form class="add-note" ng-submit="addBrewNote()">

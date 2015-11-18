@@ -1,6 +1,5 @@
 
 <form class="changeForm" name="changeForm" ng-controller="changePassword" ng-submit="resetPassword(changeForm.confirmNewPassword.$error.match)">
-<!-- <form class="changeForm" name="resetForm" ng-controller="changePassword" ng-submit="resetPassword(users)"> -->
   <div class="columns general">
     <label class="changeForm" for="changeForm">Reset Password</label>
     <input type="text" name="username" placeholder="username" ng-model="users.username" required>
@@ -10,7 +9,7 @@
     <input type="password" name="confirmNewPassword" placeholder=" confirm new password" required ng-model="users.confirmNewPassword" data-match="users.new_password">
   </div>
   <button class="clicker-button" name="changeForm" type="submit">Submit</button>
-</form> <!--end password change form -->
+</form>
 <br>
 <br>
 <span ng-show="errorMessage">{{errorMessage}}</span>
