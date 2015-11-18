@@ -73,13 +73,6 @@
       $rootScope.username = null;
       $scope.changePassword= false;
 
-      // $(".login-link").click(function(){
-      //   console.log("login link clicked")
-      //   $('.register').addClass('hidden');
-      //   $('form.login').removeClass('hidden')
-      // })
-
-
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
           $rootScope.username = response.data.username;
@@ -98,10 +91,9 @@
     $scope.logout= function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
       $scope.changePassword = false;
+
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
         .then(function(){
-          // $('.login').removeClass('hidden');//when logged out
-          // $('.logout').addClass('hidden');
           $rootScope.username = null;
         })
         $cookies.remove("Authorization")
@@ -112,6 +104,7 @@
       $(".menu").on('click', function() {
         $('.menu').toggleClass("active");
       });
+
       $(document).on('click', function(e) {
         if(!$(e.target).is('.menu.active')) {
         $('.menu').removeClass("active");
@@ -130,7 +123,6 @@
         })//.success
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
-          // $location.path('/login');
           $cookies.remove("Authorization")
           $http.defaults.headers.common = {}
           $location.path('/public');
