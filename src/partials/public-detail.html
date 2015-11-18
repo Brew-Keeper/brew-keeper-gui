@@ -148,8 +148,8 @@
     <p>{{detail.general_recipe_comment}}<p>
   </section> <!-- end general recipe comment -->
 
-  <div ng-show="username" class="clone-button" ng-click="cloneRecipe(detail)">
-    <a>CLONE THIS RECIPE</a>
+  <div ng-show="username" class="clone-button public" ng-click="cloneRecipe(detail)">
+    <a>CLONE</a>
   </div>
 
   <a href="#/login"><div ng-hide="username" class="clone-button">Login to Clone this Recipe</div></a>
@@ -185,7 +185,7 @@
           <form class="edit-note" ng-submit="editComment(comment)">
             <!--edit brew-note form-->
               <textarea required type="text" ng-model="comment.public_comment">{{comment.public_comment}}</textarea>
-              <button class="save-edit clicker-button">Save Edit</button>
+              <button class="save-edit clicker-button">Save</button>
           </form>
           <!--END edit-note form-->
         </article>

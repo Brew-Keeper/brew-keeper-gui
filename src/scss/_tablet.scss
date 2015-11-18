@@ -252,8 +252,11 @@ section.recipe-list {
     padding-top: 1ex;
     padding-bottom: 1ex;
     max-width: 12em;
-    font-weight: bold;
+    // font-weight: bold;
     padding: 2ex 0;
+    &.list-brew-it {
+      font-weight: bold;
+    }
     &.recipe-title {
       display: block;
       width: 100%;

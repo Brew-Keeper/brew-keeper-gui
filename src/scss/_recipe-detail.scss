@@ -216,6 +216,10 @@ div.clone-button {
     margin-right: 5%;
   }
 } //end div.clone-button
+div.clone-button.public {
+  float: left;
+  margin-left: 30%;
+}
 
 .brew-notes {
   margin-bottom: 10ex;
