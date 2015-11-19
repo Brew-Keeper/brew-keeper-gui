@@ -194,13 +194,15 @@ div.add-steps-heading  > .plus-icon {
 // end steps section
 
 .gen-recipe-comment {
-  border-bottom: solid 1px $heading;
+  border-bottom: 1px solid $heading;
   p {
     margin-left: 5%;
     margin-right: 5%;
   }
 } //end section.gen-recipe-comment
-
+.gen-recipe-comment.public {
+  border-top: 1px solid $heading;
+}
 div.clone-button {
   display: inline-block;
   width: 40%;
