@@ -12,7 +12,7 @@
     <button href="" class="clicker-button" name="search"  ng-click="search(searchString)">Search</button>
 </nav>
 
-<section class="recipe-list" ng-repeat="recipe in recipes | orderBy: 'id' | orderBy:query | filter:filter">
+<section class="recipe-list" ng-repeat="recipe in recipes | orderBy: '-combined_rating' | orderBy:query | filter:filter">
   <a class="recipe-title" href="#public/{{recipe.id}}">{{recipe.title}}</a>
   <span>{{recipe.bean_name}}</span>
   <div class="col-1-2">

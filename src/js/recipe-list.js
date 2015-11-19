@@ -50,8 +50,6 @@ angular.module('brewKeeper')
 
 
   .controller('publicRecipe', function($http, $scope, $rootScope, $location, $routeParams){
-    // `console.log("publicRecipe controller")
-    // console.log($scope.username)`
 
     $scope.search = function(searchString){
       $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/?search="+searchString)
@@ -77,7 +75,7 @@ angular.module('brewKeeper')
         }];
       })
     }
-    
+
     $scope.publicListBrewIt = function(id){
       //get indexOf recipe id
       for (var index = 0; index < $scope.recipes.length; index ++) {
@@ -116,5 +114,3 @@ angular.module('brewKeeper')
   })//end publicRecipe controller
 
 })();//END IFEE
-
-// ng-href="#/users/{{username}}/recipes/{{recipe.id}}/brewit"

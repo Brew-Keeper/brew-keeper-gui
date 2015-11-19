@@ -11,9 +11,9 @@ angular.module('brewKeeper')
         var username = response.data.username;
         $rootScope.username = username;
       })//.success
+
       .catch(function(){
         $rootScope.username = null; //hides login and shows logout
-        // $location.path('/login');
         $cookies.remove("Authorization")
         $http.defaults.headers.common = {}
         $location.path('/login');
@@ -21,6 +21,7 @@ angular.module('brewKeeper')
 
     $scope.createNew=function(){
       var username = ""
+
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
         .then(function(response){
         $("form-placeholder").removeClass("changed")
@@ -32,11 +33,11 @@ angular.module('brewKeeper')
             })
         $scope.recipe= { };
       })
-  } //end submit function
+    } //end submit function
 
-  $(".form-placeholder").on("change", function(){
-    $(this).addClass("changed");
-  })
+    $(".form-placeholder").on("change", function(){
+      $(this).addClass("changed");
+    })
   })//controller for creating new step
 
 })();//END IFEE

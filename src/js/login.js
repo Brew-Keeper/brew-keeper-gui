@@ -59,7 +59,7 @@ angular.module('brewKeeper')
 
       })//responses for bad login attempts
     }//submit function
-    $('.show-signup').on('click', function(){
+    $('a.show-register').on('click', function(){
       $('section.register').removeClass('hidden');
       $('form.register').removeClass('hidden');
       $('form.login').addClass('hidden')
@@ -99,7 +99,6 @@ $("a[href].about").on('click', function() {
           $(".wrapper").addClass("openerror");
           $("section.register-modal").removeClass("inactive");
 //Above is modal text.  line below is what it's replacing.
-        // alert("Passwords Do Not Match")
 //Below is exiting register mismatch modal test
         $("button.password-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
@@ -108,16 +107,17 @@ $("a[href].about").on('click', function() {
 //Above is existing register mismatch modal text.
        return
       }
+
       users.username = $scope.username;
       users.old_password = $scope.users.old_password;
       users.new_password = $scope.users.new_password;
+
       $http.post('https://brew-keeper-api.herokuapp.com/api/change-pw/', users)
         .then(function successCallback(){
 //Below is entering register mismatch modal test
           $(".wrapper").addClass("openerror");
           $("section.successful-modal").removeClass("inactive");
 //Above is modal text.  line below is what it's replacing.
-        // alert("Passwords Do Not Match")
 //Below is exiting register mismatch modal test
         $("button.change-not-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
@@ -130,7 +130,6 @@ $("a[href].about").on('click', function() {
           $(".wrapper").addClass("openerror");
           $("section.password-modal").removeClass("inactive");
 //Above is modal text.  line below is what it's replacing.
-        // alert("Passwords Do Not Match")
 //Below is exiting register mismatch modal test
         $("button.password-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
@@ -140,7 +139,7 @@ $("a[href].about").on('click', function() {
         })//end http.post to change-pw
     } //end submitChangePassword function
 
-    $('.show-reset').on('click', function(){
+    $('a.reset').on('click', function(){
       $('.reset-password').removeClass('hidden');
       $('form.login').addClass('hidden')
     });
@@ -155,6 +154,7 @@ $("a[href].about").on('click', function() {
       $scope.resetError = false;
       $scope.resetSuccess = false;
       $scope.generalError = false;
+
       $http.post('https://brew-keeper-api.herokuapp.com/api/get-reset/', $scope.users)
         .then(function(response){
           if(response.data){
@@ -169,9 +169,6 @@ $("a[href].about").on('click', function() {
     };//end requestReset function
 
     $scope.resetPassword = function(mismatch){
-      // console.log("resetPassword function")
-      // console.log($scope.users)
-      // console.log(mismatch)
       if(mismatch){
         alert("Passwords Do Not Match")
         return
@@ -180,11 +177,9 @@ $("a[href].about").on('click', function() {
       users.reset_string= $scope.users.reset_string;
       users.email = $scope.users.email;
       users.new_password = $scope.users.new_password;
-      // console.log(users)
+
       $http.post('https://brew-keeper-api.herokuapp.com/api/reset-pw/', users)
         .then(function(response){
-          // console.log("success")
-          // console.log(response);
           userInfo = "Token " + response.data.token;
           $cookies.put("Authorization", userInfo);
           $http.defaults.headers.common = {"Authorization": userInfo};
@@ -194,7 +189,6 @@ $("a[href].about").on('click', function() {
         })//end .then
         .catch(function(response){
           $rootScope.errorMessage = response.data
-          // alert(response.data);
         })//end .catch
     }; //end resetPassword function
 
