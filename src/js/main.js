@@ -6,7 +6,15 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'WhoAmIController'
         })
+        .when('/reset-pw', {
+          templateUrl: 'partials/reset-pw.html',
+          controller: 'changePassword'
+        })
         .when('/public',{
+          templateUrl: 'partials/public-list.html',
+          controller: 'publicRecipe'
+        })
+        .when('/public/users/:username', {
           templateUrl: 'partials/public-list.html',
           controller: 'publicRecipe'
         })
@@ -22,7 +30,12 @@
           templateUrl: 'partials/login.html'
         })
         .when('/info', {
-          templateUrl: 'partials/more-info.html'
+          templateUrl: 'partials/more-info.html',
+          controller: 'loginCtrl'
+        })
+        .when('/reset-pw', {
+          templateUrl: 'partials/reset-pw.html',
+          controller: 'changePassword'
         })
         .when('/:username/new', {
           templateUrl: 'partials/recipe-create.html',
@@ -44,7 +57,7 @@
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
         })
-        
+
         // .otherwise({
         //   redirectTo: '/404.html',
         //   templateUrl: 'partials/404.html'
@@ -68,6 +81,9 @@
           $rootScope.username = null; //hides login and shows logout
           $cookies.remove("Authorization")
           $http.defaults.headers.common = {}
+          if($location.path() == "/reset-pw" || "/login" || "/info"){
+            return
+          }
           $location.path('/public');
         })//.error
 
@@ -75,10 +91,9 @@
     $scope.logout= function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")}
       $scope.changePassword = false;
+
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
         .then(function(){
-          // $('.login').removeClass('hidden');//when logged out
-          // $('.logout').addClass('hidden');
           $rootScope.username = null;
         })
         $cookies.remove("Authorization")
@@ -89,6 +104,7 @@
       $(".menu").on('click', function() {
         $('.menu').toggleClass("active");
       });
+
       $(document).on('click', function(e) {
         if(!$(e.target).is('.menu.active')) {
         $('.menu').removeClass("active");
@@ -107,7 +123,6 @@
         })//.success
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
-          // $location.path('/login');
           $cookies.remove("Authorization")
           $http.defaults.headers.common = {}
           $location.path('/public');

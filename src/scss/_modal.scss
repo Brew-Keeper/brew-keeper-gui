@@ -1,0 +1,31 @@
+[class*='-modal'] {
+  position: fixed;
+  width: 100%;
+  top: 45%;
+  transform: scale(1.5);
+  div {
+  width: 50%;
+  margin: 0 25%;
+  text-align: center;
+  }
+    &.inactive {
+      height: 0;
+      width: 0;
+      left: 0;
+      top: 0;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+  }
+}
+
+.openerror {
+  background-color: $Inactive;
+  -webkit-filter: blur(5px) grayscale(50%);
+  -webkit-transform: scale(0.9);
+}
+
+[class*='-modal'], .wrapper {
+  transition: all 0.3s ease;
+}
+// Adapted from https://css-tricks.com/receding-background-modal-boxes/

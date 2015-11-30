@@ -1,42 +1,29 @@
-$brewitCurrent: #7ec78a;//bright green
-$brewitCurrentText: #000;//black???
-$brewitCurrentStep: #4d4d4f;//Thunder
-$brewitCurrentOf: #545c56;//Feldgrau
-$brewitInactive: #ebeced;//lightgray
-$brewitInactiveText:#99999d;//inactive text
-$brewitInactiveStep: #abacaf;//Silver Chalice
-$brewitInactiveOf: #b1b2b4;//Magnesium
-$brewIt: #33B55D; //Brewit-Green
-
 h3.form-heading {
   margin-left: 5%;
-  color: $brewitCurrentOf;
+  color: $heading;
   font-weight: 600;
 }
 .clicker-button{
   box-sizing: border-box;
   float: left;
-  color:darken($brewitInactive, 75%);
-  border: 2.3px solid darken($brewitInactive, 10%);
+  color:#000;
+  border: 2.3px solid $Inactive;
   border-radius: 0;
-  background-color: darken($brewitInactive, 10%);
+  background-color: $Inactive;
   text-decoration: none;
   font-size: 0.9em;
   text-align: center;
-  &.reset-brew {
+  &[class*='-fail'] {
+    display: block;
+    float: right;
+    background-color: $BrewIt;//brewit-green
+    border: 1px solid $BrewIt;
+    width: 100% * (1/2);
+    margin-left: 100% * (2/8);
+    margin-right: 100% * (2/8);
+    margin-top: 2ex;
+  }
 
-  }
-  &.restart-brew {
-    background-color: $brewIt;//brewit-green
-    border: 1px solid $brewIt;
-    width: 100% * (1/4);
-    margin-left: 5%;
-    margin-right: 0;
-    margin-bottom: 2ex;
-    &.public {
-      margin-right: 30%;
-    }
-  }
   &.add-brew-note {
     width: 100% * (7/24);
     margin-left: 0.5em;
@@ -44,17 +31,16 @@ h3.form-heading {
     margin-bottom: 2ex;
     font-size: 0.9em;
   }
-  &.cancel-note {
-
-  }
   &.login {
-    background-color: $brewIt;//brewit-green
-    border: 2.3px solid $brewIt;
-    color: black;
-    width: 100% * (1/4);
-    margin-left: 100% * (3/8);
-    margin-right: 100% * (3/8);
+    background-color: $BrewIt;
+    border: 2.3px solid $BrewIt;
+    color: #000;
+    width: 100% * (1/2);
+    margin-left: 100% * (1/4);
+    margin-right: 100% * (1/4);
     margin-top: 1ex;
+    padding-top: 1ex;
+    padding-bottom: 1ex;
   }
   &.show-signup {
     width: 100% * (1/4);
@@ -63,18 +49,27 @@ h3.form-heading {
     margin-top: 0;
     box-sizing: border-box;
     float: left;
-    color:darken($brewitInactive, 75%);
+    color:#000;
     border: none;
     border-radius: 0;
-    background-color: white;
+    background-color: #fff;
     text-decoration: underline;
     font-size: 0.9em;
+    text-align: right;
+
+    &.reset{
+      width: 100%;
+      margin-right: 5%;
+      margin-left: 0;
+    }
   }
+
   &.register {
-    width: 100% * (1/4);
-    margin-left: 100% *(3/8);
-    margin-right: 100% *(3/8);
-    margin-top: 2.5ex;
+    width: 100% * (1/2);
+    margin-left: 100% *(1/4);
+    margin-right: 100% *(1/4);
+    padding-top: 1ex;
+    padding-bottom: 1ex;
     }
   &.addSteps {//submit form button which shows Add Steps.
     width: 100% * (1/4);
@@ -96,8 +91,6 @@ h3.form-heading {
   &.edit-step {
     float: left;
     width: 100% * (1/5);
-    // margin-left: 100% *(3/5);
-    // margin-top: -2.2ex;
     margin-right: 2em;
     margin-bottom: 0;
   }
@@ -117,8 +110,6 @@ h3.form-heading {
   }
   &.save-note {
     width: 100% * (1/4);
-    // margin-left: 100% *(3/8);
-    // margin-right: 100% *(3/8);
     margin-top: 1ex;
     margin-bottom: 2.5ex;
     float: right;
@@ -131,6 +122,15 @@ h3.form-heading {
     margin-bottom: 2ex;
   }
 }//.clicker-button
+
+.restart-brew {
+  background-color: $BrewIt;
+  border: 1px solid $BrewIt;
+  margin-top: 50%;
+  &.public {
+    margin-right: 30%;
+  }
+}
 
 form.login {
   width: 90%;
@@ -172,6 +172,12 @@ form.changeForm {
 }//form.changeForm
 
 form.create-new-recipe {
+  fieldset.details {
+    margin-top: 2ex;
+    input.top-row {
+      margin-top: -.5ex;
+    }
+  }
   .columns {
     display: block;
     width: 50%;
@@ -220,13 +226,13 @@ form.create-new-recipe {
         }
       }//&.general
     .form-placeholder {
-      color: darken(lightgray, 13%);
+      color: $Inactive;
     &.changed {
-      color: black;
+      color: #000;
       }
     }
     .details-legend {
-      color: $brewitInactiveStep;
+      color: $heading;
       font-size: 1.2em;
       font-weight: 500;
     }
@@ -275,7 +281,7 @@ form.edit-recipe.clone {
       }
     }//&.general
     .details-legend {
-      color: $brewitInactiveStep;
+      color: $heading;
       font-size: 1.2em;
       font-weight: 500;
       margin-left: 0.3em;
@@ -284,25 +290,29 @@ form.edit-recipe.clone {
 }//form.edit-recipe.clone
 
 form.edit-recipe {
+  box-sizing: border-box;
   .columns {
+    fieldset.details {
+      margin-top: 2ex;
+      input.top-row {
+        margin-top: -.5ex;
+      }
+    }
+      box-sizing: border-box;
       display: block;
       width: 50%;
       float: left;
       input {
-        margin: -0.8ex 5% 2ex 5%;
-        width: 79%;
-      }
-      input.small-field {
-        margin-right: 0.2em;
+        margin: -0.8ex 0 2ex 0;
+        width: 78%;
       }
       select {
-        width: 84%;
-        margin: -0.5em 5% 2ex 5%;
+        width: 80%;
+        margin: -0.5em 0 2ex 0;
       }
       select.small-field {
-        width: 40%;
-        margin-left: 0.4em;
-        margin-right: 0;
+        width: 35%;
+        margin-left: 5%;
         margin-bottom: -.5em
       }
       .small-field {
@@ -316,19 +326,19 @@ form.edit-recipe {
       }
       &.general {
         display: block;
-        width: 100%;
+        width: 99%;
         margin: 0;
         input, textarea {
           display: block;
           width: 90%;
-          margin: 1ex 2.5% 2ex;
+          margin: 1ex 0 1.5ex;
         }
       }//&.general
       .details-legend {
-        color: $brewitInactiveStep;
+        color: $heading;
         font-size: 1.2em;
         font-weight: 500;
-        margin-left: 0.3em;
+        padding-bottom: 0.25em;
       }
   }//.columns
 }//form.edit-recipe
@@ -354,7 +364,6 @@ form.edit-step {
       height: 2.5ex;
       margin: -1.1ex 0 0 0;
       padding: 0;
-
     }
     div.small-field {
       box-sizing: border-box;

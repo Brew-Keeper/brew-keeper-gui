@@ -25,24 +25,6 @@ angular.module('brewKeeper')
             $scope.stepTotal = stepArray.length;
           });
 
-        //load the data if the page is manually reset
-        // window.onload = function(){
-        //   $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
-        //     .then(function(response){
-        //       $rootScope.detail = response.data;
-        //       $rootScope.steps = response.data.steps;
-        //       $rootScope.notes = response.data.brewnotes;
-        //       var stepArray = []; //create an array of step #'s'
-        //       for(step in $rootScope.steps){
-        //         stepArray.push($rootScope.steps[step].step_number)
-        //       };
-        //       $rootScope.stepArray = stepArray;
-        //       $scope.stepTotal = stepArray.length;
-        //       });
-        //   $scope.resetBrew();
-        // }
-
-
         var stepArray = [] //create an array of step #'s'
         for(step in $rootScope.steps){
           stepArray.push($rootScope.steps[step].step_number)
@@ -57,7 +39,6 @@ angular.module('brewKeeper')
             return;
           }
           $("."+$scope.stepArray[0]).removeClass("inactive-step").addClass("current-step");
-          // $("div.delay").animate({height: 0}, 1000, function(){
             $("div.delay").addClass("hidden").addClass("inactive-step")
           // });
           $(".delay timer").addClass("hidden");
@@ -71,26 +52,29 @@ angular.module('brewKeeper')
           if(timerRunning){
             return;
           }
+          $(".countdown").removeClass("hidden");
+          $(".brew-form").addClass("hidden");
+          $("div.restart").addClass("hidden");
+          $(".countdown").removeClass("hidden");
           $("timer.delay").removeClass("hidden");
           $(".step").addClass("inactive-step")
           $("a[href].restart-brew").addClass("hidden");
           $("a[href].add-brew-note").addClass("hidden");
-          // $(".rating").addClass("hidden");
           $("a[href].reset-brew").removeClass("hidden");
           $('timer')[0].start();
           $scope.showStars = false;
         }
 
-        // $scope.stopBrew = function(){
-        //   console.log("pause button pressed");
-        //   $scope.$broadcast('timer-stop');
-        // }; //This can be used to pause process if needed.
 
         $scope.resetBrew = function(){
+
+          $(".current-step").addClass("hidden")
+          $("timer.counter").addClass("hidden");
           $(".delay.hidden").removeClass("hidden");
           $(".current-step").removeClass("current-step");
-          $("timer").removeClass("hidden");
-          $("timer.counter").addClass("hidden");
+          $(".countdown").removeClass("hidden");
+          $("div.countdown").addClass("hidden");
+
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
           $("a[href].add-brew-note").removeClass("hidden");
@@ -110,11 +94,7 @@ angular.module('brewKeeper')
             })
         }; //end resetBrew
 
-        // $scope.finishBrew = function(id){
-        //   $scope.nextStep(id);
-        //   $("."+id).removeClass("current-step");
-        //   $("."+id).addClass("hidden")
-        // };
+      
         $scope.nextStep = function(stepNumber, brewCount){
           var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
           var nextStep = $scope.stepArray[nextStepIndex];
@@ -150,6 +130,7 @@ angular.module('brewKeeper')
 
       $(".add-brew-note").on('click', function() {
         $(".brew-form").toggleClass("hidden");
+        $('.input-focus').focus();
       })
       $(".save-note").on('click', function() {
         $(".brew-form").addClass("hidden");

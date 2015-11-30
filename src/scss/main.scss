@@ -99,8 +99,8 @@ main.container {
   margin: 0 auto;
   width: 100%;
 } //main.container
-
 @import 'styles';
+@import 'modal';
 @import 'header';
 @import 'forms';
 @import 'brew-it';
@@ -223,7 +223,7 @@ main.container {
     *:before,
     *:after {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster:
+        color: #000 !important; /* #000 prints faster:
                                    http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;

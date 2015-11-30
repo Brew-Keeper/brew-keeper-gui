@@ -1,15 +1,13 @@
 <section class="recipe-detail">
   <section class="recipe-view">
     <h3 class="title"><a href="#/{{username}}">{{detail.title}}</a></h3>
-    <!-- star rating -->
     <div class="col-1-3">
       <span ng-repeat="rating in ratings">
       <div star-rating rating-value="rating.current" max="rating.max" ng-click="rateRecipe(rating.current)"></div>
       </span>
     </div>
-    <!--END star rating -->
     <div class="col-1-3 brew-count">
-      <img class="cup" src="img/CoffeeCup-65.svg"> x {{detail.brew_count}}
+      <img class="cup" src="img/CoffeeCup-65.svg"> &#215; {{detail.brew_count}}
     </div>
     <div class="brew-it-button">
       <a ng-show="detail.steps.length" class="brew-it-button" ng-href="#/{{username}}/{{detail.id}}/brewit">BREW IT!</a>
@@ -17,53 +15,49 @@
     </div>
     <div class="details">
       <div class="detail-icon">
-        <img src="img/LightCoffeeBean.svg">
+        <img src="img/LightCoffeeBean_darker.svg">
       </div>
       <section class="details bean-details">
-      <!-- <img src="img/LightCoffeeBean.svg"> -->
         <span>{{detail.bean_name}}</span>
         <span>{{detail.roast}}, {{detail.total_bean_amount}} {{detail.bean_units}}, {{detail.grind}}</span>
       </section> <!--end section.bean-details -->
       <div class="detail-icon">
-        <img src="img/LightWater.svg">
+        <img src="img/LightWater_darker.svg">
       </div>
       <section class="details water-details">
-        {{detail.water_type}}, {{detail.total_water_amount}} {{detail.water_units}} @ {{detail.temp}} &deg;F
+        {{detail.water_type}} {{detail.total_water_amount}} {{detail.water_units}} <span ng-show="detail.temp">@ {{detail.temp}} &deg;F</span>
       </section> <!-- end section.water-details-->
       <div class="detail-icon">
-        <img src="img/LightTimer.svg">
+        <img src="img/LightTimer_darker.svg">
       </div>
       <section class="details brew-time">
         {{detail.total_duration}} sec, {{detail.orientation}}
       </section> <!-- end section.brew-time -->
       <section class="details icons"><!--TODO: Add "Make Public" button-->
-        <img class="trash-icon" ng-click="EliminateRecipe()" src="img/Delete-25.svg"/>
-        <img class="edit-icon recipe-view edit-button" ng-click="" src="img/Edit-25.svg"/>
-
+        <img class="trash-icon" ng-click="EliminateRecipe()" src="img/Delete-40.svg"/>
+        <img class="edit-icon recipe-view edit-button" ng-click="" src="img/Edit-40.svg"/>
       </section>
     </div><!--end div.details -->
-
     <!-- steps section -->
     <section class="step-list" ng-repeat="step in steps">
       <div class="num-col">
         {{$index + 1}}
-        <a ng-click="decreaseStep(step)"><img class="down-arrow-icon" src="img/UpArrow-25.svg"/></a>
-        <a ng-click="increaseStep(step)"><img class="up-arrow-icon" src="img/DownArrow-25.svg"/></a>
+        <a ng-click="decreaseStep(step)"><img class="down-arrow-icon" src="img/UpArrow-40.svg"/></a>
+        <a ng-click="increaseStep(step)"><img class="up-arrow-icon" src="img/DownArrow-40.svg"/></a>
       </div> <!-- end number column -->
       <div class="step-details {{step.id}}">
-        <p>{{step.step_title}}</p>
+        <p class="bold-text">{{step.step_title}}</p>
         <p class="step-details">{{step.step_body}}</p>
         <div class="duration {{step.id}}">
-          <span ng-show="step.water_amount"><img class="water-icon" src="img/LightWater.svg"/>{{step.water_amount}}  {{detail.water_units}} </span><img class="timer-icon" src="img/LightTimer.svg">
-          {{step.duration}} sec
+          <span ng-show="step.water_amount"><img class="water-icon" src="img/LightWater_darker.svg"/><span class="bold-text">{{step.water_amount}}</span>  {{detail.water_units}} </span><img class="timer-icon" src="img/LightTimer_darker.svg">
+          <span class="bold-text">{{step.duration}}</span> sec
         </div>
       </div> <!-- end step details -->
-
       <!-- edit step form -->
       <div class="hidden edit-step {{step.id}}">
         <form class="edit-step" ng-submit="editStep(step)">
           <section class="columns">
-            <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+            <input ng-blur="editStep(step)" list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
               <datalist id="step-title">
                 <option value="Pour">
                 <option value="Bloom">
@@ -72,38 +66,35 @@
                 <option value="Plunge">
               </datalist>
             </input>
-            <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+            <textarea ng-blur="editStep(step)" maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
             <section>
               <div class="small-field">
               </div>
               <div class="small-field">
-                <label><img class="water-icon" src="img/LightWater.svg"/></label>
-                <input class="small-field" type="number" min="0" max="32767" ng-model="step.water_amount"> </input>
+                <label><img class="water-icon" src="img/LightWater_darker.svg"/></label>
+                <input ng-blur="editStep(step)" class="small-field target" type="number" min="0" max="32767" ng-model="step.water_amount"> </input>
               </div>
               <div class="small-field">
-                <label class="time-label"><img class="timer-icon" src="img/LightTimer.svg"></label>
-                <input class="small-field" type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+                <label class="time-label"><img class="timer-icon" src="img/LightTimer_darker.svg"></label>
+                <input ng-blur="editStep(step)" class="small-field target" type="number"  placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
               </div>
             </section>
           </section>
-          <button class="edit-step clicker-button" type="submit">Save</button>
         </form><!--edit Step Form-->
       </div> <!-- edit step form div -->
       <section class=" edit-step-icons">
-        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-25.svg"/>
-        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-25.svg"/>
+        <img ng-click="deleteStep(step.step_number, step.id)" class="trash-icon" src="img/Delete-40.svg"/>
+        <img ng-click="showEditStep(step.id)" class="edit-icon" src="img/Edit-40.svg"/>
       </section>
     </section><!-- end steps section -->
-
-    <!-- <div class="addSteps" ng-controller="createNewStep"> -->
     <div class="add-steps">
-    <div class="add-steps-heading">
-      <h3>Add Step</h3>
-      <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign.svg"/>
-    </div>
+      <div class="add-steps-heading">
+        <h3>Add Step</h3>
+        <img class="plus-icon" ng-click="showAddSteps()" src="img/PlusSign-40.svg"/>
+      </div>
       <form class="hidden create-new-step" ng-submit="addStep()">
         <section class="columns">
-          <input list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+          <input class="input-focus" list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
             <datalist id="step-title">
               <option value="Pour">
               <option value="Bloom">
@@ -127,31 +118,31 @@
     </section> <!-- end general recipe comment -->
 
     <div class="clone-button" ng-Click="cloneRecipe(detail)">
-      <a>CLONE THIS RECIPE</a>
+      <a>CLONE</a>
     </div>
     <div class="clone-button" ng-Click="makePublic()">
-      <a>MAKE THIS RECIPE PUBLIC</a>
+      <a>SHARE</a>
     </div>
 
     <!--Brew notes -->
     <section class="brew-notes">
       <div class="brew-notes-heading">
         <h3>Brew Notes</h3>
-        <img class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign.svg"/><!--TODO: Add tooltip to say "Add Brew Note" on this icon-->
+        <img class="plus-icon" ng-click="showAddBrewNote()" src="img/PlusSign-40.svg"/>
       </div>
       <section class="brew-form hidden" >
         <form class="add-note" ng-submit="addBrewNote()">
-          <textarea required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
-          <button class="save-note clicker-button" >Save Note</button>
+          <textarea class="input-focus" required type="text" ng-model="brewnote.body" placeholder="Brew Note"></textarea>
+          <button class="save-note clicker-button" >Save</button>
         </form>
       </section> <!-- add brewnote section -->
       <div class="notes" ng-repeat="note in notes | orderBy: 'note.timestamp'">
         <div class="note-view{{note.id}}" ng-click="showNoteIcons(note.id)">
           <div class="note-body">{{note.body}}</div>
-          <div class="note-date">— {{note.timestamp | date}}</div>
+          <div class="note-date">— {{note.timestamp | date:'MMM dd, yyyy @ h:mma' }}</div>
           <div class="note-icons {{note.id}} hidden">
-            <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/Delete-25.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
-            <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/Edit-25.svg"/><!--Created by Daniel Boros from the Noun Project-->
+            <img class="trash-icon" ng-Click="deleteNote(note.id)" src="img/Delete-40.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
+            <img class="edit-icon" ng-Click="showEditNote(note.id)" src="img/Edit-40.svg"/><!--Created by Daniel Boros from the Noun Project-->
           </div>
         </div>
         <article class="edit-note{{note.id}} hidden">
@@ -168,14 +159,14 @@
     <form class="edit-recipe" ng-submit="editRecipe(detail)">
       <section class="columns general">
         <fieldset>
-          <input placeholder="Title *" maxlength="50"  ng-model="detail.title" required></input>
+          <input class="input-focus" placeholder="Title *" maxlength="50"  ng-model="detail.title" required></input>
           <textarea placeholder="Comments"  ng-model="detail.general_recipe_comment"></textarea>
         </fieldset><!--General Details-->
       </section>
       <section class="columns">
-        <fieldset>
-          <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean.svg"/> Details</h4></legend>
-          <input maxlength="50" placeholder="Name"  ng-model="detail.bean_name"></input>
+        <fieldset class="details">
+          <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean_darker.svg"/> Details</h4></legend>
+          <input class="top-row" maxlength="50" placeholder="Name"  ng-model="detail.bean_name"></input>
           <select list="roast" maxlength="15" placeholder="Roast" ng-model="detail.roast" id="roast">
             <option value="" disabled selected hidden>{{detail.roast}}</option>
             <option value="Light">Light</option>
@@ -201,9 +192,9 @@
         </fieldset><!--Bean Details-->
       </section>
       <section class="columns">
-        <fieldset>
-          <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater.svg"/> Details</h4></legend>
-          <input list="water-type" maxlength="50" placeholder="Type" ng-model="detail.water_type">
+        <fieldset class="details">
+          <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater_darker.svg"/> Details</h4></legend>
+          <input class="top-row" list="water-type" maxlength="50" placeholder="Type" ng-model="detail.water_type">
             <datalist id="water-type">
               <option value="Tap">
               <option value="Distilled">
