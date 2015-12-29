@@ -92,15 +92,15 @@
       fill: white;
     }
   }
-  div.delay.step.finished {
-    display: none;
-    .countdown {
-      display: none;
-    }
-    .counting {
-      display: none;
-    }
-  }//.delay.step.finished
+  // div.delay.step.finished {
+  //   height: 0;
+  //   .countdown {
+  //     display: none;
+  //   }
+  //   .counting {
+  //     display: none;
+  //   }
+  // }//.delay.step.finished
   div.current-step {
     box-sizing: border-box;
     background-color:$BrewIt;
@@ -180,28 +180,48 @@
   }//.inactive-step
 
 div.step.finished {
+    height: auto;
+    color: $Inactive;
     background-color: $Inactive;
-    color: $InactiveText;
-  p.stepOf {
-    display: none;
-    span {
-      display: none;
+    margin-left: 15%;
+    margin-right: 15%;
+  -webkit-transition: color 3s, background-color 3s, -webkit-transform 3s;
+  transition: color 3s,  background-color 3s, transform 3s;
+p.stepOf {
+  -webkit-transition: height 3s,  background-color 3s, -webkit-transform 3s;
+  transition: height 3s,  background-color 3s, transform 3s;
+  font-size: 0;
+  height: 0;
+   span {
+  -webkit-transition: font-size 3s,  background-color 3s, -webkit-transform 3s;
+  transition: font-size 3s,  background-color 3s, transform 3s;
+  font-size: 0;
     }
   }
   .counting {
-    display: none;
+  -webkit-transition: font-size 3s,  background-color 3s, -webkit-transform 3s;
+  transition: font-size 3s,  background-color 3s, transform 3s;
+  font-size: 0;
   }
   p.step-name {
-    display: none;
+  -webkit-transition: font-size 3s,  background-color 3s, -webkit-transform 3s;
+  transition: font-size 3s,  background-color 3s, transform 3s;
+  font-size: 0;
   }
   p.water {
-    display: none;
+  -webkit-transition: font-size 3s, background-color 3s, -webkit-transform 3s;
+  transition: font-size 3s, background-color 3s,  transform 3s;
+  font-size: 0;
   }
   timer.counting > p {
-    display: none;
+  -webkit-transition: font-size 3s, background-color 3s,  -webkit-transform 3s;
+  transition: font-size 3s, background-color 3s,  transform 3s;
+  font-size: 0;
   }
   p.step-body {
-    display: none;
+  -webkit-transition: font-size 3s, background-color 3s,  -webkit-transform 3s;
+  transition: font-size 3s, background-color 3s, transform 3s;
+  font-size: 0;
   }
 }//.step.finished
 

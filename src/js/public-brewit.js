@@ -170,7 +170,7 @@ angular.module('brewKeeper')
           return
         }
         $("timer."+stepNumber).addClass("hidden");// Hide last step
-        $("."+stepNumber).slideUp(1000).addClass("finished");// Hide last step
+        $("."+stepNumber).addClass("finished").removeClass("current-step");// Hide last step
 //Change next step to green  and grow next step to 200
         $("timer."+nextStep).removeClass("hidden");
         $("."+nextStep).addClass("current-step").removeClass("inactive-step");

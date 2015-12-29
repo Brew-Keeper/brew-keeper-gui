@@ -40,7 +40,6 @@ angular.module('brewKeeper')
           }
           $("."+$scope.stepArray[0]).removeClass("inactive-step").addClass("current-step");
             $("div.delay").addClass("hidden").addClass("inactive-step")
-          // });
           $(".delay timer").addClass("hidden");
           $("timer."+$scope.stepArray[0]).removeClass("hidden");//Show's timer for active step
           $('timer')[1].start();
@@ -64,7 +63,6 @@ angular.module('brewKeeper')
           $('timer')[0].start();
           $scope.showStars = false;
         }
-
 
         $scope.resetBrew = function(){
 
@@ -94,7 +92,7 @@ angular.module('brewKeeper')
             })
         }; //end resetBrew
 
-      
+
         $scope.nextStep = function(stepNumber, brewCount){
           var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
           var nextStep = $scope.stepArray[nextStepIndex];
@@ -111,7 +109,7 @@ angular.module('brewKeeper')
             return
           }
           $("timer."+stepNumber).addClass("hidden");// Hide last step
-          $("."+stepNumber).slideUp(1000).addClass("finished");// Hide last step
+          $("."+stepNumber).addClass("finished").removeClass("current-step");// Hide last step
 //Change next step to green  and grow next step to 200
           $("timer."+nextStep).removeClass("hidden");
           $("."+nextStep).addClass("current-step").removeClass("inactive-step");
