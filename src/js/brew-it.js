@@ -42,7 +42,6 @@ angular.module('brewKeeper')
             $("div.delay").addClass("hidden").addClass("inactive-step")
           $(".delay timer").addClass("hidden");
           $(".time-" + $scope.countdownVal).addClass("timeline");//timeline
-
           $("timer."+$scope.stepArray[0]).removeClass("hidden");//Show's timer for active step
           $('timer')[1].start();
           timerRunning = true;
@@ -76,7 +75,6 @@ angular.module('brewKeeper')
           $(".countdown").removeClass("hidden");
           $("div.countdown").addClass("hidden");
           $(".time-" + $scope.countdownVal).removeClass("timeline");//timeline
-
           $scope.$broadcast('timer-reset');
           $("a[href].restart-brew").removeClass("hidden");
           $("a[href].add-brew-note").removeClass("hidden");
