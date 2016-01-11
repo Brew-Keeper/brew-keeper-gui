@@ -189,13 +189,12 @@
 @for $time from 1 through 500 {
   .time-#{$time} {
     width: 0em;
-    -webkit-transition: width ($time)+s, -webkit-transform ($time)+s;
-    transition: width ($time)+s, transform ($time)+s;
+    -webkit-transition: width .5s, -webkit-transform .5s;
+    transition: width .5s, transform .5s;
     -webkit-transition-timing-function: linear;
     transition-timing-function: linear;
   }
-}
-.timeline {
+.timeline.time-#{$time} {
   background-color: $BrewIt;
   width: 100%;
   margin-left: 0;
@@ -203,6 +202,11 @@
   height: 2.5ex;
   margin-top: -5ex;
   margin-bottom: 2ex;
+    -webkit-transition: width ($time)+s, -webkit-transform ($time)+s;
+    transition: width ($time)+s, transform ($time)+s;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
 }
 
 div.step.finished {

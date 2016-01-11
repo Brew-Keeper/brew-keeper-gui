@@ -78,7 +78,8 @@
     }
 
   }
-    .timeline {
+    [class*="time-"].timeline {
+      width: 90%;
       margin-left: 5%;
       margin-right: 5%;
     }
@@ -298,7 +299,8 @@ section.recipe-list {
       width: 100% * (1/5);
     }
   }
-    .timeline {
+    [class*="time-"].timeline {
+      width: 70%;
       margin-left: 15%;
       margin-right: 15%;
     }

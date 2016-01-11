@@ -73,7 +73,8 @@
   }//end recipe-detail view
 }//body
   .brewit-page{
-.timeline {
+.timeline.time-* {
+  width: 70%;
   margin-left: 15%;
   margin-right: 15%;
 }
