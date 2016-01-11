@@ -178,7 +178,13 @@
       margin: -1.6ex 5% -3.1ex 5%;
     }
   }//.inactive-step
-
+.transition {
+    -webkit-transition: font-size 1s, -webkit-transform 1s;
+    transition: font-size 1s, transform 1s;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+    font-size: 0;
+}
 div.step.finished {
     height: auto;
     color: $Inactive;
@@ -186,54 +192,26 @@ div.step.finished {
     margin-left: 15%;
     margin-right: 15%;
   p.stepOf {
-    -webkit-transition: height 1s, -webkit-transform 1s;
-    transition: height 1s,  transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
     height: 0;
   span {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
     }
   }
   .counting {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
   }
   p.step-name {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
   }
   p.water {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
   }
   timer.counting > p {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
   }
   p.step-body {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+    @extend .transition;
   }
 }//.step.finished
 
