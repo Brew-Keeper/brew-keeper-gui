@@ -19,6 +19,8 @@
     <p class="">Restart Brew</p>
     <img src="img/CoffeeCup.svg"/>
   </div>
+  <div class="timeline time-{{detail.total_duration}}">
+  </div>
   <div class="step delay countdown">
     <p class="countdown">COUNTDOWN</p>
     <p class="counting"><timer class="countdown counting" interval="1000" countdown="3" finish-callback="startBrew(detail.brew_count)">{{seconds}}</timer></p>

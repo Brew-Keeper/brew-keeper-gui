@@ -185,6 +185,25 @@
     transition-timing-function: linear;
     font-size: 0;
 }
+
+
+.timeline {
+  height: 0;
+  color: teal;
+  width: 0;
+}
+
+@for $time from 1 through 500 {
+  .timeline.time-#{$time} {
+    height: 5ex;
+    width: 100%;
+    -webkit-transition: width ($time)s, -webkit-transform ($time)s;
+    transition: width ($time)s, transform ($time)s;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+  }
+}
+
 div.step.finished {
     height: auto;
     color: $Inactive;
