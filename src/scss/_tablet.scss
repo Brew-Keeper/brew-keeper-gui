@@ -78,6 +78,10 @@
     }
 
   }
+    div.step.finished {
+        margin-left: 5%;
+        margin-right: 5%;
+    }//adusts width of last step
 }//END .brewit-page
 
   //END BrewIt Page
@@ -290,6 +294,10 @@ section.recipe-list {
       width: 100% * (1/5);
     }
   }
+    div.step.finished {
+        margin-left: 15%;
+        margin-right: 15%;
+    }//adusts width of last step
 }//END .brewit-page
   //END BrewIt Page
 .recipe-detail {

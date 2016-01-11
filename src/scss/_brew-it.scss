@@ -189,8 +189,8 @@ div.step.finished {
     height: auto;
     color: $Inactive;
     background-color: $Inactive;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 0;
+    margin-right: 0;
   p.stepOf {
     @extend .transition;
     height: 0;

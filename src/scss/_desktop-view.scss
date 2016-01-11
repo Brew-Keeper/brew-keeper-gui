@@ -72,4 +72,10 @@
     }
   }//end recipe-detail view
 }//body
+  .brewit-page{
+    div.step.finished {
+        margin-left: 15%;
+        margin-right: 15%;
+    }//adusts width of last step
+  }
 }//END media query
