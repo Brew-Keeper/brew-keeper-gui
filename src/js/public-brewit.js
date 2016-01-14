@@ -126,7 +126,7 @@ angular.module('brewKeeper')
         $("a[href].restart-brew").addClass("hidden");
         $("a[href].add-brew-note").addClass("hidden");
         $("a[href].reset-brew").removeClass("hidden");
-        $(".time-" + $($scope.countdownVal).removeClass("timeline");//timeline
+        $(".time-" + $scope.countdownVal).removeClass("timeline");//timeline
         $('timer')[0].start();
         $scope.showStars = false;
       }
@@ -138,7 +138,7 @@ angular.module('brewKeeper')
         $(".current-step").removeClass("current-step");
         $(".countdown").removeClass("hidden");
         $("div.countdown").addClass("hidden");
-        $(".time-" + $($scope.countdownVal).removeClass("timeline");//timeline
+        $(".time-" + $scope.countdownVal).removeClass("timeline");//timeline
         $scope.$broadcast('timer-reset');
         $("a[href].restart-brew").removeClass("hidden");
         $("a[href].add-brew-note").removeClass("hidden");
