@@ -1,5 +1,5 @@
 <nav class="recipe-list">
-  <h3>{{username}}'s Recipes</h3>
+  <h3 ng-show="username">{{username}}'s Recipes</h3>
   <input class="magnify" placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="search(searchString)">
   </input>
   <select name="OrderBy" value="OrderBy" ng-model="query">
