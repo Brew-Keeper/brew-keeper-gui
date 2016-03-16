@@ -11,6 +11,7 @@
   </select>
     <button href="" class="clicker-button" name="search"  ng-click="search(searchString)">Search</button>
 </nav>
+  <div class="coffee-spinner"><img src="img/coffee-spinner.gif" ng-hide="recipes"/></div>
 
 <section class="recipe-list" ng-repeat="recipe in recipes | orderBy: '-combined_rating' | orderBy:query | filter:filter">
   <a class="recipe-title" href="#public/{{recipe.id}}">{{recipe.title}}</a>

@@ -23,7 +23,14 @@ nav.recipe-list {
   margin-bottom: 4ex;
   }
 }
-
+div.coffee-spinner {
+  width: 100%;
+  img {
+  width: 20%;
+  margin-left: 40%;
+  // margin-top: 5ex;
+  }
+}
 section.recipe-list {
   @extend .clearfix;
   box-sizing: border-box;
