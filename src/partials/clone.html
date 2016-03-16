@@ -44,6 +44,7 @@
           <option value="Distilled">Distilled</option>
           <option value="Spring">Spring</option>
           <option value="Deionized">Deionized</option>
+      </select>
       <input class="small-field" type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
       <select class="small-field" id="water-units" list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
         <option value="{{recipe.water_units}}" selected>{{recipe.water_units}}</option>
