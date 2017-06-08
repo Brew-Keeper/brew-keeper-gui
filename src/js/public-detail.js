@@ -29,16 +29,16 @@ angular.module('brewKeeper')
                   $scope.ratingId = ratingId;
                   userRating = rating.public_rating;
                 }
-                return userRating, ratingId
+                return userRating, ratingId;
               });
               $scope.userRating = userRating;
               $scope.userRatings = [{
                 current: userRating,
                 max: 5
               }];
-          })
+          });
         }//end if(username)
-    }) //end http.get
+    }); //end http.get
 
     // Function for cloning public recipes
     $scope.cloneRecipe = function(){
@@ -48,7 +48,7 @@ angular.module('brewKeeper')
         $(".wrapper").removeClass("openerror");
         $("section.confirm-clone-modal").addClass("inactive");
         return;
-      })
+      });
       $("button.confirm-clone-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-clone-modal").addClass("inactive");
@@ -71,7 +71,7 @@ angular.module('brewKeeper')
         $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ $rootScope.username +"/recipes/", cloneData).success(function(response){
           newRecipeId = response.id;
           steps = [];
-          for(step in $scope.detail.steps){
+          for(var step in $scope.detail.steps){
             steps[step] = {};
             steps[step].step_number = $scope.detail.steps[step].step_number;
             steps[step].step_title = $scope.detail.steps[step].step_title;
@@ -79,17 +79,17 @@ angular.module('brewKeeper')
             steps[step].duration = $scope.detail.steps[step].duration;
             steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ $rootScope.username +"/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
-          };//end loop to clone steps
+            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ $rootScope.username +"/recipes/"+ newRecipeId +"/steps/", steps[step]);//end step post
+          }//end loop to clone steps
         })
         .then(function(){
           $location.path("/"+ $rootScope.username +"/clone/"+ newRecipeId);
-        })//end post new recipe
-      })
+        });//end post new recipe
+      });
     }; //end recipe clone function
 
     $scope.rateRecipe = function (rating) {
-      var newRating = {"public_rating": rating}
+      var newRating = {"public_rating": rating};
 
       if(!ratingId) { //if the user has not rated, create new rating
         $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
@@ -103,8 +103,8 @@ angular.module('brewKeeper')
                 current: currentRating,
                 max: 5
             }];
-          })
-        })//end .then to get new ratings
+          });
+        });//end .then to get new ratings
       }//end if(!ratingId)
 
       if(ratingId) { //if the user has already rated, update their current rating
@@ -119,37 +119,36 @@ angular.module('brewKeeper')
                 current: currentRating,
                 max: 5
             }];
-          })
-        })//end .then to get new ratings
+          });
+        });//end .then to get new ratings
       } //end if(ratingId)
   }; //end public recipe rating function
 
     $scope.showEditNote = function(noteId) {
       noteView = "div.note-view" + noteId.toString();
       editNote = "article.edit-note" + noteId.toString();
-      $(noteView).addClass("hidden")
-      $(editNote).removeClass("hidden")
-    }
+      $(noteView).addClass("hidden");
+      $(editNote).removeClass("hidden");
+    };
 
     $scope.editComment = function(comment){
-      var comment_id = comment.id
+      var comment_id = comment.id;
       $http.put("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/comments/" + comment_id + "/", comment)
       .then( function () {
         $(editNote).addClass("hidden");
         $(noteView).removeClass("hidden");
-      })
-    } //end editNote function
+      });
+    }; //end editNote function
     //
     $scope.deleteComment = function(commentId) {
-      var commentId = commentId
         $http.delete("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/comments/" + commentId + "/")
         .then(function(){
         var id = $scope.id;
         $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/")
           .then(function(response){
             $rootScope.comments = response.data.public_comments;
-          })
-        })
+          });
+        });
       // };
     }; //end deleteNote function
 
@@ -165,15 +164,15 @@ angular.module('brewKeeper')
         $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
           .then(function(response){
             $rootScope.comments = response.data.public_comments;
-          })
-      })
+          });
+      });
     $scope.comment = { };
     $scope.addNote = false;
-    }//Add Brew Note Form
+    };//Add Brew Note Form
 
     $scope.showNoteIcons = function(noteId){
       $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
-    }
+    };
 
-  }) //end recipDetail controller
+  }); //end recipDetail controller
 })();//END Angular IFEE

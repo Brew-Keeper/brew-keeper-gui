@@ -56,7 +56,7 @@
         .when('/:username/:id/brewit', {
           templateUrl: 'partials/brew-it.html',
           controller: 'brewIt'
-        })
+        });
 
         // .otherwise({
         //   redirectTo: '/404.html',
@@ -65,8 +65,8 @@
     })
 
     .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope){
-      var cookie = $cookies.get("Authorization")
-      $http.defaults.headers.common = {"Authorization": cookie}
+      var cookie = $cookies.get("Authorization");
+      $http.defaults.headers.common = {"Authorization": cookie};
       $scope.$route = $route;
       $scope.$location = $location;
       $scope.$routeParams = $routeParams;
@@ -79,26 +79,26 @@
         })//This is for populating url with username
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
-          $cookies.remove("Authorization")
-          $http.defaults.headers.common = {}
+          $cookies.remove("Authorization");
+          $http.defaults.headers.common = {};
           if($location.path() == "/reset-pw" || "/login" || "/info"){
-            return
+            return;
           }
           $location.path('/public');
-        })//.error
+        }); //.error
 
 
     $scope.logout= function(){
-      var logoutHeader = {"Authorization":$cookies.get("Authorization")}
+      var logoutHeader = {"Authorization":$cookies.get("Authorization")};
       $scope.changePassword = false;
 
       $http.post('https://brew-keeper-api.herokuapp.com/api/logout/', logoutHeader)
         .then(function(){
           $rootScope.username = null;
-        })
-        $cookies.remove("Authorization")
-        $http.defaults.headers.common = {}
-      }
+        });
+        $cookies.remove("Authorization");
+        $http.defaults.headers.common = {};
+      };
 
       //hamburer controller
       $(".menu").on('click', function() {
@@ -112,7 +112,7 @@
         // $scope.changePassword = false;
       });
 
-    })//END MainController
+    }) //END MainController
 
     .controller('WhoAmIController', function($location, $http, $scope, $rootScope, $cookies) {
       $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
@@ -123,10 +123,10 @@
         })//.success
         .catch(function(){
           $rootScope.username = null; //hides login and shows logout
-          $cookies.remove("Authorization")
-          $http.defaults.headers.common = {}
+          $cookies.remove("Authorization");
+          $http.defaults.headers.common = {};
           $location.path('/public');
-        })//.error
-    })//END WhoAmIController
+        }); //.error
+    }); //END WhoAmIController
 
 })(); //end IIFE

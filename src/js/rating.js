@@ -38,7 +38,7 @@
                   }
               });
           }
-      }
+      };
   })
 
   .directive('viewRating', function () {
@@ -62,12 +62,11 @@
                           filled: i < scope.ratingValue
                       });
                   // }
-              };
+              }
 
             
           }
-      }
-  })
-
+      };
+  });
 
 })();//END Angular IIFE

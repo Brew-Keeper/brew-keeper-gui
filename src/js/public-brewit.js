@@ -22,11 +22,11 @@ angular.module('brewKeeper')
             max: 5
         }];
 
-        var stepArray = [] //create an array of step #'s'
+        var stepArray = []; //create an array of step #'s'
 
-        for(step in $scope.steps){
-          stepArray.push($scope.steps[step].step_number)
-        };
+        for(var step in $scope.steps){
+          stepArray.push($scope.steps[step].step_number);
+        }
         $scope.stepArray = stepArray;
         $scope.stepTotal = stepArray.length;
 
@@ -41,7 +41,7 @@ angular.module('brewKeeper')
                   $scope.ratingId = ratingId;
                   userRating = rating.public_rating;
                 }
-                return userRating, ratingId
+                return userRating, ratingId;
               });
 
               $scope.userRating = userRating;
@@ -49,12 +49,12 @@ angular.module('brewKeeper')
                 current: userRating,
                 max: 5
               }];
-          })
+          });
         }//end if(username)
       });//end http.get
 
       $scope.rateRecipe = function (rating) {
-        var newRating = {"public_rating": rating}
+        var newRating = {"public_rating": rating};
 
         if(!ratingId) { //if the user has not rated, create new rating
           $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
@@ -68,8 +68,8 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
-            })
-          })//end .then to get new ratings
+            });
+          });//end .then to get new ratings
         }//end if(!ratingId)
 
         if(ratingId) { //if the user has already rated, update their current rating
@@ -84,20 +84,20 @@ angular.module('brewKeeper')
                   current: currentRating,
                   max: 5
               }];
-            })
-          })//end .then to get new ratings
+            });
+          });//end .then to get new ratings
         } //end if(ratingId)
     }; //end public recipe rating function
 
 
-      var stepArray = [] //create an array of step #'s'
-      for(step in $rootScope.steps){
-        stepArray.push($rootScope.steps[step].step_number)
-      };
+      var stepArray = []; //create an array of step #'s'
+      for(var step in $rootScope.steps){
+        stepArray.push($rootScope.steps[step].step_number);
+      }
       $rootScope.stepArray = stepArray;
       $scope.stepTotal = stepArray.length;
 
-      var timerRunning = false //logic for brew timer
+      var timerRunning = false; //logic for brew timer
 
       //start brew function
       $scope.startBrew = function(brewCount){
@@ -105,7 +105,7 @@ angular.module('brewKeeper')
           return;
         }
         $("."+$scope.stepArray[0]).removeClass("inactive-step").addClass("current-step");
-        $("div.delay").addClass("hidden").addClass("inactive-step")
+        $("div.delay").addClass("hidden").addClass("inactive-step");
         $(".delay timer").addClass("hidden");
         $(".time-" + $scope.countdownVal).addClass("timeline");//timeline
         $("timer."+$scope.stepArray[0]).removeClass("hidden");//Show's timer for active step
@@ -122,17 +122,17 @@ angular.module('brewKeeper')
         $("div.restart").addClass("hidden");
         $(".countdown").removeClass("hidden");
         $("timer.delay").removeClass("hidden");
-        $(".step").addClass("inactive-step")
+        $(".step").addClass("inactive-step");
         $("a[href].restart-brew").addClass("hidden");
         $("a[href].add-brew-note").addClass("hidden");
         $("a[href].reset-brew").removeClass("hidden");
         $(".time-" + $scope.countdownVal).removeClass("timeline");//timeline
         $('timer')[0].start();
         $scope.showStars = false;
-      }
+      };
 
       $scope.resetBrew = function(){
-        $(".current-step").addClass("hidden")
+        $(".current-step").addClass("hidden");
         $("timer.counter").addClass("hidden");
         $(".delay.hidden").removeClass("hidden");
         $(".current-step").removeClass("current-step");
@@ -154,14 +154,14 @@ angular.module('brewKeeper')
             $scope.steps = response.data.steps;
             $scope.notes = response.data.brewnotes;
             $scope.countdownVal = response.data.total_duration;
-          })
+          });
       }; //end resetBrew
 
 
       $scope.nextStep = function(stepNumber, brewCount){
         var nextStepIndex = $scope.stepArray.indexOf(stepNumber) + 1;
         var nextStep = $scope.stepArray[nextStepIndex];
-        var prevStep = $scope.stepArray[nextStepIndex - 2]
+        var prevStep = $scope.stepArray[nextStepIndex - 2];
         var nextTimerId = $scope.stepArray.indexOf(stepNumber) + 2;
         if(nextStepIndex >= $scope.steps.length){
           //end of brew countdown
@@ -169,7 +169,7 @@ angular.module('brewKeeper')
           //update brew_count
           var recipe = {};
           recipe.brew_count = brewCount + 1;
-          return
+          return;
         }
         $("timer."+stepNumber).addClass("hidden");// Hide last step
         $("."+stepNumber).addClass("finished").removeClass("current-step");// Hide last step
@@ -183,7 +183,7 @@ angular.module('brewKeeper')
 
     $(".add-brew-note").on('click', function() {
       $(".brew-form").toggleClass("hidden");
-    })
+    });
     $(".save-note").on('click', function() {
       $(".brew-form").addClass("hidden");
     });//Add hidden class to brewNote form on submit
@@ -192,5 +192,5 @@ angular.module('brewKeeper')
     });//Cancel BrewNote form
 
 
-  }) //end public-brewit controller
+  }); //end public-brewit controller
 })();//END Angular IIFE

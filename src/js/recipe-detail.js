@@ -20,13 +20,13 @@ angular.module('brewKeeper')
               max: 5
           }];
 
-      }) //end http.get
+      }); //end http.get
 
 
       $scope.rateRecipe = function (rating) {
-        var newRating = {"rating": rating}
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating)
-      }
+        var newRating = {"rating": rating};
+        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating);
+      };
 
 
       $scope.EliminateRecipe = function() {
@@ -36,15 +36,15 @@ angular.module('brewKeeper')
           $(".wrapper").removeClass("openerror");
           $("section.confirm-eliminate-modal").addClass("inactive");
           return;
-        })
+        });
         $("button.confirm-eliminate-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
           $("section.confirm-eliminate-modal").addClass("inactive");
           $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(){
               $location.path('/'+ username);
-            })
-        })
+            });
+        });
       }; //end Eliminate function
 
       $scope.deleteStep = function(stepNumber, stepId){
@@ -54,84 +54,84 @@ angular.module('brewKeeper')
           $(".wrapper").removeClass("openerror");
           $("section.confirm-delete-modal").addClass("inactive");
           return;
-        })
+        });
         $("button.confirm-delete-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
-          $("section.confirm-delete-modal").addClass("inactive")
+          $("section.confirm-delete-modal").addClass("inactive");
           $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/")
           .then(function(){
             $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
             .then(function(response){
               $scope.steps = response.data.steps;
-              if(response.data.steps.length == 0){
+              if(response.data.steps.length === 0){
                 $(".brew-it-button").addClass("hidden");
                 $(".no-steps").removeClass("hidden");
               }
-            })
-          })
-        })
-      } //end deleteStep function
+            });
+          });
+        });
+      }; //end deleteStep function
 
       $scope.hideEditStep = function(stepId){
         stepId = "div." + stepId.toString();
-        $(stepId).toggleClass("hidden")
+        $(stepId).toggleClass("hidden");
       };
 
       $scope.editStep = function(step){
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step)
-      } //end editStep function
+        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step);
+      }; //end editStep function
 
       $scope.showEditStep = function(stepId){
         stepId = "div." + stepId.toString();
         $(stepId).toggleClass("hidden");
-      }
+      };
 
       $scope.increaseStep = function(step){
         if(step.step_number >= $rootScope.steps.length){
-          return
+          return;
         }
 
         //code to swap the steps manually incase of a slow connection
         // var currentStep = step.step_number - 1
         // var nextStep = step.step_number
-        var swapStep = $rootScope.steps[step.step_number - 1]
-        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number]
+        var swapStep = $rootScope.steps[step.step_number - 1];
+        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number];
         $rootScope.steps[step.step_number] = swapStep;
         // end code to swap the steps manually
 
-        step.step_number++
+        step.step_number++;
 
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $rootScope.steps = response.data.steps;
-            })
-        })
-      } //end increaseStep function
+            });
+        });
+      }; //end increaseStep function
 
 
       $scope.decreaseStep = function(step){
         if(step.step_number <= 1){
-          return
+          return;
         }
         //code to swap the steps manually incase of a slow connection
         // var currentStep = step.step_number - 1
         // var prevStep = step.step_number - 2
-        var swapStep = $rootScope.steps[step.step_number - 1]
-        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number - 2]
+        var swapStep = $rootScope.steps[step.step_number - 1];
+        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number - 2];
         $rootScope.steps[step.step_number - 2] = swapStep;
         // end code to swap the steps manually
 
-        step.step_number--
+        step.step_number--;
         $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
           $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $rootScope.steps = response.data.steps;
-            })
-        })
-      } //end decreaseStep function
+            });
+        });
+      }; //end decreaseStep function
 
-      $scope.step = { }//Might need to prepopulate this with empty strings for each key... Maybe...
+      $scope.step = { };//Might need to prepopulate this with empty strings for each key... Maybe...
       $scope.addStep=function(){ //add step function
         $scope.step.step_number = $scope.steps.length + 1;
         $('.input-focus').focus();
@@ -141,10 +141,10 @@ angular.module('brewKeeper')
               $(".brew-it-button").removeClass("hidden");
               $(".no-steps").addClass("hidden");
               $rootScope.steps = response.data.steps;
-            })
-        })
+            });
+        });
         $scope.step= { };
-      } //end new step submit function
+      }; //end new step submit function
 
     $scope.showAddSteps = function(){
       $("form.create-new-step").toggleClass("hidden");
@@ -158,16 +158,16 @@ angular.module('brewKeeper')
     });
 
     $(".no-steps").click(function(){
-      $scope.showAddSteps()
-    })
+      $scope.showAddSteps();
+    });
 
   $scope.editRecipe = function(recipe){
     $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
     .then( function () {
       $('.edit-recipe').addClass("hidden");
       $('.recipe-view').removeClass("hidden");
-    })
-  } //end editRecipe function
+    });
+  }; //end editRecipe function
     $('.cancel-recipe-edit').on('click', function(){
       $('.recipe-view').removeClass("hidden");
       $('.edit-recipe').addClass("hidden");
@@ -181,12 +181,12 @@ angular.module('brewKeeper')
         $(".wrapper").removeClass("openerror");
         $("section.confirm-clone-modal").addClass("inactive");
         return;
-      })
+      });
         $("button.confirm-clone-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-clone-modal").addClass("inactive");
 
-        var cloneData = {}
+        var cloneData = {};
         cloneData.title = $scope.detail.title;
         cloneData.bean_name = $scope.detail.bean_name;
         cloneData.roast = $scope.detail.roast;
@@ -205,7 +205,7 @@ angular.module('brewKeeper')
 
           newRecipeId = response.id;
           steps = [];
-          for(step in $scope.detail.steps){
+          for(var step in $scope.detail.steps){
             steps[step] = {};
             steps[step].step_number = $scope.detail.steps[step].step_number;
             steps[step].step_title = $scope.detail.steps[step].step_title;
@@ -213,42 +213,41 @@ angular.module('brewKeeper')
             steps[step].duration = $scope.detail.steps[step].duration;
             steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
-          };//end loop to clone steps
+            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step]);//end step post
+          }//end loop to clone steps
         })
         .then(function(){
           $location.path("/"+ username +"/clone/"+ newRecipeId);
-        })//end post new recipe
-      })
+        });//end post new recipe
+      });
     }; //end recipe clone function
 
 
     $scope.showEditNote = function(noteId) {
       noteView = "div.note-view" + noteId.toString();
       editNote = "article.edit-note" + noteId.toString();
-      $(noteView).addClass("hidden")
-      $(editNote).removeClass("hidden")
-    }
+      $(noteView).addClass("hidden");
+      $(editNote).removeClass("hidden");
+    };
     
 
     $scope.editNote = function(note){
-      var note_id = note.id
+      var note_id = note.id;
       $http.put("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + note_id + "/", note)
       .then( function () {
         $(editNote).addClass("hidden");
         $(noteView).removeClass("hidden");
-      })
-    } //end editNote function
+      });
+    }; //end editNote function
 
     $scope.deleteNote = function(noteId) {
-      var noteId = noteId
         $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + noteId + "/")
         .then(function(){var id = $scope.id;
         $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
           .then(function(response){
             $rootScope.notes = response.data.brewnotes;
-          })
-        })
+          });
+        });
     }; //end deleteNote function
 
     $scope.showAddBrewNote = function(){
@@ -264,17 +263,17 @@ angular.module('brewKeeper')
         $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
           .then(function(response){
             $rootScope.notes = response.data.brewnotes;
-          })
-      })
+          });
+      });
 
 
         $scope.brewnote = { };
         $scope.addNote = false;
-        }//Add Brew Note Form
+        };//Add Brew Note Form
 
         $scope.showNoteIcons = function(noteId){
           $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
-        }
+        };
 
   $scope.makePublic = function(){ //makes recipes public
     if ($rootScope.steps.length < 1) {
@@ -283,7 +282,7 @@ angular.module('brewKeeper')
       $("button.steps-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.steps-modal").addClass("inactive");
-      })
+      });
         return;
     }
       $(".wrapper").addClass("openerror");
@@ -292,11 +291,11 @@ angular.module('brewKeeper')
         $(".wrapper").removeClass("openerror");
         $("section.confirm-modal").addClass("inactive");
         return;
-      })
+      });
       $("button.confirm-fail").on("click", function() {
       $("section.confirm-modal").addClass("inactive");
 
-      var publicData = {}  //build the recipe
+      var publicData = {}; //build the recipe
       publicData.title = $scope.detail.title;
       publicData.bean_name = $scope.detail.bean_name;
       publicData.roast = $scope.detail.roast;
@@ -317,7 +316,7 @@ angular.module('brewKeeper')
         newRecipeId = response.id;
 
         steps = []; //build the steps
-        for(step in $scope.detail.steps){
+        for(var step in $scope.detail.steps){
           steps[step] = {};
           steps[step].step_number = $scope.detail.steps[step].step_number;
           steps[step].step_title = $scope.detail.steps[step].step_title;
@@ -325,7 +324,7 @@ angular.module('brewKeeper')
           steps[step].duration = $scope.detail.steps[step].duration;
           steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/pubic/recipes/"+ newRecipeId +"/steps/", steps[step])//end step post
+          $http.post("https://brew-keeper-api.herokuapp.com/api/users/pubic/recipes/"+ newRecipeId +"/steps/", steps[step]);//end step post
 
         } //end for loop to build steps
       }) //end .success for posting new recipe to public
@@ -336,11 +335,11 @@ angular.module('brewKeeper')
       $("button.sharing-not-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.sharing-modal").addClass("inactive");
-      })
-    })
-      })//end confirm-fail
+      });
+    });
+      });//end confirm-fail
 
   }; // end makePublic function
-}) //end recipDetail controller
+}); //end recipDetail controller
 
 })();//END Angular IFEE
