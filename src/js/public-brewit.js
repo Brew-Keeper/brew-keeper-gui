@@ -9,7 +9,7 @@ angular.module('brewKeeper')
     var userRating = 0;
     $scope.showStars = false;
 
-    $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + '/')
+    $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
       .then(function(response){
         $scope.detail = response.data;
         $scope.steps = response.data.steps;
@@ -31,7 +31,7 @@ angular.module('brewKeeper')
         $scope.stepTotal = stepArray.length;
 
         if($rootScope.username){
-          $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/ratings/")
+          $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/')
           .then(function(response){
             var publicRatings = response.data;
 
@@ -57,11 +57,11 @@ angular.module('brewKeeper')
         var newRating = {"public_rating": rating};
 
         if(!ratingId) { //if the user has not rated, create new rating
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
+          $http.post($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/ratings/', newRating)
           .then(function(response){ //get the updated rating
             ratingId = response.data.id;
             $scope.ratingId = ratingId;
-            $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/").then(function(response){
+            $http.get($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/').then(function(response){
               var currentRating = newRating.public_rating;
               $scope.userRating = newRating.public_rating;
               $scope.userRatings = [{
@@ -73,11 +73,11 @@ angular.module('brewKeeper')
         }//end if(!ratingId)
 
         if(ratingId) { //if the user has already rated, update their current rating
-          $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/" + ratingId + "/", newRating)
+          $http.patch($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/ratings/' + ratingId + "/", newRating)
           .then(function(response){ //get the updated rating
             ratingId = response.data.id;
             $scope.ratingId = ratingId;
-            $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/").then(function(response){
+            $http.get($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/').then(function(response){
               var currentRating = newRating.public_rating;
               $scope.userRating = newRating.public_rating;
               $scope.userRatings = [{
@@ -148,7 +148,7 @@ angular.module('brewKeeper')
 
         //getting the data again solves the timers not
         //resetting correctly
-        $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + '/')
+        $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
           .then(function(response){
             $scope.detail = response.data;
             $scope.steps = response.data.steps;

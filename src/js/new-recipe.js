@@ -6,7 +6,7 @@ angular.module('brewKeeper')
     $scope.recipe = { };
     $scope.recipe.orientation = "Standard";
 
-    $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
+    $http.get($rootScope.baseUrl + '/api/whoami/')
       .then(function(response){
         var username = response.data.username;
         $rootScope.username = username;
@@ -22,11 +22,11 @@ angular.module('brewKeeper')
     $scope.createNew=function(){
       var username = "";
 
-      $http.get('https://brew-keeper-api.herokuapp.com/api/whoami/')
+      $http.get($rootScope.baseUrl + '/api/whoami/')
         .then(function(response){
         $("form-placeholder").removeClass("changed");
           username = response.data.username;
-          $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/', $scope.recipe)
+          $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/', $scope.recipe)
             .success(function (data) {
               var id = data.id;
               $location.path('/' + username + '/' + id);

@@ -1,6 +1,6 @@
 ;(function(){ //IIFE for angular
 angular.module('brewKeeper')
-  .controller('signupController', function($scope, $http, $cookies, $location){
+  .controller('signupController', function($scope, $http, $cookies, $location, $rootScope){
     $scope.users = {};
     $scope.signupButton = function(mismatch) {
       if(mismatch){
@@ -13,7 +13,7 @@ angular.module('brewKeeper')
         return;
       }
 
-      $http.post('https://brew-keeper-api.herokuapp.com/api/register/', $scope.users)
+      $http.post($rootScope.baseUrl + '/api/register/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token;
         $cookies.put("Authorization", userInfo);
@@ -39,7 +39,7 @@ angular.module('brewKeeper')
     $scope.loginButton= function(){
       $cookies.remove("Authorization");
       $http.defaults.headers.common = {};
-      $http.post('https://brew-keeper-api.herokuapp.com/api/login/', $scope.users)
+      $http.post($rootScope.baseUrl + '/api/login/', $scope.users)
       .then(function successCallback(response) {
         userInfo = "Token " + response.data.token;
         $cookies.put("Authorization", userInfo);
@@ -112,7 +112,7 @@ $("a[href].about").on('click', function() {
       users.old_password = $scope.users.old_password;
       users.new_password = $scope.users.new_password;
 
-      $http.post('https://brew-keeper-api.herokuapp.com/api/change-pw/', users)
+      $http.post($rootScope.baseUrl + '/api/change-pw/', users)
         .then(function successCallback(){
 //Below is entering register mismatch modal test
           $(".wrapper").addClass("openerror");
@@ -155,7 +155,7 @@ $("a[href].about").on('click', function() {
       $scope.resetSuccess = false;
       $scope.generalError = false;
 
-      $http.post('https://brew-keeper-api.herokuapp.com/api/get-reset/', $scope.users)
+      $http.post($rootScope.baseUrl + '/api/get-reset/', $scope.users)
         .then(function(response){
           if(response.data){
             $scope.resetError = true;
@@ -178,7 +178,7 @@ $("a[href].about").on('click', function() {
       users.email = $scope.users.email;
       users.new_password = $scope.users.new_password;
 
-      $http.post('https://brew-keeper-api.herokuapp.com/api/reset-pw/', users)
+      $http.post($rootScope.baseUrl + '/api/reset-pw/', users)
         .then(function(response){
           userInfo = "Token " + response.data.token;
           $cookies.put("Authorization", userInfo);

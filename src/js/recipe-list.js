@@ -3,10 +3,9 @@
 angular.module('brewKeeper')
   .controller('recipeList', function($rootScope, $scope, $http, $routeParams, $location){
 
-
       var username = $routeParams.username;
 
-      $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/')
+      $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/')
         .then(function(response){
           $scope.recipes = response.data;
           $scope.username = username;
@@ -32,11 +31,11 @@ angular.module('brewKeeper')
 
       $scope.rateRecipe = function (rating, id) {
         var newRating = {"rating": rating};
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating);
+        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', newRating);
       };
 
       $scope.search = function(searchString){
-        $http.get("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/?search="+searchString)
+        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/?search=' + searchString)
           .then(function(response){
             $scope.recipes = response.data;
             $scope.rating = 0;
@@ -49,11 +48,10 @@ angular.module('brewKeeper')
   })//end recipe-list controller
 
 
-
   .controller('publicRecipe', function($http, $scope, $rootScope, $location, $routeParams){
 
     $scope.search = function(searchString){
-      $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/?search="+searchString)
+      $http.get($rootScope.baseUrl + '/api/users/public/recipes/?search=' + searchString)
         .then(function(response){
           $scope.recipes = response.data;
           $scope.rating = 0;
@@ -67,7 +65,7 @@ angular.module('brewKeeper')
       $scope.search($routeParams.username);
     }
     else {
-    $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
+    $http.get($rootScope.baseUrl + '/api/users/public/recipes/')
       .then(function(response){
         $scope.recipes = response.data;
         $scope.rating = 0;
@@ -95,8 +93,8 @@ angular.module('brewKeeper')
 
     $scope.newRating = function(rating, recipeId){
       var newRating = {"public_rating": rating};
-      $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/", newRating)
-        .then(function(){$http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/")
+      $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/', newRating)
+        .then(function(){$http.get($rootScope.baseUrl + '/api/users/public/recipes/')
           .then(function(response){
             $scope.recipes = response.data;
             $scope.rating = 0;
@@ -109,7 +107,7 @@ angular.module('brewKeeper')
 
     $scope.updateRating = function(rating, ratingId, recipeId){
       var newRating = {"public_rating": rating};
-      $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ recipeId + "/ratings/" + ratingId + "/", newRating);
+      $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/' + ratingId + '/', newRating);
     };//end updateRating
 
 

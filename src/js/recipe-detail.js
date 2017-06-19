@@ -8,7 +8,7 @@ angular.module('brewKeeper')
       $scope.id = $routeParams.id;
       $(document).scrollTop(0);
 
-      $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
+      $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
         .then(function(response){
           $rootScope.detail = response.data;
           $rootScope.steps = response.data.steps;
@@ -25,7 +25,7 @@ angular.module('brewKeeper')
 
       $scope.rateRecipe = function (rating) {
         var newRating = {"rating": rating};
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating);
+        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', newRating);
       };
 
 
@@ -40,7 +40,7 @@ angular.module('brewKeeper')
         $("button.confirm-eliminate-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
           $("section.confirm-eliminate-modal").addClass("inactive");
-          $http.delete('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+          $http.delete($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
             .then(function(){
               $location.path('/'+ username);
             });
@@ -58,9 +58,9 @@ angular.module('brewKeeper')
         $("button.confirm-delete-fail").on("click", function() {
           $(".wrapper").removeClass("openerror");
           $("section.confirm-delete-modal").addClass("inactive");
-          $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ stepId + "/")
+          $http.delete($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + stepId + '/')
           .then(function(){
-            $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id +'/')
+            $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $scope.steps = response.data.steps;
               if(response.data.steps.length === 0){
@@ -78,7 +78,7 @@ angular.module('brewKeeper')
       };
 
       $scope.editStep = function(step){
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step);
+        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + step.id + '/', step);
       }; //end editStep function
 
       $scope.showEditStep = function(stepId){
@@ -101,8 +101,8 @@ angular.module('brewKeeper')
 
         step.step_number++;
 
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + step.id + '/', step).then(function(){
+          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $rootScope.steps = response.data.steps;
             });
@@ -123,8 +123,8 @@ angular.module('brewKeeper')
         // end code to swap the steps manually
 
         step.step_number--;
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/"+ step.id + "/", step).then(function(){
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + step.id + '/', step).then(function(){
+          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $rootScope.steps = response.data.steps;
             });
@@ -135,8 +135,8 @@ angular.module('brewKeeper')
       $scope.addStep=function(){ //add step function
         $scope.step.step_number = $scope.steps.length + 1;
         $('.input-focus').focus();
-        $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ id +"/steps/", $scope.step).then(function(){
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+        $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/', $scope.step).then(function(){
+          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $(".brew-it-button").removeClass("hidden");
               $(".no-steps").addClass("hidden");
@@ -162,7 +162,7 @@ angular.module('brewKeeper')
     });
 
   $scope.editRecipe = function(recipe){
-    $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", recipe)
+    $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', recipe)
     .then( function () {
       $('.edit-recipe').addClass("hidden");
       $('.recipe-view').removeClass("hidden");
@@ -201,7 +201,7 @@ angular.module('brewKeeper')
         cloneData.temp = $scope.detail.temp;
         cloneData.steps = [];
 
-        $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/", cloneData).success(function(response){
+        $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/', cloneData).success(function(response){
 
           newRecipeId = response.id;
           steps = [];
@@ -213,7 +213,7 @@ angular.module('brewKeeper')
             steps[step].duration = $scope.detail.steps[step].duration;
             steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ username +"/recipes/"+ newRecipeId +"/steps/", steps[step]);//end step post
+            $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + newRecipeId + '/steps/', steps[step]);//end step post
           }//end loop to clone steps
         })
         .then(function(){
@@ -233,7 +233,7 @@ angular.module('brewKeeper')
 
     $scope.editNote = function(note){
       var note_id = note.id;
-      $http.put("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + note_id + "/", note)
+      $http.put($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/' + note_id + '/', note)
       .then( function () {
         $(editNote).addClass("hidden");
         $(noteView).removeClass("hidden");
@@ -241,9 +241,9 @@ angular.module('brewKeeper')
     }; //end editNote function
 
     $scope.deleteNote = function(noteId) {
-        $http.delete("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/brewnotes/" + noteId + "/")
+        $http.delete($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/' + noteId + '/')
         .then(function(){var id = $scope.id;
-        $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
+        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
           .then(function(response){
             $rootScope.notes = response.data.brewnotes;
           });
@@ -256,11 +256,11 @@ angular.module('brewKeeper')
     };
 
     $scope.addBrewNote=function(){
-      $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
+      $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
       .success(function (data) {
         $(".brew-form").toggleClass("hidden");
         var id = $scope.id;
-        $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + "/")
+        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
           .then(function(response){
             $rootScope.notes = response.data.brewnotes;
           });
@@ -311,7 +311,7 @@ angular.module('brewKeeper')
       publicData.shared_by = username;
       publicData.steps = [];
 
-      $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/", publicData).success(function(response){
+      $http.post($rootScope.baseUrl + '/api/users/public/recipes/', publicData).success(function(response){
 
         newRecipeId = response.id;
 
@@ -324,7 +324,7 @@ angular.module('brewKeeper')
           steps[step].duration = $scope.detail.steps[step].duration;
           steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-          $http.post("https://brew-keeper-api.herokuapp.com/api/users/pubic/recipes/"+ newRecipeId +"/steps/", steps[step]);//end step post
+          $http.post($rootScope.baseUrl + '/api/users/pubic/recipes/' + newRecipeId + '/steps/', steps[step]);//end step post
 
         } //end for loop to build steps
       }) //end .success for posting new recipe to public

@@ -7,7 +7,7 @@ angular.module('brewKeeper')
     var ratingId = null;
     var userRating = 0;
 
-    $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
+    $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
       .then(function(response){
         $rootScope.detail = response.data;
         $rootScope.steps = response.data.steps;
@@ -20,7 +20,7 @@ angular.module('brewKeeper')
         }];
 
         if($rootScope.username){
-          $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/ratings/")
+          $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/')
           .then(function(response){
             var publicRatings = response.data;
               publicRatings.forEach(function(rating){
@@ -68,7 +68,7 @@ angular.module('brewKeeper')
         cloneData.temp = $scope.detail.temp;
         cloneData.steps = [];
 
-        $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ $rootScope.username +"/recipes/", cloneData).success(function(response){
+        $http.post($rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/', cloneData).success(function(response){
           newRecipeId = response.id;
           steps = [];
           for(var step in $scope.detail.steps){
@@ -79,7 +79,7 @@ angular.module('brewKeeper')
             steps[step].duration = $scope.detail.steps[step].duration;
             steps[step].water_amount = $scope.detail.steps[step].water_amount;
 
-            $http.post("https://brew-keeper-api.herokuapp.com/api/users/"+ $rootScope.username +"/recipes/"+ newRecipeId +"/steps/", steps[step]);//end step post
+            $http.post($rootScope.baseUrl + '/api/users/'+ $rootScope.username + '/recipes/' + newRecipeId + '/steps/', steps[step]);//end step post
           }//end loop to clone steps
         })
         .then(function(){
@@ -92,11 +92,11 @@ angular.module('brewKeeper')
       var newRating = {"public_rating": rating};
 
       if(!ratingId) { //if the user has not rated, create new rating
-        $http.post("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/", newRating)
+        $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/', newRating)
         .then(function(response){ //get the updated rating
           ratingId = response.data.id;
           $scope.ratingId = ratingId;
-          $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/").then(function(response){
+          $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/').then(function(response){
             var currentRating = newRating.public_rating;
             $scope.userRating = newRating.public_rating;
             $scope.userRatings = [{
@@ -108,11 +108,11 @@ angular.module('brewKeeper')
       }//end if(!ratingId)
 
       if(ratingId) { //if the user has already rated, update their current rating
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/ratings/" + ratingId + "/", newRating)
+        $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/' + ratingId + '/', newRating)
         .then(function(response){ //get the updated rating
           ratingId = response.data.id;
           $scope.ratingId = ratingId;
-          $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/").then(function(response){
+          $http.get($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/').then(function(response){
             var currentRating = newRating.public_rating;
             $scope.userRating = newRating.public_rating;
             $scope.userRatings = [{
@@ -122,7 +122,7 @@ angular.module('brewKeeper')
           });
         });//end .then to get new ratings
       } //end if(ratingId)
-  }; //end public recipe rating function
+    }; //end public recipe rating function
 
     $scope.showEditNote = function(noteId) {
       noteView = "div.note-view" + noteId.toString();
@@ -133,23 +133,22 @@ angular.module('brewKeeper')
 
     $scope.editComment = function(comment){
       var comment_id = comment.id;
-      $http.put("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/comments/" + comment_id + "/", comment)
+      $http.put($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/comments/' + comment_id + '/', comment)
       .then( function () {
         $(editNote).addClass("hidden");
         $(noteView).removeClass("hidden");
       });
     }; //end editNote function
-    //
+ 
     $scope.deleteComment = function(commentId) {
-        $http.delete("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/"+ id + "/comments/" + commentId + "/")
-        .then(function(){
+      $http.delete($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/comments/' + commentId + '/')
+      .then(function() {
         var id = $scope.id;
-        $http.get("https://brew-keeper-api.herokuapp.com/api/users/public/recipes/" + id + "/")
-          .then(function(response){
-            $rootScope.comments = response.data.public_comments;
-          });
+        $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
+        .then(function(response) {
+          $rootScope.comments = response.data.public_comments;
         });
-      // };
+      });
     }; //end deleteNote function
 
     $scope.showAddBrewNote = function(){
@@ -157,11 +156,11 @@ angular.module('brewKeeper')
     };
 
     $scope.addBrewNote=function(){
-      $http.post('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + '/comments/', $scope.comment)
+      $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/comments/', $scope.comment)
       .success(function (data) {
         $(".brew-form").toggleClass("hidden");
         var id = $scope.id;
-        $http.get('https://brew-keeper-api.herokuapp.com/api/users/public/recipes/' + id + "/")
+        $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
           .then(function(response){
             $rootScope.comments = response.data.public_comments;
           });

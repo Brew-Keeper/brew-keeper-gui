@@ -8,7 +8,7 @@ angular.module('brewKeeper')
         $scope.username = $routeParams.username;
         $scope.showStars = false;
 
-        $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
           .then(function(response){
             $scope.detail = response.data;
             $scope.steps = response.data.steps;
@@ -85,7 +85,7 @@ angular.module('brewKeeper')
 
           //getting the data again solves the timers not
           //resetting correctly
-          $http.get('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/')
+          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
             .then(function(response){
               $scope.detail = response.data;
               $scope.steps = response.data.steps;
@@ -107,7 +107,7 @@ angular.module('brewKeeper')
             var recipe = {};
             recipe.brew_count = brewCount + 1;
             // brewCount++; //increment brew counter
-            $http.patch('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/', recipe);
+            $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', recipe);
             return;
           }
           $("timer."+stepNumber).addClass("hidden");// Hide last step
@@ -121,7 +121,7 @@ angular.module('brewKeeper')
 
       $scope.brewnote = { };
       $scope.addBrewNote=function(){
-        $http.post('https://brew-keeper-api.herokuapp.com/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
+        $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
         .success(function (data) {
           var id = data.id;
         });
@@ -141,7 +141,7 @@ angular.module('brewKeeper')
 
       $scope.rateRecipe = function (rating, id) {
         var newRating = {"rating": rating};
-        $http.patch("https://brew-keeper-api.herokuapp.com/api/users/"+ username + "/recipes/"+ id + "/", newRating);
+        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', newRating);
       };
 
     }); //end brewit controller
