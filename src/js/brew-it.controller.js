@@ -91,9 +91,8 @@
      * Advance the running brew timer to the next step.
      *
      * @param {number} stepNumber The current step number.
-     * @param {number} brewCount How many times this recipe has been brewed.
      */
-    function nextStep(stepNumber, brewCount) {
+    function nextStep(stepNumber) {
       var nextStepIndex = vm.stepArray.indexOf(stepNumber) + 1;
       var nextStep = vm.stepArray[nextStepIndex];
       var prevStep = vm.stepArray[nextStepIndex - 2];
@@ -103,13 +102,8 @@
         vm.resetBrew();
         // Update brew_count
         var recipe = {};
-        recipe.brew_count = brewCount + 1;
-
-        // TODO: Once we are no longer re-acquiring the recipe on reset, make
-        // sure we handle brewCount properly. The below increment was commented
-        // out in the original.
-
-        // brewCount++;
+        vm.detail.brew_count += 1;
+        recipe.brew_count = vm.detail.brew_count;
 
         // Update the database with the new brew count
         $http.patch(recipeUrl, recipe);

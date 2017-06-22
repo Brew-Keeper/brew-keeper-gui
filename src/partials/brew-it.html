@@ -30,7 +30,7 @@
     <article class="step-box">
       <p class="step-name">{{step.step_title | uppercase}}</p>
       <p class="water {{step.step_number}}" ng-show="step.water_amount">{{step.water_amount}} {{vm.detail.water_units}}</p>
-      <timer class="counting {{step.step_number}} hidden" autostart="false" interval="1000" countdown="step.duration" finish-callback="vm.nextStep(step.step_number, vm.detail.brew_count)"><p><span ng-show="minutes">{{minutes}}:{{sseconds}}</span><span ng-hide="minutes">{{seconds}}</span></p></timer>
+      <timer class="counting {{step.step_number}} hidden" autostart="false" interval="1000" countdown="step.duration" finish-callback="vm.nextStep(step.step_number)"><p><span ng-show="minutes">{{minutes}}:{{sseconds}}</span><span ng-hide="minutes">{{seconds}}</span></p></timer>
     </article>
     <p class="step-body">{{step.step_body}}</p>
   </div><!--END Steps-->
