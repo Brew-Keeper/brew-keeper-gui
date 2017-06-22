@@ -55,7 +55,8 @@
         })
         .when('/:username/:id/brewit', {
           templateUrl: 'partials/brew-it.html',
-          controller: 'brewIt'
+          controller: 'BrewIt',
+          controllerAs: 'vm'
         });
 
         // .otherwise({
@@ -66,7 +67,8 @@
 
     .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope){
       // Definition of baseUrl
-      $rootScope.baseUrl = 'https://brew-keeper-api.herokuapp.com';
+      // $rootScope.baseUrl = 'https://brew-keeper-api.herokuapp.com';
+      $rootScope.baseUrl = 'http://dev.brewkeeper.com:8000';
       var cookie = $cookies.get("Authorization");
       $http.defaults.headers.common = {"Authorization": cookie};
       $scope.$route = $route;
