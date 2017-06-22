@@ -89,6 +89,9 @@
 
     /**
      * Advance the running brew timer to the next step.
+     *
+     * @param {number} stepNumber The current step number.
+     * @param {number} brewCount How many times this recipe has been brewed.
      */
     function nextStep(stepNumber, brewCount) {
       var nextStepIndex = vm.stepArray.indexOf(stepNumber) + 1;
