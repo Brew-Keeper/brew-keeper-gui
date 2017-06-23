@@ -13,7 +13,7 @@
     vm.brewnote = {};
     vm.nextStep = nextStep;
     vm.rateRecipe = rateRecipe;
-    vm.reStartBrew = reStartBrew;
+    vm.restartBrew = restartBrew;
     vm.resetBrew = resetBrew;
     vm.showStars = false;
     vm.startBrew = startBrew;
@@ -27,47 +27,16 @@
     var recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username + '/recipes/' + $routeParams.id + '/';
     var brewNoteUrl = recipeUrl + 'brewnotes/';
 
-    initialize();
-    initBrewNoteListeners();
+    activate();
 
     ////////////////////////////////////////////////////////////////////////////
     // FUNCTIONS //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
     /**
-     * Add a brew note to the recipe.
+     * Prepare the page.
      */
-    function addBrewNote() {
-      $http.post(brewNoteUrl, vm.brewnote);
-      // Prepare for adding another brew note
-      vm.brewnote = {};
-    }
-
-    /**
-     * Initialize listeners required for adding a brew note.
-     */
-    function initBrewNoteListeners() {
-      // Prepare to enter text into the brew note form
-      $(".add-brew-note").on('click', function() {
-        $(".brew-form").toggleClass("hidden");
-        $('.input-focus').focus();
-      });
-
-      function hideBrewNoteForm() {
-        $(".brew-form").addClass("hidden");
-      }
-
-      // Hide brew note form on submit
-      $(".save-note").on('click', hideBrewNoteForm);
-
-      // Hide brew note form on cancel
-      $(".cancel-note").on('click', hideBrewNoteForm);
-    }
-
-    /**
-     * Gather the required data for this page.
-     */
-    function initialize() {
+    function activate() {
       $(document).scrollTop(0);
       $http.get(recipeUrl)
         .then(function(response) {
@@ -85,6 +54,31 @@
           vm.stepArray = stepArray;
           vm.stepTotal = stepArray.length;
         });
+
+      // Show brew note form on add note
+      $(".add-brew-note").on('click', function() {
+        $(".brew-form").toggleClass("hidden");
+        $('.input-focus').focus();
+      });
+
+      function hideBrewNoteForm() {
+        $(".brew-form").addClass("hidden");
+      }
+
+      // Hide brew note form on submit
+      $(".save-note").on('click', hideBrewNoteForm);
+
+      // Hide brew note form on cancel
+      $(".cancel-note").on('click', hideBrewNoteForm);
+    }
+
+    /**
+     * Add a brew note to the recipe.
+     */
+    function addBrewNote() {
+      $http.post(brewNoteUrl, vm.brewnote);
+      // Prepare for adding another brew note
+      vm.brewnote = {};
     }
 
     /**
@@ -109,8 +103,8 @@
         $http.patch(recipeUrl, recipe);
         return;
       }
-      $("timer."+stepNumber).addClass("hidden");// Hide last step
-      $("."+stepNumber).addClass("finished").removeClass("current-step");// Hide last step
+      $("timer."+stepNumber).addClass("hidden");  // Hide last step
+      $("."+stepNumber).addClass("finished").removeClass("current-step");  // Hide last step
       // Change next step to green and grow next step to 200
       $("timer."+nextStep).removeClass("hidden");
       $("."+nextStep).addClass("current-step").removeClass("inactive-step");
@@ -129,8 +123,8 @@
     /**
      * Restart the brew timer, linked to the "Restart Brew" button.
      */
-    function reStartBrew() {
-      if(timerRunning){
+    function restartBrew() {
+      if (timerRunning) {
         return;
       }
       $(".countdown").removeClass("hidden");
@@ -186,8 +180,8 @@
       $("." + vm.stepArray[0]).removeClass("inactive-step").addClass("current-step");
       $("div.delay").addClass("hidden").addClass("inactive-step");
       $(".delay timer").addClass("hidden");
-      $(".time-" + vm.countdownVal).addClass("timeline");  //timeline
-      $("timer." + vm.stepArray[0]).removeClass("hidden");  //Show's timer for active step
+      $(".time-" + vm.countdownVal).addClass("timeline");  // timeline
+      $("timer." + vm.stepArray[0]).removeClass("hidden");  // Shows timer for active step
       $('timer')[1].start();
       timerRunning = true;
     }

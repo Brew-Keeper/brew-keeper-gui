@@ -15,7 +15,7 @@
       <button class="save-note clicker-button" type="submit">Save</button>
     </form>
   </section><!--END brew-form-->
-  <div class="step delay restart hidden" ng-click="vm.reStartBrew()">
+  <div class="step delay restart hidden" ng-click="vm.restartBrew()">
     <p class="">Restart Brew</p>
     <img src="img/CoffeeCup.svg"/>
   </div>
@@ -26,7 +26,7 @@
     <p class="counting"><timer class="countdown counting" interval="1000" countdown="3" finish-callback="vm.startBrew()">{{seconds}}</timer></p>
   </div><!-- END countdown timer-->
   <div ng-repeat="step in vm.steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}}">
-    <p class="stepOf"><span>{{stepArray.indexOf(step.step_number)+1}}</span> of {{vm.stepTotal}}</p>
+    <p class="stepOf"><span>{{vm.stepArray.indexOf(step.step_number)+1}}</span> of {{vm.stepTotal}}</p>
     <article class="step-box">
       <p class="step-name">{{step.step_title | uppercase}}</p>
       <p class="water {{step.step_number}}" ng-show="step.water_amount">{{step.water_amount}} {{vm.detail.water_units}}</p>
