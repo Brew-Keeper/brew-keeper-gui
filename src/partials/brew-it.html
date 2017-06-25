@@ -23,14 +23,25 @@
   </div>
   <div class="step delay countdown inactive-step">
     <p class="countdown">COUNTDOWN</p>
-    <p class="counting"><timer class="countdown counting" interval="1000" countdown="3" finish-callback="vm.startBrew()">{{seconds}}</timer></p>
+    <p class="counting" ng-controller="StepTimer as stepVm">
+      <timer id="countdown-timer" class="countdown counting" ng-init="stepVm.initTimer('countdown')" interval="1000" countdown="4" finish-callback="vm.startBrew()">
+        {{seconds}}
+      </timer>
+    </p>
   </div><!-- END countdown timer-->
-  <div ng-repeat="step in vm.steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}}">
-    <p class="stepOf"><span>{{vm.stepArray.indexOf(step.step_number)+1}}</span> of {{vm.stepTotal}}</p>
+  <div ng-repeat="step in vm.steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}}" ng-controller="StepTimer as stepVm">
+    <p class="stepOf">
+      <span>{{vm.stepArray.indexOf(step.step_number)+1}}</span> of {{vm.stepTotal}}
+    </p>
     <article class="step-box">
       <p class="step-name">{{step.step_title | uppercase}}</p>
       <p class="water {{step.step_number}}" ng-show="step.water_amount">{{step.water_amount}} {{vm.detail.water_units}}</p>
-      <timer class="counting {{step.step_number}} hidden" autostart="false" interval="1000" countdown="step.duration" finish-callback="vm.nextStep(step.step_number)"><p><span ng-show="minutes">{{minutes}}:{{sseconds}}</span><span ng-hide="minutes">{{seconds}}</span></p></timer>
+      <timer class="counting {{step.step_number}} hidden" autostart="false" ng-init="stepVm.initTimer(step.step_number)" interval="1000" countdown="step.duration + 1" finish-callback="vm.nextStep(step.step_number)">
+        <p>
+          <span ng-show="minutes">{{minutes}}:{{sseconds}}</span>
+          <span ng-hide="minutes">{{seconds}}</span>
+        </p>
+      </timer>
     </article>
     <p class="step-body">{{step.step_body}}</p>
   </div><!--END Steps-->
