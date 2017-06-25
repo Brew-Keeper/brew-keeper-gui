@@ -23,10 +23,6 @@
     // INITIALIZATION /////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
 
-    var timerRunning = false;
-    var recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username + '/recipes/' + $routeParams.id + '/';
-    var brewNoteUrl = recipeUrl + 'brewnotes/';
-
     activate();
 
     ////////////////////////////////////////////////////////////////////////////
@@ -37,8 +33,12 @@
      * Prepare the page.
      */
     function activate() {
+      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username + '/recipes/' + $routeParams.id + '/';
+      vm.brewNoteUrl = vm.recipeUrl + 'brewnotes/';
+      vm.timerRunning = false;
+
       $(document).scrollTop(0);
-      $http.get(recipeUrl)
+      $http.get(vm.recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
           vm.steps = response.data.steps;
@@ -76,7 +76,7 @@
      * Add a brew note to the recipe.
      */
     function addBrewNote() {
-      $http.post(brewNoteUrl, vm.brewnote);
+      $http.post(vm.brewNoteUrl, vm.brewnote);
       // Prepare for adding another brew note
       vm.brewnote = {};
     }
@@ -100,7 +100,7 @@
         recipe.brew_count = vm.detail.brew_count;
 
         // Update the database with the new brew count
-        $http.patch(recipeUrl, recipe);
+        $http.patch(vm.recipeUrl, recipe);
         return;
       }
       $("timer."+stepNumber).addClass("hidden");  // Hide last step
@@ -117,14 +117,15 @@
      */
     function rateRecipe(rating, id) {
       var newRating = {"rating": rating};
-      $http.patch(recipeUrl, newRating);
+      $http.patch(vm.recipeUrl, newRating);
     }
 
     /**
-     * Restart the brew timer, linked to the "Restart Brew" button.
+     * Restart the brew timer (linked to the "Restart Brew" button).
      */
     function restartBrew() {
-      if (timerRunning) {
+      // Cannot restart if a timer is already running
+      if (vm.timerRunning) {
         return;
       }
       $(".countdown").removeClass("hidden");
@@ -174,9 +175,9 @@
      * Start the brew timer.
      */
     function startBrew() {
-      if (timerRunning) {
-        return;
-      }
+      // Initialize the timers property now that the page is fully loaded
+      vm.timers = $('timer').find().prevObject;
+
       $("." + vm.stepArray[0]).removeClass("inactive-step").addClass("current-step");
       $("div.delay").addClass("hidden").addClass("inactive-step");
       $(".delay timer").addClass("hidden");
