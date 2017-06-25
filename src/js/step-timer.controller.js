@@ -27,6 +27,8 @@
 
     /**
      * Record the step to which this timer belongs.
+     *
+     * @param {(number|string)} stepId The unique identifier for the timer's step.
      */
     function initTimer(stepId) {
       stepVm.stepId = stepId;
@@ -40,6 +42,8 @@
 
     /**
      * Stop, then reset the timer.
+     *
+     * @param {Object} e The event context of an incoming signal.
      */
     function resetTimer(e) {
       $scope.$broadcast('timer-stop');
@@ -49,9 +53,12 @@
 
     /**
      * Start the timer.
+     *
+     * @param {Object} e The event context of an incoming signal.
+     * @param {(number|string)} stepId The step ID this is meant to effect.
      */
-    function startTimer(e, intendedRecipient) {
-      if (stepVm.stepId === intendedRecipient) {
+    function startTimer(e, stepId) {
+      if (stepVm.stepId === stepId) {
         $scope.$broadcast('timer-start');
         e.targetScope.vm.timerRunning = true;
       }
