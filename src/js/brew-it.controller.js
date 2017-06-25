@@ -3,11 +3,11 @@
 
   angular
     .module('brewKeeper')
-    .controller('BrewIt', BrewIt);
+    .controller('BrewItController', BrewItController);
 
-  BrewIt.$inject = ['$scope', '$http', '$routeParams', '$rootScope'];
+  BrewItController.$inject = ['$scope', '$http', '$routeParams', '$rootScope'];
 
-  function BrewIt($scope, $http, $routeParams, $rootScope) {
+  function BrewItController($scope, $http, $routeParams, $rootScope) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
     vm.brewnote = {};

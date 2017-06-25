@@ -23,13 +23,13 @@
   </div>
   <div class="step delay countdown inactive-step">
     <p class="countdown">COUNTDOWN</p>
-    <p class="counting" ng-controller="StepTimer as stepVm">
+    <p class="counting" ng-controller="StepTimerController as stepVm">
       <timer id="countdown-timer" class="countdown counting" ng-init="stepVm.initTimer('countdown')" interval="1000" countdown="4" finish-callback="vm.startBrew()">
         {{seconds}}
       </timer>
     </p>
   </div><!-- END countdown timer-->
-  <div ng-repeat="step in vm.steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}}" ng-controller="StepTimer as stepVm">
+  <div ng-repeat="step in vm.steps | orderBy: 'step_number'" class="step inactive-step {{step.step_number}}" ng-controller="StepTimerController as stepVm">
     <p class="stepOf">
       <span>{{vm.stepArray.indexOf(step.step_number)+1}}</span> of {{vm.stepTotal}}
     </p>

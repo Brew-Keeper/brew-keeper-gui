@@ -55,7 +55,7 @@
         })
         .when('/:username/:id/brewit', {
           templateUrl: 'partials/brew-it.html',
-          controller: 'BrewIt',
+          controller: 'BrewItController',
           controllerAs: 'vm'
         });
 

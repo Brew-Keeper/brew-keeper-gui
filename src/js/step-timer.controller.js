@@ -3,11 +3,11 @@
 
   angular
     .module('brewKeeper')
-    .controller('StepTimer', StepTimer);
+    .controller('StepTimerController', StepTimerController);
 
-  StepTimer.$inject = ['$scope'];
+  StepTimerController.$inject = ['$scope'];
 
-  function StepTimer($scope) {
+  function StepTimerController($scope) {
     var stepVm = this;
     stepVm.initTimer = initTimer;
     stepVm.resetTimer = resetTimer;
