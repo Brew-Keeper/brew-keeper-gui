@@ -26,7 +26,7 @@
     //////////////////////////////////////////////////////////////////////////
 
     /**
-     * Record which the step to which this timer belongs.
+     * Record the step to which this timer belongs.
      */
     function initTimer(stepId) {
       stepVm.stepId = stepId;

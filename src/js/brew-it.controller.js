@@ -29,7 +29,8 @@
      * Prepare the page.
      */
     function activate() {
-      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username + '/recipes/' + $routeParams.id + '/';
+      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username +
+        '/recipes/' + $routeParams.id + '/';
       vm.brewNoteUrl = vm.recipeUrl + 'brewnotes/';
       vm.timerRunning = false;
 
