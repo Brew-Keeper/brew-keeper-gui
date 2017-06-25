@@ -109,7 +109,8 @@
       $("timer."+nextStep).removeClass("hidden");
       $("."+nextStep).addClass("current-step").removeClass("inactive-step");
 
-      $('timer')[nextTimerId].start();
+      // Start the next step's timer
+      $scope.$broadcast('startTimer', nextTimerId);
     }
 
     /**
@@ -138,7 +139,7 @@
       $("a[href].add-brew-note").addClass("hidden");
       $("a[href].reset-brew").removeClass("hidden");
       $(".time-" + vm.countdownVal).removeClass("timeline");//timeline
-      $('timer')[0].start();
+      $scope.$broadcast('startTimer', 'countdown');
       vm.showStars = false;
     }
 
@@ -146,29 +147,32 @@
      * Reset when a timer is already running (to a non-running timer).
      */
     function resetBrew() {
-      $(".current-step").addClass("hidden");
-      $("timer.counter").addClass("hidden");
-      $(".delay.hidden").removeClass("hidden");
+      // Have all of the timers reset
+      $scope.$broadcast('resetTimer');
+
+      $("timer.counting").addClass("hidden");
+
+      // Reset any completed steps back to inactive
+      $(".finished").addClass("inactive-step");
+      $(".finished").removeClass("finished");
+
+      // Reset the current step
+      $(".current-step").addClass("inactive-step");
       $(".current-step").removeClass("current-step");
+
+      // Ensure our delay steps are hidden
+      $(".delay.hidden").removeClass("hidden");
       $(".countdown").removeClass("hidden");
       $("div.countdown").addClass("hidden");
-      $(".time-" + vm.countdownVal).removeClass("timeline");//timeline
-      $scope.$broadcast('timer-reset');
+
+      // Hide the timeline
+      $(".time-" + vm.countdownVal).removeClass("timeline");
+
+      // Show "Restart Brew" and "Add Note", hide "Reset"
       $("a[href].restart-brew").removeClass("hidden");
       $("a[href].add-brew-note").removeClass("hidden");
       $("a[href].reset-brew").addClass("hidden");
       vm.showStars = true;
-      timerRunning = false;
-
-      // FIXME: Getting the data again solves the timers not resetting
-      // correctly, but we should not make a needless API call!
-      $http.get(recipeUrl)
-        .then(function(response){
-          vm.detail = response.data;
-          vm.steps = response.data.steps;
-          vm.notes = response.data.brewnotes;
-          vm.countdownVal = response.data.total_duration;
-        });
     }
 
     /**
@@ -183,8 +187,7 @@
       $(".delay timer").addClass("hidden");
       $(".time-" + vm.countdownVal).addClass("timeline");  // timeline
       $("timer." + vm.stepArray[0]).removeClass("hidden");  // Shows timer for active step
-      $('timer')[1].start();
-      timerRunning = true;
+      $scope.$broadcast('startTimer', 1);
     }
   }
 })();
