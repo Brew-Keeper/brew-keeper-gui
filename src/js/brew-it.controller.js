@@ -6,7 +6,7 @@
     .controller('BrewIt', BrewIt);
 
   BrewIt.$inject = ['$scope', '$http', '$routeParams', '$rootScope'];
-  
+
   function BrewIt($scope, $http, $routeParams, $rootScope) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
@@ -18,10 +18,6 @@
     vm.showStars = false;
     vm.startBrew = startBrew;
     vm.username = $routeParams.username;
-
-    ////////////////////////////////////////////////////////////////////////////
-    // INITIALIZATION /////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
 
     activate();
 
@@ -89,8 +85,8 @@
     function nextStep(stepNumber) {
       var nextStepIndex = vm.stepArray.indexOf(stepNumber) + 1;
       var nextStep = vm.stepArray[nextStepIndex];
-      var prevStep = vm.stepArray[nextStepIndex - 2];
       var nextTimerId = vm.stepArray.indexOf(stepNumber) + 2;
+
       if (nextStepIndex >= vm.steps.length) {
         // End of brew countdown
         vm.resetBrew();
@@ -103,8 +99,11 @@
         $http.patch(vm.recipeUrl, recipe);
         return;
       }
-      $("timer."+stepNumber).addClass("hidden");  // Hide last step
-      $("."+stepNumber).addClass("finished").removeClass("current-step");  // Hide last step
+
+      // Hide this step
+      $("timer."+stepNumber).addClass("hidden");
+      $("."+stepNumber).addClass("finished").removeClass("current-step");
+
       // Change next step to green and grow next step to 200
       $("timer."+nextStep).removeClass("hidden");
       $("."+nextStep).addClass("current-step").removeClass("inactive-step");
@@ -129,18 +128,28 @@
       if (vm.timerRunning) {
         return;
       }
-      $(".countdown").removeClass("hidden");
+
+      // Hide stars, "Add Note", brew note form, and "Restart Brew"
+      vm.showStars = false;
+      $("a[href].add-brew-note").addClass("hidden");
       $(".brew-form").addClass("hidden");
       $("div.restart").addClass("hidden");
+
+      // Hide the timeline (hidden during countdown)
+      $(".time-" + vm.countdownVal).removeClass("timeline");
+
+      // Show the "RESET" button
+      $("a[href].reset-brew").removeClass("hidden");
+
+      // Reset all steps to be inactive
+      $(".step").addClass("inactive-step");
+
+      // Show the countdown step and its timer
       $(".countdown").removeClass("hidden");
       $("timer.delay").removeClass("hidden");
-      $(".step").addClass("inactive-step");
-      $("a[href].restart-brew").addClass("hidden");
-      $("a[href].add-brew-note").addClass("hidden");
-      $("a[href].reset-brew").removeClass("hidden");
-      $(".time-" + vm.countdownVal).removeClass("timeline");//timeline
+
+      // Start the countdown timer
       $scope.$broadcast('startTimer', 'countdown');
-      vm.showStars = false;
     }
 
     /**
@@ -176,17 +185,26 @@
     }
 
     /**
-     * Start the brew timer.
+     * Start the brew timer (called when countdown timer completes).
      */
     function startBrew() {
       // Initialize the timers property now that the page is fully loaded
       vm.timers = $('timer').find().prevObject;
 
-      $("." + vm.stepArray[0]).removeClass("inactive-step").addClass("current-step");
+      // Set the first step to be current-step and show its timer
+      $("." + vm.stepArray[0])
+        .removeClass("inactive-step")
+        .addClass("current-step");
+      $("timer." + vm.stepArray[0]).removeClass("hidden");
+
+      // Hide and shrink the delay step
       $("div.delay").addClass("hidden").addClass("inactive-step");
       $(".delay timer").addClass("hidden");
-      $(".time-" + vm.countdownVal).addClass("timeline");  // timeline
-      $("timer." + vm.stepArray[0]).removeClass("hidden");  // Shows timer for active step
+
+      // Show the timeline
+      $(".time-" + vm.countdownVal).addClass("timeline");
+
+      // Start the timer
       $scope.$broadcast('startTimer', 1);
     }
   }
