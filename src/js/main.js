@@ -43,7 +43,8 @@
         })
         .when('/:username/clone/:id', {
           templateUrl: 'partials/clone.html',
-          controller:  'cloneController'
+          controller:  'CloneController',
+          controllerAs: 'cloneVm'
         })
         .when('/:username/:id', {
           templateUrl: 'partials/recipe-detail.html',
