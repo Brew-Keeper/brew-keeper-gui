@@ -10,13 +10,23 @@
   function BrewItController($scope, $http, $routeParams, $rootScope) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
+    vm.brewNoteUrl = null;
     vm.brewnote = {};
+    vm.countdownVal = null;
+    vm.detail = {};
     vm.nextStep = nextStep;
+    vm.notes = {};
     vm.rateRecipe = rateRecipe;
-    vm.restartBrew = restartBrew;
+    vm.ratings = [];
+    vm.recipeUrl = null;
     vm.resetBrew = resetBrew;
+    vm.restartBrew = restartBrew;
     vm.showStars = false;
     vm.startBrew = startBrew;
+    vm.stepArray = [];
+    vm.stepTotal = null;
+    vm.steps = {};
+    vm.timerRunning = false;
     vm.username = $routeParams.username;
 
     activate();
@@ -32,7 +42,6 @@
       vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username +
         '/recipes/' + $routeParams.id + '/';
       vm.brewNoteUrl = vm.recipeUrl + 'brewnotes/';
-      vm.timerRunning = false;
 
       $(document).scrollTop(0);
       $http.get(vm.recipeUrl)
@@ -189,9 +198,6 @@
      * Start the brew timer (called when countdown timer completes).
      */
     function startBrew() {
-      // Initialize the timers property now that the page is fully loaded
-      vm.timers = $('timer').find().prevObject;
-
       // Set the first step to be current-step and show its timer
       $("." + vm.stepArray[0])
         .removeClass("inactive-step")
