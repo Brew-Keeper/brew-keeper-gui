@@ -124,8 +124,10 @@
 
     /**
      * Update the recipe with a new rating.
+     *
+     * @param {number} rating The new rating of the recipe.
      */
-    function rateRecipe(rating, id) {
+    function rateRecipe(rating) {
       var newRating = {"rating": rating};
       $http.patch(vm.recipeUrl, newRating);
     }

@@ -5,7 +5,7 @@
     <a href="" class="hidden add-brew-note clicker-button">Add Note</a>
     <div class="stars">    <!--star ratings-->
     <span ng-show="vm.showStars" class="post-brew rating" ng-repeat="rating in vm.ratings">
-      <span star-rating rating-value="vm.detail.rating" max="5" ng-click="vm.rateRecipe(vm.detail.rating, vm.detail.id)"></span>
+      <span star-rating rating-value="vm.detail.rating" max="5" ng-click="vm.rateRecipe(vm.detail.rating)"></span>
     </span>
     </div>  <!--end star ratings-->
   </nav>
