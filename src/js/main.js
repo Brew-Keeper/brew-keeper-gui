@@ -42,7 +42,7 @@
           controller: 'createNewRecipe'
         })
         .when('/:username/clone/:id', {
-          templateUrl: 'partials/clone.html',
+          templateUrl: 'app/recipes/clone.html',
           controller:  'CloneController',
           controllerAs: 'cloneVm'
         })
@@ -55,7 +55,7 @@
           controller: 'recipeList'
         })
         .when('/:username/:id/brewit', {
-          templateUrl: 'partials/brew-it.html',
+          templateUrl: 'app/brew/brew-it.html',
           controller: 'BrewItController',
           controllerAs: 'vm'
         });
