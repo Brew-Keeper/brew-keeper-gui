@@ -31,7 +31,7 @@
         })
         .when('/info', {
           templateUrl: 'partials/more-info.html',
-          controller: 'loginCtrl'
+          controller: 'LoginController',
         })
         .when('/reset-pw', {
           templateUrl: 'partials/reset-pw.html',
@@ -66,7 +66,7 @@
         // })
     })
 
-    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope){
+    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope, userService){
       // Definition of baseUrl
       // $rootScope.baseUrl = 'https://brew-keeper-api.herokuapp.com';
       $rootScope.baseUrl = 'http://dev.brewkeeper.com:8000';
@@ -93,12 +93,14 @@
         }); //.error
 
 
-    $scope.logout= function(){
+      $scope.logout = function(){
       var logoutHeader = {"Authorization":$cookies.get("Authorization")};
       $scope.changePassword = false;
 
       $http.post($rootScope.baseUrl + '/api/logout/', logoutHeader)
         .then(function(){
+          // TODO: Make all of the below part of a successCallback function
+          userService.setUsername('');
           $rootScope.username = null;
         });
         $cookies.remove("Authorization");
@@ -119,14 +121,16 @@
 
     }) //END MainController
 
-    .controller('WhoAmIController', function($location, $http, $scope, $rootScope, $cookies) {
+    .controller('WhoAmIController', function($location, $http, $scope, $rootScope, $cookies, userService) {
       $http.get($rootScope.baseUrl + '/api/whoami/')
         .then(function(response){
           var username = response.data.username;
+          userService.setUsername(username);
           $rootScope.username = username;
           $location.path('/' + username);
         })//.success
         .catch(function(){
+          userService.setUsername('');
           $rootScope.username = null; //hides login and shows logout
           $cookies.remove("Authorization");
           $http.defaults.headers.common = {};
