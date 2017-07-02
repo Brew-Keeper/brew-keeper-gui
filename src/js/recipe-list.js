@@ -59,9 +59,8 @@
 
     function search(searchString) {
       $http.get(vm.recipeUrl + '?search=' + searchString)
-        .then(function(response){
+        .then(function(response) {
           vm.recipes = response.data;
-          $scope.rating = 0;
         });
     }
   }
