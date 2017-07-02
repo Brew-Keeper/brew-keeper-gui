@@ -14,12 +14,12 @@
           templateUrl: 'partials/login.html'
         })
         .when('/public',{
-          templateUrl: 'partials/public-list.html',
+          templateUrl: 'app/recipes/public-list.html',
           controller: 'PublicRecipeController',
           controllerAs: 'vm'
         })
         .when('/public/users/:username', {
-          templateUrl: 'partials/public-list.html',
+          templateUrl: 'app/recipes/public-list.html',
           controller: 'PublicRecipeController',
           controllerAs: 'vm'
         })
@@ -36,7 +36,7 @@
           controller: 'changePassword'
         })
         .when('/:username', {
-          templateUrl: 'partials/recipe-list.html',
+          templateUrl: 'app/recipes/recipe-list.html',
           controller: 'RecipeListController',
           controllerAs: 'vm'
         })
