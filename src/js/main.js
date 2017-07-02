@@ -63,76 +63,86 @@
         // })
     })
 
-    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope, userService){
-      // Definition of baseUrl
-      // $rootScope.baseUrl = 'https://brew-keeper-api.herokuapp.com';
-      $rootScope.baseUrl = 'http://dev.brewkeeper.com:8000';
-      var cookie = $cookies.get("Authorization");
-      $http.defaults.headers.common = {"Authorization": cookie};
-      $scope.$route = $route;
-      $scope.$location = $location;
-      $scope.$routeParams = $routeParams;
-      $rootScope.username = null;
-      $scope.changePassword= false;
+    .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope) {
+      var vm = this;
+      vm.changePassword = false;
+      vm.logout = logout;
 
+      activate();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // FUNCTIONS //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+      /**
+       * Prepare the page.
+       */
+      function activate() {
+        // Definition of baseUrl (will eventually move to dataService)
+        // $rootScope.baseUrl = 'https://brew-keeper-api.herokuapp.com';
+        $rootScope.baseUrl = 'http://dev.brewkeeper.com:8000';
+        var cookie = $cookies.get("Authorization");
+        $http.defaults.headers.common = {"Authorization": cookie};
+
+        $http.get($rootScope.baseUrl + '/api/whoami/')
+          .then(function(response) {
+            // If the user still has valid credentials, ensure rootScope has
+            // their username
+            $rootScope.username = response.data.username;
+          })
+          .catch(function(error) {
+            // TODO: Make sure that the error was not a timeout
+            $rootScope.username = null;
+            $cookies.remove("Authorization");
+            $http.defaults.headers.common = {};
+            if($location.path() == "/reset-pw" || "/login" || "/info"){
+              return;
+            }
+            $location.path('/public');
+          }); //.error
+
+        // Show/hide hamburger
+        $(".menu").on('click', function() {
+          $('.menu').toggleClass("active");
+        });
+
+        // Hide the menu if the user clicks somewhere not on the menu
+        $(document).on('click', function(e) {
+          if (!$(e.target).is('.menu.active')) {
+            $('.menu').removeClass("active");
+          }
+        });
+      }
+
+      /**
+       * Log the user out, updating what is visible in the UI.
+       */
+      function logout() {
+        var logoutHeader = {"Authorization": $cookies.get("Authorization")};
+        vm.changePassword = false;
+
+        // Log the user out of the back-end API
+        $http.post($rootScope.baseUrl + '/api/logout/', logoutHeader)
+          .then(function() {
+            $rootScope.username = null;
+            $cookies.remove("Authorization");
+            $http.defaults.headers.common = {};
+          });
+      }
+    }) //END MainController
+
+    .controller('WhoAmIController', function($location, $http, $scope, $rootScope, $cookies) {
       $http.get($rootScope.baseUrl + '/api/whoami/')
         .then(function(response){
           $rootScope.username = response.data.username;
-        })//This is for populating url with username
-        .catch(function(){
-          $rootScope.username = null; //hides login and shows logout
-          $cookies.remove("Authorization");
-          $http.defaults.headers.common = {};
-          if($location.path() == "/reset-pw" || "/login" || "/info"){
-            return;
-          }
-          $location.path('/public');
-        }); //.error
-
-
-      $scope.logout = function(){
-      var logoutHeader = {"Authorization":$cookies.get("Authorization")};
-      $scope.changePassword = false;
-
-      $http.post($rootScope.baseUrl + '/api/logout/', logoutHeader)
-        .then(function(){
-          // TODO: Make all of the below part of a successCallback function
-          userService.setUsername('');
-          $rootScope.username = null;
-        });
-        $cookies.remove("Authorization");
-        $http.defaults.headers.common = {};
-      };
-
-      //hamburer controller
-      $(".menu").on('click', function() {
-        $('.menu').toggleClass("active");
-      });
-
-      $(document).on('click', function(e) {
-        if(!$(e.target).is('.menu.active')) {
-        $('.menu').removeClass("active");
-        }
-        // $scope.changePassword = false;
-      });
-
-    }) //END MainController
-
-    .controller('WhoAmIController', function($location, $http, $scope, $rootScope, $cookies, userService) {
-      $http.get($rootScope.baseUrl + '/api/whoami/')
-        .then(function(response){
-          var username = response.data.username;
-          userService.setUsername(username);
-          $rootScope.username = username;
-          $location.path('/' + username);
+          $location.path('/' + $rootScope.username);
         })//.success
-        .catch(function(){
-          userService.setUsername('');
-          $rootScope.username = null; //hides login and shows logout
+        .catch(function(error) {
+          // TODO: Don't clear data if the error is a timeout
+          $rootScope.username = null;
           $cookies.remove("Authorization");
           $http.defaults.headers.common = {};
           $location.path('/public');
         }); //.error
     }); //END WhoAmIController
-
 })(); //end IIFE

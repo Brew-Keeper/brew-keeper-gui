@@ -30,7 +30,7 @@
         <!-- endbower -->
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body ng-app="brewKeeper" ng-controller="MainController">
+    <body ng-app="brewKeeper" ng-controller="MainController as vm">
         <heading class="heading">
           <a class="logo" href="#/public"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
           <nav class="menu hamburger">
@@ -38,9 +38,9 @@
               <li ng-show="username"><a href="#/{{username}}">My Recipes</a><li>
               <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
               <li><a class="about" href="#/info">About</a></li>
-              <li class="login-link" ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login</a></li>
-              <li ng-show="username"><a ng-click="logout()" href="#/login">Logout</a></li>
-              <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
+              <li class="login-link" ng-hide="username"><a ng-click="vm.changePassword=false" href="#/login">Login</a></li>
+              <li ng-show="username"><a ng-click="vm.logout()" href="#/login">Logout</a></li>
+              <li ng-show="username"><a ng-click="vm.changePassword=true" href="#/login">Change Password</a></li>
             </ul>
           </nav>
         </heading>
