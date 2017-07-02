@@ -27,7 +27,7 @@
     vm.stepTotal = null;
     vm.steps = {};
     vm.timerRunning = false;
-    vm.username = $routeParams.username;
+    vm.username = $rootScope.username;
 
     activate();
 
@@ -39,7 +39,7 @@
      * Prepare the page.
      */
     function activate() {
-      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username +
+      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + vm.username +
         '/recipes/' + $routeParams.id + '/';
       vm.brewNoteUrl = vm.recipeUrl + 'brewnotes/';
 
