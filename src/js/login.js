@@ -6,9 +6,9 @@
     .controller('LoginController', LoginController)
     .controller('changePassword', ChangePasswordController);
 
-  LoginController.$inject = ['$scope', '$http', '$rootScope', '$cookies', '$location', 'userService'];
+  LoginController.$inject = ['$scope', '$http', '$rootScope', '$cookies', '$location'];
 
-  function LoginController($scope, $http, $rootScope, $cookies, $location, userService) {
+  function LoginController($scope, $http, $rootScope, $cookies, $location) {
     var loginVm = this;
     loginVm.loginButton = loginButton;
     loginVm.users = {};
@@ -80,8 +80,8 @@
       $cookies.put("Authorization", userInfo);
       $http.defaults.headers.common = {"Authorization": userInfo};
 
-      // Save the username to the userService
-      userService.setUsername(loginVm.users.username);
+      // Save the username to the rootScope
+      $rootScope.username = loginVm.users.username;
 
       // Reset the users property and navigate to the root of the app
       loginVm.users = {};
@@ -91,9 +91,9 @@
 
 
 
-  ChangePasswordController.$inject = ['$scope', '$http', '$location', '$cookies', '$rootScope', 'userService'];
+  ChangePasswordController.$inject = ['$scope', '$http', '$location', '$cookies', '$rootScope'];
 
-  function ChangePasswordController($scope, $http, $location, $cookies, $rootScope, userService) {
+  function ChangePasswordController($scope, $http, $location, $cookies, $rootScope) {
     var changePwdVm = this;
     changePwdVm.generalError = false;
     changePwdVm.requestReset = requestReset;
@@ -102,7 +102,7 @@
     changePwdVm.resetSuccess = false;
     changePwdVm.submitChangePassword = submitChangePassword;
     changePwdVm.users = {
-      username: userService.username()
+      username: $rootScope.username
     };
 
     activate();
@@ -213,8 +213,7 @@
        return;
       }
 
-      // TODO: How do we get the username? From $rootScope? userService.
-      changePwdVm.users.username = $scope.username;
+      changePwdVm.users.username = $rootScope.username;
 
       $http.post($rootScope.baseUrl + '/api/change-pw/', changePwdVm.users)
         .then(successCallbackChangePassword, errorCallbackChangePassword);

@@ -6,9 +6,9 @@
     .controller('CreateNewRecipeController', CreateNewRecipeController);
 
   CreateNewRecipeController.$inject =
-    ['$scope', '$http', '$location', '$rootScope', '$cookies', 'userService'];
+    ['$scope', '$http', '$location', '$rootScope', '$cookies'];
 
-  function CreateNewRecipeController($scope, $http, $location, $rootScope, $cookies, userService) {
+  function CreateNewRecipeController($scope, $http, $location, $rootScope, $cookies) {
     var vm = this;
     vm.createNew = createNew;
     vm.recipe = {};
@@ -34,10 +34,10 @@
 
       $http.get($rootScope.baseUrl + '/api/whoami/')
         .then(function(response) {
-          userService.setUsername(response.data.username);
+          $rootScope.username = response.data.username;
         })
         .catch(function() {
-          userService.setUsername('');
+          $rootScope.username = null;
           $cookies.remove("Authorization");
           $http.defaults.headers.common = {};
           $location.path('/login');
@@ -49,10 +49,10 @@
      */
     function createNew() {
       $("form-placeholder").removeClass("changed");
-      $http.post($rootScope.baseUrl + '/api/users/' + userService.username() + '/recipes/', vm.recipe)
+      $http.post($rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/', vm.recipe)
         .success(function (data) {
           var id = data.id;
-          $location.path('/' + userService.username() + '/' + id);
+          $location.path('/' + $rootScope.username + '/' + id);
         // Clear the form
         vm.recipe = {};
         });

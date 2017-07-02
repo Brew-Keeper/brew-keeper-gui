@@ -6,15 +6,9 @@
     .controller('SignupController', SignupController);
 
   SignupController.$inject =
-    ['$http', '$cookies', '$location', '$rootScope', 'userService'];
+    ['$http', '$cookies', '$location', '$rootScope'];
   
-  function SignupController(
-    $http,
-    $cookies,
-    $location,
-    $rootScope,
-    userService
-  ){
+  function SignupController($http, $cookies, $location, $rootScope) {
     var signupVm = this;
     signupVm.users = {};
     signupVm.signupButton = signupButton;
@@ -75,8 +69,8 @@
         $cookies.put("Authorization", userInfo);
         $http.defaults.headers.common = {"Authorization": userInfo};
 
-        // Set the new username in the userService
-        userService.setUsername(signupVm.users.username);
+        // Set the new username in the rootScope
+        $rootScope.username = signupVm.users.username;
 
         // Reset the users property and navigate to the root of the app
         signupVm.users = {};
