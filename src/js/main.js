@@ -15,11 +15,13 @@
         })
         .when('/public',{
           templateUrl: 'partials/public-list.html',
-          controller: 'publicRecipe'
+          controller: 'PublicRecipeController',
+          controllerAs: 'vm'
         })
         .when('/public/users/:username', {
           templateUrl: 'partials/public-list.html',
-          controller: 'publicRecipe'
+          controller: 'PublicRecipeController',
+          controllerAs: 'vm'
         })
         .when('/public/:id',{
           templateUrl: 'partials/public-detail.html',
@@ -35,7 +37,7 @@
         })
         .when('/:username', {
           templateUrl: 'partials/recipe-list.html',
-          controller: 'recipeList',
+          controller: 'RecipeListController',
           controllerAs: 'vm'
         })
         .when('/:username/clone/:id', {

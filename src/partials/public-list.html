@@ -1,7 +1,6 @@
 <nav class="recipe-list">
   <h3>Public Recipes</h3>
-  <input class="magnify" placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="search(searchString)">
-  </input>
+  <input class="magnify" placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="vm.search(searchString)"/>
   <select name="OrderBy" value="OrderBy" ng-model="query">
     <option value="">Sort By</>
     <option value="-combined_rating">Highest Rating</option>
@@ -9,11 +8,10 @@
     <option value="-id">Newest</option>
     <option value="id">Oldest</option>
   </select>
-    <button href="" class="clicker-button" name="search"  ng-click="search(searchString)">Search</button>
+  <button href="" class="clicker-button" name="search" ng-click="vm.search(searchString)">Search</button>
 </nav>
-  <div class="coffee-spinner"><img src="img/coffee-spinner.gif" ng-hide="recipes"/></div>
-
-<section class="recipe-list" ng-repeat="recipe in recipes | orderBy: '-combined_rating' | orderBy:query | filter:filter">
+<div class="coffee-spinner"><img src="img/coffee-spinner.gif" ng-hide="vm.recipes"/></div>
+<section class="recipe-list" ng-repeat="recipe in vm.recipes | orderBy: '-combined_rating' | orderBy:query | filter:filter">
   <a class="recipe-title" href="#public/{{recipe.id}}">{{recipe.title}}</a>
   <span>{{recipe.bean_name}}</span>
   <div class="col-1-2">
@@ -21,15 +19,15 @@
     <div class="col-1-4">
       <!-- star rating -->
       <div class="col-1-3">
-          <span ng-hide="username" ng-repeat="rating in ratings">
-              <div view-rating rating-value="recipe.average_rating" max="rating.max" ng-click="" class="public"></div>
-          </span>
+        <span ng-hide="username" ng-repeat="rating in vm.ratings">
+          <div view-rating rating-value="recipe.average_rating" max="rating.max" ng-click="" class="public"></div>
+        </span>
         <section ng-show="username">
-          <span ng-hide="recipe.public_ratings.id" ng-repeat="rating in ratings">
-            <div star-rating rating-value="recipe.combined_rating" max="rating.max" ng-click="newRating(recipe.combined_rating, recipe.id)" class="public"></div>
+          <span ng-hide="recipe.public_ratings.id" ng-repeat="rating in vm.ratings">
+            <div star-rating rating-value="recipe.combined_rating" max="rating.max" ng-click="vm.newRating(recipe.combined_rating, recipe.id)" class="public"></div>
           </span>
-          <span ng-show="recipe.public_ratings.id" ng-repeat="rating in ratings">
-            <div star-rating rating-value="recipe.public_ratings.public_rating" max="5" ng-click="updateRating(recipe.public_ratings.public_rating, recipe.public_ratings.id, recipe.id)"></div>
+          <span ng-show="recipe.public_ratings.id" ng-repeat="rating in vm.ratings">
+            <div star-rating rating-value="recipe.public_ratings.public_rating" max="5" ng-click="vm.updateRating(recipe.public_ratings.public_rating, recipe.public_ratings.id, recipe.id)"></div>
           </span>
         </section>
       </div>
@@ -37,6 +35,6 @@
     <a class="shared-by" ng-show="recipe.shared_by" ng-href="#public/users/{{recipe.shared_by}}">Shared by <span>{{recipe.shared_by}}</span></a>
   </div> <!-- end col-1-2 -->
   <div class="col-1-2 button">
-    <a class="list-brew-it" ng-show="recipe.steps.length" ng-click="publicListBrewIt(recipe.id)">BREW IT!</a>
+    <a class="list-brew-it" ng-show="recipe.steps.length" ng-click="vm.publicListBrewIt(recipe.id)">BREW IT!</a>
   </div> <!--end col-1-2 -->
 </section><!-- end ng-repeat for recipe list -->

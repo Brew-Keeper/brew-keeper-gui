@@ -3,8 +3,8 @@
 
   angular
     .module('brewKeeper')
-    .controller('recipeList', RecipeListController)
-    .controller('publicRecipe', PublicRecipeController);
+    .controller('RecipeListController', RecipeListController)
+    .controller('PublicRecipeController', PublicRecipeController);
 
   RecipeListController.$inject =
     ['$rootScope', '$scope', '$http', '$routeParams', '$location'];
@@ -76,66 +76,92 @@
     ['$http', '$scope', '$rootScope', '$location', '$routeParams'];
 
   function PublicRecipeController($http, $scope, $rootScope, $location, $routeParams) {
+    var vm = this;
+    vm.newRating = newRating;
+    vm.publicListBrewIt = publicListBrewIt;
+    vm.search = search;
+    vm.updateRating = updateRating;
+    vm.ratings = [{ max: 5 }];
+    vm.recipes = [];
 
-    $scope.search = function(searchString){
-      $http.get($rootScope.baseUrl + '/api/users/public/recipes/?search=' + searchString)
-        .then(function(response){
-          $scope.recipes = response.data;
-          $scope.rating = 0;
-          $scope.ratings = [{
-              max: 5
-          }];
+    activate();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // FUNCTIONS //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Prepare the page.
+     */
+    function activate() {
+      if ($routeParams.username) {
+        // If provided, show the public recipes for the specified user
+        vm.search($routeParams.username);
+      } else {
+        // ...otherwise, show all public recipes
+        $http.get($rootScope.baseUrl + '/api/users/public/recipes/')
+          .then(function(response) {
+            vm.recipes = response.data;
+          });
+      }
+    }
+
+    /**
+     * Submit a rating for a public recipe.
+     */
+    function newRating(rating, recipeId) {
+      var providedRating = {"public_rating": rating};
+      $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/', providedRating)
+        // Now that we have posted, let's update the rating to reflect the change
+        .then(function() {
+          $http.get($rootScope.baseUrl + '/api/users/public/recipes/')
+            .then(function(response){
+              vm.recipes = response.data;
+            });
         });
-    }; //end search function
-
-    if($routeParams.username){
-      $scope.search($routeParams.username);
-    }
-    else {
-    $http.get($rootScope.baseUrl + '/api/users/public/recipes/')
-      .then(function(response){
-        $scope.recipes = response.data;
-        $scope.rating = 0;
-        $scope.ratings = [{
-            max: 5
-        }];
-      });
     }
 
-    $scope.publicListBrewIt = function(id){
-      //get indexOf recipe id
+    /**
+     * Brew the selected public recipe.
+     */
+    function publicListBrewIt(id) {
+      // Get index of recipe id in vm.recipes
       var recipeId;
-      for (var index = 0; index < $scope.recipes.length; index ++) {
-        if($scope.recipes[index].id == id){
+      for (var index = 0; index < vm.recipes.length; index ++) {
+        if (vm.recipes[index].id == id) {
           recipeId = index;
         }
       }
-      $rootScope.steps = $scope.recipes[recipeId].steps;
-      $rootScope.detail = $scope.recipes[recipeId];
+      // If we didn't find it for some reason, we're done here
+      if (recipeId === undefined) {
+        return;
+      }
+      // TODO: These rootScope assignments are currently superfluous
+      $rootScope.steps = vm.recipes[recipeId].steps;
+      $rootScope.detail = vm.recipes[recipeId];
+      // Switch to the public brew-it for this recipe
       $location.path("/public/" + id + "/brewit");
+      // TODO: This can probably come out, as it is done in the public brew-it
+      // controller
       $(document).scrollTop(0);
-    };//end listBrewit function
+    }
 
+    /**
+     * Search all public recipes for the specified string.
+     */
+    function search(searchString) {
+      $http.get($rootScope.baseUrl + '/api/users/public/recipes/?search=' + searchString)
+        .then(function(response) {
+          vm.recipes = response.data;
+        });
+    }
 
-
-    $scope.newRating = function(rating, recipeId){
-      var newRating = {"public_rating": rating};
-      $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/', newRating)
-        .then(function(){$http.get($rootScope.baseUrl + '/api/users/public/recipes/')
-          .then(function(response){
-            $scope.recipes = response.data;
-            $scope.rating = 0;
-            $scope.ratings = [{
-                max: 5
-            }];
-          });
-        });// end http.post
-    };//end newRating
-
-    $scope.updateRating = function(rating, ratingId, recipeId){
-      var newRating = {"public_rating": rating};
-      $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/' + ratingId + '/', newRating);
-    };//end updateRating
-
-  }//end publicRecipe controller
+    /**
+     * Update an existing public rating.
+     */
+    function updateRating(rating, ratingId, recipeId) {
+      var providedRating = {"public_rating": rating};
+      $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/' + ratingId + '/', providedRating);
+    }
+  }
 })();
