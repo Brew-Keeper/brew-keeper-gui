@@ -1,16 +1,16 @@
 <h3 class="form-heading">Create A New Recipe</h3>
-<form class="create-new-recipe" ng-controller="createNewRecipe"  ng-submit="createNew()">
+<form class="create-new-recipe" ng-submit="vm.createNew()">
   <section class="columns general">
   <fieldset>
-    <input class="input-focus" placeholder="Title (Required)" maxlength="50"  ng-model="recipe.title" required></input>
-    <textarea placeholder="Comments"  ng-model="recipe.general_recipe_comment"></textarea>
+    <input class="input-focus" placeholder="Title (Required)" maxlength="50"  ng-model="vm.recipe.title" required></input>
+    <textarea placeholder="Comments"  ng-model="vm.recipe.general_recipe_comment"></textarea>
   </fieldset><!--General Details-->
   </section>
   <section class="columns col-1-2">
     <fieldset class="details">
       <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean_darker.svg"/> Details</h4></legend>
-      <input class="top-row" maxlength="50" placeholder="Name"  ng-model="recipe.bean_name"></input>
-      <select class="form-placeholder" list="roast" maxlength="15" placeholder="Roast" ng-model="recipe.roast" id="roast">
+      <input class="top-row" maxlength="50" placeholder="Name"  ng-model="vm.recipe.bean_name"></input>
+      <select class="form-placeholder" list="roast" maxlength="15" placeholder="Roast" ng-model="vm.recipe.roast" id="roast">
         <option value="" disabled selected hidden>Roast</option>
         <option value="Light">Light</option>
         <option value="Medium">Medium</option>
@@ -18,7 +18,7 @@
         <option value="Dark">Dark</option>
         <option value="Extra-Dark">Extra-Dark</option>
       </select>
-      <input list="grind" maxlength="12" placeholder="Grind" ng-model="recipe.grind">
+      <input list="grind" maxlength="12" placeholder="Grind" ng-model="vm.recipe.grind">
         <datalist id="grind">
           <option value="Fine">
           <option value="Medium">
@@ -26,8 +26,8 @@
         </datalist>
       </input>
       <div>
-      <input class="small-field" type="number" min="0" max="32767" ng-model="recipe.total_bean_amount" placeholder="Amount"></input>
-      <select class="form-placeholder small-field" id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="recipe.bean_units">
+      <input class="small-field" type="number" min="0" max="32767" ng-model="vm.recipe.total_bean_amount" placeholder="Amount"></input>
+      <select class="form-placeholder small-field" id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="vm.recipe.bean_units">
         <option value="" disabled selected hidden>Units</option>
         <option value="g">g</option>
         <option value="oz">oz</option>
@@ -39,7 +39,7 @@
   <section class="columns">
     <fieldset class="details">
       <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater_darker.svg"/> Details</h4></legend>
-      <input class="top-row" list="water-type" maxlength="50" placeholder="Type" ng-model="recipe.water_type">
+      <input class="top-row" list="water-type" maxlength="50" placeholder="Type" ng-model="vm.recipe.water_type">
         <datalist id="water-type">
           <option value="Tap">
           <option value="Distilled">
@@ -47,16 +47,16 @@
           <option value="Deionized">
         </datalist>
       <div>
-      <input class="small-field" type="number" min="0" max="32767" placeholder="Amount" ng-model="recipe.total_water_amount"></input>
-        <select class="form-placeholder small-field" id="water-units"list="water-units" maxlength="12" ng-model="recipe.water_units" placeholder="Units">
+      <input class="small-field" type="number" min="0" max="32767" placeholder="Amount" ng-model="vm.recipe.total_water_amount"></input>
+        <select class="form-placeholder small-field" id="water-units"list="water-units" maxlength="12" ng-model="vm.recipe.water_units" placeholder="Units">
           <option value="" disabled selected hidden>Units</option>
           <option value="oz">oz</option>
           <option value="cc">cc</option>
           <option value="mL">mL</option>
         </select>
       </div>
-      <input type="number" placeholder="Temp in &deg;F" ng-model="recipe.temp" max="32767"></input>
-    <select class="form-placeholder" list="orientation" placeholder="Orientation" ng-model="recipe.orientation"  id="orientation">
+      <input type="number" placeholder="Temp in &deg;F" ng-model="vm.recipe.temp" max="32767"></input>
+    <select class="form-placeholder" list="orientation" placeholder="Orientation" ng-model="vm.recipe.orientation"  id="orientation">
       <option value="Standard">Standard</option>
       <option value="Inverted">Inverted</option>
     </select>

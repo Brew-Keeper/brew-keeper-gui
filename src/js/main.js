@@ -6,9 +6,12 @@
           templateUrl: 'partials/recipe-list.html',
           controller: 'WhoAmIController'
         })
-        .when('/reset-pw', {
-          templateUrl: 'partials/reset-pw.html',
-          controller: 'changePassword'
+        .when('/info', {
+          templateUrl: 'partials/more-info.html',
+          controller: 'LoginController',
+        })
+        .when('/login', {
+          templateUrl: 'partials/login.html'
         })
         .when('/public',{
           templateUrl: 'partials/public-list.html',
@@ -26,33 +29,27 @@
           templateUrl: 'partials/public-brewit.html',
           controller: 'public-brewIt'
         })
-        .when('/login', {
-          templateUrl: 'partials/login.html'
-        })
-        .when('/info', {
-          templateUrl: 'partials/more-info.html',
-          controller: 'LoginController',
-        })
         .when('/reset-pw', {
           templateUrl: 'partials/reset-pw.html',
           controller: 'changePassword'
         })
-        .when('/:username/new', {
-          templateUrl: 'partials/recipe-create.html',
-          controller: 'createNewRecipe'
+        .when('/:username', {
+          templateUrl: 'partials/recipe-list.html',
+          controller: 'recipeList'
         })
         .when('/:username/clone/:id', {
           templateUrl: 'app/recipes/clone.html',
           controller:  'CloneController',
           controllerAs: 'cloneVm'
         })
+        .when('/:username/new', {
+          templateUrl: 'app/recipes/recipe-create.html',
+          controller: 'CreateNewRecipeController',
+          controllerAs: 'vm'
+        })
         .when('/:username/:id', {
           templateUrl: 'partials/recipe-detail.html',
           controller: 'recipeDetail'
-        })
-        .when('/:username', {
-          templateUrl: 'partials/recipe-list.html',
-          controller: 'recipeList'
         })
         .when('/:username/:id/brewit', {
           templateUrl: 'app/brew/brew-it.html',
