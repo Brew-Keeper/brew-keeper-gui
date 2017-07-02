@@ -1,54 +1,76 @@
-;(function(){//IFEE
+;(function() {  //IFEE
+  'use strict';
 
-angular.module('brewKeeper')
-  .controller('recipeList', function($rootScope, $scope, $http, $routeParams, $location){
+  angular
+    .module('brewKeeper')
+    .controller('recipeList', RecipeListController)
+    .controller('publicRecipe', PublicRecipeController);
 
-      var username = $routeParams.username;
+  RecipeListController.$inject =
+    ['$rootScope', '$scope', '$http', '$routeParams', '$location'];
 
-      $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/')
-        .then(function(response){
-          $scope.recipes = response.data;
-          $scope.username = username;
+  function RecipeListController($rootScope, $scope, $http, $routeParams, $location) {
+    var vm = this;
+    vm.listBrewIt = listBrewIt;
+    vm.rateRecipe = rateRecipe;
+    vm.ratings = [{ max: 5 }];
+    vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+    vm.recipes = [];
+    vm.search = search;
 
-          $scope.ratings = [{
-              max: 5
-          }];
+    activate();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // FUNCTIONS //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Prepare the page.
+     */
+    function activate() {
+      // Get the recipes for this user
+      $http.get(vm.recipeUrl)
+        .then(function(response) {
+          vm.recipes = response.data;
         });
+    }
 
-      $scope.listBrewIt = function(username, id){
-        //get indexOf recipe id
-		var recipeId;
-        for (var index = 0; index < $scope.recipes.length; index ++) {
-          if($scope.recipes[index].id == id){
-			  recipeId = index;
-          }
+    /**
+     * Brew the selected recipe.
+     */
+    function listBrewIt(id) {
+      //get indexOf recipe id
+      var recipeId;
+      for (var index = 0; index < vm.recipes.length; index ++) {
+        if (vm.recipes[index].id == id) {
+          recipeId = index;
         }
-        $rootScope.steps = $scope.recipes[recipeId].steps;
-        $rootScope.detail = $scope.recipes[recipeId];
-        $location.path("/" + username + "/" + id + "/brewit");
-        $(document).scrollTop(0);
-      };//end listBrewit function
+      }
+      // FIXME: We set these on $rootScope, but don't end up using them.
+      $rootScope.steps = vm.recipes[recipeId].steps;
+      $rootScope.detail = vm.recipes[recipeId];
+      $location.path("/" + $rootScope.username + "/" + id + "/brewit");
+    }
 
-      $scope.rateRecipe = function (rating, id) {
-        var newRating = {"rating": rating};
-        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', newRating);
-      };
+    function rateRecipe(rating, id) {
+      var newRating = {"rating": rating};
+      $http.patch(vm.recipeUrl + id + '/', newRating);
+    }
 
-      $scope.search = function(searchString){
-        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/?search=' + searchString)
-          .then(function(response){
-            $scope.recipes = response.data;
-            $scope.rating = 0;
-            $scope.ratings = [{
-                max: 5
-            }];
-          });
-      }; //end search function
-
-  })//end recipe-list controller
+    function search(searchString) {
+      $http.get(vm.recipeUrl + '?search=' + searchString)
+        .then(function(response){
+          vm.recipes = response.data;
+          $scope.rating = 0;
+        });
+    }
+  }
 
 
-  .controller('publicRecipe', function($http, $scope, $rootScope, $location, $routeParams){
+  PublicRecipeController.$inject =
+    ['$http', '$scope', '$rootScope', '$location', '$routeParams'];
+
+  function PublicRecipeController($http, $scope, $rootScope, $location, $routeParams) {
 
     $scope.search = function(searchString){
       $http.get($rootScope.baseUrl + '/api/users/public/recipes/?search=' + searchString)
@@ -110,7 +132,5 @@ angular.module('brewKeeper')
       $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/' + ratingId + '/', newRating);
     };//end updateRating
 
-
-  });//end publicRecipe controller
-
-})();//END IFEE
+  }//end publicRecipe controller
+})();
