@@ -1,7 +1,6 @@
 <nav class="recipe-list">
   <h3 ng-show="username">{{username}}'s Recipes</h3>
-  <input class="magnify" placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="vm.search(searchString)">
-  </input>
+  <input class="magnify" placeholder="&#x1f50d" ng-model="searchString" name="search" ng-submit="vm.search(searchString)"/>
   <select name="OrderBy" value="OrderBy" ng-model="query">
     <option value="">Sort By</>
     <option value="-rating">Highest Rating</option>
@@ -11,10 +10,9 @@
     <option value="-brew_count">Most Brewed</option>
     <option value="brew_count">Least Brewed</option>
   </select>
-    <button href="" name="search" class="clicker-button" ng-click="vm.search(searchString)">Search</button>
+  <button href="" name="search" class="clicker-button" ng-click="vm.search(searchString)">Search</button>
 </nav>
-  <div class="coffee-spinner"><img src="img/coffee-spinner.gif" ng-hide="vm.recipes"/></div>
-
+<div class="coffee-spinner"><img src="img/coffee-spinner.gif" ng-hide="vm.recipes"/></div>
 <section class="recipe-list" ng-repeat="recipe in vm.recipes | orderBy: '-rating' | orderBy:query | filter:filter">
   <a class="recipe-title" href="#{{username}}/{{recipe.id}}">{{recipe.title}}</a>
   <span>{{recipe.bean_name}}</span>

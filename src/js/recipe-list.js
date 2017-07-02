@@ -36,7 +36,7 @@
     }
 
     /**
-     * Brew the selected recipe.
+     * Brew a recipe in the list.
      */
     function listBrewIt(id) {
       //get indexOf recipe id
@@ -52,11 +52,17 @@
       $location.path("/" + $rootScope.username + "/" + id + "/brewit");
     }
 
+    /**
+     * Rate a recipe in the list.
+     */
     function rateRecipe(rating, id) {
       var newRating = {"rating": rating};
       $http.patch(vm.recipeUrl + id + '/', newRating);
     }
 
+    /**
+     * Display all of the user's recipes matching the given string.
+     */
     function search(searchString) {
       $http.get(vm.recipeUrl + '?search=' + searchString)
         .then(function(response) {
