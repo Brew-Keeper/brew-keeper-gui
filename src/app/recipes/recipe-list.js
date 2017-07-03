@@ -141,9 +141,6 @@
       $rootScope.detail = vm.recipes[recipeId];
       // Switch to the public brew-it for this recipe
       $location.path("/public/" + id + "/brewit");
-      // TODO: This can probably come out, as it is done in the public brew-it
-      // controller
-      $(document).scrollTop(0);
     }
 
     /**
