@@ -46,8 +46,8 @@
           controllerAs: 'cloneVm'
         })
         .when('/:username/new', {
-          templateUrl: 'app/recipes/recipe-create.html',
-          controller: 'CreateNewRecipeController',
+          templateUrl: 'app/recipes/recipe-creation.html',
+          controller: 'RecipeCreationController',
           controllerAs: 'vm'
         })
         .when('/:username/:id', {

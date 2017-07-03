@@ -3,12 +3,12 @@
 
   angular
     .module('brewKeeper')
-    .controller('CreateNewRecipeController', CreateNewRecipeController);
+    .controller('RecipeCreationController', RecipeCreationController);
 
-  CreateNewRecipeController.$inject =
+  RecipeCreationController.$inject =
     ['$scope', '$http', '$location', '$rootScope', '$cookies'];
 
-  function CreateNewRecipeController($scope, $http, $location, $rootScope, $cookies) {
+  function RecipeCreationController($scope, $http, $location, $rootScope, $cookies) {
     var vm = this;
     vm.createNew = createNew;
     vm.recipe = {};
