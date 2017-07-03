@@ -17,7 +17,7 @@
     vm.nextStep = nextStep;
     vm.notes = {};
     vm.rateRecipe = rateRecipe;
-    vm.ratings = [];
+    vm.ratings = [{max: 5}];
     vm.recipeUrl = null;
     vm.resetBrew = resetBrew;
     vm.restartBrew = restartBrew;
@@ -50,9 +50,6 @@
           vm.steps = response.data.steps;
           vm.notes = response.data.brewnotes;
           vm.countdownVal = response.data.total_duration;
-          vm.ratings = [{
-              max: 5
-          }];
           var stepArray = []; //create an array of step #'s'
           for(var step in vm.steps){
             stepArray.push(vm.steps[step].step_number);

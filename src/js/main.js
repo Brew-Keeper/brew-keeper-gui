@@ -98,7 +98,7 @@
             $rootScope.username = null;
             $cookies.remove("Authorization");
             $http.defaults.headers.common = {};
-            if($location.path() == "/reset-pw" || "/login" || "/info"){
+            if ($location.path() == "/reset-pw" || "/login" || "/info") {
               return;
             }
             $location.path('/public');

@@ -13,7 +13,7 @@
     var vm = this;
     vm.listBrewIt = listBrewIt;
     vm.rateRecipe = rateRecipe;
-    vm.ratings = [{ max: 5 }];
+    vm.ratings = [{max: 5}];
     vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
     vm.recipes = [];
     vm.search = search;
@@ -81,7 +81,7 @@
     vm.publicListBrewIt = publicListBrewIt;
     vm.search = search;
     vm.updateRating = updateRating;
-    vm.ratings = [{ max: 5 }];
+    vm.ratings = [{max: 5}];
     vm.recipes = [];
 
     activate();
