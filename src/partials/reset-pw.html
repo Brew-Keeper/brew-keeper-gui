@@ -1,4 +1,4 @@
-<form class="changeForm" name="changeForm" ng-controller="changePassword as changePwdVm" ng-submit="changePwdVm.resetPassword(changeForm.confirmNewPassword.$error.match)">
+<form class="changeForm" name="changeForm" ng-controller="ChangePasswordController as changePwdVm" ng-submit="changePwdVm.resetPassword(changeForm.confirmNewPassword.$error.match)">
   <div class="columns general">
     <label class="changeForm" for="changeForm">Reset Password</label>
     <input type="text" name="username" placeholder="username" ng-model="changePwdVm.users.username" required>

@@ -3,7 +3,7 @@
   angular.module('brewKeeper', ['ngRoute', 'timer', 'ngCookies', 'validation.match'], function($httpProvider, $routeProvider){
       $routeProvider
         .when('/',{
-          templateUrl: 'partials/recipe-list.html',
+          templateUrl: 'app/recipes/recipe-list.html',
           controller: 'WhoAmIController'
         })
         .when('/info', {
@@ -33,7 +33,7 @@
         })
         .when('/reset-pw', {
           templateUrl: 'partials/reset-pw.html',
-          controller: 'changePassword'
+          controller: 'ChangePasswordController'
         })
         .when('/:username', {
           templateUrl: 'app/recipes/recipe-list.html',
@@ -68,7 +68,7 @@
 
     .controller('MainController', function($http, $scope, $route, $routeParams, $location, $cookies, $rootScope) {
       var vm = this;
-      vm.changePassword = false;
+      $rootScope.changePassword = false;
       vm.logout = logout;
 
       activate();
@@ -122,7 +122,7 @@
        */
       function logout() {
         var logoutHeader = {"Authorization": $cookies.get("Authorization")};
-        vm.changePassword = false;
+        $rootScope.changePassword = false;
 
         // Log the user out of the back-end API
         $http.post($rootScope.baseUrl + '/api/logout/', logoutHeader)

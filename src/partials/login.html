@@ -29,7 +29,7 @@
   </article>
 </section>
 <section class="more-info reset-password hidden columns general">
-  <form name="request-reset" class="register" ng-controller="changePassword as changePwdVm" ng-submit="changePwdVm.requestReset()">
+  <form name="request-reset" class="register" ng-controller="ChangePasswordController as changePwdVm" ng-submit="changePwdVm.requestReset()">
     <label>Reset Password</label>
     <div class="columns general">
      <input class="register-user" type="text" name="username" placeholder=" username" ng-model="changePwdVm.users.username" required>
@@ -40,7 +40,7 @@
     </div>
   </form><!-- end reset password form -->
 </section>
-<form class="changeForm" name="changeForm" ng-show="changePassword" ng-controller="changePassword as changePwdVm" ng-submit="changePwdVm.submitChangePassword(changeForm.confirmNewPassword.$error.match)">
+<form class="changeForm" name="changeForm" ng-show="changePassword" ng-controller="ChangePasswordController as changePwdVm" ng-submit="changePwdVm.submitChangePassword(changeForm.confirmNewPassword.$error.match)">
   <div class="columns general">
     <label class="changeForm" for="changeForm">Change Password</label>
     <input type="password" name="oldPassword" placeholder=" current password" ng-model="changePwdVm.users.old_password" required>
