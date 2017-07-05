@@ -26,7 +26,9 @@
     //////////////////////////////////////////////////////////////////////////
 
     /**
-     * Record the step to which this timer belongs.
+     * Initialize the timer. Resetting a timer subtracts one second from its
+     * intended total time, so we start by resetting it. This way, we will have
+     * consistent durations after subsequent resets.
      *
      * @param {(number|string)} stepId The unique identifier for the timer's step.
      */
