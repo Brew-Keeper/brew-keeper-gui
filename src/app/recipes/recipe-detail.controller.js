@@ -250,9 +250,11 @@
      * Submit brew note update to API.
      */
     function editNote(note) {
+      var noteView = "div.note-view" + note.id.toString();
+      var editNoteSelector = "article.edit-note" + note.id.toString();
       $http.put(vm.brewnotesUrl + note.id + '/', note)
         .then(function () {
-          $(editNote).addClass("hidden");
+          $(editNoteSelector).addClass("hidden");
           $(noteView).removeClass("hidden");
         });
     }
@@ -345,7 +347,7 @@
      * Show form to edit brew note.
      */
     function showEditNote(noteId) {
-      noteView = "div.note-view" + noteId.toString();
+      var noteView = "div.note-view" + noteId.toString();
       var editNoteSelector = "article.edit-note" + noteId.toString();
       $(noteView).addClass("hidden");
       $(editNoteSelector).removeClass("hidden");
