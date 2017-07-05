@@ -1,345 +1,484 @@
-;(function(){//IFEE
+;(function() {  // IFEE
+  'use strict';
 
-angular.module('brewKeeper')
-  .controller('recipeDetail', function($scope, $http, $location, $routeParams, $rootScope){
-      var id = $routeParams.id;
-      var username = $routeParams.username;
-      $scope.username = $routeParams.username;
-      $scope.id = $routeParams.id;
+  angular
+    .module('brewKeeper')
+    .controller('RecipeDetailController', RecipeDetailController);
+
+  RecipeDetailController.$inject =
+    ['$http', '$location', '$routeParams', '$rootScope'];
+
+  function RecipeDetailController($http, $location, $routeParams, $rootScope) {
+    $rootScope.cloneRecipe = cloneRecipe;
+    $rootScope.makePublic = makePublic;
+
+    var vm = this;
+    vm.addBrewNote = addBrewNote;
+    vm.addStep = addStep;
+    vm.brewnotesUrl = '';
+    vm.decreaseStep = decreaseStep;
+    vm.deleteNote = deleteNote;
+    vm.deleteRecipe = deleteRecipe;
+    vm.deleteStep = deleteStep;
+    vm.detail = {};
+    vm.editNote = editNote;
+    vm.editRecipe = editRecipe;
+    vm.editStep = editStep;
+    vm.hideEditStep = hideEditStep;
+    vm.increaseStep = increaseStep;
+    vm.notes = [];
+    vm.rateRecipe = rateRecipe;
+    vm.ratings = [{max: 5}];
+    vm.recipeUrl = '';
+    vm.recipesUrl = '';
+    vm.showAddBrewNote = showAddBrewNote;
+    vm.showAddSteps = showAddSteps;
+    vm.showCloneModal = showCloneModal;
+    vm.showEditNote = showEditNote;
+    vm.showEditStep = showEditStep;
+    vm.showMakePublic = showMakePublic;
+    vm.showNoteIcons = showNoteIcons;
+    vm.step = {};
+    vm.steps = [];
+
+    activate();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // FUNCTIONS //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Prepare the page.
+     */
+    function activate() {
       $(document).scrollTop(0);
 
-      $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-        .then(function(response){
-          $rootScope.detail = response.data;
-          $rootScope.steps = response.data.steps;
-          $rootScope.notes = response.data.brewnotes;
-          var currentRating = $rootScope.detail.rating;
-          $scope.rating = 0;
-          $scope.ratings = [{
+      vm.recipesUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+      vm.recipeUrl = vm.recipesUrl + $routeParams.id + '/';
+      vm.brewnotesUrl = vm.recipeUrl + 'brewnotes/';
+
+      $http.get(vm.recipeUrl)
+        .then(function(response) {
+          vm.detail = response.data;
+          vm.steps = response.data.steps;
+          vm.notes = response.data.brewnotes;
+          var currentRating = vm.detail.rating;
+          vm.ratings = [{
               current: currentRating,
               max: 5
           }];
-
-      }); //end http.get
-
-
-      $scope.rateRecipe = function (rating) {
-        var newRating = {"rating": rating};
-        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', newRating);
-      };
-
-
-      $scope.EliminateRecipe = function() {
-        $(".wrapper").addClass("openerror");
-        $("section.confirm-eliminate-modal").removeClass("inactive");
-        $("button.cancel-clone-fail").on("click", function() {
-          $(".wrapper").removeClass("openerror");
-          $("section.confirm-eliminate-modal").addClass("inactive");
-          return;
         });
-        $("button.confirm-eliminate-fail").on("click", function() {
-          $(".wrapper").removeClass("openerror");
-          $("section.confirm-eliminate-modal").addClass("inactive");
-          $http.delete($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-            .then(function(){
-              $location.path('/'+ username);
-            });
-        });
-      }; //end Eliminate function
 
-      $scope.deleteStep = function(stepNumber, stepId){
-        $(".wrapper").addClass("openerror");
-        $("section.confirm-delete-modal").removeClass("inactive");
-        $("button.cancel-delete-fail").on("click", function() {
-          $(".wrapper").removeClass("openerror");
-          $("section.confirm-delete-modal").addClass("inactive");
-          return;
-        });
-        $("button.confirm-delete-fail").on("click", function() {
-          $(".wrapper").removeClass("openerror");
-          $("section.confirm-delete-modal").addClass("inactive");
-          $http.delete($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + stepId + '/')
-          .then(function(){
-            $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-            .then(function(response){
-              $scope.steps = response.data.steps;
-              if(response.data.steps.length === 0){
-                $(".brew-it-button").addClass("hidden");
-                $(".no-steps").removeClass("hidden");
-              }
-            });
-          });
-        });
-      }; //end deleteStep function
-
-      $scope.hideEditStep = function(stepId){
-        stepId = "div." + stepId.toString();
-        $(stepId).toggleClass("hidden");
-      };
-
-      $scope.editStep = function(step){
-        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + step.id + '/', step);
-      }; //end editStep function
-
-      $scope.showEditStep = function(stepId){
-        stepId = "div." + stepId.toString();
-        $(stepId).toggleClass("hidden");
-      };
-
-      $scope.increaseStep = function(step){
-        if(step.step_number >= $rootScope.steps.length){
-          return;
-        }
-
-        //code to swap the steps manually incase of a slow connection
-        // var currentStep = step.step_number - 1
-        // var nextStep = step.step_number
-        var swapStep = $rootScope.steps[step.step_number - 1];
-        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number];
-        $rootScope.steps[step.step_number] = swapStep;
-        // end code to swap the steps manually
-
-        step.step_number++;
-
-        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + step.id + '/', step).then(function(){
-          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-            .then(function(response){
-              $rootScope.steps = response.data.steps;
-            });
-        });
-      }; //end increaseStep function
-
-
-      $scope.decreaseStep = function(step){
-        if(step.step_number <= 1){
-          return;
-        }
-        //code to swap the steps manually incase of a slow connection
-        // var currentStep = step.step_number - 1
-        // var prevStep = step.step_number - 2
-        var swapStep = $rootScope.steps[step.step_number - 1];
-        $rootScope.steps[step.step_number - 1] = $rootScope.steps[step.step_number - 2];
-        $rootScope.steps[step.step_number - 2] = swapStep;
-        // end code to swap the steps manually
-
-        step.step_number--;
-        $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/' + step.id + '/', step).then(function(){
-          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-            .then(function(response){
-              $rootScope.steps = response.data.steps;
-            });
-        });
-      }; //end decreaseStep function
-
-      $scope.step = { };//Might need to prepopulate this with empty strings for each key... Maybe...
-      $scope.addStep=function(){ //add step function
-        $scope.step.step_number = $scope.steps.length + 1;
+      // Show the edit form if user clicks edit
+      $('.edit-button').on('click', function() {
+        $('.edit-recipe').removeClass("hidden");
+        $('.recipe-view').addClass("hidden");
         $('.input-focus').focus();
-        $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/steps/', $scope.step).then(function(){
-          $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-            .then(function(response){
-              $(".brew-it-button").removeClass("hidden");
-              $(".no-steps").addClass("hidden");
-              $rootScope.steps = response.data.steps;
-            });
-        });
-        $scope.step= { };
-      }; //end new step submit function
+      });
 
-    $scope.showAddSteps = function(){
-      $("form.create-new-step").toggleClass("hidden");
-        $('.input-focus').focus();
-    };//Reveal "Add Step" when new recipe form is submitted.
+      // Hide the edit form if user cancels
+      $('.cancel-recipe-edit').on('click', function() {
+        $('.recipe-view').removeClass("hidden");
+        $('.edit-recipe').addClass("hidden");
+      });
 
-    $('.edit-button').on('click', function(){
-      $('.edit-recipe').removeClass("hidden");
-      $('.recipe-view').addClass("hidden");
-      $('.input-focus').focus();
-    });
+      // Handle click on Add Steps
+      $(".no-steps").click(vm.showAddSteps);
 
-    $(".no-steps").click(function(){
-      $scope.showAddSteps();
-    });
+      // Handle confirmation of clone creation
+      // $("button.confirm-clone-fail").on("click", vm.cloneRecipe);
 
-  $scope.editRecipe = function(recipe){
-    $http.patch($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/', recipe)
-    .then( function () {
-      $('.edit-recipe').addClass("hidden");
-      $('.recipe-view').removeClass("hidden");
-    });
-  }; //end editRecipe function
-    $('.cancel-recipe-edit').on('click', function(){
-      $('.recipe-view').removeClass("hidden");
-      $('.edit-recipe').addClass("hidden");
-    });
-
-    // Function for cloning recipes
-    $scope.cloneRecipe = function(){
-      $(".wrapper").addClass("openerror");
-      $("section.confirm-clone-modal").removeClass("inactive");
+      // Close the clone modal if the user cancels
       $("button.cancel-clone-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-clone-modal").addClass("inactive");
         return;
       });
-        $("button.confirm-clone-fail").on("click", function() {
-        $(".wrapper").removeClass("openerror");
-        $("section.confirm-clone-modal").addClass("inactive");
 
-        var cloneData = {};
-        cloneData.title = $scope.detail.title;
-        cloneData.bean_name = $scope.detail.bean_name;
-        cloneData.roast = $scope.detail.roast;
-        cloneData.orientation = $scope.detail.orientation;
-        cloneData.general_recipe_comment = $scope.detail.general_recipe_comment;
-        cloneData.grind = $scope.detail.grind;
-        cloneData.total_bean_amount = $scope.detail.total_bean_amount;
-        cloneData.bean_units = $scope.detail.bean_units;
-        cloneData.water_type = $scope.detail.water_type;
-        cloneData.total_water_amount = $scope.detail.total_water_amount;
-        cloneData.water_units = $scope.detail.water_units;
-        cloneData.temp = $scope.detail.temp;
-        cloneData.steps = [];
-
-        $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/', cloneData).success(function(response){
-
-          newRecipeId = response.id;
-          steps = [];
-          for(var step in $scope.detail.steps){
-            steps[step] = {};
-            steps[step].step_number = $scope.detail.steps[step].step_number;
-            steps[step].step_title = $scope.detail.steps[step].step_title;
-            steps[step].step_body = $scope.detail.steps[step].step_body;
-            steps[step].duration = $scope.detail.steps[step].duration;
-            steps[step].water_amount = $scope.detail.steps[step].water_amount;
-
-            $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + newRecipeId + '/steps/', steps[step]);//end step post
-          }//end loop to clone steps
-        })
-        .then(function(){
-          $location.path("/"+ username +"/clone/"+ newRecipeId);
-        });//end post new recipe
-      });
-    }; //end recipe clone function
-
-
-    $scope.showEditNote = function(noteId) {
-      noteView = "div.note-view" + noteId.toString();
-      editNote = "article.edit-note" + noteId.toString();
-      $(noteView).addClass("hidden");
-      $(editNote).removeClass("hidden");
-    };
-    
-
-    $scope.editNote = function(note){
-      var note_id = note.id;
-      $http.put($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/' + note_id + '/', note)
-      .then( function () {
-        $(editNote).addClass("hidden");
-        $(noteView).removeClass("hidden");
-      });
-    }; //end editNote function
-
-    $scope.deleteNote = function(noteId) {
-        $http.delete($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/' + noteId + '/')
-        .then(function(){var id = $scope.id;
-        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-          .then(function(response){
-            $rootScope.notes = response.data.brewnotes;
-          });
-        });
-    }; //end deleteNote function
-
-    $scope.showAddBrewNote = function(){
-      $(".brew-form").toggleClass("hidden");
-      $('.input-focus').focus();
-    };
-
-    $scope.addBrewNote=function(){
-      $http.post($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/brewnotes/', $scope.brewnote)
-      .success(function (data) {
-        $(".brew-form").toggleClass("hidden");
-        var id = $scope.id;
-        $http.get($rootScope.baseUrl + '/api/users/' + username + '/recipes/' + id + '/')
-          .then(function(response){
-            $rootScope.notes = response.data.brewnotes;
-          });
-      });
-
-
-        $scope.brewnote = { };
-        $scope.addNote = false;
-        };//Add Brew Note Form
-
-        $scope.showNoteIcons = function(noteId){
-          $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
-        };
-
-  $scope.makePublic = function(){ //makes recipes public
-    if ($rootScope.steps.length < 1) {
-      $(".wrapper").addClass("openerror");
-      $("section.steps-modal").removeClass("inactive");
+      // Close no-steps error modal (when attempting to make public)
       $("button.steps-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.steps-modal").addClass("inactive");
       });
-        return;
-    }
-      $(".wrapper").addClass("openerror");
-      $("section.confirm-modal").removeClass("inactive");
+
+      // Close modal after cancelling make public confirmation
       $("button.cancel-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-modal").addClass("inactive");
         return;
       });
-      $("button.confirm-fail").on("click", function() {
-      $("section.confirm-modal").addClass("inactive");
 
-      var publicData = {}; //build the recipe
-      publicData.title = $scope.detail.title;
-      publicData.bean_name = $scope.detail.bean_name;
-      publicData.roast = $scope.detail.roast;
-      publicData.orientation = $scope.detail.orientation;
-      publicData.general_recipe_comment = $scope.detail.general_recipe_comment;
-      publicData.grind = $scope.detail.grind;
-      publicData.total_bean_amount = $scope.detail.total_bean_amount;
-      publicData.bean_units = $scope.detail.bean_units;
-      publicData.water_type = $scope.detail.water_type;
-      publicData.total_water_amount = $scope.detail.total_water_amount;
-      publicData.water_units = $scope.detail.water_units;
-      publicData.temp = $scope.detail.temp;
-      publicData.shared_by = username;
-      publicData.steps = [];
+      // Trigger makePublic when user confirms
+      // $("button.confirm-fail").on("click", vm.makePublic);
 
-      $http.post($rootScope.baseUrl + '/api/users/public/recipes/', publicData).success(function(response){
-
-        newRecipeId = response.id;
-
-        steps = []; //build the steps
-        for(var step in $scope.detail.steps){
-          steps[step] = {};
-          steps[step].step_number = $scope.detail.steps[step].step_number;
-          steps[step].step_title = $scope.detail.steps[step].step_title;
-          steps[step].step_body = $scope.detail.steps[step].step_body;
-          steps[step].duration = $scope.detail.steps[step].duration;
-          steps[step].water_amount = $scope.detail.steps[step].water_amount;
-
-          $http.post($rootScope.baseUrl + '/api/users/pubic/recipes/' + newRecipeId + '/steps/', steps[step]);//end step post
-
-        } //end for loop to build steps
-      }) //end .success for posting new recipe to public
-
-    .then(function(){
-      $(".wrapper").addClass("openerror");
-      $("section.sharing-modal").removeClass("inactive");
+      // Close the made public success modal
       $("button.sharing-not-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.sharing-modal").addClass("inactive");
       });
-    });
-      });//end confirm-fail
+    }
 
-  }; // end makePublic function
-}); //end recipDetail controller
+    /**
+     * Add a brew note to this recipe with the filled-out info.
+     */
+    function addBrewNote() {
+      $http.post(vm.brewnotesUrl, vm.brewnote)
+        .success(function (data) {
+          $(".brew-form").toggleClass("hidden");
+          $http.get(vm.recipeUrl)
+            .then(function(response){
+              vm.notes = response.data.brewnotes;
+            });
+        });
 
-})();//END Angular IFEE
+      // Reset the brew note form data
+      vm.brewnote = {};
+    }
+
+    /**
+     * Add a new step to the recipe.
+     */
+    function addStep() {
+      vm.step.step_number = vm.steps.length + 1;
+      $('.input-focus').focus();
+      $http.post(vm.recipeUrl + 'steps/', vm.step)
+        .then(function(){
+          $http.get(vm.recipeUrl)
+            .then(function(response){
+              // Show the Brew It button, hide the Add Steps button
+              $(".brew-it-button").removeClass("hidden");
+              $(".no-steps").addClass("hidden");
+              vm.steps = response.data.steps;
+            });
+        });
+      vm.step = {};
+    }
+
+    /**
+     * Move the selected step further up the order.
+     */
+    function decreaseStep(step) {
+      if (step.step_number <= 1) {
+        return;
+      }
+      // Swap the steps
+      // var currentStep = step.step_number - 1
+      // var prevStep = step.step_number - 2
+      var swapStep = vm.steps[step.step_number - 1];
+      vm.steps[step.step_number - 1] = vm.steps[step.step_number - 2];
+      vm.steps[step.step_number - 2] = swapStep;
+
+      step.step_number--;
+      $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
+        .then(function() {
+          $http.get(vm.recipeUrl)
+            .then(function(response){
+              vm.steps = response.data.steps;
+            });
+        });
+    }
+
+    /**
+     * Delete the selected brew note.
+     */
+    function deleteNote(noteId) {
+        $http.delete(vm.brewnotesUrl + noteId + '/')
+          .then(function() {
+            $http.get(vm.recipeUrl)
+              .then(function(response) {
+                vm.notes = response.data.brewnotes;
+              });
+          });
+    }
+
+    /**
+     * Delete this recipe.
+     */
+    function deleteRecipe() {
+      // Show modal to confirm action
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-eliminate-modal").removeClass("inactive");
+      // Hide modal if action cancelled
+      $("button.cancel-clone-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.confirm-eliminate-modal").addClass("inactive");
+        return;
+      });
+      // Hide modal, delete recipe, and return to recipe list upon confirmation
+      $("button.confirm-eliminate-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.confirm-eliminate-modal").addClass("inactive");
+        $http.delete(vm.recipeUrl)
+          .then(function() {
+            $location.path('/'+ $rootScope.username);
+          });
+      });
+    }
+
+    /**
+     * Delete the selected step.
+     */
+    function deleteStep(stepNumber, stepId) {
+      // Show modal to confirm action
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-delete-modal").removeClass("inactive");
+      // Hide modal if action cancelled
+      $("button.cancel-delete-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.confirm-delete-modal").addClass("inactive");
+        return;
+      });
+      // Hide modal and delete step upon confirmation
+      $("button.confirm-delete-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("section.confirm-delete-modal").addClass("inactive");
+        $http.delete(vm.recipeUrl + 'steps/' + stepId + '/')
+          .then(function() {
+            $http.get(vm.recipeUrl)
+              .then(function(response){
+                vm.steps = response.data.steps;
+                if (response.data.steps.length === 0) {
+                  $(".brew-it-button").addClass("hidden");
+                  $(".no-steps").removeClass("hidden");
+                }
+              });
+          });
+      });
+    }
+
+    /**
+     * Submit brew note update to API.
+     */
+    function editNote(note) {
+      $http.put(vm.brewnotesUrl + note.id + '/', note)
+        .then(function () {
+          $(editNote).addClass("hidden");
+          $(noteView).removeClass("hidden");
+        });
+    }
+
+    /**
+     * Submit the edited recipe to the API for saving.
+     */
+    function editRecipe() {
+      $http.patch(vm.recipeUrl, vm.detail)
+        .then(function () {
+          $('.edit-recipe').addClass("hidden");
+          $('.recipe-view').removeClass("hidden");
+        });
+    }
+
+    /**
+     * Submit to the API changes made to this step.
+     */
+    function editStep(step) {
+      $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step);
+    }
+
+    /**
+     * Hide the step-editing UI elements.
+     */
+    function hideEditStep(stepId) {
+      stepId = stepId.toString();
+      $("div." + stepId).toggleClass("hidden");
+    }
+
+    /**
+     * Move the selected step further down the step order.
+     */
+    function increaseStep(step) {
+      if (step.step_number >= vm.steps.length) {
+        return;
+      }
+      // Swap the steps
+      // var currentStep = step.step_number - 1
+      // var nextStep = step.step_number
+      var swapStep = vm.steps[step.step_number - 1];
+      vm.steps[step.step_number - 1] = vm.steps[step.step_number];
+      vm.steps[step.step_number] = swapStep;
+      // end code to swap the steps manually
+
+      step.step_number++;
+
+      $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
+        .then(function() {
+          $http.get(vm.recipeUrl)
+            .then(function(response){
+              vm.steps = response.data.steps;
+            });
+        });
+    }
+
+    /**
+     * Rate this recipe.
+     */
+    function rateRecipe(rating) {
+      var newRating = {"rating": rating};
+      $http.patch(vm.recipeUrl, newRating);
+    }
+
+    /**
+     * Show the button to add a brew note.
+     */
+    function showAddBrewNote() {
+      $(".brew-form").toggleClass("hidden");
+      $('.input-focus').focus();
+    }
+
+    /**
+     * Reveal "Add Step" when new recipe form is submitted.
+     */
+    function showAddSteps(){
+      $("form.create-new-step").toggleClass("hidden");
+        $('.input-focus').focus();
+    }
+
+    /**
+     * Show the confirm clone creation modal.
+     */
+    function showCloneModal() {
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-clone-modal").removeClass("inactive");
+    }
+
+    /**
+     * Show form to edit brew note.
+     */
+    function showEditNote(noteId) {
+      noteView = "div.note-view" + noteId.toString();
+      var editNoteSelector = "article.edit-note" + noteId.toString();
+      $(noteView).addClass("hidden");
+      $(editNoteSelector).removeClass("hidden");
+    }
+
+    /**
+     * Show the step-editing UI components.
+     */
+    function showEditStep(stepId) {
+      stepId = stepId.toString();
+      $("div." + stepId).toggleClass("hidden");
+    }
+
+    /**
+     * Make a copy of this recipe to appear in the public area.
+     */
+    function showMakePublic() {
+      if (vm.steps.length < 1) {
+        // Do not allow sharing recipes with no steps
+        $(".wrapper").addClass("openerror");
+        $("section.steps-modal").removeClass("inactive");
+        return;
+      }
+
+      // Open make public confirmation
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-modal").removeClass("inactive");
+    }
+
+    /**
+     * Show the edit/delete icons for brew notes.
+     */
+    function showNoteIcons(noteId) {
+      $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // ROOTSCOPE FUNCTIONS ////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+    // TODO: Fix the modals so these can be private!
+
+    /**
+     * Create a clone of this recipe.
+     */
+    function cloneRecipe() {
+      // First, close the confirmation modal
+      $(".wrapper").removeClass("openerror");
+      $("section.confirm-clone-modal").addClass("inactive");
+
+      var cloneData = {};
+      cloneData.title = vm.detail.title;
+      cloneData.bean_name = vm.detail.bean_name;
+      cloneData.roast = vm.detail.roast;
+      cloneData.orientation = vm.detail.orientation;
+      cloneData.general_recipe_comment = vm.detail.general_recipe_comment;
+      cloneData.grind = vm.detail.grind;
+      cloneData.total_bean_amount = vm.detail.total_bean_amount;
+      cloneData.bean_units = vm.detail.bean_units;
+      cloneData.water_type = vm.detail.water_type;
+      cloneData.total_water_amount = vm.detail.total_water_amount;
+      cloneData.water_units = vm.detail.water_units;
+      cloneData.temp = vm.detail.temp;
+      cloneData.steps = [];
+
+      var newRecipeId = null;
+      $http.post(vm.recipesUrl, cloneData)
+        .success(function(response) {
+          newRecipeId = response.id;
+          var steps = [];
+          for (var step in vm.detail.steps) {
+            steps[step] = {};
+            steps[step].step_number = vm.detail.steps[step].step_number;
+            steps[step].step_title = vm.detail.steps[step].step_title;
+            steps[step].step_body = vm.detail.steps[step].step_body;
+            steps[step].duration = vm.detail.steps[step].duration;
+            steps[step].water_amount = vm.detail.steps[step].water_amount;
+
+            // Post a copy of this step to the new recipe
+            $http.post(vm.recipesUrl + newRecipeId + '/steps/', steps[step]);
+          }
+        })
+        .then(function() {
+          // Redirect to the clone editor
+          $location.path('/' + $rootScope.username + '/clone/' + newRecipeId);
+        });
+    }
+
+    /**
+     * Make a copy of this recipe to appear in the public area.
+     */
+    function makePublic() {
+      // First, close the confirmation modal
+      $("section.confirm-modal").addClass("inactive");
+
+      // Gather the relevant data
+      var publicData = {};
+      publicData.title = vm.detail.title;
+      publicData.bean_name = vm.detail.bean_name;
+      publicData.roast = vm.detail.roast;
+      publicData.orientation = vm.detail.orientation;
+      publicData.general_recipe_comment = vm.detail.general_recipe_comment;
+      publicData.grind = vm.detail.grind;
+      publicData.total_bean_amount = vm.detail.total_bean_amount;
+      publicData.bean_units = vm.detail.bean_units;
+      publicData.water_type = vm.detail.water_type;
+      publicData.total_water_amount = vm.detail.total_water_amount;
+      publicData.water_units = vm.detail.water_units;
+      publicData.temp = vm.detail.temp;
+      publicData.shared_by = $rootScope.username;
+      publicData.steps = [];
+
+      $http.post($rootScope.baseUrl + '/api/users/public/recipes/', publicData)
+        .success(function(response) {
+          var newRecipeId = response.id;
+
+          // Now that we have the new recipe, add the steps
+          var steps = []; //build the steps
+          for (var step in vm.detail.steps) {
+            steps[step] = {};
+            steps[step].step_number = vm.detail.steps[step].step_number;
+            steps[step].step_title = vm.detail.steps[step].step_title;
+            steps[step].step_body = vm.detail.steps[step].step_body;
+            steps[step].duration = vm.detail.steps[step].duration;
+            steps[step].water_amount = vm.detail.steps[step].water_amount;
+
+            $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
+          }
+        })
+        .then(function() {
+          $(".wrapper").addClass("openerror");
+          $("section.sharing-modal").removeClass("inactive");
+        });
+    }
+  }
+})();

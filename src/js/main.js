@@ -52,7 +52,8 @@
         })
         .when('/:username/:id', {
           templateUrl: 'partials/recipe-detail.html',
-          controller: 'recipeDetail'
+          controller: 'RecipeDetailController',
+          controllerAs: 'vm',
         })
         .when('/:username/:id/brewit', {
           templateUrl: 'app/brew/brew-it.html',
