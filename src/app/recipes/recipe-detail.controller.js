@@ -271,7 +271,7 @@
     }
 
     /**
-     * Submit to the API changes made to this step.
+     * Submit the API changes made to this step.
      */
     function editStep(step) {
       $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step);
