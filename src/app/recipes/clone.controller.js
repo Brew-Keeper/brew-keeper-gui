@@ -8,9 +8,9 @@
   CloneController.$inject = ['$scope', '$http', '$routeParams', '$location', '$rootScope'];
 
   function CloneController($scope, $http, $routeParams, $location, $rootScope) {
-    var cloneVm = this;
-    cloneVm.finishClone = finishClone;
-    cloneVm.recipe = null;
+    var vm = this;
+    vm.finishClone = finishClone;
+    vm.recipe = null;
 
     activate();
 
@@ -22,12 +22,12 @@
      * Prepare the page.
      */
     function activate() {
-      cloneVm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username +
+      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username +
         '/recipes/' + $routeParams.id + '/';
 
-      $http.get(cloneVm.recipeUrl)
+      $http.get(vm.recipeUrl)
         .then(function(response) {
-          cloneVm.recipe = response.data;
+          vm.recipe = response.data;
         });
     }
 
@@ -37,7 +37,7 @@
      * @param {Object} recipe The user-entered recipe info.
      */
     function finishClone(recipe) {
-      $http.patch(cloneVm.recipeUrl, recipe)
+      $http.patch(vm.recipeUrl, recipe)
         .then(function(){
           $location.path('/'+ $rootScope.username + '/' + $routeParams.id + '/');
         });

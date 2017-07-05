@@ -43,7 +43,7 @@
         .when('/:username/clone/:id', {
           templateUrl: 'app/recipes/clone.html',
           controller:  'CloneController',
-          controllerAs: 'cloneVm'
+          controllerAs: 'vm'
         })
         .when('/:username/new', {
           templateUrl: 'app/recipes/recipe-creation.html',
