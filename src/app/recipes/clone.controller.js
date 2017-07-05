@@ -22,7 +22,7 @@
      * Prepare the page.
      */
     function activate() {
-      cloneVm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $routeParams.username +
+      cloneVm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username +
         '/recipes/' + $routeParams.id + '/';
 
       $http.get(cloneVm.recipeUrl)
@@ -39,7 +39,7 @@
     function finishClone(recipe) {
       $http.patch(cloneVm.recipeUrl, recipe)
         .then(function(){
-          $location.path("/"+ $routeParams.username + "/" + $routeParams.id + "/");
+          $location.path('/'+ $rootScope.username + '/' + $routeParams.id + '/');
         });
     }
   }
