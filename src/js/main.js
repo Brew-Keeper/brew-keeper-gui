@@ -51,7 +51,7 @@
           controllerAs: 'vm'
         })
         .when('/:username/:id', {
-          templateUrl: 'partials/recipe-detail.html',
+          templateUrl: 'app/recipes/recipe-detail.html',
           controller: 'RecipeDetailController',
           controllerAs: 'vm',
         })
