@@ -1,4 +1,4 @@
-;(function() {  //IIFE for angular
+;(function() {  // IIFE
   'use strict';
 
   angular

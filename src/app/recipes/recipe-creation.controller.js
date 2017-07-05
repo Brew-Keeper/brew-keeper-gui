@@ -1,4 +1,4 @@
-;(function() {//IFEE
+;(function() {  // IFEE
   'use strict';
 
   angular
@@ -31,17 +31,6 @@
       $(".form-placeholder").on("change", function() {
         $(this).addClass("changed");
       });
-
-      $http.get($rootScope.baseUrl + '/api/whoami/')
-        .then(function(response) {
-          $rootScope.username = response.data.username;
-        })
-        .catch(function() {
-          $rootScope.username = null;
-          $cookies.remove("Authorization");
-          $http.defaults.headers.common = {};
-          $location.path('/login');
-        });
     }
 
     /**
