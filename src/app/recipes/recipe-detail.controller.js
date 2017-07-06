@@ -62,9 +62,8 @@
           vm.detail = response.data;
           vm.steps = response.data.steps;
           vm.notes = response.data.brewnotes;
-          var currentRating = vm.detail.rating;
           vm.ratings = [{
-              current: currentRating,
+              current: vm.detail.rating,
               max: 5
           }];
         });

@@ -17,7 +17,7 @@
     vm.nextStep = nextStep;
     vm.notes = {};
     vm.rateRecipe = rateRecipe;
-    vm.ratings = [{max: 5}];
+    vm.ratings = null;
     vm.recipeUrl = null;
     vm.resetBrew = resetBrew;
     vm.restartBrew = restartBrew;
@@ -48,7 +48,6 @@
           vm.detail = response.data;
           vm.ratings = [{
               current: vm.detail.rating,
-              max: 5
           }];
           vm.steps = response.data.steps;
           vm.notes = response.data.brewnotes;

@@ -20,7 +20,7 @@
     <span>{{recipe.roast}}</span>
     <div class="col-1-4">
       <span class="rating" ng-repeat="rating in vm.ratings">
-        <span star-rating rating-value="recipe.rating" max="5" ng-click="vm.rateRecipe(recipe.rating, recipe.id)"></span>
+        <span star-rating rating-value="recipe.rating" max="maxStars" ng-click="vm.rateRecipe(recipe.rating, recipe.id)"></span>
       </span>  <!-- end star rating -->
       <span class="count"><img class="cup-icon" src="img/CoffeeCup-65.svg"/> &#215; {{recipe.brew_count}}</span>
     </div>

@@ -21,6 +21,7 @@
         // Definition of baseUrl (will eventually move to dataService)
         // $rootScope.baseUrl = 'https://brew-keeper-api.herokuapp.com';
         $rootScope.baseUrl = 'http://dev.brewkeeper.com:8000';
+        $rootScope.maxStars = 5;
         var cookie = $cookies.get("Authorization");
         $http.defaults.headers.common = {"Authorization": cookie};
 
