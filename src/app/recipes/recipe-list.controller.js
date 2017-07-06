@@ -3,8 +3,7 @@
 
   angular
     .module('brewKeeper')
-    .controller('RecipeListController', RecipeListController)
-    .controller('PublicRecipeController', PublicRecipeController);
+    .controller('RecipeListController', RecipeListController);
 
   RecipeListController.$inject =
     ['$rootScope', '$scope', '$http', '$routeParams', '$location'];
