@@ -16,7 +16,7 @@
     vm.rateRecipe = rateRecipe;
     vm.ratingOrderBy = ratingOrderBy;
     vm.ratings = [{max: $rootScope.maxStars}];
-    vm.recipeUrl = null;
+    vm.recipesUrl = null;
     vm.recipes = [];
     vm.search = search;
     vm.updateRating = updateRating;
@@ -32,17 +32,17 @@
      */
     function activate() {
       if (vm.isPublic) {
-        vm.recipeUrl = $rootScope.baseUrl + '/api/users/public/recipes/';
+        vm.recipesUrl = $rootScope.baseUrl + '/api/users/public/recipes/';
         if ($routeParams.username) {
           // If provided, show the public recipes for the specified user
           vm.search($routeParams.username);
           return;
         }
       } else {
-        vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+        vm.recipesUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
       }
       // Get the recipes for this user
-      $http.get(vm.recipeUrl)
+      $http.get(vm.recipesUrl)
         .then(function(response) {
           vm.recipes = response.data;
         });
@@ -70,6 +70,10 @@
      * Submit a rating for a public recipe.
      */
     function newRating(rating, recipeId) {
+      // Ensure that we only take this action on public recipes
+      if (!vm.isPublic) {
+        return;
+      }
       var providedRating = {"public_rating": rating};
       $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/', providedRating)
         // Now that we have posted, let's update the rating to reflect the change
@@ -85,8 +89,12 @@
      * Rate a recipe in the list.
      */
     function rateRecipe(rating, id) {
+      // Ensure that we only take this action on private recipes
+      if (vm.isPublic) {
+        return;
+      }
       var newRating = {"rating": rating};
-      $http.patch(vm.recipeUrl + id + '/', newRating);
+      $http.patch(vm.recipesUrl + id + '/', newRating);
     }
 
     /**
@@ -102,14 +110,15 @@
     }
 
     /**
-     * Display all of the user's recipes matching the given string.
+     * Display all of the user's recipes matching the given string. If no
+     * string is given, get all of the recipes at the recipes url.
      */
     function search(searchString) {
       var searchParams = '';
       if (searchString !== undefined) {
         searchParams = '?search=' + searchString;
       }
-      $http.get(vm.recipeUrl + searchParams)
+      $http.get(vm.recipesUrl + searchParams)
         .then(function(response) {
           vm.recipes = response.data;
         });
@@ -119,6 +128,10 @@
      * Update an existing public rating.
      */
     function updateRating(rating, ratingId, recipeId) {
+      // Ensure that we only take this action on public recipes
+      if (!vm.isPublic) {
+        return;
+      }
       var providedRating = {"public_rating": rating};
       $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/' + ratingId + '/', providedRating);
     }
