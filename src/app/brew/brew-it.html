@@ -1,12 +1,12 @@
 <section class="brewit-page">
   <nav class="brewit-nav">
-    <a class="brewit-title" href="#{{vm.username}}/{{vm.detail.id}}"><h2 class="brewit-title">{{vm.detail.title}}</h2></a>
+    <a class="brewit-title" href="#{{username}}/{{vm.detail.id}}"><h2 class="brewit-title">{{vm.detail.title}}</h2></a>
     <a href="" class="reset-brew clicker-button" ng-click="vm.resetBrew()">RESET</a>
     <a href="" class="hidden add-brew-note clicker-button">Add Note</a>
     <div class="stars">    <!--star ratings-->
-    <span ng-show="vm.showStars" class="post-brew rating" ng-repeat="rating in vm.ratings">
-      <span star-rating rating-value="vm.detail.rating" max="5" ng-click="vm.rateRecipe(vm.detail.rating)"></span>
-    </span>
+			<span ng-show="vm.showStars" class="post-brew rating" ng-repeat="rating in vm.ratings">
+				<div star-rating rating-value="rating.current" max="rating.max" ng-click="vm.rateRecipe(rating.current)"></div>
+			</span>
     </div>  <!--end star ratings-->
   </nav>
   <section class="brew-form hidden" >

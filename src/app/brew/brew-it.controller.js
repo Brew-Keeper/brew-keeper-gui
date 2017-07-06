@@ -27,7 +27,6 @@
     vm.stepTotal = null;
     vm.steps = {};
     vm.timerRunning = false;
-    vm.username = $rootScope.username;
 
     activate();
 
@@ -39,7 +38,7 @@
      * Prepare the page.
      */
     function activate() {
-      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + vm.username +
+      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username +
         '/recipes/' + $routeParams.id + '/';
       vm.brewNoteUrl = vm.recipeUrl + 'brewnotes/';
 
@@ -47,11 +46,16 @@
       $http.get(vm.recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
+          var currentRating = vm.detail.rating;
+          vm.ratings = [{
+              current: currentRating,
+              max: 5
+          }];
           vm.steps = response.data.steps;
           vm.notes = response.data.brewnotes;
           vm.countdownVal = response.data.total_duration;
           var stepArray = []; //create an array of step #'s'
-          for(var step in vm.steps){
+          for (var step in vm.steps) {
             stepArray.push(vm.steps[step].step_number);
           }
           vm.stepArray = stepArray;
