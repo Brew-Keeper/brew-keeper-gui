@@ -46,9 +46,7 @@
       $http.get(vm.recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
-          vm.ratings = [{
-              current: vm.detail.rating,
-          }];
+          vm.ratings = [{current: vm.detail.rating}];
           vm.steps = response.data.steps;
           vm.notes = response.data.brewnotes;
           vm.countdownVal = response.data.total_duration;
