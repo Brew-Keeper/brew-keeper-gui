@@ -46,9 +46,8 @@
       $http.get(vm.recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
-          var currentRating = vm.detail.rating;
           vm.ratings = [{
-              current: currentRating,
+              current: vm.detail.rating,
               max: 5
           }];
           vm.steps = response.data.steps;
