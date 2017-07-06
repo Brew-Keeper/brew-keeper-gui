@@ -11,12 +11,16 @@
 
   function RecipeListController($rootScope, $scope, $http, $routeParams, $location) {
     var vm = this;
+    vm.isPublic = ($location.path().indexOf('/public') === 0);
     vm.listBrewIt = listBrewIt;
+    vm.newRating = newRating;
     vm.rateRecipe = rateRecipe;
+    vm.ratingOrderBy = ratingOrderBy;
     vm.ratings = [{max: $rootScope.maxStars}];
-    vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+    vm.recipeUrl = null;
     vm.recipes = [];
     vm.search = search;
+    vm.updateRating = updateRating;
 
     activate();
 
@@ -28,6 +32,16 @@
      * Prepare the page.
      */
     function activate() {
+      if (vm.isPublic) {
+        vm.recipeUrl = $rootScope.baseUrl + '/api/users/public/recipes/';
+        if ($routeParams.username) {
+          // If provided, show the public recipes for the specified user
+          vm.search($routeParams.username);
+          return;
+        }
+      } else {
+        vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+      }
       // Get the recipes for this user
       $http.get(vm.recipeUrl)
         .then(function(response) {
@@ -49,61 +63,8 @@
       // FIXME: We set these on $rootScope, but don't end up using them.
       $rootScope.steps = vm.recipes[recipeId].steps;
       $rootScope.detail = vm.recipes[recipeId];
-      $location.path("/" + $rootScope.username + "/" + id + "/brewit");
-    }
-
-    /**
-     * Rate a recipe in the list.
-     */
-    function rateRecipe(rating, id) {
-      var newRating = {"rating": rating};
-      $http.patch(vm.recipeUrl + id + '/', newRating);
-    }
-
-    /**
-     * Display all of the user's recipes matching the given string.
-     */
-    function search(searchString) {
-      $http.get(vm.recipeUrl + '?search=' + searchString)
-        .then(function(response) {
-          vm.recipes = response.data;
-        });
-    }
-  }
-
-
-  PublicRecipeController.$inject =
-    ['$http', '$scope', '$rootScope', '$location', '$routeParams'];
-
-  function PublicRecipeController($http, $scope, $rootScope, $location, $routeParams) {
-    var vm = this;
-    vm.newRating = newRating;
-    vm.publicListBrewIt = publicListBrewIt;
-    vm.search = search;
-    vm.updateRating = updateRating;
-    vm.ratings = [{max: $rootScope.maxStars}];
-    vm.recipes = [];
-
-    activate();
-
-    ////////////////////////////////////////////////////////////////////////////
-    // FUNCTIONS //////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Prepare the page.
-     */
-    function activate() {
-      if ($routeParams.username) {
-        // If provided, show the public recipes for the specified user
-        vm.search($routeParams.username);
-      } else {
-        // ...otherwise, show all public recipes
-        $http.get($rootScope.baseUrl + '/api/users/public/recipes/')
-          .then(function(response) {
-            vm.recipes = response.data;
-          });
-      }
+      $location.path("/" + (vm.isPublic ? 'public' : $rootScope.username) +
+        "/" + id + "/brewit");
     }
 
     /**
@@ -122,32 +83,34 @@
     }
 
     /**
-     * Brew the selected public recipe.
+     * Rate a recipe in the list.
      */
-    function publicListBrewIt(id) {
-      // Get index of recipe id in vm.recipes
-      var recipeId;
-      for (var index = 0; index < vm.recipes.length; index ++) {
-        if (vm.recipes[index].id == id) {
-          recipeId = index;
-        }
-      }
-      // If we didn't find it for some reason, we're done here
-      if (recipeId === undefined) {
-        return;
-      }
-      // TODO: These rootScope assignments are currently superfluous
-      $rootScope.steps = vm.recipes[recipeId].steps;
-      $rootScope.detail = vm.recipes[recipeId];
-      // Switch to the public brew-it for this recipe
-      $location.path("/public/" + id + "/brewit");
+    function rateRecipe(rating, id) {
+      var newRating = {"rating": rating};
+      $http.patch(vm.recipeUrl + id + '/', newRating);
     }
 
     /**
-     * Search all public recipes for the specified string.
+     * Depending on whether this is a public page or not, supply the correct
+     * rating orderBy.
+     */
+    function ratingOrderBy() {
+      if (vm.isPublic) {
+        return '-combined_rating';
+      }
+
+      return '-rating';
+    }
+
+    /**
+     * Display all of the user's recipes matching the given string.
      */
     function search(searchString) {
-      $http.get($rootScope.baseUrl + '/api/users/public/recipes/?search=' + searchString)
+      var searchParams = '';
+      if (searchString !== undefined) {
+        searchParams = '?search=' + searchString;
+      }
+      $http.get(vm.recipeUrl + searchParams)
         .then(function(response) {
           vm.recipes = response.data;
         });

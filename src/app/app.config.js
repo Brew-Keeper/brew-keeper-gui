@@ -19,13 +19,13 @@
         templateUrl: 'partials/login.html'
       })
       .when('/public',{
-        templateUrl: 'app/recipes/public-list.html',
-        controller: 'PublicRecipeController',
+        templateUrl: 'app/recipes/recipe-list.html',
+        controller: 'RecipeListController',
         controllerAs: 'vm'
       })
       .when('/public/users/:username', {
-        templateUrl: 'app/recipes/public-list.html',
-        controller: 'PublicRecipeController',
+        templateUrl: 'app/recipes/recipe-list.html',
+        controller: 'RecipeListController',
         controllerAs: 'vm'
       })
       .when('/public/:id',{
