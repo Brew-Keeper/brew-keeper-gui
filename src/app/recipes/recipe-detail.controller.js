@@ -28,7 +28,7 @@
     vm.increaseStep = increaseStep;
     vm.notes = [];
     vm.rateRecipe = rateRecipe;
-    vm.ratings = [{max: 5}];
+    vm.ratings = [{max: $rootScope.maxStars}];
     vm.recipeUrl = '';
     vm.recipesUrl = '';
     vm.showAddBrewNote = showAddBrewNote;
@@ -64,7 +64,7 @@
           vm.notes = response.data.brewnotes;
           vm.ratings = [{
               current: vm.detail.rating,
-              max: 5
+              max: $rootScope.maxStars
           }];
         });
 
