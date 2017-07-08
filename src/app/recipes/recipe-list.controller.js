@@ -6,9 +6,9 @@
     .controller('RecipeListController', RecipeListController);
 
   RecipeListController.$inject =
-    ['$rootScope', '$scope', '$http', '$routeParams', '$location'];
+    ['$rootScope', '$http', '$routeParams', '$location'];
 
-  function RecipeListController($rootScope, $scope, $http, $routeParams, $location) {
+  function RecipeListController($rootScope, $http, $routeParams, $location) {
     var vm = this;
     vm.isPublic = ($location.path().indexOf('/public') === 0);
     vm.listBrewIt = listBrewIt;
