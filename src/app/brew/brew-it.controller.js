@@ -10,7 +10,6 @@
   function BrewItController($scope, $routeParams, $rootScope, dataService) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
-    vm.brewNoteUrl = null;
     vm.brewnote = {};
     vm.countdownVal = null;
     vm.detail = {};
@@ -18,7 +17,6 @@
     vm.notes = {};
     vm.rateRecipe = rateRecipe;
     vm.ratings = null;
-    vm.recipeUrl = null;
     vm.resetBrew = resetBrew;
     vm.restartBrew = restartBrew;
     vm.showStars = false;
@@ -27,6 +25,9 @@
     vm.stepTotal = null;
     vm.steps = {};
     vm.timerRunning = false;
+
+    var brewNoteUrl = null;
+    var recipeUrl = null;
 
     activate();
 
@@ -38,12 +39,12 @@
      * Prepare the page.
      */
     function activate() {
-      vm.recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
+      recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
         $routeParams.id + '/';
-      vm.brewNoteUrl = vm.recipeUrl + 'brewnotes/';
+      brewNoteUrl = recipeUrl + 'brewnotes/';
 
       $(document).scrollTop(0);
-      dataService.get(vm.recipeUrl)
+      dataService.get(recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
           vm.ratings = [{current: vm.detail.rating}];
@@ -79,7 +80,7 @@
      * Add a brew note to the recipe.
      */
     function addBrewNote() {
-      dataService.post(vm.brewNoteUrl, vm.brewnote);
+      dataService.post(brewNoteUrl, vm.brewnote);
       // Prepare for adding another brew note
       vm.brewnote = {};
     }
@@ -103,7 +104,7 @@
         recipe.brew_count = vm.detail.brew_count;
 
         // Update the database with the new brew count
-        dataService.patch(vm.recipeUrl, recipe);
+        dataService.patch(recipeUrl, recipe);
         return;
       }
 
@@ -126,7 +127,7 @@
      */
     function rateRecipe(rating) {
       var newRating = {"rating": rating};
-      dataService.patch(vm.recipeUrl, newRating);
+      dataService.patch(recipeUrl, newRating);
     }
 
     /**
