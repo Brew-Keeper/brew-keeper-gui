@@ -6,9 +6,14 @@
     .controller('RecipeListController', RecipeListController);
 
   RecipeListController.$inject =
-    ['$rootScope', '$http', '$routeParams', '$location'];
+    ['$rootScope', '$routeParams', '$location', 'dataService'];
 
-  function RecipeListController($rootScope, $http, $routeParams, $location) {
+  function RecipeListController(
+    $rootScope,
+    $routeParams,
+    $location,
+    dataService
+  ) {
     var vm = this;
     vm.isPublic = ($location.path().indexOf('/public') === 0);
     vm.listBrewIt = listBrewIt;
@@ -16,10 +21,12 @@
     vm.rateRecipe = rateRecipe;
     vm.ratingOrderBy = ratingOrderBy;
     vm.ratings = [{max: $rootScope.maxStars}];
-    vm.recipesUrl = null;
     vm.recipes = [];
     vm.search = search;
     vm.updateRating = updateRating;
+
+    var publicUrl = '/api/users/public/recipes/';
+    var recipesUrl = null;
 
     activate();
 
@@ -32,17 +39,17 @@
      */
     function activate() {
       if (vm.isPublic) {
-        vm.recipesUrl = $rootScope.baseUrl + '/api/users/public/recipes/';
+        recipesUrl = publicUrl;
         if ($routeParams.username) {
           // If provided, show the public recipes for the specified user
           vm.search($routeParams.username);
           return;
         }
       } else {
-        vm.recipesUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+        recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
       }
       // Get the recipes for this user
-      $http.get(vm.recipesUrl)
+      dataService.get(recipesUrl)
         .then(function(response) {
           vm.recipes = response.data;
         });
@@ -75,10 +82,10 @@
         return;
       }
       var providedRating = {"public_rating": rating};
-      $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/', providedRating)
-        // Now that we have posted, let's update the rating to reflect the change
+      dataService.post(publicUrl + recipeId + '/ratings/', providedRating)
+        // Now that we have posted, update the rating to reflect the change
         .then(function() {
-          $http.get($rootScope.baseUrl + '/api/users/public/recipes/')
+          dataService.get(publicUrl)
             .then(function(response){
               vm.recipes = response.data;
             });
@@ -94,7 +101,7 @@
         return;
       }
       var newRating = {"rating": rating};
-      $http.patch(vm.recipesUrl + id + '/', newRating);
+      dataService.patch(recipesUrl + id + '/', newRating);
     }
 
     /**
@@ -118,7 +125,7 @@
       if (searchString !== undefined) {
         searchParams = '?search=' + searchString;
       }
-      $http.get(vm.recipesUrl + searchParams)
+      dataService.get(recipesUrl + searchParams)
         .then(function(response) {
           vm.recipes = response.data;
         });
@@ -133,7 +140,9 @@
         return;
       }
       var providedRating = {"public_rating": rating};
-      $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + recipeId + '/ratings/' + ratingId + '/', providedRating);
+      dataService.patch(
+        publicUrl + recipeId + '/ratings/' + ratingId + '/',
+        providedRating);
     }
   }
 })();
