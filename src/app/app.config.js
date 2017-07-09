@@ -30,7 +30,8 @@
       })
       .when('/public/:id',{
         templateUrl: 'partials/public-detail.html',
-        controller: 'publicDetail'
+        controller: 'publicDetail',
+        controllerAs: 'vm'
       })
       .when('/public/:id/brewit', {
         templateUrl: 'partials/public-brewit.html',

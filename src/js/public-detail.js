@@ -1,177 +1,190 @@
-;(function(){//IFEE
-angular.module('brewKeeper')
-  .controller('publicDetail', function($http, $scope, $rootScope, $routeParams, $location){
-    $(document).scrollTop(0);
-    $scope.id = $routeParams.id;
-    var id = $routeParams.id;
-    var ratingId = null;
-    var userRating = 0;
+;(function() {  // IFEE
+  'use strict';
 
-    $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
-      .then(function(response){
-        $rootScope.detail = response.data;
-        $rootScope.steps = response.data.steps;
-        var currentRating = $rootScope.detail.average_rating;
-        $rootScope.comments = response.data.public_comments;
-        $scope.rating = 0;
-        $scope.ratings = [{
-            current: currentRating,
-            max: 5
-        }];
+  angular
+    .module('brewKeeper')
+    .controller('publicDetail', PublicDetailController);
 
-        if($rootScope.username){
-          $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/')
-          .then(function(response){
-            var publicRatings = response.data;
-              publicRatings.forEach(function(rating){
-                if (rating.username == $rootScope.username){
-                  ratingId = rating.id;
-                  $scope.ratingId = ratingId;
-                  userRating = rating.public_rating;
-                }
-                return userRating, ratingId;
+  PublicDetailController.$inject =
+    ['$rootScope', '$routeParams', '$location', 'dataService'];
+
+  function PublicDetailController(
+    $rootScope,
+    $routeParams,
+    $location,
+    dataService
+  ) {
+    var vm = this;
+    vm.addBrewNote = addBrewNote;
+    vm.comments = [];
+    vm.deleteComment = deleteComment;
+    vm.editComment = editComment;
+    vm.rateRecipe = rateRecipe;
+    vm.ratingId = null;
+    vm.showAddBrewNote = showAddBrewNote;
+    vm.showCloneRecipe = showCloneRecipe;
+    vm.showEditNote = showEditNote;
+    vm.showNoteIcons = showNoteIcons;
+    vm.userRating = null;
+    vm.userRatings = [{max: $rootScope.maxStars}];
+
+    var recipeUrl = '/api/users/public/recipes/'+ $routeParams.id + '/';
+    var ratingsUrl = recipeUrl + 'ratings/';
+    var commentsUrl = recipeUrl + 'comments/';
+
+    activate();
+
+    ////////////////////////////////////////////////////////////////////////////
+    // FUNCTIONS //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+    function activate() {
+      $(document).scrollTop(0);
+
+      dataService.get(recipeUrl)
+        .then(function(response) {
+          vm.detail = response.data;
+          vm.steps = response.data.steps;
+          var currentRating = vm.detail.average_rating;
+          vm.comments = response.data.public_comments;
+          vm.ratings = [{
+              current: currentRating,
+              max: 5
+          }];
+
+          if ($rootScope.username) {
+            dataService.get(ratingsUrl)
+              .then(function(response) {
+                var publicRatings = response.data;
+                publicRatings.forEach(function(rating) {
+                  if (rating.username == $rootScope.username) {
+                    vm.ratingId = rating.id;
+                    vm.userRating = rating.public_rating;
+                  }
+                  return;
+                });
+                vm.userRatings = [{
+                  current: vm.userRating,
+                  max: $rootScope.maxStars
+                }];
               });
-              $scope.userRating = userRating;
-              $scope.userRatings = [{
-                current: userRating,
-                max: 5
-              }];
-          });
-        }//end if(username)
-    }); //end http.get
+          }
+        });
 
-    // Function for cloning public recipes
-    $scope.cloneRecipe = function(){
-      $(".wrapper").addClass("openerror");
-      $("section.confirm-clone-modal").removeClass("inactive");
+      addListeners();
+    }
+
+    /**
+     * Add a public brew note.
+     */
+    function addBrewNote() {
+      dataService.post(commentsUrl, vm.comment)
+        .success(function (data) {
+          $(".brew-form").toggleClass("hidden");
+          dataService.get(recipeUrl)
+            .then(function(response){
+              vm.comments = response.data.public_comments;
+            });
+        });
+      vm.comment = {};
+    }
+
+    /**
+     * Add the listeners needed for this controller.
+     */
+    function addListeners() {
+      // Close the confirm clone modal if user cancels
       $("button.cancel-clone-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-clone-modal").addClass("inactive");
         return;
       });
-      $("button.confirm-clone-fail").on("click", function() {
-        $(".wrapper").removeClass("openerror");
-        $("section.confirm-clone-modal").addClass("inactive");
+    }
 
-        var cloneData = {};
-        cloneData.title = $scope.detail.title;
-        cloneData.bean_name = $scope.detail.bean_name;
-        cloneData.roast = $scope.detail.roast;
-        cloneData.orientation = $scope.detail.orientation;
-        cloneData.general_recipe_comment = $scope.detail.general_recipe_comment;
-        cloneData.grind = $scope.detail.grind;
-        cloneData.total_bean_amount = $scope.detail.total_bean_amount;
-        cloneData.bean_units = $scope.detail.bean_units;
-        cloneData.water_type = $scope.detail.water_type;
-        cloneData.total_water_amount = $scope.detail.total_water_amount;
-        cloneData.water_units = $scope.detail.water_units;
-        cloneData.temp = $scope.detail.temp;
-        cloneData.steps = [];
-
-        $http.post($rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/', cloneData).success(function(response){
-          newRecipeId = response.id;
-          steps = [];
-          for(var step in $scope.detail.steps){
-            steps[step] = {};
-            steps[step].step_number = $scope.detail.steps[step].step_number;
-            steps[step].step_title = $scope.detail.steps[step].step_title;
-            steps[step].step_body = $scope.detail.steps[step].step_body;
-            steps[step].duration = $scope.detail.steps[step].duration;
-            steps[step].water_amount = $scope.detail.steps[step].water_amount;
-
-            $http.post($rootScope.baseUrl + '/api/users/'+ $rootScope.username + '/recipes/' + newRecipeId + '/steps/', steps[step]);//end step post
-          }//end loop to clone steps
-        })
-        .then(function(){
-          $location.path("/"+ $rootScope.username +"/clone/"+ newRecipeId);
-        });//end post new recipe
-      });
-    }; //end recipe clone function
-
-    $scope.rateRecipe = function (rating) {
-      var newRating = {"public_rating": rating};
-
-      if(!ratingId) { //if the user has not rated, create new rating
-        $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/', newRating)
-        .then(function(response){ //get the updated rating
-          ratingId = response.data.id;
-          $scope.ratingId = ratingId;
-          $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/').then(function(response){
-            var currentRating = newRating.public_rating;
-            $scope.userRating = newRating.public_rating;
-            $scope.userRatings = [{
-                current: currentRating,
-                max: 5
-            }];
-          });
-        });//end .then to get new ratings
-      }//end if(!ratingId)
-
-      if(ratingId) { //if the user has already rated, update their current rating
-        $http.patch($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/ratings/' + ratingId + '/', newRating)
-        .then(function(response){ //get the updated rating
-          ratingId = response.data.id;
-          $scope.ratingId = ratingId;
-          $http.get($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/').then(function(response){
-            var currentRating = newRating.public_rating;
-            $scope.userRating = newRating.public_rating;
-            $scope.userRatings = [{
-                current: currentRating,
-                max: 5
-            }];
-          });
-        });//end .then to get new ratings
-      } //end if(ratingId)
-    }; //end public recipe rating function
-
-    $scope.showEditNote = function(noteId) {
-      noteView = "div.note-view" + noteId.toString();
-      editNote = "article.edit-note" + noteId.toString();
-      $(noteView).addClass("hidden");
-      $(editNote).removeClass("hidden");
-    };
-
-    $scope.editComment = function(comment){
-      var comment_id = comment.id;
-      $http.put($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/comments/' + comment_id + '/', comment)
-      .then( function () {
-        $(editNote).addClass("hidden");
-        $(noteView).removeClass("hidden");
-      });
-    }; //end editNote function
- 
-    $scope.deleteComment = function(commentId) {
-      $http.delete($rootScope.baseUrl + '/api/users/public/recipes/'+ id + '/comments/' + commentId + '/')
-      .then(function() {
-        var id = $scope.id;
-        $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
-        .then(function(response) {
-          $rootScope.comments = response.data.public_comments;
+    /**
+     * Delete the logged-in user's comment from this public recipe.
+     */
+    function deleteComment(commentId) {
+      dataService.delete(commentsUrl + commentId + '/')
+        .then(function() {
+          for (var i = 0; i < vm.comments.length; i++) {
+            if (vm.comments[i].id == commentId) {
+              // We have identified the key of the comment to delete
+              vm.comments.splice(i, 1);
+              break;
+            }
+          }
         });
-      });
-    }; //end deleteNote function
+    }
 
-    $scope.showAddBrewNote = function(){
-      $(".brew-form").toggleClass("hidden");
-    };
+    /**
+     * Edit the logged-in user's comment on this public recipe.
+     */
+    function editComment(comment) {
+      dataService.put(commentsUrl + comment.id + '/', comment)
+        .then(function() {
+          $("article.edit-note" + comment.id).addClass("hidden");
+          $("div.note-view" + comment.id).removeClass("hidden");
+        });
+    }
+ 
+    /**
+     * Rate this public recipe.
+     */
+    function rateRecipe(rating) {
+      var newRating = {"public_rating": rating};
+      // TODO: userRating is probably cruft
+      vm.userRating = rating;
+      vm.userRatings = [{
+          current: currentRating,
+          max: 5
+      }];
 
-    $scope.addBrewNote=function(){
-      $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/comments/', $scope.comment)
-      .success(function (data) {
-        $(".brew-form").toggleClass("hidden");
-        var id = $scope.id;
-        $http.get($rootScope.baseUrl + '/api/users/public/recipes/' + id + '/')
-          .then(function(response){
-            $rootScope.comments = response.data.public_comments;
+      // If the user has already rated, update their current rating
+      if (vm.ratingId) {
+        dataService.patch(ratingsUrl + vm.ratingId + '/', newRating);
+      }
+
+      // If the user has not rated, create new rating
+      if (!vm.ratingId) {
+        dataService.post(recipeUrl + 'ratings/', newRating)
+          .then(function(response) {
+            vm.ratingId = response.data.id;
           });
-      });
-    $scope.comment = { };
-    $scope.addNote = false;
-    };//Add Brew Note Form
+      }
+    }
 
-    $scope.showNoteIcons = function(noteId){
+    /**
+     * Show the form for adding a brew note.
+     */
+    function showAddBrewNote() {
+      $(".brew-form").toggleClass("hidden");
+    }
+
+    /**
+     * Show the clone recipe modal. The cloneRecipe method is defined in the
+     * RecipeDetailController.
+     */
+    function showCloneRecipe() {
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-clone-modal").removeClass("inactive");
+    }
+
+    /**
+     * Show the form for editing the brew note.
+     */
+    function showEditNote(noteId) {
+      noteId = noteId.toString();
+      $("div.note-view" + noteId).addClass("hidden");
+      $("article.edit-note" + noteId).removeClass("hidden");
+    }
+
+    /**
+     * Show icon for editing brew note (only shows up on logged-in user's brew
+     * notes).
+     */
+    function showNoteIcons(noteId) {
       $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
-    };
-
-  }); //end recipDetail controller
-})();//END Angular IFEE
+    }
+  }
+})();
