@@ -13,6 +13,8 @@
     vm.finishClone = finishClone;
     vm.recipe = null;
 
+    var recipeUrl = null;
+
     activate();
 
     ////////////////////////////////////////////////////////////////////////////
@@ -23,10 +25,10 @@
      * Prepare the page.
      */
     function activate() {
-      vm.recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
+      recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
         $routeParams.id + '/';
 
-      dataService.get(vm.recipeUrl)
+      dataService.get(recipeUrl)
         .then(function(response) {
           vm.recipe = response.data;
         });
@@ -36,7 +38,7 @@
      * Update the clone with user-entered data.
      */
     function finishClone() {
-      dataService.patch(vm.recipeUrl, vm.recipe)
+      dataService.patch(recipeUrl, vm.recipe)
         .then(function() {
           $location.path('/'+ $rootScope.username + '/' + $routeParams.id + '/');
         });
