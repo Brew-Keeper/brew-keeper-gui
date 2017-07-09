@@ -14,6 +14,8 @@
     $location,
     dataService
   ) {
+    $rootScope.clonePublicRecipe = clonePublicRecipe;
+
     var vm = this;
     vm.addBrewNote = addBrewNote;
     vm.comments = [];
@@ -167,7 +169,7 @@
      */
     function showCloneRecipe() {
       $(".wrapper").addClass("openerror");
-      $("section.confirm-clone-modal").removeClass("inactive");
+      $("section.confirm-public-clone-modal").removeClass("inactive");
     }
 
     /**
@@ -185,6 +187,57 @@
      */
     function showNoteIcons(noteId) {
       $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // ROOTSCOPE FUNCTIONS ////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Create a clone of this recipe.
+     */
+    function clonePublicRecipe() {
+      // First, close the confirmation modal
+      $(".wrapper").removeClass("openerror");
+      $("section.confirm-public-clone-modal").addClass("inactive");
+
+      var cloneData = {};
+      cloneData.title = vm.detail.title;
+      cloneData.bean_name = vm.detail.bean_name;
+      cloneData.roast = vm.detail.roast;
+      cloneData.orientation = vm.detail.orientation;
+      cloneData.general_recipe_comment = vm.detail.general_recipe_comment;
+      cloneData.grind = vm.detail.grind;
+      cloneData.total_bean_amount = vm.detail.total_bean_amount;
+      cloneData.bean_units = vm.detail.bean_units;
+      cloneData.water_type = vm.detail.water_type;
+      cloneData.total_water_amount = vm.detail.total_water_amount;
+      cloneData.water_units = vm.detail.water_units;
+      cloneData.temp = vm.detail.temp;
+      cloneData.steps = [];
+
+      var newRecipeId = null;
+      var recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
+      dataService.post(recipesUrl, cloneData)
+        .success(function(response) {
+          newRecipeId = response.id;
+          var steps = [];
+          for (var step in vm.detail.steps) {
+            steps[step] = {};
+            steps[step].step_number = vm.detail.steps[step].step_number;
+            steps[step].step_title = vm.detail.steps[step].step_title;
+            steps[step].step_body = vm.detail.steps[step].step_body;
+            steps[step].duration = vm.detail.steps[step].duration;
+            steps[step].water_amount = vm.detail.steps[step].water_amount;
+
+            // Post a copy of this step to the new recipe
+            dataService.post(recipesUrl + newRecipeId + '/steps/', steps[step]);
+          }
+        })
+        .then(function() {
+          // Redirect to the clone editor
+          $location.path('/' + $rootScope.username + '/clone/' + newRecipeId);
+        });
     }
   }
 })();
