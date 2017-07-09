@@ -15,7 +15,6 @@
     var vm = this;
     vm.addBrewNote = addBrewNote;
     vm.addStep = addStep;
-    vm.brewnotesUrl = '';
     vm.decreaseStep = decreaseStep;
     vm.deleteNote = deleteNote;
     vm.deleteRecipe = deleteRecipe;
@@ -29,8 +28,6 @@
     vm.notes = [];
     vm.rateRecipe = rateRecipe;
     vm.ratings = [{max: $rootScope.maxStars}];
-    vm.recipeUrl = '';
-    vm.recipesUrl = '';
     vm.showAddBrewNote = showAddBrewNote;
     vm.showAddSteps = showAddSteps;
     vm.showCloneModal = showCloneModal;
@@ -40,6 +37,10 @@
     vm.showNoteIcons = showNoteIcons;
     vm.step = {};
     vm.steps = [];
+
+    var brewnotesUrl = '';
+    var recipeUrl = '';
+    var recipesUrl = '';
 
     activate();
 
@@ -53,11 +54,11 @@
     function activate() {
       $(document).scrollTop(0);
 
-      vm.recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
-      vm.recipeUrl = vm.recipesUrl + $routeParams.id + '/';
-      vm.brewnotesUrl = vm.recipeUrl + 'brewnotes/';
+      recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
+      recipeUrl = recipesUrl + $routeParams.id + '/';
+      brewNotesUrl = recipeUrl + 'brewnotes/';
 
-      dataService.get(vm.recipeUrl)
+      dataService.get(recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
           vm.steps = response.data.steps;
@@ -121,10 +122,10 @@
      * Add a brew note to this recipe with the filled-out info.
      */
     function addBrewNote() {
-      dataService.post(vm.brewnotesUrl, vm.brewnote)
+      dataService.post(brewNotesUrl, vm.brewnote)
         .success(function (data) {
           $(".brew-form").toggleClass("hidden");
-          dataService.get(vm.recipeUrl)
+          dataService.get(recipeUrl)
             .then(function(response){
               vm.notes = response.data.brewnotes;
             });
@@ -140,9 +141,9 @@
     function addStep() {
       vm.step.step_number = vm.steps.length + 1;
       $('.input-focus').focus();
-      dataService.post(vm.recipeUrl + 'steps/', vm.step)
+      dataService.post(recipeUrl + 'steps/', vm.step)
         .then(function(){
-          dataService.get(vm.recipeUrl)
+          dataService.get(recipeUrl)
             .then(function(response){
               // Show the Brew It button, hide the Add Steps button
               $(".brew-it-button").removeClass("hidden");
@@ -168,9 +169,9 @@
       vm.steps[step.step_number - 2] = swapStep;
 
       step.step_number--;
-      dataService.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
+      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step)
         .then(function() {
-          dataService.get(vm.recipeUrl)
+          dataService.get(recipeUrl)
             .then(function(response){
               vm.steps = response.data.steps;
             });
@@ -181,9 +182,9 @@
      * Delete the selected brew note.
      */
     function deleteNote(noteId) {
-        dataService.delete(vm.brewnotesUrl + noteId + '/')
+        dataService.delete(brewNotesUrl + noteId + '/')
           .then(function() {
-            dataService.get(vm.recipeUrl)
+            dataService.get(recipeUrl)
               .then(function(response) {
                 vm.notes = response.data.brewnotes;
               });
@@ -207,7 +208,7 @@
       $("button.confirm-eliminate-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-eliminate-modal").addClass("inactive");
-        dataService.delete(vm.recipeUrl)
+        dataService.delete(recipeUrl)
           .then(function() {
             $location.path('/'+ $rootScope.username);
           });
@@ -231,9 +232,9 @@
       $("button.confirm-delete-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-delete-modal").addClass("inactive");
-        dataService.delete(vm.recipeUrl + 'steps/' + stepId + '/')
+        dataService.delete(recipeUrl + 'steps/' + stepId + '/')
           .then(function() {
-            dataService.get(vm.recipeUrl)
+            dataService.get(recipeUrl)
               .then(function(response){
                 vm.steps = response.data.steps;
                 if (response.data.steps.length === 0) {
@@ -251,7 +252,7 @@
     function editNote(note) {
       var noteView = "div.note-view" + note.id.toString();
       var editNoteSelector = "article.edit-note" + note.id.toString();
-      dataService.put(vm.brewnotesUrl + note.id + '/', note)
+      dataService.put(brewNotesUrl + note.id + '/', note)
         .then(function () {
           $(editNoteSelector).addClass("hidden");
           $(noteView).removeClass("hidden");
@@ -262,7 +263,7 @@
      * Submit the edited recipe to the API for saving.
      */
     function editRecipe() {
-      dataService.patch(vm.recipeUrl, vm.detail)
+      dataService.patch(recipeUrl, vm.detail)
         .then(function () {
           $('.edit-recipe').addClass("hidden");
           $('.recipe-view').removeClass("hidden");
@@ -273,7 +274,7 @@
      * Submit the API changes made to this step.
      */
     function editStep(step) {
-      dataService.patch(vm.recipeUrl + 'steps/' + step.id + '/', step);
+      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
     }
 
     /**
@@ -301,9 +302,9 @@
 
       step.step_number++;
 
-      dataService.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
+      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step)
         .then(function() {
-          dataService.get(vm.recipeUrl)
+          dataService.get(recipeUrl)
             .then(function(response){
               vm.steps = response.data.steps;
             });
@@ -315,7 +316,7 @@
      */
     function rateRecipe(rating) {
       var newRating = {"rating": rating};
-      dataService.patch(vm.recipeUrl, newRating);
+      dataService.patch(recipeUrl, newRating);
     }
 
     /**
@@ -413,7 +414,7 @@
       cloneData.steps = [];
 
       var newRecipeId = null;
-      dataService.post(vm.recipesUrl, cloneData)
+      dataService.post(recipesUrl, cloneData)
         .success(function(response) {
           newRecipeId = response.id;
           var steps = [];
@@ -426,7 +427,7 @@
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
             // Post a copy of this step to the new recipe
-            dataService.post(vm.recipesUrl + newRecipeId + '/steps/', steps[step]);
+            dataService.post(recipesUrl + newRecipeId + '/steps/', steps[step]);
           }
         })
         .then(function() {
