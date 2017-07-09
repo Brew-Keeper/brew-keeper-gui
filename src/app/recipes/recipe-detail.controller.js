@@ -6,9 +6,9 @@
     .controller('RecipeDetailController', RecipeDetailController);
 
   RecipeDetailController.$inject =
-    ['$http', '$location', '$routeParams', '$rootScope'];
+    ['$location', '$routeParams', '$rootScope', 'dataService'];
 
-  function RecipeDetailController($http, $location, $routeParams, $rootScope) {
+  function RecipeDetailController($location, $routeParams, $rootScope, dataService) {
     $rootScope.cloneRecipe = cloneRecipe;
     $rootScope.makePublic = makePublic;
 
@@ -53,11 +53,11 @@
     function activate() {
       $(document).scrollTop(0);
 
-      vm.recipesUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/';
+      vm.recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
       vm.recipeUrl = vm.recipesUrl + $routeParams.id + '/';
       vm.brewnotesUrl = vm.recipeUrl + 'brewnotes/';
 
-      $http.get(vm.recipeUrl)
+      dataService.get(vm.recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
           vm.steps = response.data.steps;
@@ -121,10 +121,10 @@
      * Add a brew note to this recipe with the filled-out info.
      */
     function addBrewNote() {
-      $http.post(vm.brewnotesUrl, vm.brewnote)
+      dataService.post(vm.brewnotesUrl, vm.brewnote)
         .success(function (data) {
           $(".brew-form").toggleClass("hidden");
-          $http.get(vm.recipeUrl)
+          dataService.get(vm.recipeUrl)
             .then(function(response){
               vm.notes = response.data.brewnotes;
             });
@@ -140,9 +140,9 @@
     function addStep() {
       vm.step.step_number = vm.steps.length + 1;
       $('.input-focus').focus();
-      $http.post(vm.recipeUrl + 'steps/', vm.step)
+      dataService.post(vm.recipeUrl + 'steps/', vm.step)
         .then(function(){
-          $http.get(vm.recipeUrl)
+          dataService.get(vm.recipeUrl)
             .then(function(response){
               // Show the Brew It button, hide the Add Steps button
               $(".brew-it-button").removeClass("hidden");
@@ -168,9 +168,9 @@
       vm.steps[step.step_number - 2] = swapStep;
 
       step.step_number--;
-      $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
+      dataService.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
         .then(function() {
-          $http.get(vm.recipeUrl)
+          dataService.get(vm.recipeUrl)
             .then(function(response){
               vm.steps = response.data.steps;
             });
@@ -181,9 +181,9 @@
      * Delete the selected brew note.
      */
     function deleteNote(noteId) {
-        $http.delete(vm.brewnotesUrl + noteId + '/')
+        dataService.delete(vm.brewnotesUrl + noteId + '/')
           .then(function() {
-            $http.get(vm.recipeUrl)
+            dataService.get(vm.recipeUrl)
               .then(function(response) {
                 vm.notes = response.data.brewnotes;
               });
@@ -207,7 +207,7 @@
       $("button.confirm-eliminate-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-eliminate-modal").addClass("inactive");
-        $http.delete(vm.recipeUrl)
+        dataService.delete(vm.recipeUrl)
           .then(function() {
             $location.path('/'+ $rootScope.username);
           });
@@ -231,9 +231,9 @@
       $("button.confirm-delete-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.confirm-delete-modal").addClass("inactive");
-        $http.delete(vm.recipeUrl + 'steps/' + stepId + '/')
+        dataService.delete(vm.recipeUrl + 'steps/' + stepId + '/')
           .then(function() {
-            $http.get(vm.recipeUrl)
+            dataService.get(vm.recipeUrl)
               .then(function(response){
                 vm.steps = response.data.steps;
                 if (response.data.steps.length === 0) {
@@ -251,7 +251,7 @@
     function editNote(note) {
       var noteView = "div.note-view" + note.id.toString();
       var editNoteSelector = "article.edit-note" + note.id.toString();
-      $http.put(vm.brewnotesUrl + note.id + '/', note)
+      dataService.put(vm.brewnotesUrl + note.id + '/', note)
         .then(function () {
           $(editNoteSelector).addClass("hidden");
           $(noteView).removeClass("hidden");
@@ -262,7 +262,7 @@
      * Submit the edited recipe to the API for saving.
      */
     function editRecipe() {
-      $http.patch(vm.recipeUrl, vm.detail)
+      dataService.patch(vm.recipeUrl, vm.detail)
         .then(function () {
           $('.edit-recipe').addClass("hidden");
           $('.recipe-view').removeClass("hidden");
@@ -273,7 +273,7 @@
      * Submit the API changes made to this step.
      */
     function editStep(step) {
-      $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step);
+      dataService.patch(vm.recipeUrl + 'steps/' + step.id + '/', step);
     }
 
     /**
@@ -301,9 +301,9 @@
 
       step.step_number++;
 
-      $http.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
+      dataService.patch(vm.recipeUrl + 'steps/' + step.id + '/', step)
         .then(function() {
-          $http.get(vm.recipeUrl)
+          dataService.get(vm.recipeUrl)
             .then(function(response){
               vm.steps = response.data.steps;
             });
@@ -315,7 +315,7 @@
      */
     function rateRecipe(rating) {
       var newRating = {"rating": rating};
-      $http.patch(vm.recipeUrl, newRating);
+      dataService.patch(vm.recipeUrl, newRating);
     }
 
     /**
@@ -413,7 +413,7 @@
       cloneData.steps = [];
 
       var newRecipeId = null;
-      $http.post(vm.recipesUrl, cloneData)
+      dataService.post(vm.recipesUrl, cloneData)
         .success(function(response) {
           newRecipeId = response.id;
           var steps = [];
@@ -426,7 +426,7 @@
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
             // Post a copy of this step to the new recipe
-            $http.post(vm.recipesUrl + newRecipeId + '/steps/', steps[step]);
+            dataService.post(vm.recipesUrl + newRecipeId + '/steps/', steps[step]);
           }
         })
         .then(function() {
@@ -459,7 +459,7 @@
       publicData.shared_by = $rootScope.username;
       publicData.steps = [];
 
-      $http.post($rootScope.baseUrl + '/api/users/public/recipes/', publicData)
+      dataService.post($rootScope.baseUrl + '/api/users/public/recipes/', publicData)
         .success(function(response) {
           var newRecipeId = response.id;
 
@@ -473,7 +473,7 @@
             steps[step].duration = vm.detail.steps[step].duration;
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
-            $http.post($rootScope.baseUrl + '/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
+            dataService.post($rootScope.baseUrl + '/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
           }
         })
         .then(function() {

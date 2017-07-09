@@ -12,7 +12,7 @@
     var baseUrl = 'http://dev.brewkeeper.com:8000';
 
     var service = {
-      deleteItem: deleteItem,
+      delete: deleteItem,
       get: get,
       patch: patch,
       post: post,
@@ -26,7 +26,8 @@
     //////////////////////////////////////////////////////////////////////////
 
     /**
-     * Return a DELETE promise on the specified URI.
+     * Return a DELETE promise on the specified URI. (Named deleteItem because
+     * 'delete' is a reserved word in JavaScript.)
      *
      * @param {string} uri The uri of the item to delete.
      */
