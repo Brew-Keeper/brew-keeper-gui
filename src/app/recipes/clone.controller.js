@@ -5,9 +5,10 @@
     .module('brewKeeper')
     .controller('CloneController', CloneController);
 
-  CloneController.$inject = ['$scope', '$http', '$routeParams', '$location', '$rootScope'];
+  CloneController.$inject =
+    ['$routeParams', '$location', '$rootScope', 'dataService'];
 
-  function CloneController($scope, $http, $routeParams, $location, $rootScope) {
+  function CloneController($routeParams, $location, $rootScope, dataService) {
     var vm = this;
     vm.finishClone = finishClone;
     vm.recipe = null;
@@ -22,10 +23,10 @@
      * Prepare the page.
      */
     function activate() {
-      vm.recipeUrl = $rootScope.baseUrl + '/api/users/' + $rootScope.username +
-        '/recipes/' + $routeParams.id + '/';
+      vm.recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
+        $routeParams.id + '/';
 
-      $http.get(vm.recipeUrl)
+      dataService.get(vm.recipeUrl)
         .then(function(response) {
           vm.recipe = response.data;
         });
@@ -33,12 +34,10 @@
 
     /**
      * Update the clone with user-entered data.
-     *
-     * @param {Object} recipe The user-entered recipe info.
      */
-    function finishClone(recipe) {
-      $http.patch(vm.recipeUrl, recipe)
-        .then(function(){
+    function finishClone() {
+      dataService.patch(vm.recipeUrl, vm.recipe)
+        .then(function() {
           $location.path('/'+ $rootScope.username + '/' + $routeParams.id + '/');
         });
     }
