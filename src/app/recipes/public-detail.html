@@ -6,10 +6,10 @@
         <div view-rating rating-value="rating.current" max="rating.max" ng-click="" class="public"></div>
       </span>
       <section ng-show="username">
-        <span ng-hide="ratingId" ng-repeat="rating in vm.ratings">
+        <span ng-hide="vm.ratingId" ng-repeat="rating in vm.ratings">
           <div star-rating rating-value="rating.current" max="rating.max" ng-click="vm.rateRecipe(rating.current)" class="public"></div>
         </span>
-        <span ng-show="ratingId" ng-repeat="userRating in userRatings">
+        <span ng-show="vm.ratingId" ng-repeat="userRating in vm.userRatings">
           <div star-rating rating-value="userRating.current" max="userRating.max" ng-click="vm.rateRecipe(userRating.current)"></div>
         </span>
       </section>

@@ -29,7 +29,7 @@
         controllerAs: 'vm'
       })
       .when('/public/:id',{
-        templateUrl: 'partials/public-detail.html',
+        templateUrl: 'app/recipes/public-detail.html',
         controller: 'publicDetail',
         controllerAs: 'vm'
       })
