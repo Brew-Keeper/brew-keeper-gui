@@ -47,6 +47,17 @@
       padding: 4px 0;
     }
   }
+  img.trash-icon {
+    cursor: pointer;
+    width: 30px;
+    padding-top: 0.3ex;
+    float: right;
+  }
+ img.edit-icon{
+   cursor: pointer;
+   width: 35px;
+   float: right;
+ }
 }//recipe-detail (top portion)
 
 .recipe-detail & div.details {
@@ -84,15 +95,6 @@
   section.icons {
     width: 25%;
     float: right;
-    img.edit-icon{
-      width: 35px;
-      float: right;
-    }
-    img.trash-icon {
-      width: 30px;
-      padding-top: 0.3ex;
-      float: right;
-    }
   }
 } //end recipe-detail & div.details
 
@@ -101,15 +103,6 @@ section.edit-step-icons {
   width: 25%;
   margin-left: 75%;
   margin-top: -5ex;
-  img.edit-icon{
-    width: 35px;
-    float: right;
-  }
-  img.trash-icon {
-    width: 30px;
-    padding-top: 0.3ex;
-    float: right;
-  }
 }
 div.brew-notes-heading > h3 {
     display: block;
@@ -117,6 +110,7 @@ div.brew-notes-heading > h3 {
   }
 
 div.brew-notes-heading >  .plus-icon {
+    cursor: pointer;
     margin-left: 5%;
     float: right;
   }
@@ -136,6 +130,7 @@ div.add-steps-heading > h3 {
   font-weight: 500;
 }
 div.add-steps-heading  > .plus-icon {
+    cursor: pointer;
     margin-left: 5%;
     margin-right: 0;
     margin-top: -3ex;
@@ -156,6 +151,7 @@ div.add-steps-heading  > .plus-icon {
     font-weight: bold;
     text-align: center;
     [class*='-arrow-icon'] {
+      cursor: pointer;
       float: right;
       margin-left: 2.5%;
       margin-right: 20%;
@@ -204,6 +200,7 @@ div.add-steps-heading  > .plus-icon {
   border-top: 1px solid $heading;
 }
 div.clone-button {
+  cursor: pointer;
   display: inline-block;
   width: 40%;
   margin-left: 5%;
@@ -219,6 +216,7 @@ div.clone-button {
   }
 } //end div.clone-button
 div.clone-button.public {
+  cursor: pointer;
   float: left;
   margin-left: 30%;
 }
