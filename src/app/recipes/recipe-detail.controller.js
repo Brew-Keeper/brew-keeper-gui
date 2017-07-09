@@ -38,7 +38,7 @@
     vm.step = {};
     vm.steps = [];
 
-    var brewnotesUrl = '';
+    var brewNotesUrl = '';
     var recipeUrl = '';
     var recipesUrl = '';
 
