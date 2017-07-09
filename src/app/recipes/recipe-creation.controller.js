@@ -6,9 +6,9 @@
     .controller('RecipeCreationController', RecipeCreationController);
 
   RecipeCreationController.$inject =
-    ['$scope', '$http', '$location', '$rootScope', '$cookies'];
+    ['$scope', '$location', '$rootScope', '$cookies', 'dataService'];
 
-  function RecipeCreationController($scope, $http, $location, $rootScope, $cookies) {
+  function RecipeCreationController($scope, $location, $rootScope, $cookies, dataService) {
     var vm = this;
     vm.createNew = createNew;
     vm.recipe = {};
@@ -38,7 +38,7 @@
      */
     function createNew() {
       $("form-placeholder").removeClass("changed");
-      $http.post($rootScope.baseUrl + '/api/users/' + $rootScope.username + '/recipes/', vm.recipe)
+      dataService.post('/api/users/' + $rootScope.username + '/recipes/', vm.recipe)
         .success(function (data) {
           var id = data.id;
           $location.path('/' + $rootScope.username + '/' + id);
