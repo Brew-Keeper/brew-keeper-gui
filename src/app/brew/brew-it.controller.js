@@ -76,22 +76,21 @@
           }
           vm.stepArray = stepArray;
           vm.stepTotal = stepArray.length;
-        })
-      .then(function() {
-        if (vm.isPublic && $rootScope.username !== null) {
-          dataService.get(ratingsUrl)
-            .then(function(response) {
-              var publicRatings = response.data;
-              for (var i = 0; i < publicRatings.length; i++) {
-                if (publicRatings[i].username == $rootScope.username) {
-                  vm.ratingId = publicRatings[i].id;
-                  vm.userRating = publicRatings[i].public_rating;
-                  break;
+
+          if (vm.isPublic && $rootScope.username !== null) {
+            dataService.get(ratingsUrl)
+              .then(function(response) {
+                var publicRatings = response.data;
+                for (var i = 0; i < publicRatings.length; i++) {
+                  if (publicRatings[i].username == $rootScope.username) {
+                    vm.ratingId = publicRatings[i].id;
+                    vm.userRating = publicRatings[i].public_rating;
+                    break;
+                  }
                 }
-              }
-              vm.ratings = [{current: vm.userRating}];
-            });
-        }
+                vm.ratings = [{current: vm.userRating}];
+              });
+          }
       });
 
       // Show brew note form on add note
