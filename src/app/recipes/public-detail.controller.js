@@ -28,7 +28,7 @@
     vm.showEditNote = showEditNote;
     vm.showNoteIcons = showNoteIcons;
     vm.userRating = null;
-    vm.userRatings = [{max: $rootScope.maxStars}];
+    vm.userRatings = null;
 
     var recipeUrl = '/api/users/public/recipes/'+ $routeParams.id + '/';
     var ratingsUrl = recipeUrl + 'ratings/';
@@ -49,12 +49,9 @@
           vm.steps = response.data.steps;
           var currentRating = vm.detail.average_rating;
           vm.comments = response.data.public_comments;
-          vm.ratings = [{
-              current: currentRating,
-              max: 5
-          }];
+          vm.ratings = [{current: currentRating}];
 
-          if ($rootScope.username) {
+          if ($rootScope.username !== null) {
             dataService.get(ratingsUrl)
               .then(function(response) {
                 var publicRatings = response.data;
@@ -65,10 +62,7 @@
                   }
                   return;
                 });
-                vm.userRatings = [{
-                  current: vm.userRating,
-                  max: $rootScope.maxStars
-                }];
+                vm.userRatings = [{current: vm.userRating}];
               });
           }
         });
@@ -135,12 +129,8 @@
      */
     function rateRecipe(rating) {
       var newRating = {"public_rating": rating};
-      // TODO: userRating is probably cruft
       vm.userRating = rating;
-      vm.userRatings = [{
-          current: currentRating,
-          max: 5
-      }];
+      vm.userRatings = [{current: vm.userRating}];
 
       // If the user has already rated, update their current rating
       if (vm.ratingId) {
