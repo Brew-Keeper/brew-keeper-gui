@@ -86,7 +86,7 @@
         // Now that we have posted, update the rating to reflect the change
         .then(function() {
           dataService.get(publicUrl)
-            .then(function(response){
+            .then(function(response) {
               vm.recipes = response.data;
             });
         });

@@ -84,7 +84,7 @@
         .success(function (data) {
           $(".brew-form").toggleClass("hidden");
           dataService.get(recipeUrl)
-            .then(function(response){
+            .then(function(response) {
               vm.comments = response.data.public_comments;
             });
         });

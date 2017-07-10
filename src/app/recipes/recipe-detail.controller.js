@@ -85,9 +85,6 @@
       // Handle click on Add Steps
       $(".no-steps").click(vm.showAddSteps);
 
-      // Handle confirmation of clone creation
-      // $("button.confirm-clone-fail").on("click", vm.cloneRecipe);
-
       // Close the clone modal if the user cancels
       $("button.cancel-clone-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
@@ -108,10 +105,7 @@
         return;
       });
 
-      // Trigger makePublic when user confirms
-      // $("button.confirm-fail").on("click", vm.makePublic);
-
-      // Close the made public success modal
+      // Close the make public success modal
       $("button.sharing-not-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.sharing-modal").addClass("inactive");
@@ -126,7 +120,7 @@
         .success(function (data) {
           $(".brew-form").toggleClass("hidden");
           dataService.get(recipeUrl)
-            .then(function(response){
+            .then(function(response) {
               vm.notes = response.data.brewnotes;
             });
         });
@@ -142,9 +136,9 @@
       vm.step.step_number = vm.steps.length + 1;
       $('.input-focus').focus();
       dataService.post(recipeUrl + 'steps/', vm.step)
-        .then(function(){
+        .then(function() {
           dataService.get(recipeUrl)
-            .then(function(response){
+            .then(function(response) {
               // Show the Brew It button, hide the Add Steps button
               $(".brew-it-button").removeClass("hidden");
               $(".no-steps").addClass("hidden");
@@ -161,18 +155,18 @@
       if (step.step_number <= 1) {
         return;
       }
-      // Swap the steps
-      // var currentStep = step.step_number - 1
-      // var prevStep = step.step_number - 2
+      // Swap the steps in the UI
       var swapStep = vm.steps[step.step_number - 1];
       vm.steps[step.step_number - 1] = vm.steps[step.step_number - 2];
       vm.steps[step.step_number - 2] = swapStep;
 
       step.step_number--;
+
+      // Update the step in the API
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step)
         .then(function() {
           dataService.get(recipeUrl)
-            .then(function(response){
+            .then(function(response) {
               vm.steps = response.data.steps;
             });
         });
@@ -235,7 +229,7 @@
         dataService.delete(recipeUrl + 'steps/' + stepId + '/')
           .then(function() {
             dataService.get(recipeUrl)
-              .then(function(response){
+              .then(function(response) {
                 vm.steps = response.data.steps;
                 if (response.data.steps.length === 0) {
                   $(".brew-it-button").addClass("hidden");
@@ -247,7 +241,7 @@
     }
 
     /**
-     * Submit brew note update to API.
+     * Submit the edited brew note to the API.
      */
     function editNote(note) {
       var noteView = "div.note-view" + note.id.toString();
@@ -260,7 +254,7 @@
     }
 
     /**
-     * Submit the edited recipe to the API for saving.
+     * Submit the edited recipe to the API.
      */
     function editRecipe() {
       dataService.patch(recipeUrl, vm.detail)
@@ -271,7 +265,7 @@
     }
 
     /**
-     * Submit the API changes made to this step.
+     * Submit the edited step to the API.
      */
     function editStep(step) {
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
@@ -292,9 +286,7 @@
       if (step.step_number >= vm.steps.length) {
         return;
       }
-      // Swap the steps
-      // var currentStep = step.step_number - 1
-      // var nextStep = step.step_number
+      // Swap the steps in the UI
       var swapStep = vm.steps[step.step_number - 1];
       vm.steps[step.step_number - 1] = vm.steps[step.step_number];
       vm.steps[step.step_number] = swapStep;
@@ -302,10 +294,11 @@
 
       step.step_number++;
 
+      // Update the step in the API
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step)
         .then(function() {
           dataService.get(recipeUrl)
-            .then(function(response){
+            .then(function(response) {
               vm.steps = response.data.steps;
             });
         });
@@ -330,7 +323,7 @@
     /**
      * Reveal "Add Step" when new recipe form is submitted.
      */
-    function showAddSteps(){
+    function showAddSteps() {
       $("form.create-new-step").toggleClass("hidden");
         $('.input-focus').focus();
     }
