@@ -1,12 +1,23 @@
 <section class="brewit-page">
   <nav class="brewit-nav">
-    <a class="brewit-title" href="#{{username}}/{{vm.detail.id}}"><h2 class="brewit-title">{{vm.detail.title}}</h2></a>
+    <a class="brewit-title" href="#/{{vm.recipeUsername}}/{{vm.detail.id}}"><h2 class="brewit-title">{{vm.detail.title}}</h2></a>
     <a href="" class="reset-brew clicker-button" ng-click="vm.resetBrew()">RESET</a>
-    <a href="" class="hidden add-brew-note clicker-button">Add Note</a>
-    <div class="stars">    <!--star ratings-->
-			<span ng-show="vm.showStars" class="post-brew rating" ng-repeat="rating in vm.ratings">
-				<div star-rating rating-value="vm.detail.rating" max="maxStars" ng-click="vm.rateRecipe(vm.detail.rating)"></div>
-			</span>
+    <a href="" class="hidden add-brew-note clicker-button" ng-hide="vm.isPublic">Add Note</a>
+    <div class="stars" ng-show="vm.showStars">    <!--star ratings-->
+      <span ng-hide="username" class="post-brew rating" ng-repeat="rating in vm.ratings">
+        <div view-rating rating-value="rating.current" max="maxStars" ng-click="" class="rating public"></div>
+      </span>
+      <section ng-show="username && vm.isPublic">
+        <span ng-hide="vm.ratingId" ng-repeat="rating in vm.ratings" class="rating">
+          <div star-rating rating-value="rating.current" max="maxStars" ng-click="vm.ratePublicRecipe(rating.current)" class="rating public"></div>
+        </span>
+        <span ng-show="vm.ratingId" ng-repeat="userRating in vm.ratings" class="rating">
+          <div star-rating rating-value="userRating.current" max="maxStars" ng-click="vm.ratePublicRecipe(userRating.current)" class="rating"></div>
+        </span>
+      </section>
+      <span ng-show="!vm.isPublic" class="post-brew rating" ng-repeat="rating in vm.ratings">
+        <div star-rating rating-value="vm.detail.rating" max="maxStars" ng-click="vm.rateRecipe(vm.detail.rating)"></div>
+      </span>
     </div>  <!--end star ratings-->
   </nav>
   <section class="brew-form hidden" >

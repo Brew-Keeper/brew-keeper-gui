@@ -5,18 +5,29 @@
     .module('brewKeeper')
     .controller('BrewItController', BrewItController);
 
-  BrewItController.$inject = ['$scope', '$routeParams', '$rootScope', 'dataService'];
+  BrewItController.$inject =
+    ['$scope', '$routeParams', '$location', '$rootScope', 'dataService'];
 
-  function BrewItController($scope, $routeParams, $rootScope, dataService) {
+  function BrewItController(
+    $scope,
+    $routeParams,
+    $location,
+    $rootScope,
+    dataService
+    ) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
     vm.brewnote = {};
     vm.countdownVal = null;
     vm.detail = {};
+    vm.isPublic = ($location.path().indexOf('/public') === 0);
     vm.nextStep = nextStep;
     vm.notes = {};
+    vm.ratePublicRecipe = ratePublicRecipe;
     vm.rateRecipe = rateRecipe;
+    vm.ratingId = null;
     vm.ratings = null;
+    vm.recipeUsername = vm.isPublic ? 'public' : $rootScope.username;
     vm.resetBrew = resetBrew;
     vm.restartBrew = restartBrew;
     vm.showStars = false;
@@ -25,9 +36,11 @@
     vm.stepTotal = null;
     vm.steps = {};
     vm.timerRunning = false;
+    vm.userRating = null;
 
     var brewNoteUrl = null;
     var recipeUrl = null;
+    var ratingsUrl = null;
 
     activate();
 
@@ -39,15 +52,21 @@
      * Prepare the page.
      */
     function activate() {
-      recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
-        $routeParams.id + '/';
-      brewNoteUrl = recipeUrl + 'brewnotes/';
+      if (vm.isPublic) {
+        recipeUrl = '/api/users/public/recipes/' + $routeParams.id + '/';
+        ratingsUrl = recipeUrl + 'ratings/';
+      } else {
+        recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
+          $routeParams.id + '/';
+        brewNoteUrl = recipeUrl + 'brewnotes/';
+      }
 
       $(document).scrollTop(0);
       dataService.get(recipeUrl)
         .then(function(response) {
           vm.detail = response.data;
-          vm.ratings = [{current: vm.detail.rating}];
+          var currentRating = vm.isPublic ? vm.detail.average_rating : vm.detail.rating;
+          vm.ratings = [{current: currentRating}];
           vm.steps = response.data.steps;
           vm.notes = response.data.brewnotes;
           vm.countdownVal = response.data.total_duration;
@@ -57,7 +76,23 @@
           }
           vm.stepArray = stepArray;
           vm.stepTotal = stepArray.length;
-        });
+        })
+      .then(function() {
+        if (vm.isPublic && $rootScope.username !== null) {
+          dataService.get(ratingsUrl)
+            .then(function(response) {
+              var publicRatings = response.data;
+              for (var i = 0; i < publicRatings.length; i++) {
+                if (publicRatings[i].username == $rootScope.username) {
+                  vm.ratingId = publicRatings[i].id;
+                  vm.userRating = publicRatings[i].public_rating;
+                  break;
+                }
+              }
+              vm.ratings = [{current: vm.userRating}];
+            });
+        }
+      });
 
       // Show brew note form on add note
       $(".add-brew-note").on('click', function() {
@@ -118,6 +153,30 @@
 
       // Start the next step's timer
       $scope.$broadcast('startTimer', nextTimerId);
+    }
+
+    /**
+     * Rate this public recipe.
+     *
+     * @param {number} rating The new user rating of this public recipe.
+     */
+    function ratePublicRecipe(rating) {
+      var newRating = {"public_rating": rating};
+      vm.userRating = rating;
+      vm.ratings = [{current: vm.userRating}];
+
+      // If the user has already rated, update their current rating
+      if (vm.ratingId) {
+        dataService.patch(ratingsUrl + vm.ratingId + '/', newRating);
+      }
+
+      // If the user has not rated, create new rating
+      if (!vm.ratingId) {
+        dataService.post(recipeUrl + 'ratings/', newRating)
+          .then(function(response) {
+            vm.ratingId = response.data.id;
+          });
+      }
     }
 
     /**

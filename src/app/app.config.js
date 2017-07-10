@@ -34,8 +34,9 @@
         controllerAs: 'vm'
       })
       .when('/public/:id/brewit', {
-        templateUrl: 'partials/public-brewit.html',
-        controller: 'public-brewIt'
+        templateUrl: 'app/brew/brew-it.html',
+        controller: 'BrewItController',
+        controllerAs: 'vm'
       })
       .when('/reset-pw', {
         templateUrl: 'partials/reset-pw.html',
