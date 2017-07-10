@@ -3,7 +3,7 @@
 
   angular
     .module('brewKeeper')
-    .controller('publicDetail', PublicDetailController);
+    .controller('PublicDetailController', PublicDetailController);
 
   PublicDetailController.$inject =
     ['$rootScope', '$routeParams', '$location', 'dataService'];

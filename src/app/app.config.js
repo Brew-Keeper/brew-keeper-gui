@@ -30,7 +30,7 @@
       })
       .when('/public/:id',{
         templateUrl: 'app/recipes/public-detail.html',
-        controller: 'publicDetail',
+        controller: 'PublicDetailController',
         controllerAs: 'vm'
       })
       .when('/public/:id/brewit', {
