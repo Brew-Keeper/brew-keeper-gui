@@ -132,6 +132,12 @@
       if (nextStepIndex >= vm.steps.length) {
         // End of brew countdown
         vm.resetBrew();
+
+        // If this is a public recipe, we're done here
+        if (vm.isPublic) {
+          return;
+        }
+
         // Update brew_count
         var recipe = {};
         vm.detail.brew_count += 1;
@@ -139,6 +145,7 @@
 
         // Update the database with the new brew count
         dataService.patch(recipeUrl, recipe);
+
         return;
       }
 
