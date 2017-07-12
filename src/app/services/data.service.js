@@ -5,18 +5,21 @@
     .module('brewKeeper')
     .factory('dataService', dataService);
 
-  dataService.$inject = ['$http'];
+  dataService.$inject = ['$cookies', '$http'];
 
-  function dataService($http) {
+  function dataService($cookies, $http) {
     // var baseUrl = 'https://brew-keeper-api.herokuapp.com';
     var baseUrl = 'http://dev.brewkeeper.com:8000';
 
     var service = {
+      clearCredentials: clearCredentials,
       delete: deleteItem,
       get: get,
+      getCredentials: getCredentials,
       patch: patch,
       post: post,
-      put: put
+      put: put,
+      setCredentials: setCredentials
     };
 
     return service;
@@ -24,6 +27,16 @@
     ////////////////////////////////////////////////////////////////////////////
     // FUNCTIONS //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Clear the Authorization cookie and header.
+     */
+    function clearCredentials() {
+      // Clear the cookie
+      $cookies.remove("Authorization");
+      // Remove the headers
+      $http.defaults.headers.common = {};
+    }
 
     /**
      * Return a DELETE promise on the specified URI. (Named deleteItem because
@@ -42,6 +55,20 @@
      */
     function get(uri) {
       return $http.get(baseUrl + uri);
+    }
+
+    /**
+     * Get the Authorization cookie.
+     *
+     * @return {(string|boolean)} The cookie or false
+     */
+    function getCredentials() {
+      var cookie = $cookies.get("Authorization");
+      if (cookie) {
+        return cookie;
+      }
+
+      return false;
     }
 
     /**
@@ -72,6 +99,18 @@
      */
     function put(uri, data) {
       return $http.put(baseUrl + uri, data);
+    }
+
+    /**
+     * Set the Authorization cookie and header with the supplied value.
+     *
+     * @param {string} authToken The user's auth token from the back end.
+     */
+    function setCredentials(authToken) {
+      // Make sure we can get this again, later
+      $cookies.put("Authorization", authToken);
+      // Allow our calls to the API to work
+      $http.defaults.headers.common = {"Authorization": authToken};
     }
   }
 })();
