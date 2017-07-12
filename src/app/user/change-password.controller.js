@@ -5,17 +5,17 @@
     .module('brewKeeper')
     .controller('ChangePasswordController', ChangePasswordController);
 
-  ChangePasswordController.$inject = ['$scope', '$http', '$location', '$cookies', '$rootScope'];
+  ChangePasswordController.$inject = ['$location', '$rootScope', 'dataService'];
 
-  function ChangePasswordController($scope, $http, $location, $cookies, $rootScope) {
-    var changePwdVm = this;
-    changePwdVm.generalError = false;
-    changePwdVm.requestReset = requestReset;
-    changePwdVm.resetError = false;
-    changePwdVm.resetPassword = resetPassword;
-    changePwdVm.resetSuccess = false;
-    changePwdVm.submitChangePassword = submitChangePassword;
-    changePwdVm.users = {
+  function ChangePasswordController($location, $rootScope, dataService) {
+    var vm = this;
+    vm.generalError = false;
+    vm.requestReset = requestReset;
+    vm.resetError = false;
+    vm.resetPassword = resetPassword;
+    vm.resetSuccess = false;
+    vm.submitChangePassword = submitChangePassword;
+    vm.users = {
       username: $rootScope.username
     };
 
@@ -60,25 +60,25 @@
      */
     function requestReset() {
       // Reset the flags
-      changePwdVm.resetError = false;
-      changePwdVm.resetSuccess = false;
-      changePwdVm.generalError = false;
+      vm.resetError = false;
+      vm.resetSuccess = false;
+      vm.generalError = false;
 
-      $http.post($rootScope.baseUrl + '/api/get-reset/', changePwdVm.users)
+      dataService.post('/api/get-reset/', vm.users)
         .then(successCallbackRequestReset, errorCallbackRequestReset);
 
       function errorCallbackRequestReset() {
         // TODO: Convert to modal?
-        changePwdVm.generalError = true;
+        vm.generalError = true;
       }
 
       function successCallbackRequestReset(response) {
         if (response.data) {
-          changePwdVm.resetError = true;
+          vm.resetError = true;
           return;
         }
 
-        changePwdVm.resetSuccess = true;
+        vm.resetSuccess = true;
       }
     }
 
@@ -94,7 +94,7 @@
         return;
       }
 
-      $http.post($rootScope.baseUrl + '/api/reset-pw/', changePwdVm.users)
+      dataService.post('/api/reset-pw/', vm.users)
         .then(successCallbackResetPassword, errorCallbackResetPassword);
 
       function errorCallbackResetPassword(response) {
@@ -104,12 +104,11 @@
       }
 
       function successCallbackResetPassword(response) {
-        userInfo = "Token " + response.data.token;
-        $cookies.put("Authorization", userInfo);
-        $http.defaults.headers.common = {"Authorization": userInfo};
+        authToken = "Token " + response.data.token;
+        dataService.setCredentials(authToken);
 
         // Reset the users property and navigate to the root of the app
-        changePwdVm.users = {};
+        vm.users = {};
         $location.path('/');
       }
     }
@@ -127,9 +126,9 @@
        return;
       }
 
-      changePwdVm.users.username = $rootScope.username;
+      vm.users.username = $rootScope.username;
 
-      $http.post($rootScope.baseUrl + '/api/change-pw/', changePwdVm.users)
+      dataService.post('/api/change-pw/', vm.users)
         .then(successCallbackChangePassword, errorCallbackChangePassword);
 
       function errorCallbackChangePassword() {
@@ -145,7 +144,7 @@
         });
 
         // Reset users data
-        changePwdVm.users = {};
+        vm.users = {};
       }
 
       function successCallbackChangePassword() {

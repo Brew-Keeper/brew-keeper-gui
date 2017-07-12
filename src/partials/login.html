@@ -29,23 +29,23 @@
   </article>
 </section>
 <section class="more-info reset-password hidden columns general">
-  <form name="request-reset" class="register" ng-controller="ChangePasswordController as changePwdVm" ng-submit="changePwdVm.requestReset()">
+  <form name="request-reset" class="register" ng-controller="ChangePasswordController as vm" ng-submit="vm.requestReset()">
     <label>Reset Password</label>
     <div class="columns general">
-     <input class="register-user" type="text" name="username" placeholder=" username" ng-model="changePwdVm.users.username" required>
+     <input class="register-user" type="text" name="username" placeholder=" username" ng-model="vm.users.username" required>
      <button href="" class="register clicker-button" name="request-reset">Reset</button>
-     <span ng-show="changePwdVm.resetError">Invalid username, try again.</span>
-     <span ng-show="changePwdVm.resetSuccess">An email has been sent to the address you provided at registration. Follow the instructions to reset your password.</span>
-     <span ng-show="changePwdVm.generalError">There was a problem processing your request. Please try again.</span>
+     <span ng-show="vm.resetError">Invalid username, try again.</span>
+     <span ng-show="vm.resetSuccess">An email has been sent to the address you provided at registration. Follow the instructions to reset your password.</span>
+     <span ng-show="vm.generalError">There was a problem processing your request. Please try again.</span>
     </div>
   </form><!-- end reset password form -->
 </section>
-<form class="changeForm" name="changeForm" ng-show="changePassword" ng-controller="ChangePasswordController as changePwdVm" ng-submit="changePwdVm.submitChangePassword(changeForm.confirmNewPassword.$error.match)">
+<form class="changeForm" name="changeForm" ng-show="changePassword" ng-controller="ChangePasswordController as vm" ng-submit="vm.submitChangePassword(changeForm.confirmNewPassword.$error.match)">
   <div class="columns general">
     <label class="changeForm" for="changeForm">Change Password</label>
-    <input type="password" name="oldPassword" placeholder=" current password" ng-model="changePwdVm.users.old_password" required>
-    <input type="password" name="newPassword" placeholder=" new password" ng-model="changePwdVm.users.new_password" required minlength="4">
-    <input type="password" name="confirmNewPassword" placeholder=" confirm new password" required ng-model="changePwdVm.users.confirmNewPassword" data-match="changePwdVm.users.new_password">
+    <input type="password" name="oldPassword" placeholder=" current password" ng-model="vm.users.old_password" required>
+    <input type="password" name="newPassword" placeholder=" new password" ng-model="vm.users.new_password" required minlength="4">
+    <input type="password" name="confirmNewPassword" placeholder=" confirm new password" required ng-model="vm.users.confirmNewPassword" data-match="vm.users.new_password">
     <div class="columns general">
       <button class="clicker-button" name="changeForm" type="submit">Submit</button>
     </div>
