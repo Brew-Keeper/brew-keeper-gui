@@ -115,7 +115,7 @@
     /**
      * If the passwords match, attempt to update password.
      *
-     * @param {boolean} mismatch Were the two passwords entered different?
+     * @param {boolean} mismatch Do the two entered new passwords differ?
      */
     function submitChangePassword(mismatch) {
       if (mismatch) {
