@@ -5,10 +5,9 @@
     .module('brewKeeper')
     .controller('SignupController', SignupController);
 
-  SignupController.$inject =
-    ['$http', '$cookies', '$location', '$rootScope'];
+  SignupController.$inject = ['$location', '$rootScope', 'dataService'];
   
-  function SignupController($http, $cookies, $location, $rootScope) {
+  function SignupController($location, $rootScope, dataService) {
     var signupVm = this;
     signupVm.users = {};
     signupVm.signupButton = signupButton;
@@ -49,7 +48,7 @@
         return;
       }
 
-      $http.post($rootScope.baseUrl + '/api/register/', signupVm.users)
+      dataService.post('/api/register/', signupVm.users)
         .then(successCallback, errorCallback);
 
       function errorCallback(response) {
@@ -65,9 +64,8 @@
       function successCallback(response) {
         // Set the returned token in the cookies/headers to allow user to remain
         // logged in
-        var userInfo = "Token " + response.data.token;
-        $cookies.put("Authorization", userInfo);
-        $http.defaults.headers.common = {"Authorization": userInfo};
+        var authToken = "Token " + response.data.token;
+        dataService.setCredentials(authToken);
 
         // Set the new username in the rootScope
         $rootScope.username = signupVm.users.username;
