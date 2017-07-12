@@ -9,10 +9,10 @@
     ['$location', '$rootScope', '$routeParams', 'dataService'];
 
   function RecipeListController(
-    $location,
-    $rootScope,
-    $routeParams,
-    dataService
+      $location,
+      $rootScope,
+      $routeParams,
+      dataService
   ) {
     var vm = this;
     vm.isPublic = ($location.path().indexOf('/public') === 0);

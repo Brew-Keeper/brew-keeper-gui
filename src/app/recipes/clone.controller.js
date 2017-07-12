@@ -6,9 +6,9 @@
     .controller('CloneController', CloneController);
 
   CloneController.$inject =
-    ['$routeParams', '$location', '$rootScope', 'dataService'];
+    ['$location', '$rootScope', '$routeParams', 'dataService'];
 
-  function CloneController($routeParams, $location, $rootScope, dataService) {
+  function CloneController($location, $rootScope, $routeParams, dataService) {
     var vm = this;
     vm.finishClone = finishClone;
     vm.recipe = null;

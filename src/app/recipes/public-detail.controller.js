@@ -6,13 +6,13 @@
     .controller('PublicDetailController', PublicDetailController);
 
   PublicDetailController.$inject =
-    ['$rootScope', '$routeParams', '$location', 'dataService'];
+    ['$location', '$rootScope', '$routeParams', 'dataService'];
 
   function PublicDetailController(
-    $rootScope,
-    $routeParams,
-    $location,
-    dataService
+      $location,
+      $rootScope,
+      $routeParams,
+      dataService
   ) {
     $rootScope.clonePublicRecipe = clonePublicRecipe;
 
