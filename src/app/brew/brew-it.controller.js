@@ -6,14 +6,14 @@
     .controller('BrewItController', BrewItController);
 
   BrewItController.$inject =
-    ['$scope', '$routeParams', '$location', '$rootScope', 'dataService'];
+    ['$location', '$rootScope', '$routeParams', '$scope', 'dataService'];
 
   function BrewItController(
-    $scope,
-    $routeParams,
-    $location,
-    $rootScope,
-    dataService
+      $location,
+      $rootScope,
+      $routeParams,
+      $scope,
+      dataService
     ) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
