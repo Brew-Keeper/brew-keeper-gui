@@ -102,11 +102,17 @@
     }
 
     /**
-     * Set the Authorization cookie and header with the supplied value.
+     * Set the Authorization cookie and header with the supplied token (after
+     * adding "Token " to it). If the prefix is already added, indicate with
+     * optional flag.
      *
      * @param {string} authToken The user's auth token from the back end.
+     * @param {boolean} [prefixAdded=false] Provided authToken already includes prefix.
      */
-    function setCredentials(authToken) {
+    function setCredentials(authToken, prefixAdded) {
+      if (prefixAdded === undefined || false) {
+        authToken = "Token " + authToken;
+      }
       // Make sure we can get this again, later
       $cookies.put("Authorization", authToken);
       // Allow our calls to the API to work

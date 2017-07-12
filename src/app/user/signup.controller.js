@@ -64,8 +64,7 @@
       function successCallback(response) {
         // Set the returned token in the cookies/headers to allow user to remain
         // logged in
-        var authToken = "Token " + response.data.token;
-        dataService.setCredentials(authToken);
+        dataService.setCredentials(response.data.token);
 
         // Set the new username in the rootScope
         $rootScope.username = signupVm.users.username;

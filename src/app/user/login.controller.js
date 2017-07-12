@@ -75,8 +75,7 @@
      * @param {Object} response The api response data.
      */
     function successCallbackLogin(response) {
-      var authToken = "Token " + response.data.token;
-      dataService.setCredentials(authToken);
+      dataService.setCredentials(response.data.token);
 
       // Save the username to the rootScope
       $rootScope.username = loginVm.users.username;

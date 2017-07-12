@@ -26,7 +26,7 @@
       // Definition of baseUrl (will eventually move to dataService)
       $rootScope.maxStars = 5;
       var cookie = dataService.getCredentials();
-      dataService.setCredentials(cookie);
+      dataService.setCredentials(cookie, true);
 
       dataService.get('/api/whoami/')
         .then(function(response) {

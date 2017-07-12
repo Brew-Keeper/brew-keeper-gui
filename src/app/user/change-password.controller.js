@@ -104,8 +104,7 @@
       }
 
       function successCallbackResetPassword(response) {
-        authToken = "Token " + response.data.token;
-        dataService.setCredentials(authToken);
+        dataService.setCredentials(response.data.token);
 
         // Reset the users property and navigate to the root of the app
         vm.users = {};
