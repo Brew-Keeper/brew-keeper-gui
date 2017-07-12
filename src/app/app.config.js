@@ -5,7 +5,12 @@
     .module('brewKeeper')
     .config(config);
 
-  function config($routeProvider) {
+  config.$inject = ['$routeProvider', '$compileProvider'];
+
+  function config($routeProvider, $compileProvider) {
+    // Disable debug
+    $compileProvider.debugInfoEnabled(false);
+
     $routeProvider
       .when('/',{
         templateUrl: 'app/recipes/recipe-list.html',
