@@ -110,7 +110,7 @@
      * @param {boolean} [prefixAdded=false] Provided authToken already includes prefix.
      */
     function setCredentials(authToken, prefixAdded) {
-      if (prefixAdded === undefined || false) {
+      if (!prefixAdded) {
         authToken = "Token " + authToken;
       }
       // Make sure we can get this again, later
