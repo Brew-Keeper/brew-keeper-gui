@@ -5,9 +5,10 @@
     .module('brewKeeper')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$scope', '$http', '$rootScope', '$cookies', '$location'];
+  LoginController.$inject =
+    ['$cookies', '$location', '$rootScope', 'dataService'];
 
-  function LoginController($scope, $http, $rootScope, $cookies, $location) {
+  function LoginController($cookies, $location, $rootScope, dataService) {
     var loginVm = this;
     loginVm.loginButton = loginButton;
     loginVm.users = {};
@@ -63,9 +64,8 @@
      * result.
      */
     function loginButton() {
-      $cookies.remove("Authorization");
-      $http.defaults.headers.common = {};
-      $http.post($rootScope.baseUrl + '/api/login/', loginVm.users)
+      dataService.clearCredentials();
+      dataService.post('/api/login/', loginVm.users)
         .then(successCallbackLogin, errorCallbackLogin);
     }
 
@@ -75,9 +75,8 @@
      * @param {Object} response The api response data.
      */
     function successCallbackLogin(response) {
-      var userInfo = "Token " + response.data.token;
-      $cookies.put("Authorization", userInfo);
-      $http.defaults.headers.common = {"Authorization": userInfo};
+      var authToken = "Token " + response.data.token;
+      dataService.setCredentials(authToken);
 
       // Save the username to the rootScope
       $rootScope.username = loginVm.users.username;
@@ -90,4 +89,4 @@
       $location.path('/');
     }
   }
-})();//END IFFE
+})();
