@@ -5,10 +5,9 @@
     .module('brewKeeper')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject =
-    ['$cookies', '$location', '$rootScope', 'dataService'];
+  LoginController.$inject = ['$location', '$rootScope', 'dataService'];
 
-  function LoginController($cookies, $location, $rootScope, dataService) {
+  function LoginController($location, $rootScope, dataService) {
     var loginVm = this;
     loginVm.loginButton = loginButton;
     loginVm.users = {};
