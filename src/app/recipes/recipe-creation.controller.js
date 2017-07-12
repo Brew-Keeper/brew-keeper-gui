@@ -5,10 +5,9 @@
     .module('brewKeeper')
     .controller('RecipeCreationController', RecipeCreationController);
 
-  RecipeCreationController.$inject =
-    ['$scope', '$location', '$rootScope', '$cookies', 'dataService'];
+  RecipeCreationController.$inject = ['$location', '$rootScope', 'dataService'];
 
-  function RecipeCreationController($scope, $location, $rootScope, $cookies, dataService) {
+  function RecipeCreationController($location, $rootScope, dataService) {
     var vm = this;
     vm.createNew = createNew;
     vm.recipe = {};
