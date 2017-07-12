@@ -6,12 +6,12 @@
     .controller('RecipeListController', RecipeListController);
 
   RecipeListController.$inject =
-    ['$rootScope', '$routeParams', '$location', 'dataService'];
+    ['$location', '$rootScope', '$routeParams', 'dataService'];
 
   function RecipeListController(
+    $location,
     $rootScope,
     $routeParams,
-    $location,
     dataService
   ) {
     var vm = this;
