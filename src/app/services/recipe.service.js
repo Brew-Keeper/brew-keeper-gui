@@ -75,6 +75,8 @@
      *
      * @param {number} recipe_id The id of the recipe to be retrieved.
      * @param {string} username The user whose recipe we are getting.
+     *
+     * @return {Object} The recipe in question.
      */
     function getRecipe(recipe_id, username) {
       // If we don't have the recipe, go get it
@@ -115,6 +117,8 @@
      * @param {Object[]} recipes The recipes to sort.
      * @param {string} prop The property name on which to sort.
      * @param {boolean} [ascending] Should the sort be in ascending order?
+     *
+     * @return {Object[]} The same recipes in the desired order.
      */
     function sortRecipesBy(recipes, prop, ascending) {
       recipes.sort(highestPropertyClosure(prop));
@@ -127,6 +131,10 @@
 
     /**
      * Closure to create sort by specified property.
+     *
+     * @param {string} prop The name of the property to compare.
+     *
+     * @return {function} The comparison function using 'prop'.
      */
     function highestPropertyClosure(prop) {
       var propCompare = function (a, b) {
