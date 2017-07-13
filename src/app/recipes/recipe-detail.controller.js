@@ -458,7 +458,7 @@
       publicData.shared_by = $rootScope.username;
       publicData.steps = [];
 
-      dataService.post($rootScope.baseUrl + '/api/users/public/recipes/', publicData)
+      dataService.post('/api/users/public/recipes/', publicData)
         .success(function(response) {
           var newRecipeId = response.id;
 
@@ -472,7 +472,7 @@
             steps[step].duration = vm.detail.steps[step].duration;
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
-            dataService.post($rootScope.baseUrl + '/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
+            dataService.post('/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
           }
         })
         .then(function() {
