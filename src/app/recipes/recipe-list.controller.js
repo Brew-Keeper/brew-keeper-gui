@@ -6,13 +6,14 @@
     .controller('RecipeListController', RecipeListController);
 
   RecipeListController.$inject =
-    ['$location', '$rootScope', '$routeParams', 'dataService'];
+    ['$location', '$rootScope', '$routeParams', 'dataService', 'recipeService'];
 
   function RecipeListController(
       $location,
       $rootScope,
       $routeParams,
-      dataService
+      dataService,
+      recipeService
   ) {
     var vm = this;
     vm.isPublic = ($location.path().indexOf('/public') === 0);
@@ -25,6 +26,7 @@
     vm.search = search;
     vm.updateRating = updateRating;
 
+    var localUser = vm.isPublic ? 'public' : $rootScope.username;
     var publicUrl = '/api/users/public/recipes/';
     var recipesUrl = null;
 
@@ -48,11 +50,15 @@
       } else {
         recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
       }
-      // Get the recipes for this user
-      dataService.get(recipesUrl)
-        .then(function(response) {
-          vm.recipes = response.data;
-        });
+      // Attempt to get the recipes for this user from the cache
+      vm.recipes = recipeService.getRecipes(localUser);
+      // If not in the cache, get them from the API
+      if (vm.recipes.length === 0) {
+        dataService.get(recipesUrl)
+          .then(function(response) {
+            vm.recipes = recipeService.cacheRecipes(response.data);
+          });
+      }
     }
 
     /**
