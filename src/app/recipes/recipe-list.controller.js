@@ -65,16 +65,6 @@
      * Brew a recipe in the list.
      */
     function listBrewIt(id) {
-      //get indexOf recipe id
-      var recipeId;
-      for (var index = 0; index < vm.recipes.length; index ++) {
-        if (vm.recipes[index].id == id) {
-          recipeId = index;
-        }
-      }
-      // FIXME: We set these on $rootScope, but don't end up using them.
-      $rootScope.steps = vm.recipes[recipeId].steps;
-      $rootScope.detail = vm.recipes[recipeId];
       $location.path("/" + (vm.isPublic ? 'public' : $rootScope.username) +
         "/" + id + "/brewit");
     }
@@ -91,9 +81,10 @@
       dataService.post(publicUrl + recipeId + '/ratings/', providedRating)
         // Now that we have posted, update the rating to reflect the change
         .then(function() {
-          dataService.get(publicUrl)
+          dataService.get(publicUrl + recipeId + '/')
             .then(function(response) {
-              vm.recipes = response.data;
+              recipeService.cacheRecipes(response.data);
+              vm.recipes = recipeService.getRecipes('public');
             });
         });
     }
@@ -133,7 +124,7 @@
       }
       dataService.get(recipesUrl + searchParams)
         .then(function(response) {
-          vm.recipes = response.data;
+          vm.recipes = recipeService.cacheRecipes(response.data);
         });
     }
 
