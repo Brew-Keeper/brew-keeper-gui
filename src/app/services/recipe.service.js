@@ -16,7 +16,8 @@
       clearAllCache: clearAllCache,
       clearUserCache: clearUserCache,
       getRecipe: getRecipe,
-      getRecipes: getRecipes
+      getRecipes: getRecipes,
+      sortRecipesBy: sortRecipesBy
     };
 
     return service;
@@ -43,7 +44,7 @@
         $rootScope.recipeCache[recipe_id] = recipes[i];
       }
 
-      return recipes;
+      return sortRecipesBy(recipes, 'rating');
     }
 
     /**
@@ -105,7 +106,40 @@
         }
       }
 
-      return ret;
+      return sortRecipesBy(ret, 'rating');
+    }
+
+    /**
+     * Sort the provided recipes by the specified property.
+     *
+     * @param {Object[]} recipes The recipes to sort.
+     * @param {string} prop The property name on which to sort.
+     * @param {boolean} [ascending] Should the sort be in ascending order?
+     */
+    function sortRecipesBy(recipes, prop, ascending) {
+      recipes.sort(highestPropertyClosure(prop));
+      if (ascending) {
+        recipes.reverse();
+      }
+
+      return recipes;
+    }
+
+    /**
+     * Closure to create sort by specified property.
+     */
+    function highestPropertyClosure(prop) {
+      var propCompare = function (a, b) {
+        if (a[prop] > b[prop]) {
+          return -1;
+        }
+        if (a[prop] < b[prop]) {
+          return 1;
+        }
+        return 0;
+      };
+
+      return propCompare;
     }
   }
 })();
