@@ -44,7 +44,7 @@
         $rootScope.recipeCache[recipe_id] = recipes[i];
       }
 
-      return sortRecipesBy(recipes, 'rating');
+      return sortRecipesBy(recipes, 'brew_count');
     }
 
     /**
@@ -120,7 +120,7 @@
         }
       }
 
-      return sortRecipesBy(ret, 'rating');
+      return sortRecipesBy(ret, 'brew_count');
     }
 
     /**
