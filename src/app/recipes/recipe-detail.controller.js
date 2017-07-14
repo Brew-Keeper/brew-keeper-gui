@@ -6,13 +6,14 @@
     .controller('RecipeDetailController', RecipeDetailController);
 
   RecipeDetailController.$inject =
-    ['$location', '$rootScope', '$routeParams','dataService'];
+    ['$location', '$rootScope', '$routeParams','dataService', 'recipePrep'];
 
   function RecipeDetailController(
       $location,
       $rootScope,
       $routeParams,
-      dataService
+      dataService,
+      recipePrep
   ) {
     $rootScope.cloneRecipe = cloneRecipe;
     $rootScope.makePublic = makePublic;
@@ -63,16 +64,10 @@
       recipeUrl = recipesUrl + $routeParams.id + '/';
       brewNotesUrl = recipeUrl + 'brewnotes/';
 
-      dataService.get(recipeUrl)
-        .then(function(response) {
-          vm.detail = response.data;
-          vm.steps = response.data.steps;
-          vm.notes = response.data.brewnotes;
-          vm.ratings = [{
-              current: vm.detail.rating,
-              max: $rootScope.maxStars
-          }];
-        });
+      vm.detail = recipePrep;
+      vm.steps = vm.detail.steps;
+      vm.notes = vm.detail.brewnotes;
+      vm.ratings = [{current:vm.detail.rating}];
 
       // Show the edit form if user clicks edit
       $('.edit-button').on('click', function() {

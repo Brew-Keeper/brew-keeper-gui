@@ -65,7 +65,7 @@
      * Brew a recipe in the list.
      */
     function listBrewIt(id) {
-      $location.path("/" + localUser + "/" + id + "/brewit/");
+      $location.path("/" + localUser + "/" + id + "/brewit");
     }
 
     /**

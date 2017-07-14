@@ -36,7 +36,10 @@
       .when('/public/:id',{
         templateUrl: 'app/recipes/public-detail.html',
         controller: 'PublicDetailController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          recipePrep: recipePrep
+        }
       })
       .when('/public/:id/brewit', {
         templateUrl: 'app/brew/brew-it.html',
@@ -69,6 +72,9 @@
         templateUrl: 'app/recipes/recipe-detail.html',
         controller: 'RecipeDetailController',
         controllerAs: 'vm',
+        resolve: {
+          recipePrep: recipePrep
+        }
       })
       .when('/:username/:id/brewit', {
         templateUrl: 'app/brew/brew-it.html',
@@ -90,8 +96,10 @@
   function recipePrep($location, $rootScope, $route, recipeService) {
     var isPublic = ($location.path().indexOf('/public') === 0);
     var localUser = isPublic ? 'public' : $rootScope.username;
+    var recipeId = $route.current.params.id;
+    var detail = $location.path() == '/' + localUser + '/' + recipeId;
 
-    return recipeService.getRecipe($route.current.params.id, localUser);
+    return recipeService.getRecipe(recipeId, localUser, detail);
   }
 
 })();

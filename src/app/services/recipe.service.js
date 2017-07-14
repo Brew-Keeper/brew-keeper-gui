@@ -71,16 +71,25 @@
     }
 
     /**
-     * Get the specified recipe.
+     * Get the specified recipe. If it is not in the cache, retrieve it from
+     * the API. If it is already in the cache, but we need detail and it is not
+     * there, get it from the API.
      *
      * @param {number} recipe_id The id of the recipe to be retrieved.
      * @param {string} username The user whose recipe we are getting.
      *
      * @return {Object} A promise for the recipe in question.
      */
-    function getRecipe(recipe_id, username) {
-      // If we don't have the recipe, go get it
-      if (!$rootScope.recipeCache.hasOwnProperty(recipe_id)) {
+    function getRecipe(recipe_id, username, detail) {
+      // If we don't have the recipe, or we don't have all the detail (test: do
+      // we have 'grind'?), go get it
+      if (
+        !$rootScope.recipeCache.hasOwnProperty(recipe_id) ||
+        (
+          detail &&
+          !$rootScope.recipeCache[recipe_id].hasOwnProperty('grind')
+        )
+      ) {
         return dataService.get('/api/users/' + username + '/recipes/' + recipe_id + '/')
           .then(function(response) {
             $rootScope.recipeCache[recipe_id] = response.data;

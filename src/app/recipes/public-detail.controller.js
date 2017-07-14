@@ -6,13 +6,14 @@
     .controller('PublicDetailController', PublicDetailController);
 
   PublicDetailController.$inject =
-    ['$location', '$rootScope', '$routeParams', 'dataService'];
+    ['$location', '$rootScope', '$routeParams', 'dataService', 'recipePrep'];
 
   function PublicDetailController(
       $location,
       $rootScope,
       $routeParams,
-      dataService
+      dataService,
+      recipePrep
   ) {
     $rootScope.clonePublicRecipe = clonePublicRecipe;
 
@@ -43,29 +44,26 @@
     function activate() {
       $(document).scrollTop(0);
 
-      dataService.get(recipeUrl)
-        .then(function(response) {
-          vm.detail = response.data;
-          vm.steps = response.data.steps;
-          var currentRating = vm.detail.average_rating;
-          vm.comments = response.data.public_comments;
-          vm.ratings = [{current: currentRating}];
+      vm.detail = recipePrep;
+      vm.steps = vm.detail.steps;
+      vm.comments = vm.detail.public_comments;
+      var currentRating = vm.detail.average_rating;
+      vm.ratings = [{current: currentRating}];
 
-          if ($rootScope.username !== null) {
-            dataService.get(ratingsUrl)
-              .then(function(response) {
-                var publicRatings = response.data;
-                publicRatings.forEach(function(rating) {
-                  if (rating.username == $rootScope.username) {
-                    vm.ratingId = rating.id;
-                    vm.userRating = rating.public_rating;
-                  }
-                  return;
-                });
-                vm.userRatings = [{current: vm.userRating}];
-              });
-          }
-        });
+      if ($rootScope.username !== null) {
+        dataService.get(ratingsUrl)
+          .then(function(response) {
+            var publicRatings = response.data;
+            publicRatings.forEach(function(rating) {
+              if (rating.username == $rootScope.username) {
+                vm.ratingId = rating.id;
+                vm.userRating = rating.public_rating;
+              }
+              return;
+            });
+            vm.userRatings = [{current: vm.userRating}];
+          });
+      }
 
       addListeners();
     }
