@@ -5,15 +5,21 @@
     .module('brewKeeper')
     .controller('BrewItController', BrewItController);
 
-  BrewItController.$inject =
-    ['$location', '$rootScope', '$routeParams', '$scope', 'dataService'];
+  BrewItController.$inject = [
+    '$location',
+    '$rootScope',
+    '$routeParams',
+    '$scope',
+    'dataService',
+    'recipePrep'];
 
   function BrewItController(
       $location,
       $rootScope,
       $routeParams,
       $scope,
-      dataService
+      dataService,
+      recipePrep
     ) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
@@ -62,36 +68,15 @@
       }
 
       $(document).scrollTop(0);
-      dataService.get(recipeUrl)
-        .then(function(response) {
-          vm.detail = response.data;
-          var currentRating = vm.isPublic ? vm.detail.average_rating : vm.detail.rating;
-          vm.ratings = [{current: currentRating}];
-          vm.steps = response.data.steps;
-          vm.notes = response.data.brewnotes;
-          vm.countdownVal = response.data.total_duration;
-          var stepArray = []; //create an array of step #'s'
-          for (var step in vm.steps) {
-            stepArray.push(vm.steps[step].step_number);
-          }
-          vm.stepArray = stepArray;
-          vm.stepTotal = stepArray.length;
 
-          if (vm.isPublic && $rootScope.username !== null) {
-            dataService.get(ratingsUrl)
-              .then(function(response) {
-                var publicRatings = response.data;
-                for (var i = 0; i < publicRatings.length; i++) {
-                  if (publicRatings[i].username == $rootScope.username) {
-                    vm.ratingId = publicRatings[i].id;
-                    vm.userRating = publicRatings[i].public_rating;
-                    break;
-                  }
-                }
-                vm.ratings = [{current: vm.userRating}];
-              });
-          }
-      });
+      vm.recipe = recipePrep;
+      if (vm.recipe) {
+        setSemanticVariables(vm.recipe);
+      }
+
+      if (vm.isPublic && $rootScope.username) {
+        getPublicRatings();
+      }
 
       // Show brew note form on add note
       $(".add-brew-note").on('click', function() {
@@ -117,6 +102,24 @@
       dataService.post(brewNoteUrl, vm.brewnote);
       // Prepare for adding another brew note
       vm.brewnote = {};
+    }
+
+    /**
+     * Get and set the public rating associated with a public recipe.
+     */
+    function getPublicRatings() {
+      dataService.get(ratingsUrl)
+        .then(function(response) {
+          var publicRatings = response.data;
+          for (var i = 0; i < publicRatings.length; i++) {
+            if (publicRatings[i].username == $rootScope.username) {
+              vm.ratingId = publicRatings[i].id;
+              vm.userRating = publicRatings[i].public_rating;
+              break;
+            }
+          }
+          vm.ratings = [{current: vm.userRating}];
+        });
     }
 
     /**
@@ -257,6 +260,26 @@
       $("a[href].add-brew-note").removeClass("hidden");
       $("a[href].reset-brew").addClass("hidden");
       vm.showStars = true;
+    }
+
+    /**
+     * Set semantic variables to make them easier to access.
+     *
+     * @param {Object} recipe The full recipe.
+     */
+    function setSemanticVariables(recipe) {
+      vm.detail = recipe;
+      var currentRating = vm.isPublic ? vm.detail.average_rating : vm.detail.rating;
+      vm.ratings = [{current: currentRating}];
+      vm.steps = recipe.steps;
+      vm.notes = recipe.brewnotes;
+      vm.countdownVal = recipe.total_duration;
+      var stepArray = []; //create an array of step #'s'
+      for (var step in vm.steps) {
+        stepArray.push(vm.steps[step].step_number);
+      }
+      vm.stepArray = stepArray;
+      vm.stepTotal = stepArray.length;
     }
 
     /**

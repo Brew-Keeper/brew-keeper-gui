@@ -41,7 +41,10 @@
       .when('/public/:id/brewit', {
         templateUrl: 'app/brew/brew-it.html',
         controller: 'BrewItController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          recipePrep: recipePrep
+        }
       })
       .when('/reset-pw', {
         templateUrl: 'partials/reset-pw.html',
@@ -70,7 +73,10 @@
       .when('/:username/:id/brewit', {
         templateUrl: 'app/brew/brew-it.html',
         controller: 'BrewItController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          recipePrep: recipePrep
+        }
       });
 
       // .otherwise({
@@ -78,4 +84,14 @@
       //   templateUrl: 'partials/404.html'
       // })
   }
+
+  recipePrep.$inject = ['$location', '$rootScope', '$route', 'recipeService'];
+
+  function recipePrep($location, $rootScope, $route, recipeService) {
+    var isPublic = ($location.path().indexOf('/public') === 0);
+    var localUser = isPublic ? 'public' : $rootScope.username;
+
+    return recipeService.getRecipe($route.current.params.id, localUser);
+  }
+
 })();

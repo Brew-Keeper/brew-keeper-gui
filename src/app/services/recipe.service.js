@@ -5,9 +5,9 @@
     .module('brewKeeper')
     .factory('recipeService', recipeService);
 
-  recipeService.$inject = ['$rootScope', 'dataService'];
+  recipeService.$inject = ['$q', '$rootScope', 'dataService'];
 
-  function recipeService($rootScope, dataService) {
+  function recipeService($q, $rootScope, dataService) {
     // Initialize the cache
     $rootScope.recipeCache = {};
 
@@ -76,18 +76,21 @@
      * @param {number} recipe_id The id of the recipe to be retrieved.
      * @param {string} username The user whose recipe we are getting.
      *
-     * @return {Object} The recipe in question.
+     * @return {Object} A promise for the recipe in question.
      */
     function getRecipe(recipe_id, username) {
       // If we don't have the recipe, go get it
-      if (!$rootScope.hasOwnProperty(recipe_id)) {
-        dataService.get('/api/users/' + username + '/recipes/' + recipe_id + '/')
+      if (!$rootScope.recipeCache.hasOwnProperty(recipe_id)) {
+        return dataService.get('/api/users/' + username + '/recipes/' + recipe_id + '/')
           .then(function(response) {
             $rootScope.recipeCache[recipe_id] = response.data;
+            return $rootScope.recipeCache[recipe_id];
           });
       }
 
-      return $rootScope.recipeCache[recipe_id];
+      return $q(function(resolve, reject) {
+        resolve($rootScope.recipeCache[recipe_id]);
+      });
     }
 
     /**
