@@ -120,6 +120,9 @@
       var searchParams = '';
       if (searchString !== undefined) {
         searchParams = '?search=' + searchString;
+      } else {
+        vm.recipes = $rootScope.getRecipes(localUser);
+        return;
       }
       dataService.get(recipesUrl + searchParams)
         .then(function(response) {
