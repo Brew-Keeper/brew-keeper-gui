@@ -5,17 +5,25 @@
     .module('brewKeeper')
     .controller('RecipeDetailController', RecipeDetailController);
 
-  RecipeDetailController.$inject =
-    ['$location', '$rootScope', '$routeParams','dataService', 'recipePrep'];
+  RecipeDetailController.$inject = [
+    '$location',
+    '$rootScope',
+    '$routeParams',
+    'dataService',
+    'recipePrep',
+    'recipeService'
+  ];
 
   function RecipeDetailController(
       $location,
       $rootScope,
       $routeParams,
       dataService,
-      recipePrep
+      recipePrep,
+      recipeService
   ) {
     $rootScope.cloneRecipe = cloneRecipe;
+    $rootScope.deleteStep = deleteStep;
     $rootScope.makePublic = makePublic;
 
     var vm = this;
@@ -24,7 +32,6 @@
     vm.decreaseStep = decreaseStep;
     vm.deleteNote = deleteNote;
     vm.deleteRecipe = deleteRecipe;
-    vm.deleteStep = deleteStep;
     vm.detail = {};
     vm.editNote = editNote;
     vm.editRecipe = editRecipe;
@@ -37,6 +44,7 @@
     vm.showAddBrewNote = showAddBrewNote;
     vm.showAddSteps = showAddSteps;
     vm.showCloneModal = showCloneModal;
+    vm.showDeleteStep = showDeleteStep;
     vm.showEditNote = showEditNote;
     vm.showEditStep = showEditStep;
     vm.showMakePublic = showMakePublic;
@@ -85,6 +93,15 @@
       // Handle click on Add Steps
       $(".no-steps").click(vm.showAddSteps);
 
+      // Close the delete step modal if the user cancels
+      $("button.cancel-delete-step-fail").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        // Remove the deletion marker
+        $(".to-delete").removeClass("to-delete");
+        $("section.confirm-delete-step-modal").addClass("inactive");
+        return;
+      });
+
       // Close the clone modal if the user cancels
       $("button.cancel-clone-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
@@ -118,11 +135,15 @@
     function addBrewNote() {
       dataService.post(brewNotesUrl, vm.brewnote)
         .success(function (data) {
+          // Add the new note to the top (beginning) of the notes
+          vm.notes.unshift(data);
+
+          // Update the recipe with the new note and re-cache it
+          vm.detail.notes = vm.notes;
+          recipeService.cacheRecipes(vm.detail);
+
+          // Close the brew note form
           $(".brew-form").toggleClass("hidden");
-          dataService.get(recipeUrl)
-            .then(function(response) {
-              vm.notes = response.data.brewnotes;
-            });
         });
 
       // Reset the brew note form data
@@ -134,16 +155,20 @@
      */
     function addStep() {
       vm.step.step_number = vm.steps.length + 1;
+      vm.detail.total_duration += vm.step.duration;
       $('.input-focus').focus();
       dataService.post(recipeUrl + 'steps/', vm.step)
-        .then(function() {
-          dataService.get(recipeUrl)
-            .then(function(response) {
-              // Show the Brew It button, hide the Add Steps button
-              $(".brew-it-button").removeClass("hidden");
-              $(".no-steps").addClass("hidden");
-              vm.steps = response.data.steps;
-            });
+        .then(function(response) {
+          // Update the steps
+          vm.steps.push(response.data);
+
+          // Update the recipe with the new step and re-cache it
+          vm.detail.steps = vm.steps;
+          recipeService.cacheRecipes(vm.detail);
+
+          // Show the Brew It button, hide the Add Steps button
+          $(".brew-it-button").removeClass("hidden");
+          $(".no-steps").addClass("hidden");
         });
       vm.step = {};
     }
@@ -152,6 +177,7 @@
      * Move the selected step further up the order.
      */
     function decreaseStep(step) {
+      // Make sure there is a preceding step
       if (step.step_number <= 1) {
         return;
       }
@@ -160,29 +186,34 @@
       vm.steps[step.step_number - 1] = vm.steps[step.step_number - 2];
       vm.steps[step.step_number - 2] = swapStep;
 
+      // Update the step numbers
+      vm.steps[step.step_number - 1].step_number += 1;
       step.step_number--;
 
+      // Update the cached version
+      vm.detail.steps = vm.steps;
+      recipeService.cacheRecipes(vm.detail);
+
       // Update the step in the API
-      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step)
-        .then(function() {
-          dataService.get(recipeUrl)
-            .then(function(response) {
-              vm.steps = response.data.steps;
-            });
-        });
+      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
     }
 
     /**
      * Delete the selected brew note.
      */
     function deleteNote(noteId) {
-        dataService.delete(brewNotesUrl + noteId + '/')
-          .then(function() {
-            dataService.get(recipeUrl)
-              .then(function(response) {
-                vm.notes = response.data.brewnotes;
-              });
-          });
+      // Remove the note from the model
+      for (var i = 0; i < vm.notes.length; i++) {
+        if (vm.notes[i].id == noteId) {
+          vm.notes.splice(i, 1);
+        }
+      }
+
+      // Update and cache the recipe
+      vm.detail.brewnotes = vm.notes;
+      recipeService.cacheRecipes(vm.detail);
+
+      dataService.delete(brewNotesUrl + noteId + '/');
     }
 
     /**
@@ -205,37 +236,6 @@
         dataService.delete(recipeUrl)
           .then(function() {
             $location.path('/'+ $rootScope.username);
-          });
-      });
-    }
-
-    /**
-     * Delete the selected step.
-     */
-    function deleteStep(stepNumber, stepId) {
-      // Show modal to confirm action
-      $(".wrapper").addClass("openerror");
-      $("section.confirm-delete-modal").removeClass("inactive");
-      // Hide modal if action cancelled
-      $("button.cancel-delete-fail").on("click", function() {
-        $(".wrapper").removeClass("openerror");
-        $("section.confirm-delete-modal").addClass("inactive");
-        return;
-      });
-      // Hide modal and delete step upon confirmation
-      $("button.confirm-delete-fail").on("click", function() {
-        $(".wrapper").removeClass("openerror");
-        $("section.confirm-delete-modal").addClass("inactive");
-        dataService.delete(recipeUrl + 'steps/' + stepId + '/')
-          .then(function() {
-            dataService.get(recipeUrl)
-              .then(function(response) {
-                vm.steps = response.data.steps;
-                if (response.data.steps.length === 0) {
-                  $(".brew-it-button").addClass("hidden");
-                  $(".no-steps").removeClass("hidden");
-                }
-              });
           });
       });
     }
@@ -269,6 +269,8 @@
      */
     function editStep(step) {
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
+      // Recalculate the duration
+      updateDuration();
     }
 
     /**
@@ -283,6 +285,7 @@
      * Move the selected step further down the step order.
      */
     function increaseStep(step) {
+      // Make sure there is a following step
       if (step.step_number >= vm.steps.length) {
         return;
       }
@@ -290,18 +293,17 @@
       var swapStep = vm.steps[step.step_number - 1];
       vm.steps[step.step_number - 1] = vm.steps[step.step_number];
       vm.steps[step.step_number] = swapStep;
-      // end code to swap the steps manually
 
+      // Update the step numbers
+      vm.steps[step.step_number - 1].step_number -= 1;
       step.step_number++;
 
+      // Update the cached version
+      vm.detail.steps = vm.steps;
+      recipeService.cacheRecipes(vm.detail);
+
       // Update the step in the API
-      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step)
-        .then(function() {
-          dataService.get(recipeUrl)
-            .then(function(response) {
-              vm.steps = response.data.steps;
-            });
-        });
+      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
     }
 
     /**
@@ -334,6 +336,23 @@
     function showCloneModal() {
       $(".wrapper").addClass("openerror");
       $("section.confirm-clone-modal").removeClass("inactive");
+    }
+
+    /**
+     * Delete the selected step.
+     */
+    function showDeleteStep(stepNumber) {
+      // Show modal to confirm action
+      $(".wrapper").addClass("openerror");
+      $("section.confirm-delete-step-modal").removeClass("inactive");
+
+      // Mark the specified step so we know which one to delete
+      var stepIndex = stepNumber - 1;
+      $("div.step-details").each(function(index) {
+        if (index == stepIndex) {
+          $(this).addClass("to-delete");
+        }
+      });
     }
 
     /**
@@ -375,6 +394,22 @@
      */
     function showNoteIcons(noteId) {
       $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+    }
+
+    /**
+     * Recalculate the duration and re-cache if it changed.
+     */
+    function updateDuration() {
+      var newDuration = 0;
+      for (var i = 0; i < vm.steps.length; i++) {
+        newDuration += vm.steps[i].duration;
+      }
+
+      // If it changed, update and re-cache
+      if (vm.detail.total_duration !== newDuration) {
+        vm.detail.total_duration = newDuration;
+        recipeService.cacheRecipes(vm.detail);
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -427,6 +462,39 @@
           // Redirect to the clone editor
           $location.path('/' + $rootScope.username + '/clone/' + newRecipeId);
         });
+    }
+
+    /**
+     * Delete the selected step.
+     */
+    function deleteStep() {
+      var stepNumber = $(".to-delete").attr("data-step-number");
+      $(".wrapper").removeClass("openerror");
+      $("section.confirm-delete-step-modal").addClass("inactive");
+      // Delete the step in the API
+      var stepId = vm.steps[stepNumber - 1].id;
+      dataService.delete(recipeUrl + 'steps/' + stepId + '/');
+
+      // Remove the step
+      vm.steps.splice(stepNumber - 1, 1);
+
+      // If there were steps after it, adjust their step numbers
+      if (vm.steps.length >= stepNumber && vm.steps.length > 0) {
+        for (var i = stepNumber - 1; i < vm.steps.length; i++) {
+          vm.steps[i].step_number -= 1;
+        }
+      }
+
+      // Update the recipe with the new step array and re-cache it
+      vm.detail.steps = vm.steps;
+      recipeService.cacheRecipes(vm.detail);
+      updateDuration();
+
+      // Show "Add Steps" instead of "Brew It" if no steps remain
+      if (vm.steps.length === 0) {
+        $(".brew-it-button").addClass("hidden");
+        $(".no-steps").removeClass("hidden");
+      }
     }
 
     /**
