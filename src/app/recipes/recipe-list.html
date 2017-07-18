@@ -19,7 +19,7 @@
   <a class="recipe-title" ng-show="!vm.isPublic" href="#{{username}}/{{recipe.id}}">{{recipe.title}}</a>
   <span>{{recipe.bean_name}}</span>
   <div class="col-1-2">
-    <span>{{recipe.roast}}</span>
+    <span>{{recipe.roast !== null ? recipe.roast + " Roast" : ''}}</span>
     <div class="col-1-4" ng-show="vm.isPublic"> <!-- public rating and shared by -->
       <!-- star rating -->
       <div class="col-1-3">

@@ -19,7 +19,11 @@
       </div>
       <section class="details bean-details">
         <span>{{vm.detail.bean_name}}</span>
-        <span>{{vm.detail.roast}}, {{vm.detail.total_bean_amount}} {{vm.detail.bean_units}}, {{vm.detail.grind}}</span>
+        <span>
+          {{vm.detail.roast !== null ? vm.detail.roast + ', ' : ''}}
+          {{vm.detail.total_bean_amount !== null ? vm.detail.total_bean_amount : ''}}{{vm.detail.bean_units !== null ? vm.detail.bean_units + ', ' : ''}}
+          {{vm.detail.grind}}
+        </span>
       </section> <!--end section.bean-details -->
       <div class="detail-icon">
         <img src="img/LightWater_darker.svg">
