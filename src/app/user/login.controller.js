@@ -5,9 +5,13 @@
     .module('brewKeeper')
     .controller('LoginController', LoginController);
 
-  LoginController.$inject = ['$location', '$rootScope', 'dataService'];
+  LoginController.$inject = [
+    '$location',
+    '$rootScope',
+    'dataService',
+    'recipeService'];
 
-  function LoginController($location, $rootScope, dataService) {
+  function LoginController($location, $rootScope, dataService, recipeService) {
     var loginVm = this;
     loginVm.loginButton = loginButton;
     loginVm.users = {};
@@ -64,6 +68,7 @@
      */
     function loginButton() {
       dataService.clearCredentials();
+      recipeService.clearAllCache();
       dataService.post('/api/login/', loginVm.users)
         .then(successCallbackLogin, errorCallbackLogin);
     }

@@ -6,9 +6,14 @@
     .controller('MainController', MainController)
     .controller('WhoAmIController', WhoAmIController);
 
-  MainController.$inject = ['$location', '$rootScope', 'dataService'];
+  MainController.$inject = [
+    '$location',
+    '$rootScope',
+    'dataService',
+    'recipeService'
+  ];
 
-  function MainController($location, $rootScope, dataService) {
+  function MainController($location, $rootScope, dataService, recipeService) {
     var vm = this;
     $rootScope.changePassword = false;
     vm.logout = logout;
@@ -39,6 +44,7 @@
           $rootScope.username = null;
           $rootScope.changePassword = false;
           dataService.clearCredentials();
+          recipeService.clearAllCache();
           if ($location.path() == "/reset-pw" || "/login" || "/info") {
             return;
           }
@@ -71,6 +77,7 @@
           $rootScope.username = null;
           $rootScope.changePassword = false;
           dataService.clearCredentials();
+          recipeService.clearAllCache();
         });
     }
   }
@@ -98,6 +105,7 @@
           $rootScope.username = null;
           $rootScope.changePassword = false;
           dataService.clearCredentials();
+          recipeService.clearAllCache();
           $location.path('/public');
         });
     }
