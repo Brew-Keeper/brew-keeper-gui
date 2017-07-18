@@ -153,12 +153,12 @@
       }
 
       // Hide this step
-      $("timer."+stepNumber).addClass("hidden");
-      $("."+stepNumber).addClass("finished").removeClass("current-step");
+      $("timer." + stepNumber).addClass("hidden");
+      $("." + stepNumber).addClass("finished").removeClass("current-step");
 
       // Change next step to green and grow next step to 200
-      $("timer."+nextStep).removeClass("hidden");
-      $("."+nextStep).addClass("current-step").removeClass("inactive-step");
+      $("timer." + nextStep).removeClass("hidden");
+      $("." + nextStep).addClass("current-step").removeClass("inactive-step");
 
       // Start the next step's timer
       $scope.$broadcast('startTimer', nextTimerId);

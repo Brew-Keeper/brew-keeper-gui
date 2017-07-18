@@ -31,7 +31,7 @@
     vm.userRating = null;
     vm.userRatings = null;
 
-    var recipeUrl = '/api/users/public/recipes/'+ $routeParams.id + '/';
+    var recipeUrl = '/api/users/public/recipes/' + $routeParams.id + '/';
     var ratingsUrl = recipeUrl + 'ratings/';
     var commentsUrl = recipeUrl + 'comments/';
 
@@ -174,7 +174,7 @@
      * notes).
      */
     function showNoteIcons(noteId) {
-      $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+      $(".note-icons").filter($("." + noteId)).toggleClass("hidden");
     }
 
     ////////////////////////////////////////////////////////////////////////////

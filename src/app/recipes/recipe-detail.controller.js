@@ -235,7 +235,7 @@
         $("section.confirm-eliminate-modal").addClass("inactive");
         dataService.delete(recipeUrl)
           .then(function() {
-            $location.path('/'+ $rootScope.username);
+            $location.path('/' + $rootScope.username);
           });
       });
     }
@@ -393,7 +393,7 @@
      * Show the edit/delete icons for brew notes.
      */
     function showNoteIcons(noteId) {
-      $(".note-icons").filter($("."+ noteId)).toggleClass("hidden");
+      $(".note-icons").filter($("." + noteId)).toggleClass("hidden");
     }
 
     /**
