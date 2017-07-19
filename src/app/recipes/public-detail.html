@@ -27,7 +27,7 @@
         <span>{{vm.detail.bean_name}}</span>
         <span>
           {{vm.detail.roast !== null ? vm.detail.roast + ', ' : ''}}
-          {{vm.detail.total_bean_amount !== null ? vm.detail.total_bean_amount : ''}}{{vm.detail.bean_units !== null ? vm.detail.bean_units + ', ' : ''}}
+          {{vm.detail.total_bean_amount !== null ? vm.detail.total_bean_amount + '&thinsp;' : ''}}{{vm.detail.bean_units !== null ? vm.detail.bean_units + ', ' : ''}}
           {{vm.detail.grind}}
         </span>
       </section> <!--end section.bean-details -->
@@ -45,7 +45,7 @@
       </section> <!-- end section.brew-time -->
     </div><!--end div.details -->
   <!-- steps section -->
-  <section class="step-list" ng-repeat="step in vm.steps">
+  <section class="step-list" ng-repeat="step in vm.detail.steps">
     <div class="num-col">
       {{$index + 1}}
     </div> <!-- end number column -->
@@ -80,7 +80,7 @@
       </form>
     </section>
     <!-- add brewnote section -->
-    <div class="notes" ng-repeat="comment in vm.comments | orderBy: 'comment.comment_timestamp'">
+    <div class="notes" ng-repeat="comment in vm.detail.public_comments | orderBy: 'comment.comment_timestamp'">
       <div class="note-view{{comment.id}}" ng-click="showNoteIcons(note.id)">
         <div class="note-body">{{comment.public_comment}}</div>
         <div class="note-date">— {{comment.comment_timestamp | date}} by {{comment.username}}</div>

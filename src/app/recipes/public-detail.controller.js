@@ -5,8 +5,13 @@
     .module('brewKeeper')
     .controller('PublicDetailController', PublicDetailController);
 
-  PublicDetailController.$inject =
-    ['$location', '$rootScope', '$routeParams', 'dataService', 'recipePrep'];
+  PublicDetailController.$inject = [
+    '$location',
+    '$rootScope',
+    '$routeParams',
+    'dataService',
+    'recipePrep'
+  ];
 
   function PublicDetailController(
       $location,
@@ -19,16 +24,16 @@
 
     var vm = this;
     vm.addBrewNote = addBrewNote;
-    vm.comments = [];
     vm.deleteComment = deleteComment;
+    vm.detail = {};
     vm.editComment = editComment;
     vm.rateRecipe = rateRecipe;
     vm.ratingId = null;
+    vm.ratings = {};
     vm.showAddBrewNote = showAddBrewNote;
     vm.showCloneRecipe = showCloneRecipe;
     vm.showEditNote = showEditNote;
     vm.showNoteIcons = showNoteIcons;
-    vm.userRating = null;
     vm.userRatings = null;
 
     var recipeUrl = '/api/users/public/recipes/' + $routeParams.id + '/';
@@ -45,25 +50,11 @@
       $(document).scrollTop(0);
 
       vm.detail = recipePrep;
-      vm.steps = vm.detail.steps;
-      vm.comments = vm.detail.public_comments;
-      var currentRating = vm.detail.average_rating;
-      vm.ratings = [{current: currentRating}];
-
-      if ($rootScope.username !== null) {
-        dataService.get(ratingsUrl)
-          .then(function(response) {
-            var publicRatings = response.data;
-            publicRatings.forEach(function(rating) {
-              if (rating.username == $rootScope.username) {
-                vm.ratingId = rating.id;
-                vm.userRating = rating.public_rating;
-              }
-              return;
-            });
-            vm.userRatings = [{current: vm.userRating}];
-          });
+      vm.ratingId = vm.detail.public_ratings.id;
+      if (vm.ratingId !== undefined) {
+        vm.userRatings = [{current: vm.detail.public_ratings.public_rating}];
       }
+      vm.ratings = [{current: vm.detail.average_rating}];
 
       addListeners();
     }
@@ -74,12 +65,13 @@
     function addBrewNote() {
       dataService.post(commentsUrl, vm.comment)
         .success(function (data) {
+          vm.detail.public_comments.unshift(data);
+
+          // Close the brew note form
           $(".brew-form").toggleClass("hidden");
-          dataService.get(recipeUrl)
-            .then(function(response) {
-              vm.comments = response.data.public_comments;
-            });
         });
+
+      // Reset the brew note form data
       vm.comment = {};
     }
 
@@ -99,16 +91,16 @@
      * Delete the logged-in user's comment from this public recipe.
      */
     function deleteComment(commentId) {
-      dataService.delete(commentsUrl + commentId + '/')
-        .then(function() {
-          for (var i = 0; i < vm.comments.length; i++) {
-            if (vm.comments[i].id == commentId) {
-              // We have identified the key of the comment to delete
-              vm.comments.splice(i, 1);
-              break;
-            }
-          }
-        });
+      // Remove the comment from the model
+      for (var i = 0; i < vm.detail.public_comments.length; i++) {
+        if (vm.detail.public_comments[i].id == commentId) {
+          vm.detail.public_comments.splice(i, 1);
+          break;
+        }
+      }
+
+      // Remove the comment in the db
+      dataService.delete(commentsUrl + commentId + '/');
     }
 
     /**
@@ -121,17 +113,20 @@
           $("div.note-view" + comment.id).removeClass("hidden");
         });
     }
- 
+
     /**
      * Rate this public recipe.
      */
     function rateRecipe(rating) {
       var newRating = {"public_rating": rating};
-      vm.userRating = rating;
-      vm.userRatings = [{current: vm.userRating}];
+      vm.userRatings = [{current: rating}];
 
       // If the user has already rated, update their current rating
       if (vm.ratingId) {
+        // Update the rating in the model
+        vm.detail.public_ratings.public_rating = rating;
+
+        // Update the public rating in the db
         dataService.patch(ratingsUrl + vm.ratingId + '/', newRating);
       }
 
@@ -140,6 +135,7 @@
         dataService.post(recipeUrl + 'ratings/', newRating)
           .then(function(response) {
             vm.ratingId = response.data.id;
+            vm.detail.public_ratings = response.data;
           });
       }
     }
