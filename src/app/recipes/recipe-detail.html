@@ -10,8 +10,8 @@
       <img class="cup" src="img/CoffeeCup-65.svg"> &#215; {{vm.detail.brew_count}}
     </div>
     <div class="brew-it-button">
-      <a ng-show="vm.steps.length" class="brew-it-button" ng-href="#/{{username}}/{{vm.detail.id}}/brewit">BREW IT!</a>
-      <a ng-hide="vm.steps.length" class="no-steps" href="">Add Steps</a>
+      <a ng-show="vm.detail.steps.length" class="brew-it-button" ng-href="#/{{username}}/{{vm.detail.id}}/brewit">BREW IT!</a>
+      <a ng-hide="vm.detail.steps.length" class="no-steps" href="">Add Steps</a>
     </div>
     <div class="details">
       <div class="detail-icon">
@@ -21,7 +21,7 @@
         <span>{{vm.detail.bean_name}}</span>
         <span>
           {{vm.detail.roast !== null ? vm.detail.roast + ', ' : ''}}
-          {{vm.detail.total_bean_amount !== null ? vm.detail.total_bean_amount : ''}}{{vm.detail.bean_units !== null ? vm.detail.bean_units + ', ' : ''}}
+          {{vm.detail.total_bean_amount !== null ? vm.detail.total_bean_amount + '&thinsp;' : ''}}{{vm.detail.bean_units !== null ? vm.detail.bean_units + ', ' : ''}}
           {{vm.detail.grind}}
         </span>
       </section> <!--end section.bean-details -->
@@ -43,7 +43,7 @@
       </section>
     </div><!--end div.details -->
     <!-- steps section -->
-    <section class="step-list" ng-repeat="step in vm.steps">
+    <section class="step-list" ng-repeat="step in vm.detail.steps">
       <div class="num-col">
         {{$index + 1}}
         <a ng-click="vm.decreaseStep(step)"><img class="down-arrow-icon" src="img/UpArrow-40.svg"/></a>
@@ -140,7 +140,7 @@
           <button class="save-note clicker-button" >Save</button>
         </form>
       </section> <!-- add brewnote section -->
-      <div class="notes" ng-repeat="note in vm.notes | orderBy: 'note.timestamp'">
+      <div class="notes" ng-repeat="note in vm.detail.brewnotes | orderBy: 'note.timestamp'">
         <div class="note-view{{note.id}}" ng-click="vm.showNoteIcons(note.id)">
           <div class="note-body">{{note.body}}</div>
           <div class="note-date">— {{note.timestamp | date:'MMM dd, yyyy @ h:mma' }}</div>

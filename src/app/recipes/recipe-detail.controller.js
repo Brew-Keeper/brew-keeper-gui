@@ -38,7 +38,6 @@
     vm.editStep = editStep;
     vm.hideEditStep = hideEditStep;
     vm.increaseStep = increaseStep;
-    vm.notes = [];
     vm.rateRecipe = rateRecipe;
     vm.ratings = [{max: $rootScope.maxStars}];
     vm.showAddBrewNote = showAddBrewNote;
@@ -50,7 +49,6 @@
     vm.showMakePublic = showMakePublic;
     vm.showNoteIcons = showNoteIcons;
     vm.step = {};
-    vm.steps = [];
 
     var brewNotesUrl = '';
     var recipeUrl = '';
@@ -73,8 +71,6 @@
       brewNotesUrl = recipeUrl + 'brewnotes/';
 
       vm.detail = recipePrep;
-      vm.steps = vm.detail.steps;
-      vm.notes = vm.detail.brewnotes;
       vm.ratings = [{current:vm.detail.rating}];
 
       // Show the edit form if user clicks edit
@@ -136,11 +132,7 @@
       dataService.post(brewNotesUrl, vm.brewnote)
         .success(function (data) {
           // Add the new note to the top (beginning) of the notes
-          vm.notes.unshift(data);
-
-          // Update the recipe with the new note and re-cache it
-          vm.detail.notes = vm.notes;
-          recipeService.cacheRecipes(vm.detail);
+          vm.detail.brewnotes.unshift(data);
 
           // Close the brew note form
           $(".brew-form").toggleClass("hidden");
@@ -154,22 +146,20 @@
      * Add a new step to the recipe.
      */
     function addStep() {
-      vm.step.step_number = vm.steps.length + 1;
+      vm.step.step_number = vm.detail.steps.length + 1;
       vm.detail.total_duration += vm.step.duration;
       $('.input-focus').focus();
       dataService.post(recipeUrl + 'steps/', vm.step)
         .then(function(response) {
-          // Update the steps
-          vm.steps.push(response.data);
-
-          // Update the recipe with the new step and re-cache it
-          vm.detail.steps = vm.steps;
-          recipeService.cacheRecipes(vm.detail);
+          // Update the steps array
+          vm.detail.steps.push(response.data);
 
           // Show the Brew It button, hide the Add Steps button
           $(".brew-it-button").removeClass("hidden");
           $(".no-steps").addClass("hidden");
         });
+
+      // Clear the step form data
       vm.step = {};
     }
 
@@ -181,20 +171,16 @@
       if (step.step_number <= 1) {
         return;
       }
-      // Swap the steps in the UI
-      var swapStep = vm.steps[step.step_number - 1];
-      vm.steps[step.step_number - 1] = vm.steps[step.step_number - 2];
-      vm.steps[step.step_number - 2] = swapStep;
+      // Swap the steps in the model
+      var swapStep = vm.detail.steps[step.step_number - 1];
+      vm.detail.steps[step.step_number - 1] = vm.detail.steps[step.step_number - 2];
+      vm.detail.steps[step.step_number - 2] = swapStep;
 
-      // Update the step numbers
-      vm.steps[step.step_number - 1].step_number += 1;
+      // Update the step numbers in the model
+      vm.detail.steps[step.step_number - 1].step_number += 1;
       step.step_number--;
 
-      // Update the cached version
-      vm.detail.steps = vm.steps;
-      recipeService.cacheRecipes(vm.detail);
-
-      // Update the step in the API
+      // Update the step in the db
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
     }
 
@@ -203,16 +189,14 @@
      */
     function deleteNote(noteId) {
       // Remove the note from the model
-      for (var i = 0; i < vm.notes.length; i++) {
-        if (vm.notes[i].id == noteId) {
-          vm.notes.splice(i, 1);
+      for (var i = 0; i < vm.detail.brewnotes.length; i++) {
+        if (vm.detail.brewnotes[i].id == noteId) {
+          vm.detail.brewnotes.splice(i, 1);
+          break;
         }
       }
 
-      // Update and cache the recipe
-      vm.detail.brewnotes = vm.notes;
-      recipeService.cacheRecipes(vm.detail);
-
+      // Delete the note in the db
       dataService.delete(brewNotesUrl + noteId + '/');
     }
 
@@ -235,13 +219,14 @@
         $("section.confirm-eliminate-modal").addClass("inactive");
         dataService.delete(recipeUrl)
           .then(function() {
+            recipeService.removeRecipe(vm.detail.id);
             $location.path('/' + $rootScope.username);
           });
       });
     }
 
     /**
-     * Submit the edited brew note to the API.
+     * Submit the edited brew note to the db.
      */
     function editNote(note) {
       var noteView = "div.note-view" + note.id.toString();
@@ -254,7 +239,7 @@
     }
 
     /**
-     * Submit the edited recipe to the API.
+     * Submit the edited recipe to the db.
      */
     function editRecipe() {
       dataService.patch(recipeUrl, vm.detail)
@@ -265,10 +250,11 @@
     }
 
     /**
-     * Submit the edited step to the API.
+     * Submit the edited step to the db.
      */
     function editStep(step) {
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
+
       // Recalculate the duration
       updateDuration();
     }
@@ -286,23 +272,19 @@
      */
     function increaseStep(step) {
       // Make sure there is a following step
-      if (step.step_number >= vm.steps.length) {
+      if (step.step_number >= vm.detail.steps.length) {
         return;
       }
-      // Swap the steps in the UI
-      var swapStep = vm.steps[step.step_number - 1];
-      vm.steps[step.step_number - 1] = vm.steps[step.step_number];
-      vm.steps[step.step_number] = swapStep;
+      // Swap the steps in the model
+      var swapStep = vm.detail.steps[step.step_number - 1];
+      vm.detail.steps[step.step_number - 1] = vm.detail.steps[step.step_number];
+      vm.detail.steps[step.step_number] = swapStep;
 
-      // Update the step numbers
-      vm.steps[step.step_number - 1].step_number -= 1;
+      // Update the step numbers in the model
+      vm.detail.steps[step.step_number - 1].step_number -= 1;
       step.step_number++;
 
-      // Update the cached version
-      vm.detail.steps = vm.steps;
-      recipeService.cacheRecipes(vm.detail);
-
-      // Update the step in the API
+      // Update the step in the db
       dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
     }
 
@@ -377,7 +359,7 @@
      * Make a copy of this recipe to appear in the public area.
      */
     function showMakePublic() {
-      if (vm.steps.length < 1) {
+      if (vm.detail.steps.length < 1) {
         // Do not allow sharing recipes with no steps
         $(".wrapper").addClass("openerror");
         $("section.steps-modal").removeClass("inactive");
@@ -401,15 +383,11 @@
      */
     function updateDuration() {
       var newDuration = 0;
-      for (var i = 0; i < vm.steps.length; i++) {
-        newDuration += vm.steps[i].duration;
+      for (var i = 0; i < vm.detail.steps.length; i++) {
+        newDuration += vm.detail.steps[i].duration;
       }
 
-      // If it changed, update and re-cache
-      if (vm.detail.total_duration !== newDuration) {
-        vm.detail.total_duration = newDuration;
-        recipeService.cacheRecipes(vm.detail);
-      }
+      vm.detail.total_duration = newDuration;
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -471,27 +449,24 @@
       var stepNumber = $(".to-delete").attr("data-step-number");
       $(".wrapper").removeClass("openerror");
       $("section.confirm-delete-step-modal").addClass("inactive");
-      // Delete the step in the API
-      var stepId = vm.steps[stepNumber - 1].id;
+      // Delete the step in the db
+      var stepId = vm.detail.steps[stepNumber - 1].id;
       dataService.delete(recipeUrl + 'steps/' + stepId + '/');
 
       // Remove the step
-      vm.steps.splice(stepNumber - 1, 1);
+      vm.detail.steps.splice(stepNumber - 1, 1);
 
       // If there were steps after it, adjust their step numbers
-      if (vm.steps.length >= stepNumber && vm.steps.length > 0) {
-        for (var i = stepNumber - 1; i < vm.steps.length; i++) {
-          vm.steps[i].step_number -= 1;
+      if (vm.detail.steps.length >= stepNumber && vm.detail.steps.length > 0) {
+        for (var i = stepNumber - 1; i < vm.detail.steps.length; i++) {
+          vm.detail.steps[i].step_number -= 1;
         }
       }
 
-      // Update the recipe with the new step array and re-cache it
-      vm.detail.steps = vm.steps;
-      recipeService.cacheRecipes(vm.detail);
       updateDuration();
 
       // Show "Add Steps" instead of "Brew It" if no steps remain
-      if (vm.steps.length === 0) {
+      if (vm.detail.steps.length === 0) {
         $(".brew-it-button").addClass("hidden");
         $(".no-steps").removeClass("hidden");
       }

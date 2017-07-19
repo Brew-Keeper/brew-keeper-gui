@@ -14,9 +14,9 @@
     var service = {
       cacheRecipes: cacheRecipes,
       clearAllCache: clearAllCache,
-      clearUserCache: clearUserCache,
       getRecipe: getRecipe,
       getRecipes: getRecipes,
+      removeRecipe: removeRecipe,
       sortRecipesBy: sortRecipesBy
     };
 
@@ -52,22 +52,6 @@
      */
     function clearAllCache() {
       $rootScope.recipeCache = {};
-    }
-
-    /**
-     * Clear the cache of the specified user.
-     *
-     * @param {string} username The user to whom the recipes belong.
-     */
-    function clearUserCache(username) {
-      for (var key in $rootScope.recipeCache) {
-        if (!$rootScope.recipeCache.hasOwnProperty(key)) {
-          continue;
-        }
-        if ($rootScope.recipeCache[key].username === username) {
-          $rootScope.recipeCache[key] = undefined;
-        }
-      }
     }
 
     /**
@@ -121,6 +105,15 @@
       }
 
       return sortRecipesBy(ret, 'brew_count');
+    }
+
+    /**
+     * Clear the specified recipe from the cache.
+     *
+     * @param {number} recipe_id The ID of the recipe to delete.
+     */
+    function removeRecipe(recipe_id) {
+      delete $rootScope.recipeCache[recipe_id];
     }
 
     /**
