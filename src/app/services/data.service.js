@@ -8,8 +8,8 @@
   dataService.$inject = ['$cookies', '$http'];
 
   function dataService($cookies, $http) {
-    // var baseUrl = 'https://brew-keeper-api.herokuapp.com';
-    var baseUrl = 'http://dev.brewkeeper.com:8000';
+    var baseUrl = 'https://brew-keeper-api.herokuapp.com';
+    // var baseUrl = 'http://dev.brewkeeper.com:8000';
 
     var service = {
       clearCredentials: clearCredentials,
