@@ -121,7 +121,7 @@
       if (searchString !== undefined) {
         searchParams = '?search=' + searchString;
       } else {
-        vm.recipes = $rootScope.getRecipes(localUser);
+        vm.recipes = recipeService.getRecipes(localUser);
         return;
       }
       dataService.get(recipesUrl + searchParams)
