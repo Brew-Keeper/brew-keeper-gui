@@ -14,8 +14,10 @@
   ];
 
   function MainController($location, $rootScope, dataService, recipeService) {
-    var vm = this;
     $rootScope.changePassword = false;
+    $rootScope.maxStars = 5;
+
+    var vm = this;
     vm.logout = logout;
 
     activate();
@@ -28,8 +30,6 @@
      * Prepare the page.
      */
     function activate() {
-      // Definition of baseUrl (will eventually move to dataService)
-      $rootScope.maxStars = 5;
       var cookie = dataService.getCredentials();
       dataService.setCredentials(cookie, true);
 
@@ -82,9 +82,14 @@
     }
   }
 
-  WhoAmIController.$inject = ['$location', '$rootScope', 'dataService'];
+  WhoAmIController.$inject = [
+    '$location',
+    '$rootScope',
+    'dataService',
+    'recipeService'
+  ];
 
-  function WhoAmIController($location, $rootScope, dataService) {
+  function WhoAmIController($location, $rootScope, dataService, recipeService) {
     activate();
 
     ////////////////////////////////////////////////////////////////////////////
