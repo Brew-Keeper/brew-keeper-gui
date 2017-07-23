@@ -27,9 +27,11 @@ cp bower_components/normalize-css/normalize.css dist/bower_components/normalize-
 echo 'Step 3b: copy more bower components'
 mkdir -p dist/bower_components/angular-cookies/
 cp bower_components/angular-cookies/angular-cookies.min.js dist/bower_components/angular-cookies/angular-cookies.min.js
+# cp bower_components/angular-cookies/angular-cookies.min.js.map dist/bower_components/angular-cookies/angular-cookies.min.js.map
 
 mkdir -p dist/bower_components/angular-route/
 cp bower_components/angular-route/angular-route.min.js dist/bower_components/angular-route/angular-route.min.js
+# cp bower_components/angular-route/angular-route.min.js.map dist/bower_components/angular-route/angular-route.min.js.map
 
 mkdir -p dist/bower_components/angular-timer/dist/
 cp bower_components/angular-timer/dist/angular-timer.js dist/bower_components/angular-timer/dist/angular-timer.js
@@ -39,12 +41,14 @@ cp bower_components/angular-validation-match/dist/angular-validation-match.min.j
 
 mkdir -p dist/bower_components/angular/
 cp bower_components/angular/angular.min.js dist/bower_components/angular/angular.min.js
+# cp bower_components/angular/angular.min.js.map dist/bower_components/angular/angular.min.js.map
 
 mkdir -p dist/bower_components/humanize-duration/
 cp bower_components/humanize-duration/humanize-duration.js dist/bower_components/humanize-duration/humanize-duration.js
 
 mkdir -p dist/bower_components/jquery/dist/
 cp bower_components/jquery/dist/jquery.min.js dist/bower_components/jquery/dist/jquery.min.js
+# cp bower_components/jquery/dist/jquery.min.map dist/bower_components/jquery/dist/jquery.min.map
 
 mkdir -p dist/bower_components/modernizr/
 cp bower_components/modernizr/modernizr.js dist/bower_components/modernizr/modernizr.js
