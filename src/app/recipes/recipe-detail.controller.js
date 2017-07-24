@@ -513,7 +513,9 @@
             dataService.post('/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
           }
         })
-        .then(function() {
+        .then(function(response) {
+          // Make sure this new public recipe is in the cache
+          recipeService.getRecipe(response.data.id, 'public');
           $(".wrapper").addClass("openerror");
           $("section.sharing-modal").removeClass("inactive");
         });

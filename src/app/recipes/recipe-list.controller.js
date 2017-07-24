@@ -5,8 +5,13 @@
     .module('brewKeeper')
     .controller('RecipeListController', RecipeListController);
 
-  RecipeListController.$inject =
-    ['$location', '$rootScope', '$routeParams', 'dataService', 'recipeService'];
+  RecipeListController.$inject = [
+    '$location',
+    '$rootScope',
+    '$routeParams',
+    'dataService',
+    'recipeService'
+  ];
 
   function RecipeListController(
       $location,
@@ -79,12 +84,15 @@
       var providedRating = {"public_rating": rating};
       dataService.post(publicUrl + recipeId + '/ratings/', providedRating)
         // Now that we have posted, update the rating to reflect the change
-        .then(function() {
-          dataService.get(publicUrl + recipeId + '/')
-            .then(function(response) {
-              recipeService.cacheRecipes(response.data);
-              vm.recipes = recipeService.getRecipes('public');
-            });
+        .then(function(response) {
+          var cachedRecipes = recipeService.getRecipes('public');
+            for (var i = 0; i < cachedRecipes.length; i++) {
+              if (cachedRecipes[i].id == recipeId) {
+                cachedRecipes[i].public_ratings = response.data;
+                console.log(cachedRecipes[i]);
+                break;
+              }
+            }
         });
     }
 
