@@ -89,7 +89,6 @@
             for (var i = 0; i < cachedRecipes.length; i++) {
               if (cachedRecipes[i].id == recipeId) {
                 cachedRecipes[i].public_ratings = response.data;
-                console.log(cachedRecipes[i]);
                 break;
               }
             }
