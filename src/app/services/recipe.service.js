@@ -30,7 +30,6 @@
      * Cache the provided recipe(s), overwriting existing.
      *
      * @param {(Object|array)} recipes The recipe or array of recipes to cache.
-     * @param {string} username The user to whom the recipes belong.
      *
      * @return {Object[]} The now-cached recipes.
      */
@@ -61,6 +60,7 @@
      *
      * @param {number} recipe_id The id of the recipe to be retrieved.
      * @param {string} username The user whose recipe we are getting.
+     * @param {boolean} [detail] Do we need full details for this recipe?
      *
      * @return {Object} A promise for the recipe in question.
      */
