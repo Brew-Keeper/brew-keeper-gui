@@ -113,8 +113,13 @@
       if (!prefixAdded) {
         authToken = "Token " + authToken;
       }
+
+      // Define an expiration date 30 days hence
+      var expirationDate = new Date();
+      expirationDate.setTime(+ expirationDate + (30 * 24 * 60 * 60 * 1000));
+
       // Make sure we can get this again, later
-      $cookies.put("Authorization", authToken);
+      $cookies.put("Authorization", authToken, {"expires": expirationDate});
       // Allow our calls to the API to work
       $http.defaults.headers.common = {"Authorization": authToken};
     }
