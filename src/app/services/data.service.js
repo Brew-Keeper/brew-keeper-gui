@@ -43,6 +43,8 @@
      * 'delete' is a reserved word in JavaScript.)
      *
      * @param {string} uri The uri of the item to delete.
+     *
+     * @return {Object} The DELETE promise.
      */
     function deleteItem(uri) {
       return $http.delete(baseUrl + uri);
@@ -52,6 +54,8 @@
      * Return a GET promise on the specified URI.
      *
      * @param {string} uri The uri of the item to get.
+     *
+     * @return {Object} The GET promise.
      */
     function get(uri) {
       return $http.get(baseUrl + uri);
@@ -76,6 +80,8 @@
      *
      * @param {string} uri The uri of the item to patch.
      * @param {Object} data The patch data.
+     *
+     * @return {Object} The PATCH promise.
      */
     function patch(uri, data) {
       return $http.patch(baseUrl + uri, data);
@@ -86,6 +92,8 @@
      *
      * @param {string} uri The uri of the item to post.
      * @param {Object} data The post data.
+     *
+     * @return {Object} The POST promise.
      */
     function post(uri, data) {
       return $http.post(baseUrl + uri, data);
@@ -96,6 +104,8 @@
      *
      * @param {string} uri The uri of the item to put.
      * @param {Object} data The put data.
+     *
+     * @return {Object} The PUT promise.
      */
     function put(uri, data) {
       return $http.put(baseUrl + uri, data);
