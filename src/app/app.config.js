@@ -21,7 +21,9 @@
         controller: 'LoginController',
       })
       .when('/login', {
-        templateUrl: 'partials/login.html'
+        templateUrl: 'app/user/login.html',
+        controller: 'LoginController',
+        controllerAs: 'vm'
       })
       .when('/public',{
         templateUrl: 'app/recipes/recipe-list.html',

@@ -12,39 +12,13 @@
     'recipeService'];
 
   function LoginController($location, $rootScope, dataService, recipeService) {
-    var loginVm = this;
-    loginVm.loginButton = loginButton;
-    loginVm.users = {};
-
-    activate();
+    var vm = this;
+    vm.login = login;
+    vm.users = {};
 
     ////////////////////////////////////////////////////////////////////////////
     // FUNCTIONS //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Prepare the page.
-     */
-    function activate() {
-      // Register
-      $('a.show-register').on('click', function() {
-        $('section.register').removeClass('hidden');
-        $('form.register').removeClass('hidden');
-        $('form.login').addClass('hidden');
-      });//show signup form
-
-      // About Creators
-      $(".keeper-clicker").on('click', function() {
-        $(".more-info").addClass("hidden");
-        $(".about-creators").removeClass("hidden");
-      });
-
-      // Extended Creators Info
-      $("a[href].about").on('click', function() {
-        $(".more-info").removeClass("hidden");
-        $(".about-creators").addClass("hidden");
-      });
-    }
 
     /**
      * What to do in case an error occurs during login.
@@ -66,10 +40,10 @@
      * Submit login info to API. Show success or failure flow depending on
      * result.
      */
-    function loginButton() {
+    function login() {
       dataService.clearCredentials();
       recipeService.clearAllCache();
-      dataService.post('/api/login/', loginVm.users)
+      dataService.post('/api/login/', vm.users)
         .then(successCallbackLogin, errorCallbackLogin);
     }
 
@@ -82,13 +56,13 @@
       dataService.setCredentials(response.data.token);
 
       // Save the username to the rootScope
-      $rootScope.username = loginVm.users.username;
+      $rootScope.username = vm.users.username;
 
       // Show change password
       $rootScope.changePassword = true;
 
       // Reset the users property and navigate to the root of the app
-      loginVm.users = {};
+      vm.users = {};
       $location.path('/');
     }
   }
