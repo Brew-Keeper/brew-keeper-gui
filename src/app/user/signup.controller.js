@@ -8,9 +8,9 @@
   SignupController.$inject = ['$location', '$rootScope', 'dataService'];
   
   function SignupController($location, $rootScope, dataService) {
-    var signupVm = this;
-    signupVm.users = {};
-    signupVm.signupButton = signupButton;
+    var vm = this;
+    vm.users = {};
+    vm.register = register;
 
     activate();
 
@@ -40,7 +40,7 @@
      *
      * @param {boolean} mismatch Were the two passwords entered different?
      */
-    function signupButton(mismatch) {
+    function register(mismatch) {
       if (mismatch) {
         // Show user mismatch error
         $(".wrapper").addClass("openerror");
@@ -48,7 +48,7 @@
         return;
       }
 
-      dataService.post('/api/register/', signupVm.users)
+      dataService.post('/api/register/', vm.users)
         .then(successCallback, errorCallback);
 
       function errorCallback(response) {
@@ -67,10 +67,10 @@
         dataService.setCredentials(response.data.token);
 
         // Set the new username in the rootScope
-        $rootScope.username = signupVm.users.username;
+        $rootScope.username = vm.users.username;
 
         // Reset the users property and navigate to the root of the app
-        signupVm.users = {};
+        vm.users = {};
         $location.path('/');
 
         // Show welcome modal

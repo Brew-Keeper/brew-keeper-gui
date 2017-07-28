@@ -29,29 +29,10 @@
      * Prepare the page.
      */
     function activate() {
-      // Hide register mismatch modal when user acknowledges
-      $("button.password-fail").on("click", function() {
-        $(".wrapper").removeClass("openerror");
-        $("section.register-modal").addClass("inactive");
-      });
-
       // Hide password change success modal when user acknowledges
       $("button.change-not-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
         $("section.successful-modal").addClass("inactive");
-      });
-
-      // Show the password reset form
-      $('a.reset').on('click', function() {
-        $('.reset-password').removeClass('hidden');
-        $('form.login').addClass('hidden');
-      });
-
-      // Show login form when "Login" is clicked
-      $(".login-link").click(function() {
-        $('section.register').addClass('hidden');
-        $('section.reset-password').addClass('hidden');
-        $('form.login').removeClass('hidden');
       });
     }
 

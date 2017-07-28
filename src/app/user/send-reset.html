@@ -1,0 +1,12 @@
+<section class="more-info reset-password columns general">
+  <form name="request-reset" class="register" ng-submit="vm.requestReset()">
+    <label>Reset Password</label>
+    <div class="columns general">
+     <input class="register-user" type="text" name="username" placeholder=" username" ng-model="vm.users.username" required>
+     <button href="" class="register clicker-button" name="request-reset">Reset</button>
+     <span ng-show="vm.resetError">Invalid username, try again.</span>
+     <span ng-show="vm.resetSuccess">An email has been sent to the address you provided at registration. Follow the instructions to reset your password.</span>
+     <span ng-show="vm.generalError">There was a problem processing your request. Please try again.</span>
+    </div>
+  </form>
+</section>

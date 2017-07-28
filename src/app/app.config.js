@@ -52,8 +52,19 @@
         }
       })
       .when('/reset-pw', {
-        templateUrl: 'partials/reset-pw.html',
-        controller: 'ChangePasswordController'
+        templateUrl: 'app/user/reset-pw.html',
+        controller: 'ChangePasswordController',
+        controllerAs: 'vm'
+      })
+      .when('/send-reset', {
+        templateUrl: 'app/user/send-reset.html',
+        controller: 'ChangePasswordController',
+        controllerAs: 'vm'
+      })
+      .when('/signup', {
+        templateUrl: 'app/user/signup.html',
+        controller: 'SignupController',
+        controllerAs: 'vm'
       })
       .when('/:username', {
         templateUrl: 'app/recipes/recipe-list.html',
