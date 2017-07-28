@@ -58,9 +58,6 @@
       // Save the username to the rootScope
       $rootScope.username = vm.users.username;
 
-      // Show change password
-      $rootScope.changePassword = true;
-
       // Reset the users property and navigate to the root of the app
       vm.users = {};
       $location.path('/');

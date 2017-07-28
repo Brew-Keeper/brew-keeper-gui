@@ -38,9 +38,9 @@
               <li ng-show="username"><a href="#/{{username}}">My Recipes</a><li>
               <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
               <li><a class="about" href="#/info">About</a></li>
-              <li class="login-link" ng-hide="username"><a ng-click="changePassword=false" href="#/login">Login</a></li>
+              <li class="login-link" ng-hide="username"><a href="#/login">Login</a></li>
               <li ng-show="username"><a ng-click="vm.logout()" href="#/login">Logout</a></li>
-              <li ng-show="username"><a ng-click="changePassword=true" href="#/login">Change Password</a></li>
+              <li ng-show="username"><a href="#/change-password">Change Password</a></li>
             </ul>
           </nav>
         </heading>

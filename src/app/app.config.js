@@ -16,6 +16,11 @@
         templateUrl: 'app/recipes/recipe-list.html',
         controller: 'WhoAmIController'
       })
+      .when('/change-password',{
+        templateUrl: 'app/user/change-password.html',
+        controller: 'ChangePasswordController',
+        controllerAs: 'vm'
+      })
       .when('/info', {
         templateUrl: 'partials/more-info.html',
         controller: 'LoginController',

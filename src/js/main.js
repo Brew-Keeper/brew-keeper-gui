@@ -14,7 +14,6 @@
   ];
 
   function MainController($location, $rootScope, dataService, recipeService) {
-    $rootScope.changePassword = false;
     $rootScope.maxStars = 5;
 
     var vm = this;
@@ -42,7 +41,6 @@
         .catch(function(error) {
           // TODO: Make sure that the error was not a timeout
           $rootScope.username = null;
-          $rootScope.changePassword = false;
           dataService.clearCredentials();
           recipeService.clearAllCache();
           if ($location.path() == "/reset-pw" || "/login" || "/info") {
@@ -75,7 +73,6 @@
       dataService.post('/api/logout/', logoutHeader)
         .then(function() {
           $rootScope.username = null;
-          $rootScope.changePassword = false;
           dataService.clearCredentials();
           recipeService.clearAllCache();
         });
@@ -108,7 +105,6 @@
         .catch(function(error) {
           // TODO: Don't clear data if the error is a timeout
           $rootScope.username = null;
-          $rootScope.changePassword = false;
           dataService.clearCredentials();
           recipeService.clearAllCache();
           $location.path('/public');
