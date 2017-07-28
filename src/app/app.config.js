@@ -57,7 +57,7 @@
         }
       })
       .when('/reset-pw', {
-        templateUrl: 'app/user/reset-pw.html',
+        templateUrl: 'app/user/reset-password.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm'
       })
