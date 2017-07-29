@@ -28,6 +28,12 @@
     function activate() {
       // Focus on the username field
       $("input[name='username']").focus();
+
+      // Hide invalid login modal after user acknowledges
+      $("#invalid-login-btn").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("#invalid-login-modal").addClass("inactive");
+      });
     }
 
     /**
@@ -36,14 +42,9 @@
      * @param {Object} response The api response data.
      */
     function errorCallbackLogin(response) {
-      // Show register mismatch modal test
+      // Show invalid login modal
       $(".wrapper").addClass("openerror");
-      $("section.login-modal").removeClass("inactive");
-      $("button.login-fail").on("click", function() {
-        // Hide register mismatch modal text
-        $(".wrapper").removeClass("openerror");
-        $("section.login-modal").addClass("inactive");
-      });
+      $("#invalid-login-modal").removeClass("inactive");
     }
 
     /**
