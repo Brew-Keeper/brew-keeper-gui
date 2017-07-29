@@ -16,28 +16,9 @@
     vm.login = login;
     vm.users = {};
 
-    activate();
-
     ////////////////////////////////////////////////////////////////////////////
     // FUNCTIONS //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Prepare the page.
-     */
-    function activate() {
-      // About Creators
-      $(".keeper-clicker").on('click', function() {
-        $(".more-info").addClass("hidden");
-        $(".about-creators").removeClass("hidden");
-      });
-
-      // Extended Creators Info
-      $("#about-creators").on('click', function() {
-        $(".more-info").removeClass("hidden");
-        $(".about-creators").addClass("hidden");
-      });
-    }
 
     /**
      * What to do in case an error occurs during login.

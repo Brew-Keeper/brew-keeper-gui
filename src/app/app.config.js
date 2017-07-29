@@ -16,14 +16,16 @@
         templateUrl: 'app/recipes/recipe-list.html',
         controller: 'WhoAmIController'
       })
+      .when('/about', {
+        templateUrl: 'app/about/about.html',
+      })
       .when('/change-password',{
         templateUrl: 'app/user/change-password.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm'
       })
-      .when('/info', {
-        templateUrl: 'partials/more-info.html',
-        controller: 'LoginController',
+      .when('/creator-detail', {
+        templateUrl: 'app/about/creator-detail.html',
       })
       .when('/login', {
         templateUrl: 'app/user/login.html',
