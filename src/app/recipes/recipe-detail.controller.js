@@ -99,9 +99,9 @@
       });
 
       // Close the clone modal if the user cancels
-      $("button.cancel-clone-fail").on("click", function() {
+      $("#cancel-clone-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.confirm-clone-modal").addClass("inactive");
+        $("#confirm-clone-modal").addClass("inactive");
         return;
       });
 
@@ -317,7 +317,7 @@
      */
     function showCloneModal() {
       $(".wrapper").addClass("openerror");
-      $("section.confirm-clone-modal").removeClass("inactive");
+      $("#confirm-clone-modal").removeClass("inactive");
     }
 
     /**
@@ -402,7 +402,7 @@
     function cloneRecipe() {
       // First, close the confirmation modal
       $(".wrapper").removeClass("openerror");
-      $("section.confirm-clone-modal").addClass("inactive");
+      $("#confirm-clone-modal").addClass("inactive");
 
       var cloneData = {};
       cloneData.title = vm.detail.title;
