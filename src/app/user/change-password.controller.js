@@ -41,6 +41,12 @@
         $("#pw-mismatch-modal").addClass("inactive");
       });
 
+      // Hide incorrect password modal after user acknowledges
+      $("#incorrect-pw-btn").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("#incorrect-pw-modal").addClass("inactive");
+      });
+
       // Hide password change success modal when user acknowledges
       $("#pw-success-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
@@ -125,16 +131,9 @@
         .then(successCallbackChangePassword, errorCallbackChangePassword);
 
       function errorCallbackChangePassword() {
-        // FIXME: This appears to be undefined!!!!!!
         // Show error changing password modal
         $(".wrapper").addClass("openerror");
-        $("section.password-modal").removeClass("inactive");
-
-        // Hide error changing password modal after user acknowledges
-        $("button.password-fail").on("click", function() {
-          $(".wrapper").removeClass("openerror");
-          $("section.password-modal").addClass("inactive");
-        });
+        $("#incorrect-pw-modal").removeClass("inactive");
 
         // Reset users data
         vm.users = {};
