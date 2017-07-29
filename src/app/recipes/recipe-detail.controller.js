@@ -111,10 +111,10 @@
         $("#steps-required-modal").addClass("inactive");
       });
 
-      // Close modal after cancelling make public confirmation
-      $("button.cancel-fail").on("click", function() {
+      // Close make public modal after cancelling
+      $("#make-public-cancel-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.confirm-modal").addClass("inactive");
+        $("#make-public-modal").addClass("inactive");
         return;
       });
 
@@ -368,7 +368,7 @@
 
       // Open make public confirmation
       $(".wrapper").addClass("openerror");
-      $("section.confirm-modal").removeClass("inactive");
+      $("#make-public-modal").removeClass("inactive");
     }
 
     /**
@@ -477,7 +477,7 @@
      */
     function makePublic() {
       // First, close the confirmation modal
-      $("section.confirm-modal").addClass("inactive");
+      $("#make-public-modal").addClass("inactive");
 
       // Gather the relevant data
       var publicData = {};
