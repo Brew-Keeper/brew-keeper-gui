@@ -42,9 +42,9 @@
       });
 
       // Hide password change success modal when user acknowledges
-      $("button.change-not-fail").on("click", function() {
+      $("#pw-success-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.successful-modal").addClass("inactive");
+        $("#pw-success-modal").addClass("inactive");
       });
     }
 
@@ -143,7 +143,7 @@
       function successCallbackChangePassword() {
         // Show password change success modal
         $(".wrapper").addClass("openerror");
-        $("section.successful-modal").removeClass("inactive");
+        $("#pw-success-modal").removeClass("inactive");
 
         // Navigate to the root of the app
         $location.path('/');
