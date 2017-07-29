@@ -16,9 +16,19 @@
     vm.login = login;
     vm.users = {};
 
+    activate();
+
     ////////////////////////////////////////////////////////////////////////////
     // FUNCTIONS //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Prepare the page.
+     */
+    function activate() {
+      // Focus on the username field
+      $("input[name='username']").focus();
+    }
 
     /**
      * What to do in case an error occurs during login.
