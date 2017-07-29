@@ -90,11 +90,11 @@
       $(".no-steps").click(vm.showAddSteps);
 
       // Close the delete step modal if the user cancels
-      $("button.cancel-delete-step-fail").on("click", function() {
+      $("#cancel-delete-step-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
         // Remove the deletion marker
         $(".to-delete").removeClass("to-delete");
-        $("section.confirm-delete-step-modal").addClass("inactive");
+        $("#confirm-delete-step-modal").addClass("inactive");
         return;
       });
 
@@ -326,7 +326,7 @@
     function showDeleteStep(stepNumber) {
       // Show modal to confirm action
       $(".wrapper").addClass("openerror");
-      $("section.confirm-delete-step-modal").removeClass("inactive");
+      $("#confirm-delete-step-modal").removeClass("inactive");
 
       // Mark the specified step so we know which one to delete
       var stepIndex = stepNumber - 1;
@@ -448,7 +448,7 @@
     function deleteStep() {
       var stepNumber = $(".to-delete").attr("data-step-number");
       $(".wrapper").removeClass("openerror");
-      $("section.confirm-delete-step-modal").addClass("inactive");
+      $("#confirm-delete-step-modal").addClass("inactive");
       // Delete the step in the db
       var stepId = vm.detail.steps[stepNumber - 1].id;
       dataService.delete(recipeUrl + 'steps/' + stepId + '/');
