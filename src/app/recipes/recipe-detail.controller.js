@@ -105,10 +105,10 @@
         return;
       });
 
-      // Close no-steps error modal (when attempting to make public)
-      $("button.steps-fail").on("click", function() {
+      // Close steps required modal (when attempting to make public)
+      $("#steps-required-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.steps-modal").addClass("inactive");
+        $("#steps-required-modal").addClass("inactive");
       });
 
       // Close modal after cancelling make public confirmation
@@ -360,9 +360,9 @@
      */
     function showMakePublic() {
       if (vm.detail.steps.length < 1) {
-        // Do not allow sharing recipes with no steps
+        // Show steps required modal
         $(".wrapper").addClass("openerror");
-        $("section.steps-modal").removeClass("inactive");
+        $("#steps-required-modal").removeClass("inactive");
         return;
       }
 
