@@ -3,7 +3,7 @@
 <form class="edit-recipe clone" ng-submit="vm.finishClone()">
   <section class="columns general">
     <fieldset>
-      <input placeholder="Title *" maxlength="50" ng-model="vm.recipe.title" required></input>
+      <input name="title" placeholder="Title *" maxlength="50" ng-model="vm.recipe.title" required></input>
       <textarea placeholder="Comments" ng-model="vm.recipe.general_recipe_comment"></textarea>
     </fieldset><!--General Details-->
   </section>

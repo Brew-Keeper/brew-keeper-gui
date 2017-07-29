@@ -22,6 +22,9 @@
      * Prepare the page.
      */
     function activate() {
+      // Focus on the username field
+      $("input[name='username']").focus();
+
       // Hide mismatch error when user acknowledges
       $("button.password-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");

@@ -32,6 +32,9 @@
         .then(function(response) {
           vm.recipe = response.data;
         });
+
+      // Focus on the 'Title' input
+      $("input[name='title']").focus();
     }
 
     /**

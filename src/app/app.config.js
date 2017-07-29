@@ -121,5 +121,4 @@
 
     return recipeService.getRecipe(recipeId, localUser, detail);
   }
-
 })();

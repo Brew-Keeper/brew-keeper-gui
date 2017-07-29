@@ -29,6 +29,12 @@
      * Prepare the page.
      */
     function activate() {
+      // Start focus on appropriate field
+      $("input[name='username']").focus();
+      if ($location.path() == '/change-password') {
+        $("input[name='oldPassword']").focus();
+      }
+
       // Hide password change success modal when user acknowledges
       $("button.change-not-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
