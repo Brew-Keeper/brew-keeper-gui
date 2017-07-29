@@ -48,32 +48,10 @@
 
         <div class="place-holder">
           <ng-view />
-        <div> <!-- end div.place-holder -->
+        <div>
       </main>
 
-<section class="register-modal inactive">
-<div>Please make sure your passwords match.
-    <button class="clicker-button password-fail">OK</button>
-</div>
-</section>
-
-<section class="login-modal inactive">
-<div>Please enter a valid username and password.
-    <button class="clicker-button login-fail">OK</button>
-</div>
-</section>
-
-<section class="successful-modal inactive">
-<div>Password Successfully Changed!
-    <button class="clicker-button change-not-fail">OK</button>
-</div>
-</section>
-
-<section class="password-modal inactive">
-<div>Current password incorrect, please try again.
-    <button class="clicker-button password-fail">OK</button>
-</div>
-</section>
+      <div data-ng-include="'app/user/user.modals.html'"></div>
 
 <section class="steps-modal inactive">
 <div>Plese add steps to recipe before making it public.

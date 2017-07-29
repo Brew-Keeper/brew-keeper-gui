@@ -26,9 +26,9 @@
       $("input[name='username']").focus();
 
       // Hide mismatch error when user acknowledges
-      $("button.password-fail").on("click", function() {
+      $("#pw-mismatch-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.register-modal").addClass("inactive");
+        $("#pw-mismatch-modal").addClass("inactive");
       });
 
       // Hide welcome modal when user acknowledges
@@ -45,9 +45,9 @@
      */
     function register(mismatch) {
       if (mismatch) {
-        // Show user mismatch error
+        // Show password mismatch error
         $(".wrapper").addClass("openerror");
-        $("section.register-modal").removeClass("inactive");
+        $("#pw-mismatch-modal").removeClass("inactive");
         return;
       }
 

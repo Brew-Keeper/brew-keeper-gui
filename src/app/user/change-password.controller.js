@@ -35,6 +35,12 @@
         $("input[name='oldPassword']").focus();
       }
 
+      // Hide mismatch error when user acknowledges
+      $("#pw-mismatch-btn").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("#pw-mismatch-modal").addClass("inactive");
+      });
+
       // Hide password change success modal when user acknowledges
       $("button.change-not-fail").on("click", function() {
         $(".wrapper").removeClass("openerror");
@@ -76,9 +82,10 @@
      */
     function resetPassword(mismatch) {
       if (mismatch) {
-        // TODO: Convert to modal
-        alert("Passwords Do Not Match");
-        return;
+        // Show password mismatch modal
+        $(".wrapper").addClass("openerror");
+        $("#pw-mismatch-modal").removeClass("inactive");
+       return;
       }
 
       dataService.post('/api/reset-pw/', vm.users)
@@ -106,9 +113,9 @@
      */
     function submitChangePassword(mismatch) {
       if (mismatch) {
-        // Show register mismatch modal
+        // Show password mismatch modal
         $(".wrapper").addClass("openerror");
-        $("section.register-modal").removeClass("inactive");
+        $("#pw-mismatch-modal").removeClass("inactive");
        return;
       }
 
