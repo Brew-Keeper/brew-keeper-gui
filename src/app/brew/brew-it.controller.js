@@ -70,9 +70,7 @@
       $(document).scrollTop(0);
 
       vm.recipe = recipePrep;
-      if (vm.recipe) {
-        setSemanticVariables(vm.recipe);
-      }
+      setSemanticVariables(vm.recipe);
 
       if (vm.isPublic && $rootScope.username) {
         getPublicRatings();
