@@ -32,9 +32,9 @@
       });
 
       // Hide welcome modal when user acknowledges
-      $("button.welcome-fail").on("click", function() {
+      $("#welcome-modal-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.welcome-modal").addClass("inactive");
+        $("#welcome-modal").addClass("inactive");
       });
     }
 
@@ -78,7 +78,7 @@
 
         // Show welcome modal
         $(".wrapper").addClass("openerror");
-        $("section.welcome-modal").removeClass("inactive");
+        $("#welcome-modal").removeClass("inactive");
       }
     }
   }
