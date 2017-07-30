@@ -126,9 +126,9 @@
       });
 
       // Close the make public success modal
-      $("button.sharing-not-fail").on("click", function() {
+      $("#make-public-success-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.sharing-modal").addClass("inactive");
+        $("#make-public-success-modal").addClass("inactive");
       });
     }
 
@@ -517,8 +517,10 @@
         .then(function(response) {
           // Make sure this new public recipe is in the cache
           recipeService.getRecipe(response.data.id, 'public');
+
+          // Show the make public success modal
           $(".wrapper").addClass("openerror");
-          $("section.sharing-modal").removeClass("inactive");
+          $("#make-public-success-modal").removeClass("inactive");
         });
     }
   }
