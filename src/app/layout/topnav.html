@@ -1,0 +1,39 @@
+<header class="heading" ng-controller="TopNavController as vm">
+  <a class="logo" href="#/public">
+    <img class="logo" src="img/Brew_Keeper_Logo_v3.png"/>
+  </a>
+  <nav class="menu hamburger">
+    <ul class="menu">
+      <li ng-show="username">
+        <a href="#/{{username}}">
+          My Recipes
+        </a>
+      </li>
+      <li ng-show="username">
+        <a href="#/{{username}}/new">
+          Create Recipe
+        </a>
+      </li>
+      <li>
+        <a href="#/about" class="about">
+          About
+        </a>
+      </li>
+      <li ng-hide="username" class="login-link">
+        <a href="#/login">
+          Login
+        </a>
+      </li>
+      <li ng-show="username">
+        <a ng-click="vm.logout()" href="#/login">
+          Logout
+        </a>
+      </li>
+      <li ng-show="username">
+        <a href="#/change-password">
+          Change Password
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

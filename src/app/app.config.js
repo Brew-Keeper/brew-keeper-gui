@@ -14,7 +14,7 @@
     $routeProvider
       .when('/',{
         templateUrl: 'app/recipes/recipe-list.html',
-        controller: 'WhoAmIController'
+        controller: 'RootController'
       })
       .when('/about', {
         templateUrl: 'app/about/about.html',

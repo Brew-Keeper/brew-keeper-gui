@@ -1,19 +1,18 @@
-;(function() {  // IIFE
+(function() {  // IIFE
   'use strict';
 
   angular
     .module('brewKeeper')
-    .controller('MainController', MainController)
-    .controller('WhoAmIController', WhoAmIController);
+    .controller('TopNavController', TopNavController);
 
-  MainController.$inject = [
+  TopNavController.$inject = [
     '$location',
     '$rootScope',
     'dataService',
     'recipeService'
   ];
 
-  function MainController($location, $rootScope, dataService, recipeService) {
+  function TopNavController($location, $rootScope, dataService, recipeService) {
     $rootScope.maxStars = 5;
 
     var vm = this;
@@ -74,38 +73,6 @@
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();
-        });
-    }
-  }
-
-  WhoAmIController.$inject = [
-    '$location',
-    '$rootScope',
-    'dataService',
-    'recipeService'
-  ];
-
-  function WhoAmIController($location, $rootScope, dataService, recipeService) {
-    activate();
-
-    ////////////////////////////////////////////////////////////////////////////
-    // FUNCTIONS //////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Prepare the page.
-     */
-    function activate() {
-      dataService.get('/api/whoami/')
-        .then(function(response) {
-          $rootScope.username = response.data.username;
-          $location.path('/' + $rootScope.username);
-        })
-        .catch(function(error) {
-          $rootScope.username = null;
-          dataService.clearCredentials();
-          recipeService.clearAllCache();
-          $location.path('/public');
         });
     }
   }

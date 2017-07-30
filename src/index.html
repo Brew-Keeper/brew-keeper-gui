@@ -36,21 +36,8 @@
     <link href="css/main.css" rel="stylesheet" />
     <!-- endinject -->
   </head>
-  <body ng-controller="MainController as vm">
-    <heading class="heading">
-      <a class="logo" href="#/public"><img class="logo" src="img/Brew_Keeper_Logo_v3.png"/></a>
-      <nav class="menu hamburger">
-        <ul class="menu">
-          <li ng-show="username"><a href="#/{{username}}">My Recipes</a></li>
-          <li ng-show="username"><a href="#/{{username}}/new">Create Recipe</a></li>
-          <li><a class="about" href="#/about">About</a></li>
-          <li class="login-link" ng-hide="username"><a href="#/login">Login</a></li>
-          <li ng-show="username"><a ng-click="vm.logout()" href="#/login">Logout</a></li>
-          <li ng-show="username"><a href="#/change-password">Change Password</a></li>
-        </ul>
-      </nav>
-    </heading>
-
+  <body>
+    <div data-ng-include="'app/layout/topnav.html'"></div>
     <main class="container wrapper">
       <div class="place-holder">
         <ng-view />
@@ -81,7 +68,6 @@
     <!-- Bootstrapping -->
     <script src="app/app.module.js"></script>
     <script src="app/app.config.js"></script>
-    <script src="js/main.js"></script>
 
     <!-- services -->
     <script src="app/services/data.service.js"></script>
@@ -94,6 +80,10 @@
     <!-- brew module -->
     <script src="app/brew/brew-it.controller.js"></script>
     <script src="app/brew/step-timer.controller.js"></script>
+
+    <!-- layout/nav -->
+    <script src="app/layout/topnav.controller.js"></script>
+    <script src="app/layout/root.controller.js"></script>
 
     <!-- recipes module -->
     <script src="app/recipes/clone.controller.js"></script>
