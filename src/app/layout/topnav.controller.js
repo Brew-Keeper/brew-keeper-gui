@@ -6,13 +6,12 @@
     .controller('TopNavController', TopNavController);
 
   TopNavController.$inject = [
-    '$location',
     '$rootScope',
     'dataService',
     'recipeService'
   ];
 
-  function TopNavController($location, $rootScope, dataService, recipeService) {
+  function TopNavController($rootScope, dataService, recipeService) {
     $rootScope.maxStars = 5;
 
     var vm = this;
@@ -25,7 +24,7 @@
     //////////////////////////////////////////////////////////////////////////
 
     /**
-     * Prepare the page.
+     * Prepare the nav bar.
      */
     function activate() {
       var cookie = dataService.getCredentials();
@@ -41,10 +40,6 @@
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();
-          if ($location.path() == "/reset-pw" || "/login" || "/info") {
-            return;
-          }
-          $location.path('/public');
         });
 
       // Show/hide hamburger
