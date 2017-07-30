@@ -39,7 +39,6 @@
           $rootScope.username = response.data.username;
         })
         .catch(function(error) {
-          // TODO: Make sure that the error was not a timeout
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();
@@ -103,7 +102,6 @@
           $location.path('/' + $rootScope.username);
         })
         .catch(function(error) {
-          // TODO: Don't clear data if the error is a timeout
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();
