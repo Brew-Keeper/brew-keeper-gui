@@ -89,6 +89,13 @@
       // Handle click on Add Steps
       $(".no-steps").click(vm.showAddSteps);
 
+      // Close the delete recipe modal if the user cancels
+      $("#delete-recipe-cancel-btn").on("click", function() {
+        $(".wrapper").removeClass("openerror");
+        $("#delete-recipe-modal").addClass("inactive");
+        return;
+      });
+
       // Close the delete step modal if the user cancels
       $("#cancel-delete-step-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
@@ -206,17 +213,11 @@
     function deleteRecipe() {
       // Show modal to confirm action
       $(".wrapper").addClass("openerror");
-      $("section.confirm-eliminate-modal").removeClass("inactive");
-      // Hide modal if action cancelled
-      $("button.cancel-clone-fail").on("click", function() {
-        $(".wrapper").removeClass("openerror");
-        $("section.confirm-eliminate-modal").addClass("inactive");
-        return;
-      });
+      $("#delete-recipe-modal").removeClass("inactive");
       // Hide modal, delete recipe, and return to recipe list upon confirmation
-      $("button.confirm-eliminate-fail").on("click", function() {
+      $("#delete-recipe-confirm-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.confirm-eliminate-modal").addClass("inactive");
+        $("#delete-recipe-modal").addClass("inactive");
         dataService.delete(recipeUrl)
           .then(function() {
             recipeService.removeRecipe(vm.detail.id);
