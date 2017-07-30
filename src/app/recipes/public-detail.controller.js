@@ -79,10 +79,10 @@
      * Add the listeners needed for this controller.
      */
     function addListeners() {
-      // Close the confirm clone modal if user cancels
-      $("button.cancel-clone-fail").on("click", function() {
+      // Close the public clone modal if user cancels
+      $("#public-clone-cancel-btn").on("click", function() {
         $(".wrapper").removeClass("openerror");
-        $("section.confirm-clone-modal").addClass("inactive");
+        $("#public-clone-modal").addClass("inactive");
         return;
       });
     }
@@ -153,7 +153,7 @@
      */
     function showCloneRecipe() {
       $(".wrapper").addClass("openerror");
-      $("section.confirm-public-clone-modal").removeClass("inactive");
+      $("#public-clone-modal").removeClass("inactive");
     }
 
     /**
@@ -183,7 +183,7 @@
     function clonePublicRecipe() {
       // First, close the confirmation modal
       $(".wrapper").removeClass("openerror");
-      $("section.confirm-public-clone-modal").addClass("inactive");
+      $("#public-clone-modal").addClass("inactive");
 
       var cloneData = {};
       cloneData.title = vm.detail.title;
