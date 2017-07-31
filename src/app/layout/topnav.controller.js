@@ -58,10 +58,9 @@
           if (publicPages[$location.path()]) {
             return;
           }
-          // If they are looking for a particular public recipe, the cache is
-          // now empty; redirect to public recipe list
+          // If they are looking for anything public, that's OK
           if ($location.path().indexOf('/public') === 0) {
-            $location.path('/public');
+            return;
           }
           // All remaining pages require a logged-in user, so show them the
           // login. Add queryparams of current target to redirect them there
