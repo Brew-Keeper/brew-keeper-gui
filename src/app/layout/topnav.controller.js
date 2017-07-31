@@ -42,8 +42,8 @@
           recipeService.clearAllCache();
 
           /**
-           * TODO: Make this part of $rootScope, have each module register its
-           *       public pages
+           * TODO: Change uri structure to have users under '/users', then
+           *       redirect anything with that prefix to the login
            */
           // Should we redirect?
           var publicPages = [

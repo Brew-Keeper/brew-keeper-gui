@@ -70,7 +70,8 @@
       $rootScope.username = vm.users.username;
 
       // Reset the users property and navigate to the root of the app
-      vm.users = {};
+			// TODO: Parse `target` query param; redirect to it if it exists
+			vm.users = {};
       $location.path('/');
     }
   }
