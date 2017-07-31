@@ -40,6 +40,33 @@
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();
+
+          /**
+           * TODO: Make this part of $rootScope, have each module register its
+           *       public pages
+           */
+          // Should we redirect?
+          var publicPages = [
+            "/about",
+            "/change-password",
+            "/creator-detail",
+            "/login",
+            "/reset-pw",
+            "/send-reset",
+            "/signup",
+          ];
+          if (publicPages[$location.path()]) {
+            return;
+          }
+          // If they are looking for a particular public recipe, the cache is
+          // now empty; redirect to public recipe list
+          if ($location.path().indexOf('/public') === 0) {
+            $location.path('/public');
+          }
+          // All remaining pages require a logged-in user, so show them the
+          // login. Add queryparams of current target to redirect them there
+          // once they are logged in.
+          $location.path('/login?target=' + $location.path());
         });
 
       // Show/hide hamburger
