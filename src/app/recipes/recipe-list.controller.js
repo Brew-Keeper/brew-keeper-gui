@@ -58,7 +58,7 @@
       // Attempt to get the recipes for this user from the cache
       vm.recipes = recipeService.getRecipes(localUser);
       // If full set of orders not in the cache, get them from the API
-      if (vm.recipes.length <= 1) {
+      if (vm.recipes.length <= 2) {
         dataService.get(recipesUrl)
           .then(function(response) {
             vm.recipes = recipeService.cacheRecipes(response.data);
