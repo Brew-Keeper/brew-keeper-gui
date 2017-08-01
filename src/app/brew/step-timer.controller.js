@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('brewKeeper')
+    .module('app.brew')
     .controller('StepTimerController', StepTimerController);
 
   StepTimerController.$inject = ['$scope'];

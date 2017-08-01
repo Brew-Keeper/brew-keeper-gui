@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" data-ng-app="brewKeeper" ng-strict-di>
+<html class="no-js" lang="en" data-ng-app="app" ng-strict-di>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -68,22 +68,30 @@
     <script src="app/app.config.js"></script>
 
     <!-- services -->
+    <script src="app/services/services.module.js"></script>
     <script src="app/services/data.service.js"></script>
     <script src="app/services/recipe.service.js"></script>
 
     <!-- components -->
+    <script src="app/components/components.module.js"></script>
     <script src="app/components/star-rating.directive.js"></script>
     <script src="app/components/view-rating.directive.js"></script>
 
     <!-- brew module -->
+    <script src="app/brew/brew.module.js"></script>
+    <script src="app/brew/config.route.js"></script>
     <script src="app/brew/brew-it.controller.js"></script>
     <script src="app/brew/step-timer.controller.js"></script>
 
     <!-- layout/nav -->
+    <script src="app/layout/layout.module.js"></script>
+    <script src="app/layout/config.route.js"></script>
     <script src="app/layout/topnav.controller.js"></script>
     <script src="app/layout/root.controller.js"></script>
 
     <!-- recipes module -->
+    <script src="app/recipes/recipes.module.js"></script>
+    <script src="app/recipes/config.route.js"></script>
     <script src="app/recipes/clone.controller.js"></script>
     <script src="app/recipes/public-detail.controller.js"></script>
     <script src="app/recipes/recipe-creation.controller.js"></script>
@@ -91,6 +99,8 @@
     <script src="app/recipes/recipe-list.controller.js"></script>
 
     <!-- user module -->
+    <script src="app/user/user.module.js"></script>
+    <script src="app/user/config.route.js"></script>
     <script src="app/user/change-password.controller.js"></script>
     <script src="app/user/login.controller.js"></script>
     <script src="app/user/signup.controller.js"></script>

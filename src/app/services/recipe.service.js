@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('brewKeeper')
+    .module('app.services')
     .factory('recipeService', recipeService);
 
   recipeService.$inject = ['$q', '$rootScope', 'dataService'];

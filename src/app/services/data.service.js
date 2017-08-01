@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('brewKeeper')
+    .module('app.services')
     .factory('dataService', dataService);
 
   dataService.$inject = ['$cookies', '$http'];

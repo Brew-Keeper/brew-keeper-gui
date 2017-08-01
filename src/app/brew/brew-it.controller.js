@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('brewKeeper')
+    .module('app.brew')
     .controller('BrewItController', BrewItController);
 
   BrewItController.$inject = [

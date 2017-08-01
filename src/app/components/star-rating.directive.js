@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('brewKeeper')
+    .module('app.components')
     .directive('starRating', starRating);
 
   function starRating() {

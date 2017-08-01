@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('brewKeeper')
+    .module('app.user')
     .controller('ChangePasswordController', ChangePasswordController);
 
   ChangePasswordController.$inject = ['$location', '$rootScope', 'dataService'];

@@ -2,10 +2,17 @@
   'use strict';
 
   angular
-    .module('brewKeeper', [
+    .module('app', [
+      /* Angular modules */
       'ngCookies',
       'ngRoute',
       'timer',
-      'validation.match'
+      'validation.match',
+
+      /* Feature areas */
+      'app.brew',
+      'app.layout',
+      'app.recipes',
+      'app.user'
     ]);
 })();
