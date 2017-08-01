@@ -42,31 +42,13 @@
           dataService.clearCredentials();
           recipeService.clearAllCache();
 
-          /**
-           * TODO: Change uri structure to have users under '/users', then
-           *       redirect anything with that prefix to the login
-           */
-          // Should we redirect?
-          var publicPages = [
-            "/about",
-            "/change-password",
-            "/creator-detail",
-            "/login",
-            "/reset-pw",
-            "/send-reset",
-            "/signup",
-          ];
-          if (publicPages[$location.path()]) {
-            return;
+          // If they are looking for anything private, redirect to login
+          if ($location.path().indexOf('/users/') === 0) {
+            // Save the current target; redirect back after login
+            var target = $location.path();
+            $location.path('/login');
+            $location.search('target', target);
           }
-          // If they are looking for anything public, that's OK
-          if ($location.path().indexOf('/public') === 0) {
-            return;
-          }
-          // All remaining pages require a logged-in user, so show them the
-          // login. Add queryparams of current target to redirect them there
-          // once they are logged in.
-          $location.path('/login');
         });
 
       // Show/hide hamburger

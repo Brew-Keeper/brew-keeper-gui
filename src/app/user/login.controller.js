@@ -72,7 +72,12 @@
       // Reset the users property and navigate to the root of the app
 			// TODO: Parse `target` query param; redirect to it if it exists
 			vm.users = {};
-      $location.path('/');
+      var queryParams = $location.search();
+      if (queryParams && queryParams.target) {
+        $location.path(queryParams.target);
+      } else {
+        $location.path('/');
+      }
     }
   }
 })();
