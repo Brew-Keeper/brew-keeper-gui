@@ -69,7 +69,7 @@
     var detail = $location.path() == '/' + localUser + '/' + recipeId;
 
     if (localUser === undefined || null) {
-      $location.path('/login');
+      $location.path('/public');
       return;
     }
     return recipeService.getRecipe(recipeId, localUser, detail);
