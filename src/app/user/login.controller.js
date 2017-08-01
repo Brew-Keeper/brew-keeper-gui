@@ -69,9 +69,8 @@
       // Save the username to the rootScope
       $rootScope.username = vm.users.username;
 
-      // Reset the users property and navigate to the root of the app
-			// TODO: Parse `target` query param; redirect to it if it exists
-			vm.users = {};
+      // Reset the users property and navigate to the root of the app (or
+      // target, if provided)
       var queryParams = $location.search();
       if (queryParams && queryParams.target) {
         $location.url(queryParams.target);
