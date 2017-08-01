@@ -74,7 +74,7 @@
 			vm.users = {};
       var queryParams = $location.search();
       if (queryParams && queryParams.target) {
-        $location.path(queryParams.target);
+        $location.url(queryParams.target);
       } else {
         $location.path('/');
       }
