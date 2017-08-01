@@ -220,7 +220,7 @@
         })
         .then(function() {
           // Redirect to the clone editor
-          $location.path('/' + $rootScope.username + '/clone/' + newRecipeId);
+          $location.path('/users/' + $rootScope.username + '/clone/' + newRecipeId);
         });
     }
   }

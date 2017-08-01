@@ -6,12 +6,13 @@
     .controller('TopNavController', TopNavController);
 
   TopNavController.$inject = [
+    '$location',
     '$rootScope',
     'dataService',
     'recipeService'
   ];
 
-  function TopNavController($rootScope, dataService, recipeService) {
+  function TopNavController($location, $rootScope, dataService, recipeService) {
     $rootScope.maxStars = 5;
 
     var vm = this;
@@ -65,7 +66,7 @@
           // All remaining pages require a logged-in user, so show them the
           // login. Add queryparams of current target to redirect them there
           // once they are logged in.
-          $location.path('/login?target=' + $location.path());
+          $location.path('/login');
         });
 
       // Show/hide hamburger

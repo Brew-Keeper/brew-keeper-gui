@@ -221,7 +221,7 @@
         dataService.delete(recipeUrl)
           .then(function() {
             recipeService.removeRecipe(vm.detail.id);
-            $location.path('/' + $rootScope.username);
+            $location.path('/users/' + $rootScope.username + '/recipes');
           });
       });
     }
@@ -439,7 +439,7 @@
         })
         .then(function() {
           // Redirect to the clone editor
-          $location.path('/' + $rootScope.username + '/clone/' + newRecipeId);
+          $location.path('/users/' + $rootScope.username + '/clone/' + newRecipeId);
         });
     }
 

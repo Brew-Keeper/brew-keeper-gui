@@ -1,6 +1,6 @@
 <section class="brewit-page">
   <nav class="brewit-nav">
-    <a class="brewit-title" href="#/{{vm.recipeUsername}}/{{vm.detail.id}}"><h2 class="brewit-title">{{vm.detail.title}}</h2></a>
+    <a class="brewit-title" href="#/users/{{vm.recipeUsername}}/recipes/{{vm.detail.id}}"><h2 class="brewit-title">{{vm.detail.title}}</h2></a>
     <a href="" class="reset-brew clicker-button" ng-click="vm.resetBrew()">RESET</a>
     <a href="" class="hidden add-brew-note clicker-button" ng-hide="vm.isPublic">Add Note</a>
     <div class="stars" ng-show="vm.showStars">    <!--star ratings-->

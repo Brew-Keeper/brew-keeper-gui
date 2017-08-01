@@ -39,10 +39,10 @@
       $("form-placeholder").removeClass("changed");
       dataService.post('/api/users/' + $rootScope.username + '/recipes/', vm.recipe)
         .success(function (data) {
-          var id = data.id;
-          $location.path('/' + $rootScope.username + '/' + id);
-        // Clear the form
-        vm.recipe = {};
+          // Clear the form
+          vm.recipe = {};
+          // Navigate to the new recipe
+          $location.path('/users/' + $rootScope.username + '/recipes/' + data.id);
         });
     }
   }

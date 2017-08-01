@@ -43,7 +43,8 @@
     function finishClone() {
       dataService.patch(recipeUrl, vm.recipe)
         .then(function() {
-          $location.path('/'+ $rootScope.username + '/' + $routeParams.id + '/');
+          $location.path(
+            '/users/'+ $rootScope.username + '/recipes/' + $routeParams.id + '/');
         });
     }
   }

@@ -70,7 +70,11 @@
      * Brew a recipe in the list.
      */
     function listBrewIt(id) {
-      $location.path('/' + localUser + '/' + id + '/brewit');
+      if (vm.isPublic) {
+        $location.path('/' + localUser + '/' + id + '/brewit');
+      } else {
+        $location.path('/users/' + localUser + '/recipes/' + id + '/brewit');
+      }
     }
 
     /**

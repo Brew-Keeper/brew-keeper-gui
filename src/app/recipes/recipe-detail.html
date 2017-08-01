@@ -1,6 +1,6 @@
 <section class="recipe-detail">
   <section class="recipe-view">
-    <h3 class="title"><a href="#/{{username}}">{{vm.detail.title}}</a></h3>
+    <h3 class="title"><a href="#/users/{{username}}/recipes">{{vm.detail.title}}</a></h3>
     <div class="col-1-3">
       <span ng-repeat="rating in vm.ratings">
         <div star-rating rating-value="vm.detail.rating" max="maxStars" ng-click="vm.rateRecipe(vm.detail.rating)"></div>
@@ -10,7 +10,7 @@
       <img class="cup" src="img/CoffeeCup-65.svg"> &#215; {{vm.detail.brew_count}}
     </div>
     <div class="brew-it-button">
-      <a ng-show="vm.detail.steps.length" class="brew-it-button" ng-href="#/{{username}}/{{vm.detail.id}}/brewit">BREW IT!</a>
+      <a ng-show="vm.detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{vm.detail.id}}/brewit">BREW IT!</a>
       <a ng-hide="vm.detail.steps.length" class="no-steps" href="">Add Steps</a>
     </div>
     <div class="details">

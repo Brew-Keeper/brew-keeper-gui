@@ -1,4 +1,4 @@
-;(function() {  // IIFE
+(function() {  // IIFE
   'use strict';
 
   angular
@@ -12,14 +12,14 @@
     $compileProvider.debugInfoEnabled(false);
 
     $routeProvider
-      .when('/',{
+      .when('/', {
         templateUrl: 'app/recipes/recipe-list.html',
         controller: 'RootController'
       })
       .when('/about', {
         templateUrl: 'app/about/about.html',
       })
-      .when('/change-password',{
+      .when('/change-password', {
         templateUrl: 'app/user/change-password.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm'
@@ -32,7 +32,7 @@
         controller: 'LoginController',
         controllerAs: 'vm'
       })
-      .when('/public',{
+      .when('/public', {
         templateUrl: 'app/recipes/recipe-list.html',
         controller: 'RecipeListController',
         controllerAs: 'vm'
@@ -42,7 +42,7 @@
         controller: 'RecipeListController',
         controllerAs: 'vm'
       })
-      .when('/public/:id',{
+      .when('/public/:id', {
         templateUrl: 'app/recipes/public-detail.html',
         controller: 'PublicDetailController',
         controllerAs: 'vm',
@@ -73,22 +73,22 @@
         controller: 'SignupController',
         controllerAs: 'vm'
       })
-      .when('/:username', {
+      .when('/users/:username/recipes', {
         templateUrl: 'app/recipes/recipe-list.html',
         controller: 'RecipeListController',
         controllerAs: 'vm'
       })
-      .when('/:username/clone/:id', {
+      .when('/users/:username/clone/:id', {
         templateUrl: 'app/recipes/clone.html',
         controller:  'CloneController',
         controllerAs: 'vm'
       })
-      .when('/:username/new', {
+      .when('/users/:username/recipes/create', {
         templateUrl: 'app/recipes/recipe-creation.html',
         controller: 'RecipeCreationController',
         controllerAs: 'vm'
       })
-      .when('/:username/:id', {
+      .when('/users/:username/recipes/:id', {
         templateUrl: 'app/recipes/recipe-detail.html',
         controller: 'RecipeDetailController',
         controllerAs: 'vm',
@@ -96,7 +96,7 @@
           recipePrep: recipePrep
         }
       })
-      .when('/:username/:id/brewit', {
+      .when('/users/:username/recipes/:id/brewit', {
         templateUrl: 'app/brew/brew-it.html',
         controller: 'BrewItController',
         controllerAs: 'vm',
@@ -119,6 +119,10 @@
     var recipeId = $route.current.params.id;
     var detail = $location.path() == '/' + localUser + '/' + recipeId;
 
+    if (localUser === undefined || null) {
+      $location.path('/login');
+      return;
+    }
     return recipeService.getRecipe(recipeId, localUser, detail);
   }
 })();
