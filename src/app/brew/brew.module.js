@@ -2,8 +2,5 @@
   'use strict';
 
   angular
-    .module('app.brew', [
-      'app.components',
-      'app.services'
-    ]);
+    .module('app.brew', []);
 })();

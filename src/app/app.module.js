@@ -9,6 +9,10 @@
       'timer',
       'validation.match',
 
+      /* Shared modules */
+      'app.components',
+      'app.services',
+
       /* Feature areas */
       'app.brew',
       'app.layout',

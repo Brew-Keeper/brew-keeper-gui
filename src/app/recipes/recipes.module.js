@@ -2,8 +2,5 @@
   'use strict';
 
   angular
-    .module('app.recipes', [
-      'app.components',
-      'app.services'
-    ]);
+    .module('app.recipes', []);
 })();
