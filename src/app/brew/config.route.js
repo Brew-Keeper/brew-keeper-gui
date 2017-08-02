@@ -26,8 +26,12 @@
     var localUser = isPublic ? 'public' : $rootScope.username;
     var recipeId = $route.current.params.id;
     var detail = $location.path() == '/' + localUser + '/' + recipeId;
+    if (!isPublic) {
+      detail = $location.path() == '/users/' + localUser + '/recipes/' + recipeId;
+    }
 
     if (localUser === undefined || null) {
+      $location.search("target", $location.path());
       $location.path('/public');
       return;
     }

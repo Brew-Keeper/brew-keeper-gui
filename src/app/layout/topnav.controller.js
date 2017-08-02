@@ -36,6 +36,9 @@
           // If the user still has valid credentials, ensure rootScope has
           // their username
           $rootScope.username = response.data.username;
+          if ($location.search()) {
+            $location.url($location.search().target);
+          }
         })
         .catch(function(error) {
           $rootScope.username = null;
