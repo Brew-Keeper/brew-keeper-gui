@@ -1,242 +1,215 @@
-.brewit-page{
+.brewit-page {
   box-sizing: border-box;
-  width:100%;//width: 100% * (2/3); desktop
-  margin: 0 auto;//margin: 0 100% * (1/6); desktop
-  .brewit-nav {
-    display: block;
-    height: 12ex;
-    margin-bottom: 2ex;
-    position: relative;
-    .brewit-title {
-      text-decoration: none;
-      h2 {
-        color: $heading;
-        font-size: 1.4em;
-        font-weight: 600;
-        margin-left: 5%;
-        margin-bottom: 0;
-        opacity: 85%;
-        padding-bottom: 1.5ex;
-      }
-      .stars {
-        display: block;
-        width: 100%;
-      }
-    }
-    .reset-brew {
-      position: absolute;
-      top: 6.9ex;
-      right: 2%;
-      font-size: 0.8em;
-      color: #000;
-      text-decoration: none;
-      padding: .15ex 2.5em;
-      background-color: $Inactive;
-    }
-    a.add-brew-note {
-      float: right;
-    }
-    span.rating {
-      margin-left: 5%;
-      margin-top: 1ex;
-      display: inline-block;
-      float: left;
-    }
-    span.rating.public {
-      margin-top: -1ex;
-      display: inline-block;
-      margin-right: 5%;
-      float: right;
-    }
-  }//.brewit-nav
+  margin: 0 auto;
+  width: 100%;
 
   section.brew-form {
-    margin-top: -2ex;
-    margin-bottom: 1ex;
+    margin: -2ex 0 1ex 10%;
     width: 80%;
-    margin-left: 10%;
   }
-  div.step.delay {
+
+  span.rating {
+    display: inline-block;
+    float: left;
+    margin-top: .8rem;
+  }
+
+  span.rating .public {
+    margin-top: -1.5ex;
+  }
+
+}
+
+.brew-step {
+  background-color: $Inactive;
+  box-sizing: border-box;
+  clear:both;
+  color: #000;
+  height: 10.3rem;
+  margin: 1rem 0 1rem;
+  padding-top: .01rem;
+  position: relative;
+  .counting {
+    bottom: 5%;
+    font-size: 2.4rem;
+    font-weight: 300;
+    position: absolute;
+    text-align: center;
     width: 100%;
-    box-sizing: border-box;
-    background-color: $Inactive;
-    color: #000;
-    height: 19.75ex;
-    padding-top: 0.025ex;
-    p.countdown {
-      width: 100%;
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    p.counting {
-      text-align: center;
-      font-size: 2.8em;
-      font-weight: 300;
-      line-height: 0.25;
-    }
-  }//.delay
-
-  div.step.delay.restart {
-    background-color: $BrewIt;
-    box-sizing: border-box;
-    p {
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: 600;
-    }
-    img {
-      width: 100% * (1/3);
-      max-height: 5em;
-      margin-left: 35%;
-      fill: white;
-    }
   }
-  // div.delay.step.finished {
-  //   height: 0;
-  //   .countdown {
-  //     display: none;
-  //   }
-  //   .counting {
-  //     display: none;
-  //   }
-  // }//.delay.step.finished
-  div.current-step {
-    box-sizing: border-box;
-    background-color:$BrewIt;
-    color: #000;
-    padding: 1ex 5%;
-    p.stepOf {
-      text-align: right;
-      span {
-        font-weight: bold;
-      }
-    }
-    .counting {
-      font-size: 2.8em;
-      font-weight: 300;
-      line-height: 0;
-      text-align: center;
-    }
-    p.step-name {
-      margin-top: -3.9ex;
-      width: 100%;
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    p.water {
-      width: 100%;
-      margin: -.6ex 0;
-      font-size: 1.1em;
-      font-weight: bold;
-      line-height: 0;
-      text-align: center;
-    }
-    timer.counting > p {
-      width: 100%;
-      text-align: center;
-    }
-    p.step-body {
-      width: 100%;
-      text-align: justify;
-      margin: -.6ex 0 1ex 0;
-    }
-  }//.current-step
-
-  div.inactive-step {
-    background-color: $Inactive;
-    color: $InactiveText;
-    padding-bottom: 4.0ex;
-    margin-top: -1.4ex;
-    p.stepOf {
-      color: $InactiveText;
-      text-align: right;
-      padding: 1ex 5%;
-      span {
-        font-weight: bold;
-      }
-    }
-    p.step-name {
-      margin-top: -4.4ex;
-      width: 100%;
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: 600;
-    }
-    p.water {
-      width: 100%;
-      margin-top: -2ex;
-      margin-bottom: 2ex;
-      font-size: 1.1em;
-      font-weight: 600;
-      text-align: center;
-    }
-    p.step-body {
-      font-size: 0.8em;
-      text-align: justify;
-      margin: -1.6ex 5% -3.1ex 5%;
-    }
-  }//.inactive-step
-.transition {
-    -webkit-transition: font-size 1s, -webkit-transform 1s;
-    transition: font-size 1s, transform 1s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-    font-size: 0;
+  .counting.countdown {
+    bottom: 30%;
+  }
 }
 
-@for $time from 1 through 500 {
-  .time-#{$time} {
-    width: 0em;
-    -webkit-transition: width .5s, -webkit-transform .5s;
-    transition: width .5s, transform .5s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-  }
-.timeline.time-#{$time} {
+.brew-step--current {
   background-color: $BrewIt;
-  width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  height: 2.5ex;
-  margin-top: -5ex;
-  margin-bottom: 1.31ex;
-    -webkit-transition: width ($time)+s, -webkit-transform ($time)+s;
-    transition: width ($time)+s, transform ($time)+s;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-}
+  .brew-step__title {
+    font-weight: bold;
+    margin-top: -4.0ex;
+  }
+  .brew-step__water {
+    font-weight: bold;
+    line-height: 0;
+    margin: -.9ex 0;
+  }
+  .brew-step__body {
+    font-size: .9rem;
+  }
 }
 
-div.step.finished {
-    height: auto;
-    color: $Inactive;
-    background-color: $Inactive;
-    margin-left: 0;
-    margin-right: 0;
-  p.stepOf {
-    @extend .transition;
+.brew-step--finished {
+  @extend .transition-step;
+  color: $Inactive;
+  padding: 0 0;
+  .brew-step__body {
+    @extend .transition-font;
+  }
+  .brew-step__step-of {
+    @extend .transition-font;
     height: 0;
-  span {
-    @extend .transition;
+    span {
+      @extend .transition-font;
     }
+  }
+  .brew-step__title {
+    @extend .transition-font;
+  }
+  .brew-step__water {
+    @extend .transition-font;
   }
   .counting {
-    @extend .transition;
-  }
-  p.step-name {
-    @extend .transition;
-  }
-  p.water {
-    @extend .transition;
+    @extend .transition-font;
   }
   timer.counting > p {
-    @extend .transition;
+    @extend .transition-font;
   }
-  p.step-body {
-    @extend .transition;
-  }
-}//.step.finished
+}
 
-}//END .brewit-page
+.brew-step--inactive {
+  color: $InactiveText;
+  height: 7rem;
+  margin-top: -1.4ex;
+  padding-bottom: 4.0ex;
+  .brew-step__step-of {
+    padding: 0 5%;
+  }
+  .brew-step__title {
+    margin-top: -2.5rem;
+    width: 100%;
+  }
+}
+
+.brew-step--restart {
+  background-color: $BrewIt;
+}
+
+.brew-step__body {
+  bottom: 8%;
+  font-size: 0.8rem;
+  margin: 0 5%;
+  position: absolute;
+  text-align: justify;
+}
+
+.brew-step__img {
+  fill: white;
+  margin-left: 35%;
+  max-height: 5rem;
+  width: 100% * (1/3);
+}
+
+.brew-step__step-of {
+  padding: 1ex 5% .3ex;
+  text-align: right;
+  span {
+    font-weight: bold;
+  }
+}
+
+.brew-step__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+.brew-step__title--countdown {
+  @extend .brew-step__title;
+  font-weight: bold;
+}
+
+.brew-step__water {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: -2ex 0 2ex;
+  text-align: center;
+  width: 100%;
+}
+
+.nav--brew-it {
+  display: block;
+  height: 5.9rem;
+  margin: 0 5%;
+  position: relative;
+}
+
+.nav__button--brew-it {
+  float: right;
+  margin: 0 0 0 0;
+  padding: .15rem 0rem;
+  width: 7rem;
+}
+
+.nav__header-title--brew-it {
+  color: $heading;
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-bottom: 0;
+  opacity: 85%;
+  padding-bottom: 1.5ex;
+}
+
+.stars {
+  display: block;
+  width: 100%;
+}
+
+// Timeline
+:root {
+  --brew-duration: 0s;
+}
+
+[class|="time"] {
+  width: 0em;
+}
+
+.timeline[class|="time"] {
+  background-color: $BrewIt;
+  height: 1.4rem;
+  margin: -.7rem 0 0;
+  position: absolute;
+  width: inherit;
+  z-index: 2;
+    -webkit-transition: width var(--brew-duration) linear;
+    -moz-transition: width var(--brew-duration) linear;
+    -o-transition: width var(--brew-duration) linear;
+    transition: width var(--brew-duration) linear;
+}
+
+.transition-font {
+  font-size: 0;
+  -webkit-transition: font-size 1s linear;
+  -moz-transition: font-size 1s linear;
+  -o-transition: font-size 1s linear;
+  transition: font-size 1s linear;
+}
+
+.transition-step {
+  height: 0;
+  margin: 0 0;
+  -webkit-transition: height 1s linear, margin 1s linear;
+  -moz-transition: height 1s linear, margin 1s linear;
+  -o-transition: height 1s linear, margin 1s linear;
+  transition: height 1s linear, margin 1s linear;
+}

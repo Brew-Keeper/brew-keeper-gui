@@ -21,7 +21,7 @@ ul.rating {
 .rating .filled {
     color: gold;
 }
-.public & .rating .filled {
+.public > .rating .filled {
   color: $BrewIt;
 }
 .read-only li {

@@ -91,6 +91,11 @@
 
       // Hide brew note form on cancel
       $(".cancel-note").on('click', hideBrewNoteForm);
+
+      // Set the timeline duration variable
+      document.documentElement.style.setProperty(
+        '--brew-duration',
+        vm.recipe.total_duration + 's');
     }
 
     /**
@@ -152,11 +157,11 @@
 
       // Hide this step
       $("timer." + stepNumber).addClass("hidden");
-      $("." + stepNumber).addClass("finished").removeClass("current-step");
+      $("." + stepNumber).addClass("brew-step--finished").removeClass("brew-step--current");
 
       // Change next step to green and grow next step to 200
       $("timer." + nextStep).removeClass("hidden");
-      $("." + nextStep).addClass("current-step").removeClass("inactive-step");
+      $("." + nextStep).addClass("brew-step--current").removeClass("brew-step--inactive");
 
       // Start the next step's timer
       $scope.$broadcast('startTimer', nextTimerId);
@@ -209,7 +214,7 @@
       vm.showStars = false;
       $("a[href].add-brew-note").addClass("hidden");
       $(".brew-form").addClass("hidden");
-      $("div.restart").addClass("hidden");
+      $(".brew-step--restart").addClass("hidden");
 
       // Hide the timeline (hidden during countdown)
       $(".time-" + vm.countdownVal).removeClass("timeline");
@@ -218,10 +223,11 @@
       $("a[href].reset-brew").removeClass("hidden");
 
       // Reset all steps to be inactive
-      $(".step").addClass("inactive-step");
+      $(".brew-step").addClass("brew-step--inactive");
 
       // Show the countdown step and its timer
-      $(".countdown").removeClass("hidden");
+      $(".brew-step--countdown").removeClass("brew-step--inactive");
+      $(".brew-step--countdown").removeClass("hidden");
       $("timer.delay").removeClass("hidden");
 
       // Start the countdown timer
@@ -235,26 +241,26 @@
       // Have all of the timers reset
       $scope.$broadcast('resetTimer');
 
-      $("timer.counting").addClass("hidden");
+      $("timer").addClass("hidden");
 
       // Reset any completed steps back to inactive
-      $(".finished").addClass("inactive-step");
-      $(".finished").removeClass("finished");
+      $(".brew-step--finished").addClass("brew-step--inactive");
+      $(".brew-step--finished").removeClass("brew-step--finished");
 
       // Reset the current step
-      $(".current-step").addClass("inactive-step");
-      $(".current-step").removeClass("current-step");
+      $(".brew-step--current").addClass("brew-step--inactive");
+      $(".brew-step--current").removeClass("brew-step--current");
 
-      // Ensure our delay steps are hidden
-      $(".delay.hidden").removeClass("hidden");
+      // Make sure the reset step is not flagged as inactive
+      $(".brew-step--restart").removeClass("brew-step--inactive");
       $(".countdown").removeClass("hidden");
-      $("div.countdown").addClass("hidden");
+      $(".brew-step--countdown").addClass("hidden");
 
       // Hide the timeline
       $(".time-" + vm.countdownVal).removeClass("timeline");
 
       // Show "Restart Brew" and "Add Note", hide "Reset"
-      $("a[href].restart-brew").removeClass("hidden");
+      $(".brew-step--restart").removeClass("hidden");
       $("a[href].add-brew-note").removeClass("hidden");
       $("a[href].reset-brew").addClass("hidden");
       vm.showStars = true;
@@ -286,13 +292,12 @@
     function startBrew() {
       // Set the first step to be current-step and show its timer
       $("." + vm.stepArray[0])
-        .removeClass("inactive-step")
-        .addClass("current-step");
+        .removeClass("brew-step--inactive")
+        .addClass("brew-step--current");
       $("timer." + vm.stepArray[0]).removeClass("hidden");
 
-      // Hide and shrink the delay step
-      $("div.delay").addClass("hidden").addClass("inactive-step");
-      $(".delay timer").addClass("hidden");
+      // Hide and shrink the countdown step
+      $(".brew-step--countdown").addClass("hidden").addClass("brew-step--inactive");
 
       // Show the timeline
       $(".time-" + vm.countdownVal).addClass("timeline");
