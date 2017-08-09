@@ -18,6 +18,10 @@
       })
       .when('/creator-detail', {
         templateUrl: 'app/about/creator-detail.html',
+      })
+      .otherwise({
+        redirectTo: '/not-found',
+        templateUrl: 'partials/404.html'
       });
   }
 })();
