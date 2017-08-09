@@ -17,7 +17,6 @@
   span.rating .public {
     margin-top: -1.5ex;
   }
-
 }
 
 .brew-step {
@@ -57,7 +56,7 @@
 .brew-step--finished {
   @extend .transition-step;
   color: $Inactive;
-  padding: 0 0;
+  padding: 0;
   [class^=brew-step__] {
     font-size: 0px;
   }
@@ -136,7 +135,7 @@
 
 .nav__button--brew-it {
   float: right;
-  margin: 0 0 0 0;
+  margin: 0;
   padding: .15rem 0rem;
   width: 7rem;
 }
@@ -179,7 +178,7 @@
 
 .transition-step {
   height: 0;
-  margin: 0 0;
+  margin: 0;
   -webkit-transition: height 1s linear, margin 1s linear;
   -moz-transition: height 1s linear, margin 1s linear;
   -o-transition: height 1s linear, margin 1s linear;
