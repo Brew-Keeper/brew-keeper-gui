@@ -58,27 +58,11 @@
   @extend .transition-step;
   color: $Inactive;
   padding: 0 0;
-  .brew-step__body {
-    @extend .transition-font;
-  }
-  .brew-step__step-of {
-    @extend .transition-font;
-    height: 0;
-    span {
-      @extend .transition-font;
-    }
-  }
-  .brew-step__title {
-    @extend .transition-font;
-  }
-  .brew-step__water {
-    @extend .transition-font;
+  [class^=brew-step__] {
+    font-size: 0px;
   }
   .counting {
-    @extend .transition-font;
-  }
-  timer.counting > p {
-    @extend .transition-font;
+    font-size: 0px;
   }
 }
 
@@ -191,14 +175,6 @@
     -moz-transition: width var(--brew-duration) linear;
     -o-transition: width var(--brew-duration) linear;
     transition: width var(--brew-duration) linear;
-}
-
-.transition-font {
-  font-size: 0;
-  -webkit-transition: font-size 100ms linear;
-  -moz-transition: font-size 100ms linear;
-  -o-transition: font-size 100ms linear;
-  transition: font-size 100ms linear;
 }
 
 .transition-step {
