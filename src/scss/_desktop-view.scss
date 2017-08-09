@@ -80,8 +80,7 @@
 
   .brewit-page {
     width: 32rem;
-    margin-left: calc((100% - 32rem) / 2);
-    margin-right: calc((100% - 32rem) / 2);
+    margin: 0 calc((100% - 32rem) / 2);
   }
 
   .nav--brew-it {

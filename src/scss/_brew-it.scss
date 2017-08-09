@@ -27,11 +27,12 @@
   color: #000;
   height: 10.3rem;
   margin: 1rem 0 1rem;
-  padding-top: .01rem;
+  // padding-top: .01rem;
+  padding: .2rem 5%;
   position: relative;
   .counting {
-    bottom: 5%;
-    font-size: 2.4rem;
+    bottom: .4rem;
+    font-size: 2.8rem;
     font-weight: 300;
     position: absolute;
     text-align: center;
@@ -46,12 +47,9 @@
   background-color: $BrewIt;
   .brew-step__title {
     font-weight: bold;
-    margin-top: -4.0ex;
   }
   .brew-step__water {
     font-weight: bold;
-    line-height: 0;
-    margin: -.9ex 0;
   }
   .brew-step__body {
     font-size: .9rem;
@@ -90,14 +88,6 @@
   color: $InactiveText;
   height: 7rem;
   margin-top: -1.4ex;
-  padding-bottom: 4.0ex;
-  .brew-step__step-of {
-    padding: 0 5%;
-  }
-  .brew-step__title {
-    margin-top: -2.5rem;
-    width: 100%;
-  }
 }
 
 .brew-step--restart {
@@ -105,23 +95,26 @@
 }
 
 .brew-step__body {
-  bottom: 8%;
+  bottom: 0%;
   font-size: 0.8rem;
-  margin: 0 5%;
   position: absolute;
   text-align: justify;
+  width: 90%;
 }
 
 .brew-step__img {
   fill: white;
   margin-left: 35%;
   max-height: 5rem;
+  position: absolute;
+  top: 3.4rem;
   width: 100% * (1/3);
 }
 
 .brew-step__step-of {
-  padding: 1ex 5% .3ex;
-  text-align: right;
+  position: absolute;
+  right: 5%;
+  top: -.2rem;
   span {
     font-weight: bold;
   }
@@ -130,8 +123,11 @@
 .brew-step__title {
   font-size: 1.2rem;
   font-weight: 600;
+  position: absolute;
   text-align: center;
-  width: 100%;
+  top: .7rem;
+  width: 55%;
+  margin: 0 22.5%;
 }
 
 .brew-step__title--countdown {
@@ -142,9 +138,11 @@
 .brew-step__water {
   font-size: 1.1em;
   font-weight: 600;
-  margin: -2ex 0 2ex;
+  margin: -2ex 30% 0;
+  position: absolute;
   text-align: center;
-  width: 100%;
+  top: 3.4rem;
+  width: 40%;
 }
 
 .nav--brew-it {
@@ -199,10 +197,10 @@
 
 .transition-font {
   font-size: 0;
-  -webkit-transition: font-size 1s linear;
-  -moz-transition: font-size 1s linear;
-  -o-transition: font-size 1s linear;
-  transition: font-size 1s linear;
+  -webkit-transition: font-size 100ms linear;
+  -moz-transition: font-size 100ms linear;
+  -o-transition: font-size 100ms linear;
+  transition: font-size 100ms linear;
 }
 
 .transition-step {
