@@ -11,7 +11,8 @@
     '$routeParams',
     '$scope',
     'dataService',
-    'recipePrep'];
+    'recipePrep'
+  ];
 
   function BrewItController(
       $location,
@@ -20,7 +21,7 @@
       $scope,
       dataService,
       recipePrep
-    ) {
+  ) {
     var vm = this;
     vm.addBrewNote = addBrewNote;
     vm.brewnote = {};
