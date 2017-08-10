@@ -1,45 +1,28 @@
-////////////////////////////////////////////////////////////////////////////////
-// 32em WIDTH /////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////
+// 32em MIN WIDTH ///////////////////////
+////////////////////////////////////////
 
 @media (min-width: 32em) {
 
-  .heading {
-    img.logo {
-      width:14em;
-    }
-    a[href].logo {
-      display: block;
-      width: 14em;
-    }
-    nav.menu {
-      &.hamburger::before {
-        font-size: 3.5em;
-        top: -0.5ex;
-      }
-      ul.menu.active {
-        top: 4.5ex;
-        border: 1px solid $heading;
-        border-top: 2px solid #fff;
-        border-right: 1px solid #fff;
-        padding: 0 5% 1.7ex 0.5em;
-        li {
-          text-align:right;
-          a {
-            text-decoration: none;
-            &:hover {
-              color: $BrewIt;
-            }
-          }
-          &.hidden {
-            display: none;
-          }
-        }
-      }
-    }
+   // Top Nav
+  ////////////////////////////////////////
+
+  .topnav__hamburger::before {
+    font-size: 3.5em;
+    top: -0.5ex;
   }
 
-  // Brew Page
+  .topnav__logo {
+    width:14em;
+  }
+
+  .topnav__menu.active {
+    border-top: 2px solid #fff;
+    padding: 0 5% 1.7ex 0.5em;
+    top: 4.5ex;
+  }
+
+   // Brew Page
   ////////////////////////////////////////
 
   .brewit-page {
@@ -51,75 +34,91 @@
     margin: 0 0;
   }
 
-  //Recipe Detail Page
+   // Recipe Detail Page
+  ////////////////////////////////////////
+
   .recipe-detail {
-    width: 80%;
     margin: 0 10%;
+    width: 80%;
+
     .recipe-view {
       .col-1-3 {
-        float: left;
         box-sizing: border-box;
+        float: left;
         width: 100% * (1/3);
         &.brew-count {
-          text-align: left;
           padding-top: 0.5ex;
+          text-align: left;
         }
       }
+
       img.cup {
         width: 25px;
       }
-      a.brew-it-button {//See recipe-dtail.scss
-        width: 100% * (1/2);
+
+      // See _recipe-detail.scss
+      a.brew-it-button {
         margin-left: 100% * (1/4);
+        width: 100% * (1/2);
       }
+
       a.no-steps {
-        width: 100% * (1/2);
         margin-left: 100% * (1/4);
+        width: 100% * (1/2);
       }
     }
-  }//recipe-detail (top portion)
-  .recipe-detail & div.details {
+  }  // recipe-detail (top portion)
+
+  .recipe-detail div.details {
     section.icons {
-      width: 25%;
       float: right;
+      width: 25%;
     }
-  } //end recipe-detail & div.details
+  }
+
   section.edit-step-icons {
     clear:both;
-    width: 25%;
     margin-left: 75%;
+    width: 25%;
+
     img.edit-icon {
-      width: 35px;
       float: right;
+      width: 35px;
     }
+
     img.trash-icon {
       width: 30px;
     }
   }
-  .step-list { // steps section
+
+  .step-list {
     div.step-details {
       p.step-details {
         width: 95%;
       }
-    } //end div.step-details
+    }
   }
-  // end steps section
 
-  // END Recipe Detail Page
-  //Recipe List Page
+   // Recipe List Page
+  ////////////////////////////////////////
+
   nav.recipe-list {
-    width: 80%;
-    margin-right: 10%;
     margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
   }
+
   section.recipe-list {
-    width: 80%;
-    margin-right: 10%;
     margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+
     .col-1-2 {
       width: 50%;
+
       .col-1-4 {
         width: 110%;
+
         span.count {
           font-size: 1em;
           margin-left: 2%;
@@ -127,174 +126,182 @@
           img {
             width: 20px;
           }
-        } //end span.count
-      } //end col-1-4
-      a {
-        width: 85%;
-        margin-top: -2ex;
-        &.recipe-title {
-          display: block;
-          width: 100%;
-          max-width: 100%;
         }
       }
-    } // end col-1-2
-  } //end section.recipe-list
-  //END Recipe List Page
 
-  //Login-Registration Page
+      a {
+        margin-top: -2ex;
+        width: 85%;
+
+        &.recipe-title {
+          display: block;
+          max-width: 100%;
+          width: 100%;
+        }
+      }
+    }  // end col-1-2
+  }  // end section.recipe-list
+
+   // Login-Registration Pages
+  ////////////////////////////////////////
+
   form.login {
     width:50%;
     margin: auto 25%;
   }
+
   form.register {
     width:50%;
     margin: auto 25%;
   }
-  section.more-info >article {
+
+  section.more-info > article {
     width: 100%*(9/10);
     margin-right: 100% *(1/20);
     margin-left: 100% *(1/20);
   }
-  //END Login/Registration Page
+
+   // About Creators Page
+  ////////////////////////////////////////
 
   .about-creators {
     figure {
       box-sizing: border-box;
-      margin-top: 1ex;
-      margin-left:  0;
-      margin-right: 0;
       display: block;
       float: left;
-      width: 25%;
+      margin-left:  0;
+      margin-right: 0;
+      margin-top: 1ex;
       max-width: 100px;
+      width: 25%;
+
       img {
         width: 100%;
       }
     }
+
     div {
       box-sizing: border-box;
       display: block;
       float: left;
-      width: 75%;
       padding-left: 5%;
+      width: 75%;
+
       h4 {
         line-height: 0;
       }
     }
+
     .link-icons {
-      width: 30px;
-      max-width: 30px;
       margin-top: 1ex;
+      max-width: 30px;
+      width: 30px;
     }
   }
 
-} //END @media min-width 28
+}  // END @media min-width 32
 
-////////////////////////////////////////////////////////////////////////////////
-// 47em WIDTH /////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////
+// 47em MIN WIDTH ///////////////////////
+////////////////////////////////////////
 
 @media (min-width: 47em) {
   nav.recipe-list {
-    width: 70%;
-    margin-right: 15%;
     margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
   }
 
   section.recipe-list {
-    width: 70%;
-    margin-right: 15%;
     margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+
     a {
-      width: 85%;
-      // margin-top: 0.6ex;
       margin-left: 0;
       margin-right: 5%;
-      padding-top: 1ex;
-      padding-bottom: 1ex;
       max-width: 12em;
-      // font-weight: bold;
+      padding-bottom: 1ex;
+      padding-top: 1ex;
       padding: 2ex 0;
+      width: 85%;
+
       &.list-brew-it {
         font-weight: bold;
       }
+
       &.recipe-title {
         display: block;
-        width: 100%;
         max-width: 100%;
+        width: 100%;
       }
     }
-  }
-
-  // Brew Page
-  ////////////////////////////////////////
-
-  .brewit-page {
-    width: 32rem;
-    margin: 0 calc((100% - 32rem) / 2);
-  }
-
-  .nav--brew-it {
-    margin: 0 0;
   }
 
   .recipe-detail {
     .recipe-view {
       .col-1-3 {
-        float: left;
         box-sizing: border-box;
+        float: left;
         width: 100% * (1/5);
+
         &.brew-count {
-          text-align: left;
           padding-top: 0.5ex;
+          text-align: left;
         }
       }
     }
+
     div.clone-button {
-      width: 25%;
       margin-left: 15%;
+      width: 25%;
+
       &:last-of-type {
         margin-right: 15%;
       }
-    } //end div.clone-button
-  }//end recipe-detaiil view
+    }
+  }  // end recipe-detaiil view
 
   .about-creators {
     article {
       figure {
         box-sizing: border-box;
-        margin-top: 1ex;
-        margin-left:  0;
-        margin-right: 0;
         display: block;
         float: left;
-        width: 25%;
+        margin-left:  0;
+        margin-right: 0;
+        margin-top: 1ex;
         max-width: 100px;
+        width: 25%;
+
         img {
           width: 100%;
         }
       }
+
       div {
         box-sizing: border-box;
         display: block;
         float: left;
-        width: 75%;
         padding-left: 5%;
+        width: 75%;
+
         h4 {
           line-height: 0;
         }
+
         p {
           font-size: 0.8em;
         }
       }
+
       .link-icons {
-        width: 35px;
-        max-width: 35px;
-        margin-top: 1ex;
         margin-right: 0.5em;
+        margin-top: 1ex;
+        max-width: 35px;
+        width: 35px;
       }
     }
   }
-
-}//END @media min-width 47
+}  // END @media min-width 47

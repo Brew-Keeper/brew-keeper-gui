@@ -1,36 +1,43 @@
-<header class="heading" ng-controller="TopNavController as vm">
-  <a class="logo" href="#/public">
-    <img class="logo" src="img/Brew_Keeper_Logo_v3.png"/>
+<header class="topnav" ng-controller="TopNavController as vm">
+  <a href="#/public">
+    <img class="topnav__logo" src="img/Brew_Keeper_Logo_v3.png"/>
   </a>
-  <nav class="menu hamburger">
-    <ul class="menu">
-      <li ng-show="username">
-        <a href="#/users/{{username}}/recipes">
+  <nav class="topnav__hamburger">
+    <ul class="topnav__menu">
+      <li class="topnav__entry" ng-show="username">
+        <a class="topnav__link"
+           href="#/users/{{username}}/recipes">
           My Recipes
         </a>
       </li>
-      <li ng-show="username">
-        <a href="#/users/{{username}}/recipes/create">
+      <li class="topnav__entry" ng-show="username">
+        <a class="topnav__link"
+           href="#/users/{{username}}/recipes/create">
           Create Recipe
         </a>
       </li>
-      <li>
-        <a href="#/about" class="about">
+      <li class="topnav__entry">
+        <a class="topnav__link about"
+           href="#/about">
           About
         </a>
       </li>
-      <li ng-hide="username" class="login-link">
-        <a href="#/login">
+      <li class="topnav__entry login-link" ng-hide="username">
+        <a class="topnav__link"
+           href="#/login">
           Login
         </a>
       </li>
-      <li ng-show="username">
-        <a ng-click="vm.logout()" href="#/login">
+      <li class="topnav__entry" ng-show="username">
+        <a class="topnav__link"
+           href="#/login"
+           ng-click="vm.logout()">
           Logout
         </a>
       </li>
-      <li ng-show="username">
-        <a href="#/change-password">
+      <li class="topnav__entry" ng-show="username">
+        <a class="topnav__link"
+           href="#/change-password">
           Change Password
         </a>
       </li>

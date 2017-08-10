@@ -55,14 +55,14 @@
         });
 
       // Show/hide hamburger
-      $(".menu").on('click', function() {
-        $('.menu').toggleClass("active");
+      $(".topnav__hamburger").on("click", function() {
+        $(".topnav__menu").toggleClass("active");
       });
 
       // Hide the menu if the user clicks somewhere not on the menu
       $(document).on('click', function(e) {
-        if (!$(e.target).is('.menu.active')) {
-          $('.menu').removeClass("active");
+        if (!$(e.target).is(".topnav__hamburger")) {
+          $(".topnav__menu").removeClass("active");
         }
       });
     }
