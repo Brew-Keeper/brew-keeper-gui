@@ -3,8 +3,8 @@
 
 .about-creators {
     margin: 2ex auto;
-    width: 90%;
     max-width: 40em;
+    width: 90%;
 
     article {
       @extend .clearfix;
@@ -56,8 +56,8 @@
 
 .more-info {
   margin: 2ex auto;
-  width: 90%;
   max-width: 40em;
+  width: 90%;
 
   &.register > label {
     font-weight: 400;
@@ -128,11 +128,11 @@
 
   // TODO: Move to central location
   h2, h3 {
-    display: block;
     color: $heading;
+    display: block;
     line-height: 0;
-    padding-top: 2ex;
     margin-bottom: 2ex;
+    padding-top: 2ex;
   }
 
   input {
@@ -145,7 +145,7 @@
 
   p {
     font-weight: 400;
-    text-align: justify;
     margin-bottom: -1ex;
+    text-align: justify;
   }
 }
