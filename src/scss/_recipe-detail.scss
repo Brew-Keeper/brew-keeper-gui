@@ -1,4 +1,3 @@
-//recipe detail page
 .recipe-detail {
   box-sizing: border-box;
   width: 90%;
@@ -58,9 +57,9 @@
    width: 35px;
    float: right;
  }
-}//recipe-detail (top portion)
+}
 
-.recipe-detail & div.details {
+.recipe-detail div.details {
   @extend .clearfix;
   width: 100%;
   padding-bottom: 2ex;
