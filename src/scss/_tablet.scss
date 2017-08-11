@@ -155,43 +155,10 @@
     margin: auto 25%;
   }
 
-  section.more-info > article {
-    width: 100%*(9/10);
-    margin-right: 100% *(1/20);
-    margin-left: 100% *(1/20);
-  }
-
    // About Creators Page
   ////////////////////////////////////////
 
   .about-creators {
-    figure {
-      box-sizing: border-box;
-      display: block;
-      float: left;
-      margin-left:  0;
-      margin-right: 0;
-      margin-top: 1ex;
-      max-width: 100px;
-      width: 25%;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    div {
-      box-sizing: border-box;
-      display: block;
-      float: left;
-      padding-left: 5%;
-      width: 75%;
-
-      h4 {
-        line-height: 0;
-      }
-    }
-
     .link-icons {
       margin-top: 1ex;
       max-width: 30px;
@@ -265,37 +232,9 @@
 
   .about-creators {
     article {
-      figure {
-        box-sizing: border-box;
-        display: block;
-        float: left;
-        margin-left:  0;
-        margin-right: 0;
-        margin-top: 1ex;
-        max-width: 100px;
-        width: 25%;
-
-        img {
-          width: 100%;
-        }
+      p {
+        font-size: 0.8em;
       }
-
-      div {
-        box-sizing: border-box;
-        display: block;
-        float: left;
-        padding-left: 5%;
-        width: 75%;
-
-        h4 {
-          line-height: 0;
-        }
-
-        p {
-          font-size: 0.8em;
-        }
-      }
-
       .link-icons {
         margin-right: 0.5em;
         margin-top: 1ex;

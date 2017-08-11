@@ -8,11 +8,16 @@ $BrewIt: #33B55D; //Brewit-Green
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
   color: #000;
+  font-family: 'Open Sans', sans-serif;
+
   a {
     color: #000;
     text-decoration: none;
+  }
+
+  h1 {
+    color: $heading;
   }
 }
 

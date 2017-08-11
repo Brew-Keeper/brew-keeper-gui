@@ -1,113 +1,145 @@
+ // More About the Team
+//////////////////////////////////////////
+
 .about-creators {
+    margin: 2ex auto;
     width: 90%;
-    margin: 2ex 5%;
+    max-width: 40em;
+
     article {
       @extend .clearfix;
-      width: 100%;
       display: block;
+      width: 100%;
+
     figure {
       box-sizing: border-box;
-      margin-top: 1ex;
-      margin-left:  0;
-      margin-right: 0;
       display: block;
       float: left;
-      width: 25%;
+      margin-left:  0;
+      margin-right: 0;
+      margin-top: 1ex;
       max-width: 100px;
+      width: 25%;
+
       img {
         width: 100%;
       }
     }
+
     div {
       box-sizing: border-box;
       display: block;
       float: left;
-      width: 75%;
       padding-left: 5%;
+      width: 75%;
+
       h4 {
         line-height: 0;
       }
+
       p {
         font-size: 0.7em;
         line-height: 2.2ex;
       }
-
     }
   }
+
   .link-icons {
-    width: 20px;
-    max-width: 20px;
     margin-top: -1ex;
+    max-width: 20px;
+    width: 20px;
   }
 }
 
+// About
+//////////////////////////////////////////
 
 .more-info {
+  margin: 2ex auto;
   width: 90%;
-  margin: 2ex 5%;
+  max-width: 40em;
+
   &.register > label {
     font-weight: 400;
   }
+
   article {
     box-sizing: border-box;
-    margin-top: 7ex;
-    margin-bottom: -6.5ex;
+    margin: 7ex auto -6.5ex;
   }
+
   article.keepers {
     @extend .clearfix;
+    margin-top: -1rem;
     padding-bottom: 2ex;
-    h3 {
-      text-decoration: underline;
 
-      &:hover {
-      color: $BrewIt;
-      }
-    }
     figure {
       box-sizing: border-box;
-      margin-top: 1ex;
-      margin-left:  0;
-      margin-right: 0;
       display: block;
       float: left;
-      width: 25%;
+      margin: 1ex .75%;
       max-width: 150px;
-      img {
-        width: 100%;
-        border: 5px solid white;
-        border-bottom: 0;
-        border-top: 0;
-      }
+      width: 23.5%;
+
       figcaption {
         text-align: center;
       }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    h1 {
+      font-size: 2em;
+      text-decoration: underline;
+
+      &:hover {
+        color: $BrewIt;
+      }
     }
   }
+
+  .gray-text {
+    color: $heading;
+  }
+
+  .header-link {
+    cursor: pointer;
+  }
+
   article.links {
     padding-bottom: 2ex;
-    h3 {
-      padding-top: 1ex;
-    }
+
     a {
       text-decoration: underline;
     }
+
     a:hover {
       color: $BrewIt;
     }
   }
-  h3 {
+
+  .spacer {
+    margin-bottom: 25em;
+  }
+
+  h2, h3 {
     display: block;
     color: $heading;
     line-height: 0;
     padding-top: 2ex;
     margin-bottom: 2ex;
   }
+
   input {
     box-sizing: border-box;
     display: block;
-    width: 100%;
     margin-top: 2ex;
+    max-width: 40em;
+    width: 100%;
   }
+
   p {
     font-weight: 400;
     text-align: justify;
