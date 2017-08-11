@@ -1,9 +1,12 @@
 <section class="brewit-page">
 
   <nav class="nav--brew-it">
-    <a href="vm.isPublic
-               ? #/public/{{vm.detail.id}}
-               : #/users/{{vm.recipeUsername}}/recipes/{{vm.detail.id}}">
+    <a href="#/public/{{vm.detail.id}}"
+       ng-show="vm.isPublic">
+      <h2 class="nav__header-title--brew-it">{{vm.detail.title}}</h2>
+    </a>
+    <a href="#/users/{{vm.recipeUsername}}/recipes/{{vm.detail.id}}"
+       ng-hide="vm.isPublic">
       <h2 class="nav__header-title--brew-it">{{vm.detail.title}}</h2>
     </a>
     <a class="reset-brew clicker-button nav__button--brew-it"
