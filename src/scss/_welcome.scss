@@ -51,7 +51,7 @@
   }
 }
 
-// About
+ // About
 //////////////////////////////////////////
 
 .more-info {
@@ -100,6 +100,7 @@
     }
   }
 
+  // TODO: Move to central location
   .gray-text {
     color: $heading;
   }
@@ -120,10 +121,12 @@
     }
   }
 
+  // TODO: Move to central location
   .spacer {
     margin-bottom: 25em;
   }
 
+  // TODO: Move to central location
   h2, h3 {
     display: block;
     color: $heading;
