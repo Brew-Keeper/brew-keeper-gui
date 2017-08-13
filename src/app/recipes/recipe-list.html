@@ -1,4 +1,4 @@
-<nav class="recipe-list">
+<nav class="nav--recipe-list">
   <h3 ng-show="vm.isPublic">Public Recipes</h3>
   <h3 ng-show="username && !vm.isPublic">{{username}}'s Recipes</h3>
   <input class="magnify"
@@ -38,7 +38,7 @@
      ng-hide="vm.isPublic">
     {{recipe.title}}
   </a>
-  <span>{{recipe.bean_name}}</span>
+  <p>{{recipe.bean_name}}</p>
   <div class="col-1-2">
     <span>{{recipe.roast !== null ? recipe.roast + " Roast" : ''}}</span>
     <div class="col-1-4" ng-show="vm.isPublic"> <!-- public rating and shared by -->

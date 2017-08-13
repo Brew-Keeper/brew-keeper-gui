@@ -99,49 +99,6 @@
     }
   }
 
-   // Recipe List Page
-  ////////////////////////////////////////
-
-  nav.recipe-list {
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-  }
-
-  section.recipe-list {
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-
-    .col-1-2 {
-      width: 50%;
-
-      .col-1-4 {
-        width: 110%;
-
-        span.count {
-          font-size: 1em;
-          margin-left: 2%;
-          margin-top: 1ex;
-          img {
-            width: 20px;
-          }
-        }
-      }
-
-      a {
-        margin-top: -2ex;
-        width: 85%;
-
-        &.recipe-title {
-          display: block;
-          max-width: 100%;
-          width: 100%;
-        }
-      }
-    }  // end col-1-2
-  }  // end section.recipe-list
-
    // Login-Registration Pages
   ////////////////////////////////////////
 
@@ -174,38 +131,6 @@
 ////////////////////////////////////////
 
 @media (min-width: 47em) {
-  nav.recipe-list {
-    margin-left: 15%;
-    margin-right: 15%;
-    width: 70%;
-  }
-
-  section.recipe-list {
-    margin-left: 15%;
-    margin-right: 15%;
-    width: 70%;
-
-    a {
-      margin-left: 0;
-      margin-right: 5%;
-      max-width: 12em;
-      padding-bottom: 1ex;
-      padding-top: 1ex;
-      padding: 2ex 0;
-      width: 85%;
-
-      &.list-brew-it {
-        font-weight: bold;
-      }
-
-      &.recipe-title {
-        display: block;
-        max-width: 100%;
-        width: 100%;
-      }
-    }
-  }
-
   .recipe-detail {
     .recipe-view {
       .col-1-3 {
