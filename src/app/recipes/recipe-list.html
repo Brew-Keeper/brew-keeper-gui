@@ -8,8 +8,10 @@
          placeholder="&#x1f50d"/>
   <select name="OrderBy" value="OrderBy" ng-model="query">
     <option value="">Sort By</>
-    <option value="-rating">Highest Rating</option>
-    <option value="rating">Lowest Rating</option>
+    <option ng-hide="vm.isPublic" value="-rating">Highest Rating</option>
+    <option ng-hide="vm.isPublic" value="rating">Lowest Rating</option>
+    <option ng-show="vm.isPublic" value="-combined_rating">Highest Rating</option>
+    <option ng-show="vm.isPublic" value="combined_rating">Lowest Rating</option>
     <option value="-id">Newest</option>
     <option value="id">Oldest</option>
     <option ng-hide="vm.isPublic" value="-brew_count">Most Brewed</option>
