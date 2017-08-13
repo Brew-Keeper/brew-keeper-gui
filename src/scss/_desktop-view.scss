@@ -37,19 +37,4 @@
     top: 1ex;
     width: 60%;
   }
-
-   // Recipe Detail Page
-  ////////////////////////////////////////
-
-  .recipe-detail {
-    .recipe-view {
-      .col-1-3{
-        width: 100% * (1/5);
-        &.brew-count {
-          padding-top: 0.5ex;
-          text-align: left;
-        }
-      }
-    }
-  }
 }  // END @media min-width 60

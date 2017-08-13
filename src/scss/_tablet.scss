@@ -38,33 +38,20 @@
   ////////////////////////////////////////
 
   .recipe-detail {
-    margin: 0 10%;
-    width: 80%;
-
     .recipe-view {
-      .col-1-3 {
-        box-sizing: border-box;
-        float: left;
-        width: 100% * (1/3);
-        &.brew-count {
-          padding-top: 0.5ex;
-          text-align: left;
-        }
-      }
-
-      img.cup {
+      .cup {
         width: 25px;
       }
 
       // See _recipe-detail.scss
-      a.brew-it-button {
-        margin-left: 100% * (1/4);
-        width: 100% * (1/2);
+      .main-action-button {
+        margin-left: 25%;
+        width: 50%;
       }
 
       a.no-steps {
-        margin-left: 100% * (1/4);
-        width: 100% * (1/2);
+        margin-left: 25%;
+        width: 50%;
       }
     }
   }  // recipe-detail (top portion)
@@ -132,19 +119,6 @@
 
 @media (min-width: 47em) {
   .recipe-detail {
-    .recipe-view {
-      .col-1-3 {
-        box-sizing: border-box;
-        float: left;
-        width: 100% * (1/5);
-
-        &.brew-count {
-          padding-top: 0.5ex;
-          text-align: left;
-        }
-      }
-    }
-
     div.clone-button {
       margin-left: 15%;
       width: 25%;

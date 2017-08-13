@@ -1,9 +1,9 @@
 <section class="recipe-detail">
   <section class="recipe-view">
-    <h3 class="title">
+    <h1 class="title">
       <a href="#/public">{{vm.detail.title}}</a>
-    </h3>
-    <div class="col-1-3">
+    </h1>
+    <div class="star-rating">
       <span ng-hide="username" ng-repeat="rating in vm.ratings">
         <div class="public"
              max="maxStars"
@@ -29,11 +29,13 @@
         </span>
       </section>
     </div>
-    <a ng-href="#public/users/{{vm.detail.shared_by}}"
-       ng-show="vm.detail.shared_by">
-      Shared by {{vm.detail.shared_by}}
-    </a>
-    <div class="brew-it-button">
+    <div class="shared-by-container">
+      Shared by <a ng-href="#public/users/{{vm.detail.shared_by}}"
+         ng-show="vm.detail.shared_by">
+        <span class="shared-by">{{vm.detail.shared_by}}</span>
+      </a>
+    </div>
+    <div class="main-action-button">
       <a class="brew-it-button"
          ng-href="#/public/{{vm.detail.id}}/brewit"
          ng-show="vm.detail.steps.length">
