@@ -1,23 +1,39 @@
 <section class="recipe-detail">
   <section class="recipe-view">
-    <h3 class="title"><a href="#/users/{{username}}/recipes">{{vm.detail.title}}</a></h3>
+    <h3 class="title">
+      <a href="#/users/{{username}}/recipes">
+        {{vm.detail.title}}
+      </a>
+    </h3>
     <div class="col-1-3">
       <span ng-repeat="rating in vm.ratings">
-        <div star-rating rating-value="vm.detail.rating" max="maxStars" ng-click="vm.rateRecipe(vm.detail.rating)"></div>
+        <div max="maxStars"
+             ng-click="vm.rateRecipe(vm.detail.rating)"
+             rating-value="vm.detail.rating"
+             star-rating>
+        </div>
       </span>
     </div>
-    <div class="col-1-3 brew-count">
-      <img class="cup" src="img/CoffeeCup-65.svg"> &#215; {{vm.detail.brew_count}}
+    <div class="brew-count col-1-3">
+      <img class="cup" src="img/CoffeeCup-65.svg" /> &#215; {{vm.detail.brew_count}}
     </div>
     <div class="brew-it-button">
-      <a ng-show="vm.detail.steps.length" class="brew-it-button" ng-href="#/users/{{username}}/recipes/{{vm.detail.id}}/brewit">BREW IT!</a>
-      <a ng-hide="vm.detail.steps.length" class="no-steps" href="">Add Steps</a>
+      <a class="brew-it-button"
+         ng-href="#/users/{{username}}/recipes/{{vm.detail.id}}/brewit"
+         ng-show="vm.detail.steps.length">
+        BREW IT!
+      </a>
+      <a class="no-steps"
+         href=""
+         ng-hide="vm.detail.steps.length">
+         Add Steps
+      </a>
     </div>
     <div class="details">
       <div class="detail-icon">
         <img src="img/LightCoffeeBean_darker.svg">
       </div>
-      <section class="details bean-details">
+      <section class="bean-details details">
         <span>{{vm.detail.bean_name}}</span>
         <span>
           {{vm.detail.roast !== null ? vm.detail.roast + ', ' : ''}}
@@ -38,30 +54,54 @@
         {{vm.detail.total_duration}} sec, {{vm.detail.orientation}}
       </section> <!-- end section.brew-time -->
       <section class="details icons"><!--TODO: Add "Make Public" button-->
-        <img class="trash-icon" ng-click="vm.deleteRecipe()" src="img/Delete-40.svg"/>
-        <img class="edit-icon recipe-view edit-button" ng-click="" src="img/Edit-40.svg"/>
+        <img class="trash-icon"
+             ng-click="vm.deleteRecipe()"
+             src="img/Delete-40.svg"/>
+        <img class="edit-button edit-icon recipe-view"
+             ng-click=""
+             src="img/Edit-40.svg"/>
       </section>
     </div><!--end div.details -->
     <!-- steps section -->
     <section class="step-list" ng-repeat="step in vm.detail.steps">
       <div class="num-col">
         {{$index + 1}}
-        <a ng-click="vm.decreaseStep(step)"><img class="down-arrow-icon" src="img/UpArrow-40.svg"/></a>
-        <a ng-click="vm.increaseStep(step)"><img class="up-arrow-icon" src="img/DownArrow-40.svg"/></a>
+        <a ng-click="vm.decreaseStep(step)">
+          <img class="down-arrow-icon" src="img/UpArrow-40.svg"/>
+        </a>
+        <a ng-click="vm.increaseStep(step)">
+          <img class="up-arrow-icon" src="img/DownArrow-40.svg"/>
+        </a>
       </div> <!-- end number column -->
-      <div class="step-details {{step.id}}" data-step-number="{{step.step_number}}">
-        <p class="bold-text">{{step.step_title}}</p>
-        <p class="step-details">{{step.step_body}}</p>
+      <div class="step-details {{step.id}}"
+           data-step-number="{{step.step_number}}">
+        <p class="bold-text">
+          {{step.step_title}}
+        </p>
+        <p class="step-details">
+          {{step.step_body}}
+        </p>
         <div class="duration {{step.id}}">
-          <span ng-show="step.water_amount"><img class="water-icon" src="img/LightWater_darker.svg"/><span class="bold-text">{{step.water_amount}}</span> {{vm.detail.water_units}} </span><img class="timer-icon" src="img/LightTimer_darker.svg">
+          <span ng-show="step.water_amount">
+            <img class="water-icon" src="img/LightWater_darker.svg"/>
+            <span class="bold-text">{{step.water_amount}}</span>
+            {{vm.detail.water_units}}
+          </span>
+          <img class="timer-icon" src="img/LightTimer_darker.svg">
           <span class="bold-text">{{step.duration}}</span> sec
         </div>
       </div> <!-- end step details -->
       <!-- edit step form -->
-      <div class="hidden edit-step {{step.id}}">
+      <div class="edit-step hidden {{step.id}}">
         <form class="edit-step" ng-submit="vm.editStep(step)">
           <section class="columns">
-            <input ng-blur="vm.editStep(step)" list="step-title" maxlength="50" type="text" ng-model="step.step_title" required placeholder="Action *" required>
+            <input list="step-title"
+                   maxlength="50"
+                   ng-blur="vm.editStep(step)"
+                   ng-model="step.step_title"
+                   placeholder="Action *"
+                   required
+                   type="text">
               <datalist id="step-title">
                 <option value="Pour">
                 <option value="Bloom">
@@ -70,35 +110,70 @@
                 <option value="Plunge">
               </datalist>
             </input>
-            <textarea ng-blur="vm.editStep(step)" maxlength="255" type="text" placeholder="Additional Notes" ng-model="step.step_body"></textarea>
+            <textarea maxlength="255"
+                      ng-blur="vm.editStep(step)"
+                      ng-model="step.step_body"
+                      placeholder="Additional Notes"
+                      type="text">
+            </textarea>
             <section>
               <div class="small-field">
               </div>
               <div class="small-field">
-                <label><img class="water-icon" src="img/LightWater_darker.svg"/></label>
-                <input ng-blur="vm.editStep(step)" class="small-field target" type="number" min="0" max="32767" ng-model="step.water_amount"> </input>
+                <label>
+                  <img class="water-icon" src="img/LightWater_darker.svg"/>
+                </label>
+                <input class="small-field target"
+                       max="32767"
+                       min="0"
+                       ng-blur="vm.editStep(step)"
+                       ng-model="step.water_amount"
+                       type="number">
+                </input>
               </div>
               <div class="small-field">
-                <label class="time-label"><img class="timer-icon" src="img/LightTimer_darker.svg"></label>
-                <input ng-blur="vm.editStep(step)" class="small-field target" type="number" placeholder="Duration in sec. *" ng-model="step.duration" min="1" max="32767" required></input>
+                <label class="time-label">
+                  <img class="timer-icon" src="img/LightTimer_darker.svg"/>
+                </label>
+                <input class="small-field target"
+                       max="32767"
+                       min="1"
+                       ng-blur="vm.editStep(step)"
+                       ng-model="step.duration"
+                       placeholder="Duration in sec. *"
+                       required
+                       type="number" >
+                </input>
               </div>
             </section>
           </section>
         </form><!--edit Step Form-->
       </div> <!-- edit step form div -->
       <section class="edit-step-icons">
-        <img ng-click="vm.showDeleteStep(step.step_number)" class="trash-icon" src="img/Delete-40.svg"/>
-        <img ng-click="vm.showEditStep(step.id)" class="edit-icon" src="img/Edit-40.svg"/>
+        <img class="trash-icon"
+             ng-click="vm.showDeleteStep(step.step_number)"
+             src="img/Delete-40.svg"/>
+        <img class="edit-icon"
+             ng-click="vm.showEditStep(step.id)"
+             src="img/Edit-40.svg"/>
       </section>
     </section><!-- end steps section -->
     <div class="add-steps">
       <div class="add-steps-heading">
         <h3>Add Step</h3>
-        <img class="plus-icon" ng-click="vm.showAddSteps()" src="img/PlusSign-40.svg"/>
+        <img class="plus-icon"
+             ng-click="vm.showAddSteps()"
+             src="img/PlusSign-40.svg"/>
       </div>
-      <form class="hidden create-new-step" ng-submit="vm.addStep()">
+      <form class="create-new-step hidden" ng-submit="vm.addStep()">
         <section class="columns">
-          <input class="input-focus" list="step-title" maxlength="50" type="text" ng-model="vm.step.step_title" required placeholder="Action *" required>
+          <input class="input-focus"
+                 list="step-title"
+                 maxlength="50"
+                 ng-model="vm.step.step_title"
+                 placeholder="Action *"
+                 required
+                 type="text">
             <datalist id="step-title">
               <option value="Pour">
               <option value="Bloom">
@@ -107,53 +182,108 @@
               <option value="Plunge">
             </datalist>
           </input>
-          <textarea maxlength="255" type="text" placeholder="Additional Notes" ng-model="vm.step.step_body"></textarea>
-          <input type="number" placeholder="Duration in sec. *" ng-model="vm.step.duration" min="1" max="32767" required></input>
-          <input type="number" min="0" max="32767" placeholder="Water Amount (in {{vm.detail.water_units}})" ng-model="vm.step.water_amount"> </input>
+          <textarea maxlength="255"
+                    ng-model="vm.step.step_body"
+                    placeholder="Additional Notes"
+                    type="text">
+          </textarea>
+          <input max="32767"
+                 min="1"
+                 ng-model="vm.step.duration"
+                 placeholder="Duration in sec. *"
+                 required
+                 type="number">
+          </input>
+          <input max="32767"
+                 min="0"
+                 ng-model="vm.step.water_amount"
+                 placeholder="Water Amount (in {{vm.detail.water_units}})"
+                 type="number">
+          </input>
         </section>
         <div class="columns general">
-          <button class="clicker-button add-step">Add Step</button>
+          <button class="add-step clicker-button">
+            Add Step
+          </button>
         </div>
       </form><!--Add Step Form-->
     </div> <!-- add step section -->
 
-    <section ng-show="vm.detail.general_recipe_comment" class="gen-recipe-comment">
-      <p>{{vm.detail.general_recipe_comment}}<p>
+    <section class="gen-recipe-comment"
+             ng-show="vm.detail.general_recipe_comment">
+      <p>
+        {{vm.detail.general_recipe_comment}}
+      </p>
     </section> <!-- end general recipe comment -->
 
     <div class="clone-button" ng-click="vm.showCloneModal()">
-      <a>CLONE</a>
+      <a>
+        CLONE
+      </a>
     </div>
     <div class="clone-button" ng-click="vm.showMakePublic()">
-      <a>SHARE</a>
+      <a>
+        SHARE
+      </a>
     </div>
 
     <!--Brew notes -->
     <section class="brew-notes">
       <div class="brew-notes-heading">
         <h3>Brew Notes</h3>
-        <img class="plus-icon" ng-click="vm.showAddBrewNote()" src="img/PlusSign-40.svg"/>
+        <img class="plus-icon"
+             ng-click="vm.showAddBrewNote()"
+             src="img/PlusSign-40.svg"/>
       </div>
       <section class="brew-form hidden" >
         <form class="add-note" ng-submit="vm.addBrewNote()">
-          <textarea class="input-focus" required type="text" ng-model="vm.brewnote.body" placeholder="Brew Note"></textarea>
-          <button class="save-note clicker-button" >Save</button>
+          <textarea class="input-focus"
+                    ng-model="vm.brewnote.body"
+                    placeholder="Brew Note"
+                    required
+                    type="text">
+          </textarea>
+          <button class="clicker-button save-note">
+            Save
+          </button>
         </form>
       </section> <!-- add brewnote section -->
-      <div class="notes" ng-repeat="note in vm.detail.brewnotes | orderBy: 'note.timestamp'">
+      <div class="notes"
+           ng-repeat="note in vm.detail.brewnotes | orderBy: 'note.timestamp'">
         <div class="note-view{{note.id}}" ng-click="vm.showNoteIcons(note.id)">
-          <div class="note-body">{{note.body}}</div>
-          <div class="note-date">— {{note.timestamp | date:'MMM dd, yyyy @ h:mma' }}</div>
-          <div class="note-icons {{note.id}} hidden">
-            <img class="trash-icon" ng-click="vm.deleteNote(note.id)" src="img/Delete-40.svg"/><!--Created by Pham Thi Dieu Linh from the Noun Project-->
-            <img class="edit-icon" ng-click="vm.showEditNote(note.id)" src="img/Edit-40.svg"/><!--Created by Daniel Boros from the Noun Project-->
+          <div class="note-body">
+            {{note.body}}
+          </div>
+          <div class="note-date">
+            — {{note.timestamp | date:'MMM dd, yyyy @ h:mma' }}
+          </div>
+          <div class="hidden note-icons {{note.id}}">
+            <img class="trash-icon"
+                 ng-click="vm.deleteNote(note.id)"
+                 src="img/Delete-40.svg"/>
+                 <!--Created by Pham Thi Dieu Linh from the Noun Project-->
+            <img class="edit-icon"
+                 ng-click="vm.showEditNote(note.id)"
+                 src="img/Edit-40.svg"/>
+                 <!--Created by Daniel Boros from the Noun Project-->
           </div>
         </div>
         <article class="edit-note{{note.id}} hidden">
-          <form class="edit-note" ng-submit="vm.editNote(note)"><!--edit brew-note form-->
-            <textarea required type="text" ng-model="note.body" placeholder="{{note.body}}"></textarea>
-            <button class="save-edit clicker-button">Save Edit</button>
-          </form><!--END edit-note form-->
+
+          <!--edit brew-note form-->
+          <form class="edit-note"
+                ng-submit="vm.editNote(note)">
+            <textarea ng-model="note.body"
+                      placeholder="{{note.body}}"
+                      required
+                      type="text">
+            </textarea>
+            <button class="clicker-button save-edit">
+              Save Edit
+            </button>
+          </form>
+          <!--END edit-note form-->
+
         </article><!--END edit-note article-->
       </div> <!-- .notes -->
     </section><!-- end section.brew-notes -->
@@ -163,32 +293,70 @@
     <form class="edit-recipe" ng-submit="vm.editRecipe()">
       <section class="columns general">
         <fieldset>
-          <input class="input-focus" placeholder="Title *" maxlength="50" ng-model="vm.detail.title" required></input>
-          <textarea placeholder="Comments" ng-model="vm.detail.general_recipe_comment"></textarea>
+          <input class="input-focus"
+                 maxlength="50"
+                 ng-model="vm.detail.title"
+                 placeholder="Title *"
+                 required>
+          </input>
+          <textarea ng-model="vm.detail.general_recipe_comment"
+                    placeholder="Comments">
+          </textarea>
         </fieldset><!--General Details-->
       </section>
       <section class="columns">
         <fieldset class="details">
-          <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean_darker.svg"/> Details</h4></legend>
-          <input class="top-row" maxlength="50" placeholder="Name" ng-model="vm.detail.bean_name"></input>
-          <select list="roast" maxlength="15" placeholder="Roast" ng-model="vm.detail.roast" id="roast">
-            <option value="" disabled selected hidden>{{vm.detail.roast}}</option>
+          <legend>
+            <h4 class="details-legend">
+              <img class="bean-icon" src="img/LightCoffeeBean_darker.svg"/>
+              Details
+            </h4>
+          </legend>
+          <input class="top-row"
+                 maxlength="50"
+                 ng-model="vm.detail.bean_name"
+                 placeholder="Name">
+          </input>
+          <select id="roast"
+                  list="roast"
+                  maxlength="15"
+                  ng-model="vm.detail.roast"
+                  placeholder="Roast">
+            <option disabled hidden selected value="">
+              {{vm.detail.roast}}
+            </option>
             <option value="Light">Light</option>
             <option value="Medium">Medium</option>
             <option value="Med-Dark">Med-Dark</option>
             <option value="Dark">Dark</option>
             <option value="Extra-Dark">Extra-Dark</option>
           </select>
-          <input list="grind" maxlength="30" placeholder="Grind" ng-model="vm.detail.grind">
+          <input list="grind"
+                 maxlength="30"
+                 ng-model="vm.detail.grind"
+                 placeholder="Grind">
             <datalist id="grind">
               <option value="Fine">
               <option value="Medium">
               <option value="Coarse">
             </datalist>
           </input>
-          <input class="small-field" type="number" min="0" max="32767" ng-model="vm.detail.total_bean_amount" placeholder="Amount"></input>
-          <select class="small-field" id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="vm.detail.bean_units">
-            <option value="{{vm.detail.bean_units}}" disabled selected hidden>{{vm.detail.bean_units}}</option>
+          <input class="small-field"
+                 max="32767"
+                 min="0"
+                 ng-model="vm.detail.total_bean_amount"
+                 placeholder="Amount"
+                 type="number">
+          </input>
+          <select class="small-field"
+                  id="bean-units"
+                  list="bean-units"
+                  maxlength="12"
+                  ng-model="vm.detail.bean_units"
+                  placeholder="Units">
+            <option disabled hidden selected value="{{vm.detail.bean_units}}">
+              {{vm.detail.bean_units}}
+            </option>
             <option value="g">g</option>
             <option value="oz">oz</option>
             <option value="scoops">scoops</option>
@@ -197,30 +365,69 @@
       </section>
       <section class="columns">
         <fieldset class="details">
-          <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater_darker.svg"/> Details</h4></legend>
-          <input class="top-row" list="water-type" maxlength="50" placeholder="Type" ng-model="vm.detail.water_type">
+          <legend>
+            <h4 class="details-legend">
+              <img class="water-icon" src="img/LightWater_darker.svg"/>
+                Details
+            </h4>
+          </legend>
+          <input class="top-row"
+                 list="water-type"
+                 maxlength="50"
+                 ng-model="vm.detail.water_type"
+                 placeholder="Type">
             <datalist id="water-type">
               <option value="Tap">
               <option value="Distilled">
               <option value="Spring">
               <option value="Deionized">
             </datalist>
-          <input class="small-field" type="number" min="0" max="32767" placeholder="Amount" ng-model="vm.detail.total_water_amount"></input>
-          <select class="small-field" id="water-units" list="water-units" maxlength="12" ng-model="vm.detail.water_units" placeholder="Units">
-            <option value="{{vm.detail.water_units}}" disabled selected hidden>{{vm.detail.water_units}}</option>
+          <input class="small-field"
+                 max="32767"
+                 min="0"
+                 ng-model="vm.detail.total_water_amount"
+                 placeholder="Amount"
+                 type="number">
+          </input>
+          <select class="small-field"
+                  id="water-units"
+                  list="water-units"
+                  maxlength="12"
+                  ng-model="vm.detail.water_units"
+                  placeholder="Units">
+            <option disabled
+                    hidden
+                    selected
+                    value="{{vm.detail.water_units}}">
+              {{vm.detail.water_units}}
+            </option>
             <option value="oz">oz</option>
             <option value="cc">cc</option>
             <option value="mL">mL</option>
           </select>
-          <input type="number" placeholder="Temp in &deg;F" ng-model="vm.detail.temp" max="32767"></input>
-          <select list="orientation" placeholder="Orientation" ng-model="vm.detail.orientation" id="orientation">
-            <option value="{{vm.detail.orientation}}" disabled selected hidden>{{vm.detail.orientation}}</option>
+          <input max="32767"
+                 ng-model="vm.detail.temp"
+                 placeholder="Temp in &deg;F"
+                 type="number">
+          </input>
+          <select id="orientation"
+                  list="orientation"
+                  ng-model="vm.detail.orientation"
+                  placeholder="Orientation">
+            <option disabled
+                    hidden
+                    selected
+                    value="{{vm.detail.orientation}}">
+              {{vm.detail.orientation}}
+            </option>
             <option value="Standard">Standard</option>
             <option value="Inverted">Inverted</option>
           </select>
         </fieldset><!--Water Details-->
       </section>
-      <button href="" class="submit-recipe-edit edit clicker-button">Submit</button>
+      <button class="clicker-button edit submit-recipe-edit" href="">
+        Submit
+      </button>
     </form>
   </section><!--END edit recipe-->
 </section><!--.recipe-detail-->
