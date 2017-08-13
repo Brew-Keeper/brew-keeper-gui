@@ -22,16 +22,17 @@
       width: 17px;//See tablet.scss
       }
     a.brew-it-button {//See tablet.scss
-      box-sizing: border-box;
-      float: left;
-      width: 100%;
-      margin-top: 1ex;
-      margin-bottom: 2ex;
       background-color: $BrewIt;
+      box-sizing: border-box;
+      clear: both;
+      float: left;
       font-size: 1.1em;
       font-weight: bold;
-      text-align: center;
+      margin-bottom: 2ex;
+      margin-top: 1ex;
       padding: 4px 0;
+      text-align: center;
+      width: 100%;
     }
     a.no-steps {
       box-sizing: border-box;
