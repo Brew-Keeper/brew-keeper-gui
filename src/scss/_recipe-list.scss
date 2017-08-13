@@ -1,11 +1,8 @@
 // TODO: Extract to main.scss
 .coffee-spinner {
   width: 100%;
-  img {
-    margin-left: 40%;
-    margin-top: 5ex;
-    width: 20%;
-  }
+  margin: 2rem auto;
+  max-width: 12rem;
 }
 
  // Recipe List Nav
