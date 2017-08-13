@@ -1,29 +1,53 @@
 <section class="recipe-detail">
   <section class="recipe-view">
-    <h3 class="title"><a href="#/public">{{vm.detail.title}}</a></h3>
+    <h3 class="title">
+      <a href="#/public">{{vm.detail.title}}</a>
+    </h3>
     <div class="col-1-3">
       <span ng-hide="username" ng-repeat="rating in vm.ratings">
-        <div view-rating rating-value="vm.detail.average_rating" max="maxStars" class="public"></div>
+        <div class="public"
+             max="maxStars"
+             rating-value="vm.detail.average_rating"
+             view-rating>
+        </div>
       </span>
       <section ng-show="username">
         <span ng-hide="vm.ratingId" ng-repeat="rating in vm.ratings">
-          <div star-rating rating-value="vm.detail.combined_rating" max="maxStars" ng-click="vm.rateRecipe(vm.detail.combined_rating)" class="public"></div>
+          <div class="public"
+               max="maxStars"
+               ng-click="vm.rateRecipe(vm.detail.combined_rating)"
+               rating-value="vm.detail.combined_rating"
+               star-rating>
+          </div>
         </span>
         <span ng-show="vm.ratingId" ng-repeat="userRating in vm.userRatings">
-          <div star-rating rating-value="vm.detail.combined_rating" max="maxStars" ng-click="vm.rateRecipe(vm.detail.combined_rating)"></div>
+          <div max="maxStars"
+               ng-click="vm.rateRecipe(vm.detail.combined_rating)"
+               rating-value="vm.detail.combined_rating"
+               star-rating>
+          </div>
         </span>
       </section>
     </div>
-    <a ng-show="vm.detail.shared_by" ng-href="#public/users/{{vm.detail.shared_by}}">Shared by {{vm.detail.shared_by}}</a>
+    <a ng-href="#public/users/{{vm.detail.shared_by}}"
+       ng-show="vm.detail.shared_by">
+      Shared by {{vm.detail.shared_by}}
+    </a>
     <div class="brew-it-button">
-      <a ng-show="vm.detail.steps.length" class="brew-it-button" ng-href="#/public/{{vm.detail.id}}/brewit">BREW IT!</a>
-      <a ng-hide="vm.detail.steps.length" class="no-steps" href="">Add Steps</a>
+      <a class="brew-it-button"
+         ng-href="#/public/{{vm.detail.id}}/brewit"
+         ng-show="vm.detail.steps.length">
+        BREW IT!
+      </a>
+      <a class="no-steps" href="" ng-hide="vm.detail.steps.length">
+        Add Steps
+      </a>
     </div>
     <div class="details">
       <div class="detail-icon">
         <img src="img/LightCoffeeBean_darker.svg">
       </div>
-      <section class="details bean-details">
+      <section class="bean-details details">
         <span>{{vm.detail.bean_name}}</span>
         <span>
           {{vm.detail.roast !== null ? vm.detail.roast + ', ' : ''}}
@@ -35,12 +59,13 @@
         <img src="img/LightWater_darker.svg">
       </div>
       <section class="details water-details">
-        {{vm.detail.water_type}} {{vm.detail.total_water_amount}} {{vm.detail.water_units}} <span ng-show="vm.detail.temp">@ {{vm.detail.temp}} &deg;F</span>
+        {{vm.detail.water_type}} {{vm.detail.total_water_amount}} {{vm.detail.water_units}}
+        <span ng-show="vm.detail.temp">@ {{vm.detail.temp}} &deg;F</span>
       </section> <!-- end section.water-details-->
       <div class="detail-icon">
         <img src="img/LightTimer_darker.svg">
       </div>
-      <section class="details brew-time">
+      <section class="brew-time details">
         <span >{{vm.detail.total_duration}} sec, {{vm.detail.orientation}}
       </section> <!-- end section.brew-time -->
     </div><!--end div.details -->
@@ -53,49 +78,85 @@
       <p class="bold-text">{{step.step_title}}</p>
       <p class="step-details">{{step.step_body}}</p>
       <div class="duration">
-        <span ng-show="step.water_amount"><span class="bold-text">{{step.water_amount}}</span> {{vm.detail.water_units}}, </span>
+        <span ng-show="step.water_amount">
+          <span class="bold-text">{{step.water_amount}}</span>
+          {{vm.detail.water_units}},
+        </span>
         <span class="bold-text">{{step.duration}}</span> sec
       </div>
     </div> <!-- end step details -->
   </section><!-- end steps section -->
-  <section ng-show="vm.detail.general_recipe_comment" class="gen-recipe-comment public">
-    <p>{{vm.detail.general_recipe_comment}}<p>
+  <section class="gen-recipe-comment public"
+           ng-show="vm.detail.general_recipe_comment">
+    <p>
+      {{vm.detail.general_recipe_comment}}
+    </p>
   </section> <!-- end general recipe comment -->
 
-  <div ng-show="username" class="clone-button public" ng-click="vm.showCloneRecipe()">
+  <div class="clone-button public"
+       ng-click="vm.showCloneRecipe()"
+       ng-show="username">
     <a>CLONE</a>
   </div>
-  <a href="#/login"><div ng-hide="username" class="clone-button">Login to Clone this Recipe</div></a>
+  <a href="#/login">
+    <div class="clone-button" ng-hide="username">
+      Login to Clone this Recipe
+    </div>
+  </a>
 
   <!-- Brew notes -->
   <section class="brew-notes">
     <div class="brew-notes-heading">
       <h3>Comments</h3>
-      <img ng-show="username" class="plus-icon" ng-click="vm.showAddBrewNote()" src="img/PlusSign-40.svg"/>
+      <img class="plus-icon"
+           ng-click="vm.showAddBrewNote()"
+           ng-show="username"
+           src="img/PlusSign-40.svg"/>
     </div>
-    <section class="brew-form hidden"  ng-submit="vm.addBrewNote()">
+    <section class="brew-form hidden" ng-submit="vm.addBrewNote()">
       <form class="add-note">
-        <textarea required type="text" ng-model="vm.comment.public_comment"></textarea>
-        <button class="save-note clicker-button">Add</button>
+        <textarea ng-model="vm.comment.public_comment"
+                  required
+                  type="text">
+        </textarea>
+        <button class="clicker-button save-note">
+          Add
+        </button>
       </form>
     </section>
     <!-- add brewnote section -->
-    <div class="notes" ng-repeat="comment in vm.detail.public_comments | orderBy: 'comment.comment_timestamp'">
+    <div class="notes"
+         ng-repeat="comment in vm.detail.public_comments | orderBy: 'comment.comment_timestamp'">
       <div class="note-view{{comment.id}}" ng-click="showNoteIcons(note.id)">
-        <div class="note-body">{{comment.public_comment}}</div>
-        <div class="note-date">— {{comment.comment_timestamp | date}} by {{comment.username}}</div>
-        <div class="note-icons {{note.id}}" ng-show="username == comment.username">
-          <img class="trash-icon" ng-Click="vm.deleteComment(comment.id)" src="img/Delete-40.svg"/>
-          <!--Created by Pham Thi Dieu Linh from the Noun Project-->
-          <img class="edit-icon" ng-Click="vm.showEditNote(comment.id)" src="img/Edit-40.svg"/>
-          <!--Created by Daniel Boros from the Noun Project-->
+        <div class="note-body">
+          {{comment.public_comment}}
+        </div>
+        <div class="note-date">
+          — {{comment.comment_timestamp | date}} by {{comment.username}}
+        </div>
+        <div class="note-icons {{note.id}}"
+             ng-show="username == comment.username">
+          <img class="trash-icon"
+               ng-Click="vm.deleteComment(comment.id)"
+               src="img/Delete-40.svg"/>
+               <!--Created by Pham Thi Dieu Linh from the Noun Project-->
+          <img class="edit-icon"
+               ng-Click="vm.showEditNote(comment.id)"
+               src="img/Edit-40.svg"/>
+               <!--Created by Daniel Boros from the Noun Project-->
         </div>
       </div>
       <article class="edit-note{{comment.id}} hidden">
         <form class="edit-note" ng-submit="vm.editComment(comment)">
           <!--edit brew-note form-->
-            <textarea required type="text" ng-model="comment.public_comment">{{comment.public_comment}}</textarea>
-            <button class="save-edit clicker-button">Save</button>
+            <textarea ng-model="comment.public_comment"
+                      required
+                      type="text">
+              {{comment.public_comment}}
+            </textarea>
+            <button class="clicker-button save-edit">
+              Save
+            </button>
         </form>
       </article>
     </div>
