@@ -79,9 +79,11 @@
       <p class="step-details">{{step.step_body}}</p>
       <div class="duration">
         <span ng-show="step.water_amount">
+          <img class="water-icon" src="img/LightWater_darker.svg"/>
           <span class="bold-text">{{step.water_amount}}</span>
-          {{vm.detail.water_units}},
+          {{vm.detail.water_units}}
         </span>
+        <img class="timer-icon" src="img/LightTimer_darker.svg">
         <span class="bold-text">{{step.duration}}</span> sec
       </div>
     </div> <!-- end step details -->
