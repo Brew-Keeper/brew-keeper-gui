@@ -10,3 +10,6 @@ The initial goal is to implement the Angular best practices, as described in
 [John Papa's Angular
 styleguide](https://github.com/johnpapa/angular-styleguide/tree/master/a1), and
 then implement some new features.
+
+This project is live at
+[https://brewkeeper-52a9a.firebaseapp.com](https://brewkeeper-52a9a.firebaseapp.com).
