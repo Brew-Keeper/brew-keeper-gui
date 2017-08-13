@@ -22,8 +22,13 @@
     .cup {
         width: 17px;
       }
-    .main-action-button {
+
+    .brew-it-button {
+      @extend .main-action-button;
       background-color: $BrewIt;
+    }
+
+    .main-action-button {
       box-sizing: border-box;
       clear: both;
       float: left;
@@ -37,16 +42,8 @@
     }
 
     .no-steps {
+      @extend .main-action-button;
       background-color:$Inactive;
-      box-sizing: border-box;
-      float: left;
-      font-size: 1em;
-      font-weight: 500;
-      margin-bottom: 2ex;
-      margin-top: 1ex;
-      padding: 4px 0;
-      text-align: center;
-      width: 100%;
     }
   }
 
