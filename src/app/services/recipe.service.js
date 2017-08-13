@@ -43,6 +43,10 @@
         $rootScope.recipeCache[recipe_id] = recipes[i];
       }
 
+      if (recipes.length && recipes[0].username === 'public') {
+        return sortRecipesBy(recipes, 'combined_rating');
+      }
+
       return sortRecipesBy(recipes, 'brew_count');
     }
 
@@ -102,6 +106,10 @@
         if ($rootScope.recipeCache[key].username === username) {
           ret.push($rootScope.recipeCache[key]);
         }
+      }
+
+      if (username === 'public') {
+        return sortRecipesBy(ret, 'combined_rating');
       }
 
       return sortRecipesBy(ret, 'brew_count');
