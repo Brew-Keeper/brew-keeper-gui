@@ -39,8 +39,7 @@
           if ($location.search()) {
             $location.url($location.search().target);
           }
-        })
-        .catch(function(error) {
+        }, function(error) {
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();
