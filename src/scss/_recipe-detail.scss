@@ -215,22 +215,24 @@ div.add-steps-heading  > .plus-icon {
 .gen-recipe-comment.public {
   border-top: 1px solid $heading;
 }
+
 div.clone-button {
+  background-color: $Inactive;
   cursor: pointer;
   display: inline-block;
-  width: 40%;
+  margin-bottom: 3ex;
   margin-left: 5%;
   margin-top: 2ex;
-  margin-bottom: 3ex;
-  padding-top: 1ex;
   padding-bottom: 1ex;
-  background-color: $Inactive;
+  padding-top: 1ex;
   text-align: center;
+  width: 40%;
   &:last-of-type {
     float: right;
     margin-right: 5%;
   }
 } //end div.clone-button
+
 div.clone-button.public {
   cursor: pointer;
   float: left;
