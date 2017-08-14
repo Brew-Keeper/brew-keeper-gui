@@ -25,14 +25,11 @@ h3.form-heading {
   }
   &.login {
     background-color: $BrewIt;
-    border: 2.3px solid $BrewIt;
+    border: none;
     color: #000;
-    width: 100% * (1/2);
-    margin-left: 100% * (1/4);
-    margin-right: 100% * (1/4);
-    margin-top: 1ex;
-    padding-top: 1ex;
-    padding-bottom: 1ex;
+    margin: 0.5rem 25%;
+    padding: .7rem 0;
+    width: 50%;
   }
   &.show-signup {
     width: 100% * (1/4);
@@ -125,20 +122,26 @@ h3.form-heading {
 }
 
 form.login {
+  margin: 0 auto;
+  max-width: 40rem;
   width: 90%;
-  margin: 0 5%;
   .columns {
     display: block;
     margin-top: 5%;
     label.login {
+      color: $heading;
       display: block;
+      font-size: 1.7rem;
+      font-weight: bold;
+      margin: 1rem auto;
       width: 100%;
-      margin: 5% 0 2%;
     }
     input {
       box-sizing: border-box;
+      display: block;
+      margin: 1rem auto;
+      max-width: 30rem;
       width: 100%;
-      margin: 1ex 0;
     }
   }
 }//form.login
