@@ -54,11 +54,9 @@ h3.form-heading {
   }
 
   &.register {
-    width: 100% * (1/2);
-    margin-left: 100% *(1/4);
-    margin-right: 100% *(1/4);
-    padding-top: 1ex;
-    padding-bottom: 1ex;
+    width: 50%;
+    margin: 1rem 25%;
+    padding: 1ex 0;
     }
   &.addSteps {//submit form button which shows Add Steps.
     width: 100% * (1/4);
@@ -140,7 +138,7 @@ form.login {
       box-sizing: border-box;
       display: block;
       margin: 1rem auto;
-      max-width: 30rem;
+      max-width: 40rem;
       width: 100%;
     }
   }
