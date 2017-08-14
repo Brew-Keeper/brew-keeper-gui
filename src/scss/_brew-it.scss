@@ -4,18 +4,8 @@
   width: 100%;
 
   section.brew-form {
-    margin: -2ex 0 1ex 10%;
+    margin: 0 0 1ex 10%;
     width: 80%;
-  }
-
-  span.rating {
-    display: inline-block;
-    float: left;
-    margin-top: .8rem;
-  }
-
-  span.rating .public {
-    margin-top: -1.5ex;
   }
 }
 
@@ -128,7 +118,7 @@
 
 .nav--brew-it {
   display: block;
-  height: 5.9rem;
+  height: 5.4rem;
   margin: 0 5%;
   position: relative;
 }
@@ -141,17 +131,14 @@
 }
 
 .nav__header-title--brew-it {
-  color: $heading;
-  font-size: 1.4em;
-  font-weight: 600;
-  margin-bottom: 0;
-  opacity: 85%;
-  padding-bottom: 1.5ex;
+  margin-bottom: .4rem;
 }
 
 .stars {
   display: block;
-  width: 100%;
+  float: left;
+  margin-top: -.1rem;
+  width: 8rem;
 }
 
 // Timeline

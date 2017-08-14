@@ -94,8 +94,9 @@
   // TODO: Make this text color a variable
   .shared-by {
     color: #b1b2b4;
-    clear: both;
     display: block;
+    clear: left;
+    width: 200%;
     & span {
       color: $BrewIt;
     }

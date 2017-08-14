@@ -16,8 +16,24 @@ body {
     text-decoration: none;
   }
 
-  h1 {
+  .general-heading {
     color: $heading;
+    font-weight: 600;
+  }
+
+  h1 {
+    @extend .general-heading;
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    @extend .general-heading;
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    @extend .general-heading;
+    font-size: 1.1rem;
   }
 }
 

@@ -5,10 +5,11 @@
   width: 90%;
 
   .title {
-    color: $heading;
-    font-weight: 600;
-    font-size: 1.5rem;
     margin: 1rem 0 .2rem;
+  }
+
+  .title a {
+    color: $heading;
   }
 
   .brew-count {
@@ -59,7 +60,7 @@
   .star-rating {
     box-sizing: border-box;
     float: left;
-    width: 7rem;
+    width: 8rem;
   }
 
   .trash-icon {

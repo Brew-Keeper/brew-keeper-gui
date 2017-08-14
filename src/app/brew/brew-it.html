@@ -3,11 +3,11 @@
   <nav class="nav--brew-it">
     <a href="#/public/{{vm.detail.id}}"
        ng-show="vm.isPublic">
-      <h2 class="nav__header-title--brew-it">{{vm.detail.title}}</h2>
+      <h1 class="nav__header-title--brew-it">{{vm.detail.title}}</h1>
     </a>
     <a href="#/users/{{vm.recipeUsername}}/recipes/{{vm.detail.id}}"
        ng-hide="vm.isPublic">
-      <h2 class="nav__header-title--brew-it">{{vm.detail.title}}</h2>
+      <h1 class="nav__header-title--brew-it">{{vm.detail.title}}</h1>
     </a>
     <a class="reset-brew clicker-button nav__button--brew-it"
        href=""
