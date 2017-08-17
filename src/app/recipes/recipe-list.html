@@ -6,16 +6,11 @@
          ng-model="searchString"
          ng-submit="vm.search(searchString)"
          placeholder="&#x1f50d"/>
-  <select name="OrderBy" value="OrderBy" ng-model="query">
-    <option value="">Sort By</>
-    <option ng-hide="vm.isPublic" value="-rating">Highest Rating</option>
-    <option ng-hide="vm.isPublic" value="rating">Lowest Rating</option>
-    <option ng-show="vm.isPublic" value="-combined_rating">Highest Rating</option>
-    <option ng-show="vm.isPublic" value="combined_rating">Lowest Rating</option>
-    <option value="-id">Newest</option>
-    <option value="id">Oldest</option>
-    <option ng-hide="vm.isPublic" value="-brew_count">Most Brewed</option>
-    <option ng-hide="vm.isPublic" value="brew_count">Least Brewed</option>
+  <select name="OrderBy"
+          value="OrderBy"
+          ng-model="vm.query"
+          ng-options="sortBy.value as sortBy.name for sortBy in vm.sortByOptions">
+    <option value="">Sort By</option>
   </select>
   <button class="clicker-button"
           name="search"
@@ -29,7 +24,7 @@
 </div>
 
 <section class="recipe-list"
-         ng-repeat="recipe in vm.recipes | orderBy:vm.ratingOrderBy | orderBy:query | filter:filter">
+         ng-repeat="recipe in vm.recipes | orderBy:vm.ratingOrderBy | orderBy:vm.query | filter:filter">
   <a class="recipe-title"
      href="#/public/{{recipe.id}}"
      ng-show="vm.isPublic">

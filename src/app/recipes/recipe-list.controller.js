@@ -24,11 +24,13 @@
     vm.isPublic = ($location.path().indexOf('/public') === 0);
     vm.listBrewIt = listBrewIt;
     vm.newRating = newRating;
+    vm.query = '';
     vm.rateRecipe = rateRecipe;
     vm.ratingOrderBy = ratingOrderBy;
     vm.ratings = [{max: $rootScope.maxStars}];
     vm.recipes = [];
     vm.search = search;
+    vm.sortByOptions = [];
     vm.updateRating = updateRating;
 
     var localUser = vm.isPublic ? 'public' : $rootScope.username;
@@ -63,6 +65,25 @@
           .then(function(response) {
             vm.recipes = recipeService.cacheRecipes(response.data);
           });
+      }
+
+      // Set the sortBy options
+      if (vm.isPublic) {
+        vm.sortByOptions = [
+          {name:'Highest Rating', value:'-combined_rating'},
+          {name:'Lowest Rating', value:'combined_rating'},
+          {name:'Newest', value:'-id'},
+          {name:'Oldest', value:'id'}
+        ];
+      } else {
+        vm.sortByOptions = [
+          {name:'Highest Rating', value:'-rating'},
+          {name:'Lowest Rating', value:'rating'},
+          {name:'Newest', value:'-id'},
+          {name:'Oldest', value:'id'},
+          {name:'Most Brewed', value:'-brew_count'},
+          {name:'Least Brewed', value:'brew_count'}
+        ];
       }
     }
 
