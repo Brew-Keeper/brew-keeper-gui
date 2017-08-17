@@ -29,8 +29,8 @@ Best Practices Implementation Highlights:
 
 - [x] Reduce calls to the API as much as possible. Prime examples being the
   add, delete, and update methods for steps and brew notes on the user recipe
-  detail page, which have been updated make the changes only and not re-acquire
-  the recipe after the change.
+  detail page, which have been updated to make the changes only and not
+  re-acquire the recipe after the change.
 
 ### Update Sass/CSS
 
