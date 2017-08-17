@@ -67,6 +67,9 @@
           });
       }
 
+      // Show the nav
+      $('.nav--recipe-list').removeClass('hidden');
+
       // Set the sortBy options
       if (vm.isPublic) {
         vm.sortByOptions = [
