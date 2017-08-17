@@ -61,14 +61,19 @@
       vm.recipes = recipeService.getRecipes(localUser);
       // If full set of orders not in the cache, get them from the API
       if (vm.recipes.length <= 2) {
+        // Hide the nav
+        $('.nav--recipe-list').addClass('hidden');
+        // Show the spinner
+        $('.coffee-spinner').removeClass('hidden');
         dataService.get(recipesUrl)
           .then(function(response) {
             vm.recipes = recipeService.cacheRecipes(response.data);
+            // Hide the spinner
+            $('.coffee-spinner').addClass('hidden');
+            // Show the nav
+            $('.nav--recipe-list').removeClass('hidden');
           });
       }
-
-      // Show the nav
-      $('.nav--recipe-list').removeClass('hidden');
 
       // Set the sortBy options
       if (vm.isPublic) {
