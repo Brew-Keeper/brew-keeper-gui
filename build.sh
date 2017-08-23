@@ -63,5 +63,8 @@ echo 'Step 4: Copy img folder'
 cp  -r src/img/ dist/img/
 cp  -r src/img/favicons/favicon.ico dist/favicon.ico
 
-echo 'Step 5: verify working project in dist/'
+echo 'Step 5: Copy audio folder'
+cp  -r src/audio/ dist/audio/
+
+echo 'Step 6: verify working project in dist/'
 npm run start:dist
