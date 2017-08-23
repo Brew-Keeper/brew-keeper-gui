@@ -55,6 +55,3 @@ Also, I replaced ~7500 lines of compiled CSS with 16 lines—yay CSS variables!
 - [x] **More uniform styling.** Display of elements within the UI (headers, stars,
   spacing, etc.) are now sharing the same underlying styling and more
   consistent html markup.
-
-- [x] **More brews!** Slightly smaller stars on the user recipe list allow for
-  4-digit brew counts to stay on the same line at 375px (iPhone 6 width).
