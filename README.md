@@ -55,5 +55,3 @@ Also, I replaced ~7500 lines of compiled CSS with 16 lines—yay CSS variables!
 - [x] **More uniform styling.** Display of elements within the UI (headers, stars,
   spacing, etc.) are now sharing the same underlying styling and more
   consistent html markup.
-
-- [x] **Audio Cues.** When brewing, a beep now sounds after each step completes.
