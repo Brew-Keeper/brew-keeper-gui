@@ -136,6 +136,10 @@
       var nextStep = vm.stepArray[nextStepIndex];
       var nextTimerId = vm.stepArray.indexOf(stepNumber) + 2;
 
+      // Play the beep sound
+      var stepBeep = new Audio('audio/beep-07.mp3');
+      stepBeep.play();
+
       if (nextStepIndex >= vm.steps.length) {
         // End of brew countdown
         vm.resetBrew();
