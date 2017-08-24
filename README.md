@@ -38,7 +38,7 @@ I updated several Sass files to be more concise and predictable, implementing
 the BEM style (although not yet throughout) and reducing specificity wherever
 possible.
 
-Also, I replaced ~7500 lines of compiled CSS with 16 lines—yay CSS variables!
+Also, I replaced ~7500 lines of compiled CSS with 13 lines—yay CSS variables!
 
 ### New Features
 
