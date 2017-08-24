@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.recipes')
+    .module('app.recipe.create')
     .controller('RecipeCreationController', RecipeCreationController);
 
   RecipeCreationController.$inject = ['$location', '$rootScope', 'dataService'];

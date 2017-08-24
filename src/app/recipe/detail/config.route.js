@@ -2,56 +2,23 @@
   'use strict';
 
   angular
-    .module('app.recipes')
+    .module('app.recipe.detail')
     .config(config);
 
   config.$inject = ['$routeProvider'];
 
   function config($routeProvider) {
     $routeProvider
-      .when('/public', {
-        templateUrl: 'app/recipes/recipe-list.html',
-        controller: 'RecipeListController',
-        controllerAs: 'vm'
-      })
-      .when('/public/users/:username', {
-        templateUrl: 'app/recipes/recipe-list.html',
-        controller: 'RecipeListController',
-        controllerAs: 'vm'
-      })
       .when('/public/:id', {
-        templateUrl: 'app/recipes/public-detail.html',
+        templateUrl: 'app/recipe/detail/public-detail.html',
         controller: 'PublicDetailController',
         controllerAs: 'vm',
         resolve: {
           recipePrep: recipePrep
         }
       })
-      .when('/public/:id/brewit', {
-        templateUrl: 'app/brew/brew-it.html',
-        controller: 'BrewItController',
-        controllerAs: 'vm',
-        resolve: {
-          recipePrep: recipePrep
-        }
-      })
-      .when('/users/:username/recipes', {
-        templateUrl: 'app/recipes/recipe-list.html',
-        controller: 'RecipeListController',
-        controllerAs: 'vm'
-      })
-      .when('/users/:username/clone/:id', {
-        templateUrl: 'app/recipes/clone.html',
-        controller:  'CloneController',
-        controllerAs: 'vm'
-      })
-      .when('/users/:username/recipes/create', {
-        templateUrl: 'app/recipes/recipe-creation.html',
-        controller: 'RecipeCreationController',
-        controllerAs: 'vm'
-      })
       .when('/users/:username/recipes/:id', {
-        templateUrl: 'app/recipes/recipe-detail.html',
+        templateUrl: 'app/recipe/detail/recipe-detail.html',
         controller: 'RecipeDetailController',
         controllerAs: 'vm',
         resolve: {

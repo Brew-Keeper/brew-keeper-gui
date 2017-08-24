@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.recipes')
+    .module('app.recipe.clone')
     .controller('CloneController', CloneController);
 
   CloneController.$inject =

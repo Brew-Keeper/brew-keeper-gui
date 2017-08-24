@@ -10,7 +10,7 @@
   function config($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'app/recipes/recipe-list.html',
+        templateUrl: 'app/recipe/list/recipe-list.html',
         controller: 'RootController'
       })
       .when('/about', {

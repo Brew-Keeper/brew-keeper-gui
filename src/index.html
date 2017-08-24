@@ -44,7 +44,7 @@
 
     <!-- modals -->
     <div data-ng-include="'app/user/user.modals.html'"></div>
-    <div data-ng-include="'app/recipes/recipes.modals.html'"></div>
+    <div data-ng-include="'app/recipe/detail/recipe.modals.html'"></div>
     <!-- endmodals -->
 
     <!-- inject-vendor:js -->
@@ -87,14 +87,25 @@
     <script src="app/layout/root.controller.js"></script>
     <script src="app/layout/topnav.controller.js"></script>
 
-    <!-- recipes module -->
-    <script src="app/recipes/recipes.module.js"></script>
-    <script src="app/recipes/config.route.js"></script>
-    <script src="app/recipes/clone.controller.js"></script>
-    <script src="app/recipes/public-detail.controller.js"></script>
-    <script src="app/recipes/recipe-creation.controller.js"></script>
-    <script src="app/recipes/recipe-detail.controller.js"></script>
-    <script src="app/recipes/recipe-list.controller.js"></script>
+    <!-- recipe modules -->
+    <script src="app/recipe/recipe.module.js"></script>
+    <!-- clone module -->
+    <script src="app/recipe/clone/clone.module.js"></script>
+    <script src="app/recipe/clone/config.route.js"></script>
+    <script src="app/recipe/clone/clone.controller.js"></script>
+    <!-- create module -->
+    <script src="app/recipe/create/create.module.js"></script>
+    <script src="app/recipe/create/config.route.js"></script>
+    <script src="app/recipe/create/recipe-creation.controller.js"></script>
+    <!-- detail module -->
+    <script src="app/recipe/detail/detail.module.js"></script>
+    <script src="app/recipe/detail/config.route.js"></script>
+    <script src="app/recipe/detail/public-detail.controller.js"></script>
+    <script src="app/recipe/detail/recipe-detail.controller.js"></script>
+    <!-- list module -->
+    <script src="app/recipe/list/list.module.js"></script>
+    <script src="app/recipe/list/config.route.js"></script>
+    <script src="app/recipe/list/recipe-list.controller.js"></script>
 
     <!-- user module -->
     <script src="app/user/user.module.js"></script>

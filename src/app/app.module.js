@@ -16,7 +16,7 @@
       /* Feature areas */
       'app.brew',
       'app.layout',
-      'app.recipes',
+      'app.recipe',
       'app.user'
     ]);
 })();

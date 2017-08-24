@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.recipes')
+    .module('app.recipe.list')
     .controller('RecipeListController', RecipeListController);
 
   RecipeListController.$inject = [
