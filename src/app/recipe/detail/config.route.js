@@ -33,16 +33,12 @@
     var isPublic = ($location.path().indexOf('/public') === 0);
     var localUser = isPublic ? 'public' : $rootScope.username;
     var recipeId = $route.current.params.id;
-    var detail = $location.path() == '/' + localUser + '/' + recipeId;
-    if (!isPublic) {
-      detail = $location.path() == '/users/' + localUser + '/recipes/' + recipeId;
-    }
 
     if (localUser === undefined || null) {
       $location.search("target", $location.path());
       $location.path('/login');
       return;
     }
-    return recipeService.getRecipe(recipeId, localUser, detail);
+    return recipeService.getRecipe(recipeId, localUser, true);
   }
 })();
