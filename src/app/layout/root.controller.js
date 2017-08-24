@@ -27,8 +27,7 @@
         .then(function(response) {
           $rootScope.username = response.data.username;
           $location.path('/users/' + $rootScope.username + '/recipes');
-        })
-        .catch(function(error) {
+        }, function(error) {
           $rootScope.username = null;
           dataService.clearCredentials();
           recipeService.clearAllCache();

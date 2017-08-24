@@ -72,10 +72,14 @@
       // Reset the users property and navigate to the root of the app (or
       // target, if provided)
       var queryParams = $location.search();
-      if (queryParams && queryParams.target) {
+      if (
+        queryParams &&
+        queryParams.target &&
+        queryParams.target.indexOf('/users/' + $rootScope.username + '/') === 0
+      ) {
         $location.url(queryParams.target);
       } else {
-        $location.path('/');
+        $location.url('/');
       }
     }
   }
