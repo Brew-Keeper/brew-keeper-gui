@@ -132,9 +132,7 @@ div.brew-notes-heading >  .plus-icon {
     float: right;
   }
 div.add-steps {
-  margin-bottom: 4ex;
-  padding-bottom: 1ex;
-  border-bottom: 1px solid $heading;
+  margin-bottom: 2rem;
 }
 div.add-steps-heading {
   display: block;
@@ -207,15 +205,14 @@ div.add-steps-heading  > .plus-icon {
 // end steps section
 
 .gen-recipe-comment {
+  border-top: 1px solid $heading;
   border-bottom: 1px solid $heading;
+  margin-bottom: 1rem;
   p {
     margin-left: 5%;
     margin-right: 5%;
   }
 } //end section.gen-recipe-comment
-.gen-recipe-comment.public {
-  border-top: 1px solid $heading;
-}
 
 div.clone-button {
   background-color: $Inactive;
