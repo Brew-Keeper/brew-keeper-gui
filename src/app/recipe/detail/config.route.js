@@ -40,7 +40,7 @@
 
     if (localUser === undefined || null) {
       $location.search("target", $location.path());
-      $location.path('/public');
+      $location.path('/login');
       return;
     }
     return recipeService.getRecipe(recipeId, localUser, detail);
