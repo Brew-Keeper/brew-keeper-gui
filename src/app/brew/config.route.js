@@ -9,6 +9,14 @@
 
   function config($routeProvider) {
     $routeProvider
+      .when('/public/:id/brewit', {
+        templateUrl: 'app/brew/brew-it.html',
+        controller: 'BrewItController',
+        controllerAs: 'vm',
+        resolve: {
+          recipePrep: recipePrep
+        }
+      })
       .when('/users/:username/recipes/:id/brewit', {
         templateUrl: 'app/brew/brew-it.html',
         controller: 'BrewItController',

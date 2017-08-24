@@ -100,7 +100,7 @@
      */
     function listBrewIt(id) {
       if (vm.isPublic) {
-        $location.path('/' + localUser + '/' + id + '/brewit');
+        $location.path('/public/' + id + '/brewit');
       } else {
         $location.path('/users/' + localUser + '/recipes/' + id + '/brewit');
       }
