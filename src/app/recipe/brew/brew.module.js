@@ -2,5 +2,5 @@
   'use strict';
 
   angular
-    .module('app.brew', []);
+    .module('app.recipe.brew', []);
 })();

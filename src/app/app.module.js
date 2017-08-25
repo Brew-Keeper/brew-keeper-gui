@@ -14,7 +14,6 @@
       'app.services',
 
       /* Feature areas */
-      'app.brew',
       'app.layout',
       'app.recipe',
       'app.user'

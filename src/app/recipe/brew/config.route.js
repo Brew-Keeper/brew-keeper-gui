@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.brew')
+    .module('app.recipe.brew')
     .config(config);
 
   config.$inject = ['$routeProvider'];
@@ -10,7 +10,7 @@
   function config($routeProvider) {
     $routeProvider
       .when('/public/:id/brewit', {
-        templateUrl: 'app/brew/brew-it.html',
+        templateUrl: 'app/recipe/brew/brew-it.html',
         controller: 'BrewItController',
         controllerAs: 'vm',
         resolve: {
@@ -18,7 +18,7 @@
         }
       })
       .when('/users/:username/recipes/:id/brewit', {
-        templateUrl: 'app/brew/brew-it.html',
+        templateUrl: 'app/recipe/brew/brew-it.html',
         controller: 'BrewItController',
         controllerAs: 'vm',
         resolve: {
