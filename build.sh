@@ -21,13 +21,13 @@ mkdir dist/css
 npm run sass
 cp src/css/main.css dist/css/main.css
 
-echo 'Step 3: Copy all the `bower_components/`!'
+echo 'Step 3: Copy all the relevant `bower_components/`!'
 
-echo 'Step 3a: Normalize the CSS...'
+echo ' -- 3a: Normalize the CSS...'
 mkdir -p dist/bower_components/normalize-css/
 cp bower_components/normalize-css/normalize.css dist/bower_components/normalize-css/normalize.css
 
-echo 'Step 3b: copy more bower components'
+echo ' -- 3b: Copy more bower components'
 mkdir -p dist/bower_components/angular-cookies/
 cp bower_components/angular-cookies/angular-cookies.min.js dist/bower_components/angular-cookies/angular-cookies.min.js
 # cp bower_components/angular-cookies/angular-cookies.min.js.map dist/bower_components/angular-cookies/angular-cookies.min.js.map
@@ -66,5 +66,5 @@ echo 'Step 4: Copy img folder'
 cp  -r src/img/ dist/img/
 cp  -r src/img/favicons/favicon.ico dist/favicon.ico
 
-echo 'Step 5: verify working project in dist/'
+echo 'Step 5: Verify working project in dist/'
 npm run start:dist
