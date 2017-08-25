@@ -1,6 +1,9 @@
 echo 'Step 0: Kill ALL THE THINGS... in `dist/`'
-
-rm -rf dist/*
+if [ ! -d dist ]; then
+  mkdir dist
+else
+  rm -rf dist/*
+fi
 
 echo 'Step 1: Copy all the HTML and JS'
 cp src/index.html dist/
