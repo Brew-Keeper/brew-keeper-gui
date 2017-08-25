@@ -10,27 +10,27 @@
   function config($routeProvider) {
     $routeProvider
       .when('/change-password', {
-        templateUrl: 'app/user/change-password.html',
+        templateUrl: 'app/user/password/change-password.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm'
       })
       .when('/login', {
-        templateUrl: 'app/user/login.html',
+        templateUrl: 'app/user/login/login.html',
         controller: 'LoginController',
         controllerAs: 'vm'
       })
       .when('/reset-pw', {
-        templateUrl: 'app/user/reset-password.html',
+        templateUrl: 'app/user/password/reset-password.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm'
       })
       .when('/send-reset', {
-        templateUrl: 'app/user/send-reset.html',
+        templateUrl: 'app/user/password/send-reset.html',
         controller: 'ChangePasswordController',
         controllerAs: 'vm'
       })
       .when('/signup', {
-        templateUrl: 'app/user/signup.html',
+        templateUrl: 'app/user/signup/signup.html',
         controller: 'SignupController',
         controllerAs: 'vm'
       });
