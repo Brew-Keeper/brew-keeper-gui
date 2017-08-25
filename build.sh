@@ -10,9 +10,6 @@ cp src/index.html dist/
 mkdir dist/app
 cp -r src/app dist/
 
-mkdir dist/partials
-cp -r src/partials dist/
-
 mkdir dist/js
 cp -r src/js dist/
 
