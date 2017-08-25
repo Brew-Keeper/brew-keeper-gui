@@ -21,7 +21,7 @@
       })
       .otherwise({
         redirectTo: '/not-found',
-        templateUrl: 'partials/404.html'
+        templateUrl: 'app/layout/404.html'
       });
   }
 })();
