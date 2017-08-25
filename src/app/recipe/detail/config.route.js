@@ -18,7 +18,7 @@
         }
       })
       .when('/users/:username/recipes/:id', {
-        templateUrl: 'app/recipe/detail/recipe-detail.html',
+        templateUrl: 'app/recipe/detail/detail.html',
         controller: 'RecipeDetailController',
         controllerAs: 'vm',
         resolve: {
