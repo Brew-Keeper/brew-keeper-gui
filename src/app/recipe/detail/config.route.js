@@ -34,11 +34,17 @@
     var localUser = isPublic ? 'public' : $rootScope.username;
     var recipeId = $route.current.params.id;
 
-    if (localUser === undefined || null) {
+    if (localUser === undefined || localUser === null) {
       $location.search("target", $location.path());
       $location.path('/login');
       return;
     }
-    return recipeService.getRecipe(recipeId, localUser, true);
+    var recipe = recipeService.getRecipe(recipeId, localUser, true);
+
+    if (recipe === 'error') {
+      $location.path('/public');
+    } else {
+      return recipe;
+    }
   }
 })();

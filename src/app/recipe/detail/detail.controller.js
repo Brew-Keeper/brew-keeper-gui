@@ -515,7 +515,8 @@
           }
         })
         .then(function(response) {
-          // Make sure this new public recipe is in the cache
+          // Make sure this new public recipe is in the cache. It is possible
+          // that this request will fail, but unlikely.
           recipeService.getRecipe(response.data.id, 'public');
 
           // Show the make public success modal

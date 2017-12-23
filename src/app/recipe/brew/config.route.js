@@ -40,6 +40,12 @@
       return;
     }
 
-    return recipeService.getRecipe(recipeId, localUser);
+    var recipe = recipeService.getRecipe(recipeId, localUser);
+
+    if (recipe === 'error') {
+      $location.path('/public');
+    } else {
+      return recipe;
+    }
   }
 })();

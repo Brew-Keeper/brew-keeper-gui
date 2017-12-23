@@ -82,6 +82,9 @@
           .then(function(response) {
             $rootScope.recipeCache[recipe_id] = response.data;
             return $rootScope.recipeCache[recipe_id];
+          },
+          function() {
+            return 'error';
           });
       }
 
