@@ -44,12 +44,12 @@ Also, I replaced ~7500 lines of compiled CSS with 13 lines—yay CSS variables!
 
 - [x] **Log in less frequently.** With the new order caching in place, the app is
   now lightening fast; however, one of the biggest time savers is having the
-  authentication cookie last for 30 days.
+  authentication cookie last for 30 days (rolling).
 
-- [x] **New uri structure.** To better set up for future features and communicate
-  better to the user where they are in the app, the uri structure has been
-  modified (e.g., `/users/{username}/recipes` instead of `/{username}` and
-  `/users/{username}/recipes/{recipe_id}/brewit` instead of
+- [x] **New uri structure.** To be better positioned for future features and
+  better communicate to the user where they are in the app, the uri structure
+  has been modified (e.g., `/users/{username}/recipes` instead of `/{username}`
+  and `/users/{username}/recipes/{recipe_id}/brewit` instead of
   `/{username}/{recipe_id}/brewit`).
 
 - [x] **More uniform styling.** Display of elements within the UI (headers, stars,
