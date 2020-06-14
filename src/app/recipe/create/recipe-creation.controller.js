@@ -1,4 +1,4 @@
-(function() {  // IFEE
+(function() {
   'use strict';
 
   angular
