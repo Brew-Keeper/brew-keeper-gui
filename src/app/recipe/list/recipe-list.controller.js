@@ -164,7 +164,7 @@
         vm.recipes = recipeService.getRecipes(localUser);
         return;
       }
-      dataService.get(recipesUrl + searchParams)
+      dataService.get(`${recipesUrl}${searchParams}`)
         .then(function(response) {
           vm.recipes = recipeService.cacheRecipes(response.data);
         });
