@@ -75,7 +75,7 @@
       if (
         queryParams &&
         queryParams.target &&
-        queryParams.target.indexOf('/users/' + $rootScope.username + '/') === 0
+        queryParams.target.indexOf(`/users/${$rootScope.username}/`) === 0
       ) {
         $location.url(queryParams.target);
       } else {

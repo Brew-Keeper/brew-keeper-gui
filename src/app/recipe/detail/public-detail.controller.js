@@ -36,9 +36,9 @@
     vm.showNoteIcons = showNoteIcons;
     vm.userRatings = null;
 
-    var recipeUrl = '/api/users/public/recipes/' + $routeParams.id + '/';
-    var ratingsUrl = recipeUrl + 'ratings/';
-    var commentsUrl = recipeUrl + 'comments/';
+    var recipeUrl = `/api/users/public/recipes/${$routeParams.id}/`;
+    var ratingsUrl = `${recipeUrl}ratings/`;
+    var commentsUrl = `${recipeUrl}comments/`;
 
     activate();
 
@@ -93,24 +93,24 @@
     function deleteComment(commentId) {
       // Remove the comment from the model
       for (var i = 0; i < vm.detail.public_comments.length; i++) {
-        if (vm.detail.public_comments[i].id == commentId) {
+        if (vm.detail.public_comments[i].id === commentId) {
           vm.detail.public_comments.splice(i, 1);
           break;
         }
       }
 
       // Remove the comment in the db
-      dataService.delete(commentsUrl + commentId + '/');
+      dataService.delete(`${commentsUrl}${commentId}/`);
     }
 
     /**
      * Edit the logged-in user's comment on this public recipe.
      */
     function editComment(comment) {
-      dataService.put(commentsUrl + comment.id + '/', comment)
+      dataService.put(`${commentsUrl}${comment.id}/`, comment)
         .then(function() {
-          $("article.edit-note" + comment.id).addClass("hidden");
-          $("div.note-view" + comment.id).removeClass("hidden");
+          $(`article.edit-note${comment.id}`).addClass("hidden");
+          $(`div.note-view${comment.id}`).removeClass("hidden");
         });
     }
 
@@ -127,12 +127,12 @@
         vm.detail.public_ratings.public_rating = rating;
 
         // Update the public rating in the db
-        dataService.patch(ratingsUrl + vm.ratingId + '/', newRating);
+        dataService.patch(`${ratingsUrl}${vm.ratingId}/`, newRating);
       }
 
       // If the user has not rated, create new rating
       if (!vm.ratingId) {
-        dataService.post(recipeUrl + 'ratings/', newRating)
+        dataService.post(`${recipeUrl}ratings/`, newRating)
           .then(function(response) {
             vm.ratingId = response.data.id;
             vm.detail.public_ratings = response.data;
@@ -161,8 +161,8 @@
      */
     function showEditNote(noteId) {
       noteId = noteId.toString();
-      $("div.note-view" + noteId).addClass("hidden");
-      $("article.edit-note" + noteId).removeClass("hidden");
+      $(`div.note-view${noteId}`).addClass("hidden");
+      $(`article.edit-note${noteId}`).removeClass("hidden");
     }
 
     /**
@@ -170,7 +170,7 @@
      * notes).
      */
     function showNoteIcons(noteId) {
-      $(".note-icons").filter($("." + noteId)).toggleClass("hidden");
+      $(".note-icons").filter($(`.${noteId}`)).toggleClass("hidden");
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -201,7 +201,7 @@
       cloneData.steps = [];
 
       var newRecipeId = null;
-      var recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
+      var recipesUrl = `/api/users/${$rootScope.username}/recipes/`;
       dataService.post(recipesUrl, cloneData)
         .success(function(response) {
           newRecipeId = response.id;
@@ -215,12 +215,12 @@
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
             // Post a copy of this step to the new recipe
-            dataService.post(recipesUrl + newRecipeId + '/steps/', steps[step]);
+            dataService.post(`${recipesUrl}${newRecipeId}/steps/`, steps[step]);
           }
         })
         .then(function() {
           // Redirect to the clone editor
-          $location.path('/users/' + $rootScope.username + '/clone/' + newRecipeId);
+          $location.path(`/users/${$rootScope.username}/clone/${newRecipeId}`);
         });
     }
   }

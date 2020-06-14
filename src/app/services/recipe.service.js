@@ -78,7 +78,7 @@
           !$rootScope.recipeCache[recipe_id].hasOwnProperty('grind')
         )
       ) {
-        return dataService.get('/api/users/' + username + '/recipes/' + recipe_id + '/')
+        return dataService.get(`/api/users/${username}/recipes/${recipe_id}/`)
           .then(function(response) {
             $rootScope.recipeCache[recipe_id] = response.data;
             return $rootScope.recipeCache[recipe_id];

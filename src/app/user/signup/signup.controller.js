@@ -6,7 +6,7 @@
     .controller('SignupController', SignupController);
 
   SignupController.$inject = ['$location', '$rootScope', 'dataService'];
-  
+
   function SignupController($location, $rootScope, dataService) {
     var vm = this;
     vm.users = {};

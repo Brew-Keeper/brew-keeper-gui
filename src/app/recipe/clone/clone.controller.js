@@ -25,8 +25,7 @@
      * Prepare the page.
      */
     function activate() {
-      recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
-        $routeParams.id + '/';
+      recipeUrl = `/api/users/${$rootScope.username}/recipes/${$routeParams.id}/`;
 
       dataService.get(recipeUrl)
         .then(function(response) {
@@ -44,7 +43,7 @@
       dataService.patch(recipeUrl, vm.recipe)
         .then(function() {
           $location.path(
-            '/users/'+ $rootScope.username + '/recipes/' + $routeParams.id + '/');
+            `/users/${$rootScope.username}/recipes/${$routeParams.id}/`);
         });
     }
   }

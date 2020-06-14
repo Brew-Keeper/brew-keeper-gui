@@ -26,7 +26,7 @@
       dataService.get('/api/whoami/')
         .then(function(response) {
           $rootScope.username = response.data.username;
-          $location.path('/users/' + $rootScope.username + '/recipes');
+          $location.path(`/users/${$rootScope.username}/recipes`);
         }, function(error) {
           $rootScope.username = null;
           dataService.clearCredentials();

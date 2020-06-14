@@ -55,7 +55,7 @@
           return;
         }
       } else {
-        recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
+        recipesUrl = `/api/users/${$rootScope.username}/recipes/`;
       }
       // Attempt to get the recipes for this user from the cache
       vm.recipes = recipeService.getRecipes(localUser);
@@ -100,9 +100,9 @@
      */
     function listBrewIt(id) {
       if (vm.isPublic) {
-        $location.path('/public/' + id + '/brewit');
+        $location.path(`/public/${id}/brewit`);
       } else {
-        $location.path('/users/' + localUser + '/recipes/' + id + '/brewit');
+        $location.path(`/users/${localUser}/recipes/${id}/brewit`);
       }
     }
 
@@ -115,12 +115,12 @@
         return;
       }
       var providedRating = {"public_rating": rating};
-      dataService.post(publicUrl + recipeId + '/ratings/', providedRating)
+      dataService.post(`${publicUrl}${recipeId}/ratings/`, providedRating)
         // Now that we have posted, update the rating to reflect the change
         .then(function(response) {
           var cachedRecipes = recipeService.getRecipes('public');
             for (var i = 0; i < cachedRecipes.length; i++) {
-              if (cachedRecipes[i].id == recipeId) {
+              if (cachedRecipes[i].id === recipeId) {
                 cachedRecipes[i].public_ratings = response.data;
                 break;
               }
@@ -137,7 +137,7 @@
         return;
       }
       var newRating = {"rating": rating};
-      dataService.patch(recipesUrl + id + '/', newRating);
+      dataService.patch(`${recipesUrl}${id}/`, newRating);
     }
 
     /**
@@ -159,7 +159,7 @@
     function search(searchString) {
       var searchParams = '';
       if (searchString !== undefined) {
-        searchParams = '?search=' + searchString;
+        searchParams = `?search=${searchString}`;
       } else {
         vm.recipes = recipeService.getRecipes(localUser);
         return;
@@ -180,7 +180,7 @@
       }
       var providedRating = {"public_rating": rating};
       dataService.patch(
-        publicUrl + recipeId + '/ratings/' + ratingId + '/',
+        `${publicUrl}${recipeId}/ratings/${ratingId}/`,
         providedRating);
     }
   }

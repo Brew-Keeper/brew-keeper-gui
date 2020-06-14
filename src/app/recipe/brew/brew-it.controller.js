@@ -60,12 +60,11 @@
      */
     function activate() {
       if (vm.isPublic) {
-        recipeUrl = '/api/users/public/recipes/' + $routeParams.id + '/';
-        ratingsUrl = recipeUrl + 'ratings/';
+        recipeUrl = `/api/users/public/recipes/${$routeParams.id}/`;
+        ratingsUrl = `${recipeUrl}ratings/`;
       } else {
-        recipeUrl = '/api/users/' + $rootScope.username + '/recipes/' +
-          $routeParams.id + '/';
-        brewNoteUrl = recipeUrl + 'brewnotes/';
+        recipeUrl = `/api/users/${$rootScope.username}/recipes/${$routeParams.id}/`;
+        brewNoteUrl = `${recipeUrl}brewnotes/`;
       }
 
       $(document).scrollTop(0);
@@ -96,7 +95,7 @@
       // Set the timeline duration variable
       document.documentElement.style.setProperty(
         '--brew-duration',
-        vm.recipe.total_duration + 's');
+        `${vm.recipe.total_duration}s`);
     }
 
     /**
@@ -116,7 +115,7 @@
         .then(function(response) {
           var publicRatings = response.data;
           for (var i = 0; i < publicRatings.length; i++) {
-            if (publicRatings[i].username == $rootScope.username) {
+            if (publicRatings[i].username === $rootScope.username) {
               vm.ratingId = publicRatings[i].id;
               vm.userRating = publicRatings[i].public_rating;
               break;
@@ -157,12 +156,12 @@
       }
 
       // Hide this step
-      $("timer." + stepNumber).addClass("hidden");
-      $("." + stepNumber).addClass("brew-step--finished").removeClass("brew-step--current");
+      $(`timer.${stepNumber}`).addClass("hidden");
+      $(`.${stepNumber}`).addClass("brew-step--finished").removeClass("brew-step--current");
 
       // Change next step to green and grow next step to 200
-      $("timer." + nextStep).removeClass("hidden");
-      $("." + nextStep).addClass("brew-step--current").removeClass("brew-step--inactive");
+      $(`timer.${nextStep}`).removeClass("hidden");
+      $(`.${nextStep}`).addClass("brew-step--current").removeClass("brew-step--inactive");
 
       // Start the next step's timer
       $scope.$broadcast('startTimer', nextTimerId);
@@ -180,12 +179,12 @@
 
       // If the user has already rated, update their current rating
       if (vm.ratingId) {
-        dataService.patch(ratingsUrl + vm.ratingId + '/', newRating);
+        dataService.patch(`${ratingsUrl}${vm.ratingId}/`, newRating);
       }
 
       // If the user has not rated, create new rating
       if (!vm.ratingId) {
-        dataService.post(recipeUrl + 'ratings/', newRating)
+        dataService.post(`${recipeUrl}ratings/`, newRating)
           .then(function(response) {
             vm.ratingId = response.data.id;
           });
@@ -218,7 +217,7 @@
       $(".brew-step--restart").addClass("hidden");
 
       // Hide the timeline (hidden during countdown)
-      $(".time-" + vm.countdownVal).removeClass("timeline");
+      $(`.time-${vm.countdownVal}`).removeClass("timeline");
 
       // Show the "RESET" button
       $("a[href].reset-brew").removeClass("hidden");
@@ -258,7 +257,7 @@
       $(".brew-step--countdown").addClass("hidden");
 
       // Hide the timeline
-      $(".time-" + vm.countdownVal).removeClass("timeline");
+      $(`.time-${vm.countdownVal}`).removeClass("timeline");
 
       // Show "Restart Brew" and "Add Note", hide "Reset"
       $(".brew-step--restart").removeClass("hidden");
@@ -292,16 +291,16 @@
      */
     function startBrew() {
       // Set the first step to be current-step and show its timer
-      $("." + vm.stepArray[0])
+      $(`.${vm.stepArray[0]}`)
         .removeClass("brew-step--inactive")
         .addClass("brew-step--current");
-      $("timer." + vm.stepArray[0]).removeClass("hidden");
+      $(`timer.${vm.stepArray[0]}`).removeClass("hidden");
 
       // Hide and shrink the countdown step
       $(".brew-step--countdown").addClass("hidden").addClass("brew-step--inactive");
 
       // Show the timeline
-      $(".time-" + vm.countdownVal).addClass("timeline");
+      $(`.time-${vm.countdownVal}`).addClass("timeline");
 
       // Start the timer
       $scope.$broadcast('startTimer', 1);

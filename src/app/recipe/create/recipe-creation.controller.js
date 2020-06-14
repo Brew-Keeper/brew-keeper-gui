@@ -37,12 +37,12 @@
      */
     function createNew() {
       $("form-placeholder").removeClass("changed");
-      dataService.post('/api/users/' + $rootScope.username + '/recipes/', vm.recipe)
+      dataService.post(`/api/users/${$rootScope.username}/recipes/`, vm.recipe)
         .success(function (data) {
           // Clear the form
           vm.recipe = {};
           // Navigate to the new recipe
-          $location.path('/users/' + $rootScope.username + '/recipes/' + data.id);
+          $location.path(`/users/${$rootScope.username}/recipes/${data.id}`);
         });
     }
   }

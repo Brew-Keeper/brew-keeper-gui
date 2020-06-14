@@ -31,7 +31,7 @@
     function activate() {
       // Start focus on appropriate field
       $("input[name='username']").focus();
-      if ($location.path() == '/change-password') {
+      if ($location.path() === '/change-password') {
         $("input[name='oldPassword']").focus();
       }
 

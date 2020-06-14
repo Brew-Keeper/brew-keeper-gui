@@ -66,9 +66,9 @@
     function activate() {
       $(document).scrollTop(0);
 
-      recipesUrl = '/api/users/' + $rootScope.username + '/recipes/';
-      recipeUrl = recipesUrl + $routeParams.id + '/';
-      brewNotesUrl = recipeUrl + 'brewnotes/';
+      recipesUrl = `/api/users/${$rootScope.username}/recipes/`;
+      recipeUrl = `${recipesUrl}${$routeParams.id}/`;
+      brewNotesUrl = `${recipeUrl}brewnotes/`;
 
       vm.detail = recipePrep;
       vm.ratings = [{current:vm.detail.rating}];
@@ -156,7 +156,7 @@
       vm.step.step_number = vm.detail.steps.length + 1;
       vm.detail.total_duration += vm.step.duration;
       $('.input-focus').focus();
-      dataService.post(recipeUrl + 'steps/', vm.step)
+      dataService.post(`${recipeUrl}steps/`, vm.step)
         .then(function(response) {
           // Update the steps array
           vm.detail.steps.push(response.data);
@@ -188,7 +188,7 @@
       step.step_number--;
 
       // Update the step in the db
-      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
+      dataService.patch(`${recipeUrl}steps/${step.id}/`, step);
     }
 
     /**
@@ -197,14 +197,14 @@
     function deleteNote(noteId) {
       // Remove the note from the model
       for (var i = 0; i < vm.detail.brewnotes.length; i++) {
-        if (vm.detail.brewnotes[i].id == noteId) {
+        if (vm.detail.brewnotes[i].id === noteId) {
           vm.detail.brewnotes.splice(i, 1);
           break;
         }
       }
 
       // Delete the note in the db
-      dataService.delete(brewNotesUrl + noteId + '/');
+      dataService.delete(`${brewNotesUrl}${noteId}/`);
     }
 
     /**
@@ -221,7 +221,7 @@
         dataService.delete(recipeUrl)
           .then(function() {
             recipeService.removeRecipe(vm.detail.id);
-            $location.path('/users/' + $rootScope.username + '/recipes');
+            $location.path(`/users/${$rootScope.username}/recipes`);
           });
       });
     }
@@ -230,9 +230,9 @@
      * Submit the edited brew note to the db.
      */
     function editNote(note) {
-      var noteView = "div.note-view" + note.id.toString();
-      var editNoteSelector = "article.edit-note" + note.id.toString();
-      dataService.put(brewNotesUrl + note.id + '/', note)
+      var noteView = `div.note-view${note.id.toString()}`;
+      var editNoteSelector = `article.edit-note${note.id.toString()}`;
+      dataService.put(`${brewNotesUrl}${note.id}/`, note)
         .then(function () {
           $(editNoteSelector).addClass("hidden");
           $(noteView).removeClass("hidden");
@@ -254,7 +254,7 @@
      * Submit the edited step to the db.
      */
     function editStep(step) {
-      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
+      dataService.patch(`${recipeUrl}steps/${step.id}/`, step);
 
       // Recalculate the duration
       updateDuration();
@@ -265,7 +265,7 @@
      */
     function hideEditStep(stepId) {
       stepId = stepId.toString();
-      $("div." + stepId).toggleClass("hidden");
+      $(`div.${stepId}`).toggleClass("hidden");
     }
 
     /**
@@ -286,7 +286,7 @@
       step.step_number++;
 
       // Update the step in the db
-      dataService.patch(recipeUrl + 'steps/' + step.id + '/', step);
+      dataService.patch(`${recipeUrl}steps/${step.id}/`, step);
     }
 
     /**
@@ -332,7 +332,7 @@
       // Mark the specified step so we know which one to delete
       var stepIndex = stepNumber - 1;
       $("div.step-details").each(function(index) {
-        if (index == stepIndex) {
+        if (index === stepIndex) {
           $(this).addClass("to-delete");
         }
       });
@@ -342,8 +342,8 @@
      * Show form to edit brew note.
      */
     function showEditNote(noteId) {
-      var noteView = "div.note-view" + noteId.toString();
-      var editNoteSelector = "article.edit-note" + noteId.toString();
+      var noteView = `div.note-view${noteId.toString()}`;
+      var editNoteSelector = `article.edit-note${noteId.toString()}`;
       $(noteView).addClass("hidden");
       $(editNoteSelector).removeClass("hidden");
     }
@@ -353,7 +353,7 @@
      */
     function showEditStep(stepId) {
       stepId = stepId.toString();
-      $("div." + stepId).toggleClass("hidden");
+      $(`div.${stepId}`).toggleClass("hidden");
     }
 
     /**
@@ -376,7 +376,7 @@
      * Show the edit/delete icons for brew notes.
      */
     function showNoteIcons(noteId) {
-      $(".note-icons").filter($("." + noteId)).toggleClass("hidden");
+      $(".note-icons").filter($(`.${noteId}`)).toggleClass("hidden");
     }
 
     /**
@@ -434,12 +434,12 @@
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
             // Post a copy of this step to the new recipe
-            dataService.post(recipesUrl + newRecipeId + '/steps/', steps[step]);
+            dataService.post(`${recipesUrl}${newRecipeId}/steps/`, steps[step]);
           }
         })
         .then(function() {
           // Redirect to the clone editor
-          $location.path('/users/' + $rootScope.username + '/clone/' + newRecipeId);
+          $location.path(`/users/${$rootScope.username}/clone/${newRecipeId}`);
         });
     }
 
@@ -452,7 +452,7 @@
       $("#confirm-delete-step-modal").addClass("inactive");
       // Delete the step in the db
       var stepId = vm.detail.steps[stepNumber - 1].id;
-      dataService.delete(recipeUrl + 'steps/' + stepId + '/');
+      dataService.delete(`${recipeUrl}steps/${stepId}/`);
 
       // Remove the step
       vm.detail.steps.splice(stepNumber - 1, 1);
@@ -511,7 +511,7 @@
             steps[step].duration = vm.detail.steps[step].duration;
             steps[step].water_amount = vm.detail.steps[step].water_amount;
 
-            dataService.post('/api/users/public/recipes/' + newRecipeId + '/steps/', steps[step]);
+            dataService.post(`/api/users/public/recipes/${newRecipeId}/steps/${steps[step]}`);
           }
         })
         .then(function(response) {

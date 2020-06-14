@@ -121,7 +121,7 @@
      */
     function setCredentials(authToken, prefixAdded) {
       if (!prefixAdded) {
-        authToken = "Token " + authToken;
+        authToken = `Token ${authToken}`;
       }
 
       // Define an expiration date 30 days hence
