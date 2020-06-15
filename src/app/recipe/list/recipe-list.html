@@ -6,6 +6,12 @@
            name="search"
            ng-model="searchString"
            placeholder="&#x1f50d"/>
+    <button class="clicker-button"
+            name="search"
+            type="submit"
+            ng-click="vm.search(searchString)">
+      Search
+    </button>
   </form>
   <select class="order-by"
           name="OrderBy"
