@@ -1,0 +1,109 @@
+<nav class="nav--recipe-list">
+  <h1 ng-show="vm.isPublic">Public Recipes</h1>
+  <h1 ng-show="username && !vm.isPublic">{{username}}'s Recipes</h1>
+  <div class="search-and-sort">
+    <form class="search" ng-submit="vm.search(searchString)">
+      <input class="magnify"
+             name="search"
+             ng-model="searchString"
+             placeholder="&#x1f50d"/>
+      <button class="clicker-button"
+              name="search"
+              type="submit"
+              ng-click="vm.search(searchString)">
+        Search
+      </button>
+    </form>
+    <select class="order-by"
+            name="OrderBy"
+            value="OrderBy"
+            ng-model="vm.query"
+            ng-options="sortBy.value as sortBy.name for sortBy in vm.sortByOptions">
+      <option value="">Sort By</option>
+    </select>
+  </div>
+</nav>
+
+<div class="coffee-spinner hidden">
+  <img src="img/coffee-spinner.gif"/>
+</div>
+
+<section class="recipe-list"
+         ng-repeat="recipe in vm.recipes | orderBy:vm.ratingOrderBy | orderBy:vm.query | filter:filter">
+  <a class="recipe-title"
+     href="#/public/{{recipe.id}}"
+     ng-show="vm.isPublic">
+    {{recipe.title}}
+  </a>
+  <a class="recipe-title"
+     ng-href="#/users/{{username}}/recipes/{{recipe.id}}"
+     ng-hide="vm.isPublic">
+    {{recipe.title}}
+  </a>
+  <p>{{recipe.bean_name}}</p>
+  <div class="col-1-2">
+    <span>{{recipe.roast !== null ? recipe.roast + " Roast" : ''}}</span>
+    <div class="col-1-4" ng-show="vm.isPublic"> <!-- public rating and shared by -->
+      <!-- star rating -->
+      <div class="col-1-3">
+        <span ng-hide="username" ng-repeat="rating in vm.ratings">
+          <div class="public"
+               max="maxStars"
+               rating-value="recipe.average_rating"
+               view-rating>
+          </div>
+        </span>
+        <section ng-show="username">
+          <span ng-hide="recipe.public_ratings.id"
+                ng-repeat="rating in vm.ratings">
+            <div class="public"
+                 max="maxStars"
+                 ng-click="vm.newRating(recipe.combined_rating, recipe.id)"
+                 rating-value="recipe.combined_rating"
+                 star-rating>
+            </div>
+          </span>
+          <span ng-repeat="rating in vm.ratings"
+                ng-show="recipe.public_ratings.id">
+            <div max="maxStars"
+                 ng-click="vm.updateRating(recipe.combined_rating, recipe.public_ratings.id, recipe.id)"
+                 rating-value="recipe.combined_rating"
+                 star-rating>
+            </div>
+          </span>
+        </section>
+      </div>
+    </div>
+    <a class="shared-by"
+       ng-show="recipe.shared_by"
+       ng-href="#/public/users/{{recipe.shared_by}}">
+      Shared by <span>{{recipe.shared_by}}</span>
+    </a> <!-- end public rating and shared by -->
+
+    <div class="col-1-4" ng-hide="vm.isPublic"> <!-- user rating -->
+      <span class="rating" ng-repeat="rating in vm.ratings">
+        <span max="maxStars"
+              ng-click="vm.rateRecipe(recipe.rating, recipe.id)"
+              rating-value="recipe.rating"
+              star-rating>
+        </span>
+      </span>  <!-- end star rating -->
+      <span class="count">
+        <img class="cup-icon" src="img/CoffeeCup-65.svg"/>
+        &#215; {{recipe.brew_count}}
+      </span>
+    </div> <!-- end user rating -->
+  </div> <!-- end col-1-2 -->
+  <div class="col-1-2 button">
+    <a class="list-brew-it"
+       ng-click="vm.listBrewIt(recipe.id)"
+       ng-show="recipe.steps.length">
+      BREW IT!
+    </a>
+    <a class="list-brew-it"
+       href="#/users/{{username}}/recipes/{{recipe.id}}"
+       ng-hide="recipe.steps.length || vm.isPublic">
+      Add Steps
+    </a>
+  </div> <!--end col-1-2 -->
+</section><!-- end ng-repeat for recipe list -->

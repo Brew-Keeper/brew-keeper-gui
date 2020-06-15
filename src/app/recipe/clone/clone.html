@@ -1,0 +1,64 @@
+<h1 class="form-heading">Edit Clone</h1>
+<section class="edit-recipe">
+<form class="edit-recipe clone" ng-submit="vm.finishClone()">
+  <section class="columns general">
+    <fieldset>
+      <input name="title" placeholder="Title *" maxlength="50" ng-model="vm.recipe.title" required></input>
+      <textarea placeholder="Comments" ng-model="vm.recipe.general_recipe_comment"></textarea>
+    </fieldset><!--General Details-->
+  </section>
+  <section class="columns">
+    <fieldset class="details">
+      <legend><h4 class="details-legend"><img class="bean-icon" src="img/LightCoffeeBean.svg"/> Details</h4></legend>
+      <input maxlength="50" placeholder="Name" ng-model="vm.recipe.bean_name"></input>
+      <select list="roast" maxlength="15" placeholder="Roast" ng-model="vm.recipe.roast" id="roast" selected="vm.recipe.roast">
+        <option value="{{vm.recipe.roast}}" selected>{{vm.recipe.roast}}</option>
+        <option value="Light">Light</option>
+        <option value="Medium">Medium</option>
+        <option value="Med-Dark">Med-Dark</option>
+        <option value="Dark">Dark</option>
+        <option value="Extra-Dark">Extra-Dark</option>
+      </select>
+      <select list="grind" maxlength="12" placeholder="Grind" ng-model="vm.recipe.grind" selected="vm.recipe.grind">
+          <option value="{{vm.recipe.grind}}" selected>{{vm.recipe.grind}} Grind</option>
+          <option value="Fine">Fine</option>
+          <option value="Medium">Medium</option>
+          <option value="Coarse">Coarse</option>
+      </select>
+      <input class="small-field" type="number" min="0" max="32767" ng-model="vm.recipe.total_bean_amount" placeholder="Amount"></input>
+      <select class="small-field" id="bean-units" list="bean-units" maxlength="12" placeholder="Units" ng-model="vm.recipe.bean_units">
+        <option value="{{vm.recipe.bean_units}}" selected>{{vm.recipe.bean_units}}</option>
+        <option value="g">g</option>
+        <option value="oz">oz</option>
+        <option value="scoops">scoops</option>
+      </select>
+  </fieldset><!--Bean Details-->
+  </section>
+  <section class="columns">
+    <fieldset class="details">
+      <legend><h4 class="details-legend"><img class="water-icon" src="img/LightWater.svg"/> Details</h4></legend>
+      <select list="water-type" maxlength="50" placeholder="Type" ng-model="vm.recipe.water_type">
+          <option value="{{vm.recipe.water_type}}" selected>{{vm.recipe.water_type}} water</option>
+          <option value="Tap">Tap</option>
+          <option value="Distilled">Distilled</option>
+          <option value="Spring">Spring</option>
+          <option value="Deionized">Deionized</option>
+      </select>
+      <input class="small-field" type="number" min="0" max="32767" placeholder="Amount" ng-model="vm.recipe.total_water_amount"></input>
+      <select class="small-field" id="water-units" list="water-units" maxlength="12" ng-model="vm.recipe.water_units" placeholder="Units">
+        <option value="{{vm.recipe.water_units}}" selected>{{vm.recipe.water_units}}</option>
+        <option value="oz">oz</option>
+        <option value="cc">cc</option>
+        <option value="mL">mL</option>
+      </select>
+      <input type="number" placeholder="Temp in &deg;F" ng-model="vm.recipe.temp" max="32767"></input>
+      <select list="orientation" placeholder="Orientation" ng-model="vm.recipe.orientation" id="orientation">
+        <option value="{{vm.recipe.orientation}}" selected>{{vm.recipe.orientation}}</option>
+        <option value="Standard">Standard</option>
+        <option value="Inverted">Inverted</option>
+      </select>
+    </fieldset><!--Water Details-->
+  </section>
+  <button class="submit-recipe-edit clone clicker-button" >Submit Clone</button>
+</form><!--Edit Recipe Form-->
+</section>

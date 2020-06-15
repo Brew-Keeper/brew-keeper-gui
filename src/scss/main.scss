@@ -94,11 +94,13 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
 main.container {
   box-sizing: border-box;
   margin: 0 auto;
   width: 100%;
 } //main.container
+
 @import 'styles';
 @import 'modal';
 @import 'header';
@@ -110,16 +112,7 @@ main.container {
 @import 'welcome';
 @import 'tablet';
 @import 'desktop-view';
-
-
-
-
-
-
-
-
-
-
+@import '404';
 
 
 /* ==========================================================================

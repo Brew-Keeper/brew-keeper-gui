@@ -1,0 +1,137 @@
+<section class="brewit-page">
+
+  <nav class="nav--brew-it">
+    <a href="#/public/{{vm.detail.id}}"
+       ng-show="vm.isPublic">
+      <h1 class="nav__header-title--brew-it">{{vm.detail.title}}</h1>
+    </a>
+    <a href="#/users/{{vm.recipeUsername}}/recipes/{{vm.detail.id}}"
+       ng-hide="vm.isPublic">
+      <h1 class="nav__header-title--brew-it">{{vm.detail.title}}</h1>
+    </a>
+    <a class="reset-brew clicker-button nav__button--brew-it"
+       href=""
+       ng-click="vm.resetBrew()">
+      RESET
+    </a>
+    <a class="hidden add-brew-note clicker-button nav__button--brew-it"
+       href=""
+       ng-hide="vm.isPublic">
+      Add Note
+    </a>
+
+    <!--star ratings-->
+    <div class="stars" ng-show="vm.showStars">
+      <span class="post-brew rating"
+            ng-hide="username"
+            ng-repeat="rating in vm.ratings">
+        <div view-rating rating-value="rating.current"
+             max="maxStars"
+             class="rating public">
+        </div>
+      </span>
+      <section ng-show="username && vm.isPublic">
+        <span class="rating"
+              ng-hide="vm.ratingId"
+              ng-repeat="rating in vm.ratings">
+          <div class="rating public"
+               max="maxStars"
+               ng-click="vm.ratePublicRecipe(rating.current)"
+               rating-value="rating.current"
+               star-rating>
+          </div>
+        </span>
+        <span class="rating"
+              ng-repeat="userRating in vm.ratings"
+              ng-show="vm.ratingId">
+          <div class="rating"
+               max="maxStars"
+               ng-click="vm.ratePublicRecipe(userRating.current)"
+               rating-value="userRating.current"
+               star-rating>
+          </div>
+        </span>
+      </section>
+      <span class="post-brew rating"
+            ng-repeat="rating in vm.ratings"
+            ng-show="!vm.isPublic">
+        <div max="maxStars"
+             ng-click="vm.rateRecipe(vm.detail.rating)"
+             rating-value="vm.detail.rating"
+             star-rating>
+        </div>
+      </span>
+    </div>
+    <!--end star ratings-->
+
+  </nav>
+
+  <div class="time-{{vm.detail.total_duration}}"></div>
+
+  <section class="brew-form hidden" >
+    <form ng-submit="vm.addBrewNote()">
+      <textarea class="input-focus"
+                ng-model="vm.brewnote.body"
+                placeholder="Brew Note"
+                required
+                type="text">
+      </textarea>
+      <button class="save-note clicker-button" type="submit">
+        Save
+      </button>
+    </form>
+  </section><!--END brew-form-->
+
+  <div class="brew-step brew-step--restart hidden" ng-click="vm.restartBrew()">
+    <p class="brew-step__title">
+      Restart Brew
+    </p>
+    <img class="brew-step__img" src="img/CoffeeCup.svg"/>
+  </div>
+
+  <div class="brew-step brew-step--countdown">
+    <p class="brew-step__title brew-step__title--countdown">
+      COUNTDOWN
+    </p>
+    <p ng-controller="StepTimerController as stepVm">
+      <timer class="countdown counting"
+             countdown="4"
+             finish-callback="vm.startBrew()"
+             id="countdown-timer"
+             interval="1000"
+             ng-init="stepVm.initTimer('countdown')">
+        {{seconds}}
+      </timer>
+    </p>
+  </div><!-- END countdown timer-->
+
+  <div class="brew-step brew-step--inactive {{step.step_number}}"
+       ng-controller="StepTimerController as stepVm"
+       ng-repeat="step in vm.steps | orderBy: 'step_number'">
+    <p class="brew-step__step-of">
+      <span>{{vm.stepArray.indexOf(step.step_number) + 1}}</span> of
+      {{vm.stepTotal}}
+    </p>
+    <article class="step-box">
+      <p class="brew-step__title">{{step.step_title | uppercase}}</p>
+      <p class="brew-step__water {{step.step_number}}"
+         ng-show="step.water_amount">
+        {{step.water_amount}} {{vm.detail.water_units}}
+      </p>
+      <timer autostart="false"
+             class="{{step.step_number}} hidden"
+             countdown="step.duration + 1"
+             finish-callback="vm.nextStep(step.step_number)"
+             interval="1000"
+             ng-init="stepVm.initTimer(step.step_number)">
+        <p class="counting">
+          <span ng-show="minutes">{{minutes}}:{{sseconds}}</span>
+          <span ng-hide="minutes">{{seconds}}</span>
+        </p>
+      </timer>
+    <p class="brew-step__body">
+      {{step.step_body}}
+    </p>
+    </article>
+  </div><!--END Steps-->
+</section><!--END brewit-page-->

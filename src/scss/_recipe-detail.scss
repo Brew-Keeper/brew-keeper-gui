@@ -1,55 +1,83 @@
-//recipe detail page
 .recipe-detail {
   box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 40rem;
   width: 90%;
-  margin: 0 5%;
 
-  h3.title {
-    color: $heading;
-    font-weight: 600;
-    margin: 5% 0 2%;
+  .title {
+    margin: 1rem 0 .2rem;
   }
+
+  .title a {
+    color: $heading;
+  }
+
+  .brew-count {
+    display: block;
+    float: right;
+    margin: .45rem 0 0 0;
+    text-align: right;
+  }
+
   .recipe-view {
-    .col-1-3{
-      float: left;
-      box-sizing: border-box;
-      width: 100% * (1/2);
-      &.brew-count {
-        text-align: right;
-        padding-top: 0.5ex;
+    .cup {
+        width: 17px;
       }
-    }
-    img.cup {
-      width: 17px;//See tablet.scss
-      }
-    a.brew-it-button {//See tablet.scss
-      box-sizing: border-box;
-      float: left;
-      width: 100%;
-      margin-top: 1ex;
-      margin-bottom: 2ex;
+
+    .brew-it-button {
+      @extend .main-action-button;
       background-color: $BrewIt;
+    }
+
+    .main-action-button {
+      box-sizing: border-box;
+      clear: both;
+      float: left;
       font-size: 1.1em;
       font-weight: bold;
-      text-align: center;
-      padding: 4px 0;
-    }
-    a.no-steps {
-      box-sizing: border-box;
-      float: left;
-      width: 100%;
-      margin-top: 1ex;
       margin-bottom: 2ex;
-      background-color:$Inactive;
-      font-size: 1em;
-      font-weight: 500;
-      text-align: center;
+      margin-top: 1ex;
       padding: 4px 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .no-steps {
+      @extend .main-action-button;
+      background-color:$Inactive;
     }
   }
-}//recipe-detail (top portion)
 
-.recipe-detail & div.details {
+  .shared-by {
+    color: $BrewIt;
+  }
+
+  .shared-by-container {
+    float: right;
+    margin: .45rem 0 0;
+  }
+
+  .star-rating {
+    box-sizing: border-box;
+    float: left;
+    width: 8rem;
+  }
+
+  .trash-icon {
+    cursor: pointer;
+    float: right;
+    padding-top: 0.3ex;
+    width: 30px;
+  }
+
+  .edit-icon {
+    cursor: pointer;
+    float: right;
+    width: 35px;
+  }
+}
+
+.recipe-detail div.details {
   @extend .clearfix;
   width: 100%;
   padding-bottom: 2ex;
@@ -84,15 +112,6 @@
   section.icons {
     width: 25%;
     float: right;
-    img.edit-icon{
-      width: 35px;
-      float: right;
-    }
-    img.trash-icon {
-      width: 30px;
-      padding-top: 0.3ex;
-      float: right;
-    }
   }
 } //end recipe-detail & div.details
 
@@ -101,15 +120,6 @@ section.edit-step-icons {
   width: 25%;
   margin-left: 75%;
   margin-top: -5ex;
-  img.edit-icon{
-    width: 35px;
-    float: right;
-  }
-  img.trash-icon {
-    width: 30px;
-    padding-top: 0.3ex;
-    float: right;
-  }
 }
 div.brew-notes-heading > h3 {
     display: block;
@@ -117,13 +127,12 @@ div.brew-notes-heading > h3 {
   }
 
 div.brew-notes-heading >  .plus-icon {
+    cursor: pointer;
     margin-left: 5%;
     float: right;
   }
 div.add-steps {
-  margin-bottom: 4ex;
-  padding-bottom: 1ex;
-  border-bottom: 1px solid $heading;
+  margin-bottom: 2rem;
 }
 div.add-steps-heading {
   display: block;
@@ -136,6 +145,7 @@ div.add-steps-heading > h3 {
   font-weight: 500;
 }
 div.add-steps-heading  > .plus-icon {
+    cursor: pointer;
     margin-left: 5%;
     margin-right: 0;
     margin-top: -3ex;
@@ -156,6 +166,7 @@ div.add-steps-heading  > .plus-icon {
     font-weight: bold;
     text-align: center;
     [class*='-arrow-icon'] {
+      cursor: pointer;
       float: right;
       margin-left: 2.5%;
       margin-right: 20%;
@@ -174,7 +185,7 @@ div.add-steps-heading  > .plus-icon {
     p {
       margin: 0;
     }
-    p.step-details{
+    p.step-details {
       width: 80%;
     }
     div.duration {
@@ -194,31 +205,34 @@ div.add-steps-heading  > .plus-icon {
 // end steps section
 
 .gen-recipe-comment {
+  border-top: 1px solid $heading;
   border-bottom: 1px solid $heading;
+  margin-bottom: 1rem;
   p {
     margin-left: 5%;
     margin-right: 5%;
   }
 } //end section.gen-recipe-comment
-.gen-recipe-comment.public {
-  border-top: 1px solid $heading;
-}
+
 div.clone-button {
+  background-color: $Inactive;
+  cursor: pointer;
   display: inline-block;
-  width: 40%;
+  margin-bottom: 3ex;
   margin-left: 5%;
   margin-top: 2ex;
-  margin-bottom: 3ex;
-  padding-top: 1ex;
   padding-bottom: 1ex;
-  background-color: $Inactive;
+  padding-top: 1ex;
   text-align: center;
+  width: 40%;
   &:last-of-type {
     float: right;
     margin-right: 5%;
   }
 } //end div.clone-button
+
 div.clone-button.public {
+  cursor: pointer;
   float: left;
   margin-left: 30%;
 }

@@ -1,86 +1,40 @@
-@media (min-width: 60em){
+@media (min-width: 60em) {
 
-  body {
-  .heading {
-    img.logo {
-      width:17em;
-    }
-    a[href].logo {
-      display: block;
-      width: 17em;
-    }
-    > nav.menu {
-      &.hamburger::before {
-        display: none;
-      }
-      ul.menu {
-        display: block;
-        float: right;
-        width: 60%;
-        position: absolute;
-        top: 1ex;
-        right: 0;
-        padding: 0;
-        margin-right: 5%;
-        list-style-type: none;
-        li > a {
-          display: block;
-          float: right;
-          padding: 0;
-          margin-right: 0;
-          margin-left: 3ex;
-          &:hover {
-            color: $BrewIt;
-            font-weight: normal;
-          }
-        }
-      }
-      ul.menu.active {
-        width: 60%;
-        position: absolute;
-        top: 1ex;
-        padding: 0;
-        background-color: white;
-        border: 1px solid #fff;
-
-        li > a {
-          display: block;
-          float: right;
-          padding: 0;
-          margin-right: 0;
-          margin-left: 3ex;
-          &:hover {
-            color: $BrewIt;
-            font-weight: normal;
-          }
-        }
-      }
-    }//nav.menu
-  }//.heading
   .container {
     width: 50em;
   }
-  .recipe-detail{
-    .recipe-view {
-      .col-1-3{
-        width: 100% * (1/5);
-        &.brew-count {
-          text-align: left;
-          padding-top: 0.5ex;
-        }
-      }
-    }
-  }//end recipe-detail view
-}//body
-  .brewit-page{
-.timeline.time-* {
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-}
-    div.step.finished {
-        margin-left: 15%;
-        margin-right: 15%;
-    }//adusts width of last step
+
+   // Top Nav
+  ////////////////////////////////////////
+
+  .topnav__hamburger::before {
+    display: none;
   }
-}//END media query
+
+  .topnav__link {
+    display: block;
+    float: right;
+    margin-left: 3ex;
+    margin-right: 0;
+    padding: 0;
+    &:hover {
+      font-weight: normal;
+    }
+  }
+
+  .topnav__logo {
+    width:17em;
+  }
+
+  .topnav__menu {
+    display: block;
+    float: right;
+    list-style-type: none;
+    margin-right: 5%;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 1ex;
+    width: 60%;
+  }
+}  // END @media min-width 60

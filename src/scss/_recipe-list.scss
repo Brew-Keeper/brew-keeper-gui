@@ -1,92 +1,113 @@
-nav.recipe-list {
-  box-sizing: border-box;
-  height: 100%;
-  display: block;
-  margin: 2ex 5% 5ex;
-  input {
-    box-sizing: border-box;
-    width: 40%;
-    float: left;
-    margin-right: 10%;
-  }
-  select {
-    box-sizing: border-box;
-    float: left;
-    width: 40%;
-    margin-left: 8%;
-  }
-  .clicker-button {
-  margin-left: 0;
-  margin-right: 90%;
-  float: left;
-  margin-top: 2ex;
-  margin-bottom: 4ex;
-  }
-}
-div.coffee-spinner {
+// TODO: Extract to main.scss
+.coffee-spinner {
+  margin: 2rem auto;
+  text-align: center;
   width: 100%;
-  img {
-  width: 20%;
-  margin-left: 40%;
-  // margin-top: 5ex;
-  }
 }
-section.recipe-list {
+
+ // Recipe List Nav
+//////////////////////////////////////////
+
+.nav--recipe-list {
   @extend .clearfix;
   box-sizing: border-box;
-  width: 100%;
-  margin: 0 5% 3ex 5%;
+  display: block;
+  margin: 0 auto;
+  max-width: 40rem;
+  width: 90%;
 
-  & :after {
-    @extend .clearfix;
+  input {
+    box-sizing: border-box;
   }
 
-  a.recipe-title {
+  select {
     box-sizing: border-box;
-    width: 100%;
-    max-width: 9em;
-    font-weight: bold;
-    &.recipe-title {
-      display: block;
-      width: 90%;
-      max-width: 90%;
-   }
+    flex: 0 1 42.5%;
+  }
+
+  .clicker-button {
+    display: block;
+    margin: 1rem 0 2rem;
+    width: 6rem;
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+  }
+
+  .search-and-sort {
+    align-items: start;
+    display: flex;
+    justify-content: space-between;
+  }
 }
+
+ // Recipe List
+//////////////////////////////////////////
+
+.recipe-list {
+  @extend .clearfix;
+  box-sizing: border-box;
+  margin: 0 auto 3ex;
+  max-width: 40rem;
+  width: 90%;
+
+  p {
+    margin: 0;
+  }
+
   .col-1-2 {
-    width: 45%;
+    width: 50%;
     float: left;
-    .col-1-4 {
-      width: 110%;
+  }
+
+  .col-1-4 {
+    width: 110%;
+    float: left;
+    span {
       float: left;
-      span {
-        float: left;
-      }
-
-      span.count {
-        font-size: 0.8em;
-        margin-left: 2%;
-        margin-top: 1.9ex;
-        img {   //See Tablet View
-         width: 17px;
-        }
-      } //end span.count
-    } //end col-1-4
-
-    a.list-brew-it {//See Tablet View
-      box-sizing: border-box;
-      float: right;
-      width: 85%;
-      margin-top: 0.6em;
-      padding-top: 1ex;
-      padding-bottom: 1ex;
-      background-color: $BrewIt;
-      text-align: center;
     }
-    a.shared-by {
-      color: #b1b2b4;
-      & span {
-        color: $BrewIt;
-      }
+  }
+
+  .count {
+    font-size: 0.8rem;
+    margin-left: 2%;
+    margin-top: .6rem;
+    img {
+     width: 17px;
     }
-  } // end col-1-2
-} //end section.recipe-list
+  }
+
+  .list-brew-it {
+    background-color: $BrewIt;
+    box-sizing: border-box;
+    cursor: pointer;
+    float: right;
+    font-weight: 600;
+    margin: 0.6rem 0 0;
+    padding: 1ex 0;
+    text-align: center;
+    width: 85%;
+  }
+
+  .recipe-title {
+    box-sizing: border-box;
+    font-weight: bold;
+    margin: 0;
+    max-width: 9rem;
+    width: 100%;
+  }
+
+  // TODO: Make this text color a variable
+  .shared-by {
+    color: #b1b2b4;
+    display: block;
+    clear: left;
+    width: 200%;
+    & span {
+      color: $BrewIt;
+    }
+  }
+}

@@ -1,7 +1,5 @@
-h3.form-heading {
+.form-heading {
   margin-left: 5%;
-  color: $heading;
-  font-weight: 600;
 }
 .clicker-button{
   box-sizing: border-box;
@@ -23,24 +21,13 @@ h3.form-heading {
     margin-right: 100% * (2/8);
     margin-top: 2ex;
   }
-
-  &.add-brew-note {
-    width: 100% * (7/24);
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    margin-bottom: 2ex;
-    font-size: 0.9em;
-  }
   &.login {
     background-color: $BrewIt;
-    border: 2.3px solid $BrewIt;
+    border: none;
     color: #000;
-    width: 100% * (1/2);
-    margin-left: 100% * (1/4);
-    margin-right: 100% * (1/4);
-    margin-top: 1ex;
-    padding-top: 1ex;
-    padding-bottom: 1ex;
+    margin: 0.5rem 25%;
+    padding: .7rem 0;
+    width: 50%;
   }
   &.show-signup {
     width: 100% * (1/4);
@@ -65,11 +52,9 @@ h3.form-heading {
   }
 
   &.register {
-    width: 100% * (1/2);
-    margin-left: 100% *(1/4);
-    margin-right: 100% *(1/4);
-    padding-top: 1ex;
-    padding-bottom: 1ex;
+    width: 50%;
+    margin: 1rem 25%;
+    padding: 1ex 0;
     }
   &.addSteps {//submit form button which shows Add Steps.
     width: 100% * (1/4);
@@ -133,27 +118,31 @@ h3.form-heading {
 }
 
 form.login {
+  margin: 0 auto;
+  max-width: 40rem;
   width: 90%;
-  margin: 0 5%;
   .columns {
     display: block;
-    margin-top: 5%;
     label.login {
+      color: $heading;
       display: block;
+      font-size: 1.7rem;
+      font-weight: bold;
+      margin: 1rem auto;
       width: 100%;
-      margin: 5% 0 2%;
     }
     input {
       box-sizing: border-box;
+      display: block;
+      margin: 1rem auto;
       width: 100%;
-      margin: 1ex 0;
     }
   }
 }//form.login
 
 form.changeForm {
   width: 80%;
-  max-width: 15em;
+  max-width: 15rem;
   margin: 0 10%;
   .columns.general {
     display: block;

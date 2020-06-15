@@ -1,4 +1,4 @@
-[class*='-modal'] {
+[class*='modal'] {
   position: fixed;
   width: 100%;
   top: 45%;
@@ -25,7 +25,7 @@
   -webkit-transform: scale(0.9);
 }
 
-[class*='-modal'], .wrapper {
+[class*='modal'], .wrapper {
   transition: all 0.3s ease;
 }
 // Adapted from https://css-tricks.com/receding-background-modal-boxes/
