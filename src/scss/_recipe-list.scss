@@ -18,21 +18,29 @@
 
   input {
     box-sizing: border-box;
-    width: 40%;
-    float: left;
   }
 
   select {
     box-sizing: border-box;
-    float: right;
-    margin-top: -1.75rem;
-    width: 40%;
+    flex: 0 1 42.5%;
   }
 
   .clicker-button {
-    clear: both;
     display: block;
     margin: 1rem 0 2rem;
+    width: 6rem;
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+  }
+
+  .search-and-sort {
+    align-items: start;
+    display: flex;
+    justify-content: space-between;
   }
 }
 

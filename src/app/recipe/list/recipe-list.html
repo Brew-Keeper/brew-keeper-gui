@@ -1,25 +1,27 @@
 <nav class="nav--recipe-list">
   <h1 ng-show="vm.isPublic">Public Recipes</h1>
   <h1 ng-show="username && !vm.isPublic">{{username}}'s Recipes</h1>
-  <form ng-submit="vm.search(searchString)">
-    <input class="magnify"
-           name="search"
-           ng-model="searchString"
-           placeholder="&#x1f50d"/>
-    <button class="clicker-button"
-            name="search"
-            type="submit"
-            ng-click="vm.search(searchString)">
-      Search
-    </button>
-  </form>
-  <select class="order-by"
-          name="OrderBy"
-          value="OrderBy"
-          ng-model="vm.query"
-          ng-options="sortBy.value as sortBy.name for sortBy in vm.sortByOptions">
-    <option value="">Sort By</option>
-  </select>
+  <div class="search-and-sort">
+    <form class="search" ng-submit="vm.search(searchString)">
+      <input class="magnify"
+             name="search"
+             ng-model="searchString"
+             placeholder="&#x1f50d"/>
+      <button class="clicker-button"
+              name="search"
+              type="submit"
+              ng-click="vm.search(searchString)">
+        Search
+      </button>
+    </form>
+    <select class="order-by"
+            name="OrderBy"
+            value="OrderBy"
+            ng-model="vm.query"
+            ng-options="sortBy.value as sortBy.name for sortBy in vm.sortByOptions">
+      <option value="">Sort By</option>
+    </select>
+  </div>
 </nav>
 
 <div class="coffee-spinner hidden">
