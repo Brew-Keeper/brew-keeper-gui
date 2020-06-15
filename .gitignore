@@ -1,4 +1,5 @@
 *.css
+.firebase/
 .firebaserc
 bower_components
 dist/
